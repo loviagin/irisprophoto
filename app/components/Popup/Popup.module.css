@@ -53,7 +53,7 @@
 .left form {
     display: flex;
     flex-direction: column;
-    padding-top: 15px;
+    padding-top: 10px;
     gap: 15px;
 }
 
@@ -94,11 +94,13 @@
 
 .right h2 {
     margin-bottom: 10px;
+    font-size: 30px;
 }
 
 .right form {
     display: flex;
     flex-direction: column;
+    padding-top: 10px;
     gap: 10px;
 }
 
@@ -133,4 +135,15 @@
         opacity: 1;
         transform: scale(1);
     }
+}
+
+.signUp {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
 }

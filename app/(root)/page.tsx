@@ -7,7 +7,7 @@ export default function Home() {
       <HeroSection />
       <div className={styles.test}>
       </div>
-      <p className={styles.version}>Version 1.0.3</p>
+      <p className={styles.version}>Version 1.0.4</p>
     </main>
   );
 }
