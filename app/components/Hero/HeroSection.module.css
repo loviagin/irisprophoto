@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .hero {
   position: relative;
   width: 100%;
@@ -6,7 +10,8 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  overflow: hidden; /* Чтобы фон не выходил за границы */
+  overflow: hidden; 
+  margin-top: -80px;
 }
 
 .heroBackground {

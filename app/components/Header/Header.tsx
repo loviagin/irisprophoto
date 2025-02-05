@@ -1,8 +1,21 @@
+"use client";
+import { useState, useEffect } from "react";
 import styles from "./Header.module.css";
 
 export default function Header() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50); // Фон станет черным после 50px прокрутки
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
       <div className={styles.logo}>IRISPROPHOTO</div>
       <nav>
         <ul className={styles.navList}>
