@@ -1,0 +1,44 @@
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100vw; /* Ограничивает ширину */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: black;
+    color: white;
+    z-index: 100;
+    box-sizing: border-box; /* Учитывает padding в width */
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .navList {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navList li {
+    display: inline;
+  }
+  
+  .navList a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: 0.3s;
+    white-space: nowrap; 
+  }
+  
+  .navList a:hover {
+    color: #ddd;
+  }
