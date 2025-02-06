@@ -1,0 +1,50 @@
+/* Правая часть: Вход */
+.right {
+    flex: 1;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.right h2 {
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
+.right form {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    gap: 10px;
+}
+
+.right input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+}
+
+.right button {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.signUp {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}

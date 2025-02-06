@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .tabBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .tabBar button {
+    display: flex;
+    vertical-align: middle;
+    gap: 8px;
+    border: none;
+    background: none;
+    padding: 10px 60px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .tabBar button.active {
+    font-weight: bold;
+    color: #00d0ff;
+    border-bottom: 2px solid #00d0ff;
+  }
+  
+  .content {
+    text-align: center;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 20px;
+    padding: 20px;
+  }

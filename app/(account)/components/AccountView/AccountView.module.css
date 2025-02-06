@@ -1,0 +1,53 @@
+
+.account {
+    padding-right: 17px;
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative; /* Чтобы мини-меню позиционировалось относительно этого блока */
+    cursor: pointer;
+}
+
+/* Мини-меню */
+.dropdownMenu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: rgb(0, 0, 0);
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    z-index: 100;
+}
+
+.dropdownMenu ul {
+    list-style: none;
+    padding: 0 10px;
+    margin: 0;
+}
+
+.dropdownMenu li {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.dropdownMenu li:last-child {
+    border-bottom: none;
+}
+
+.dropdownMenu li:hover {
+    color: #a7cdff;
+}
+
+.logout {
+    vertical-align: bottom;
+    color: #ff0000;
+}

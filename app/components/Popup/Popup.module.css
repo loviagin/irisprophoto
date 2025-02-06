@@ -1,3 +1,29 @@
+.content {
+    display: flex;
+    justify-content: space-between; /* Размещаем элементы равномерно */
+    align-items: stretch; /* Выровнять по высоте */
+    gap: 20px;
+    width: 100%;
+}
+
+.left,
+.right {
+    flex: 1; /* Гарантированно заставляет колонки занимать равное пространство */
+    width: 50%; /* Дублируем для надёжности */
+    min-width: 0; /* Убираем возможное переполнение */
+}
+
+.divider {
+    width: 2px;
+    background: #ddd;
+    flex-shrink: 0; /* Запрещаем сжимать разделитель */
+}
+
+.left h2 {
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
 .popupOverlay {
     position: fixed;
     top: 0;
@@ -34,97 +60,6 @@
     cursor: pointer;
 }
 
-.content {
-    display: flex;
-    gap: 20px;
-}
-
-/* Левая часть: Форма заказа */
-.left {
-    flex: 1;
-    padding-right: 20px;
-}
-
-.left h2 {
-    margin-bottom: 10px;
-    font-size: 30px;
-}
-
-.left form {
-    display: flex;
-    flex-direction: column;
-    padding-top: 10px;
-    gap: 15px;
-}
-
-.left input,
-.left textarea {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-}
-
-.left button {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    background: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin: 10px;
-}
-
-/* Разделитель */
-.divider {
-    width: 2px;
-    background: #ddd;
-}
-
-/* Правая часть: Вход */
-.right {
-    flex: 1;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.right h2 {
-    margin-bottom: 10px;
-    font-size: 30px;
-}
-
-.right form {
-    display: flex;
-    flex-direction: column;
-    padding-top: 10px;
-    gap: 10px;
-}
-
-.right input {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-}
-
-.right button {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    background: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin: 10px;
-}
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -135,15 +70,4 @@
         opacity: 1;
         transform: scale(1);
     }
-}
-
-.signUp {
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.errorMessage {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
 }

@@ -22,11 +22,11 @@ export default function HeroButton({ text }: HeroButtonProps) {
       }
     });
 
-    signOut(auth).then(() => {
-      // Sign-out successful.
-    }).catch((error) => {
-      // An error happened.
-    });
+    // signOut(auth).then(() => {
+    //   // Sign-out successful.
+    // }).catch((error) => {
+    //   // An error happened.
+    // });
   }, []);
 
   useEffect(() => {

@@ -3,12 +3,14 @@
   top: 0;
   left: 0;
   width: 100%;
-  max-width: 100vw; /* Ограничивает ширину */
+  max-width: 100vw;
+  /* Ограничивает ширину */
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 40px;
-  background: transparent; /* Фон прозрачный по умолчанию */
+  background: transparent;
+  /* Фон прозрачный по умолчанию */
   color: white;
   z-index: 100;
   box-sizing: border-box;
@@ -28,6 +30,7 @@
 .navList {
   list-style: none;
   display: flex;
+  align-items: center;
   gap: 20px;
   margin: 0;
   padding: 0;
@@ -47,4 +50,19 @@
 
 .navList a:hover {
   color: #ddd;
+}
+
+.account p {
+  display: flex;
+  align-items: center; /* Выравниваем иконку по центру */
+  gap: 6px;
+  padding: 5px 10px;
+  border: 1px solid white;
+  border-radius: 25px;
+}
+
+.account {
+  font-weight: bold;
+  display: flex;
+  align-items: center; /* Выравниваем иконку по центру */
 }

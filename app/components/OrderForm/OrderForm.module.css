@@ -1,0 +1,33 @@
+.left {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.left form {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    gap: 15px;
+}
+
+.left input,
+.left textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+}
+
+.left button {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+}
