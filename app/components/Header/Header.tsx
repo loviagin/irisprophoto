@@ -2,13 +2,15 @@
 import { useState, useEffect } from "react";
 import styles from "./Header.module.css";
 import AccountButton from "./AccountButton";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50); // Фон станет черным после 50px прокрутки
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -18,14 +20,19 @@ export default function Header() {
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
       <div className={styles.logo}>IRISPROPHOTO</div>
-      <nav>
-        <ul className={styles.navList}>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#contacts">Contacts</a></li>
-          <AccountButton />
-        </ul>
-      </nav>
+      <div className={styles.menuWrapper}>
+        <button className={styles.menuButton} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+        <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ""}`}>
+          <ul className={styles.navList}>
+            <li><a href="#about" onClick={() => setIsMenuOpen(false)}>About Us</a></li>
+            <li><a href="#portfolio" onClick={() => setIsMenuOpen(false)}>Portfolio</a></li>
+            <li><a href="#contacts" onClick={() => setIsMenuOpen(false)}>Contacts</a></li>
+            <AccountButton />
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 }

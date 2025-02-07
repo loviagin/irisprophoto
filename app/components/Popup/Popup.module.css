@@ -71,3 +71,35 @@
         transform: scale(1);
     }
 }
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left, .right {
+        width: 100%;
+    }
+
+    .divider {
+        display: none;
+    }
+
+    .left h2 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .popup {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .closeButton {
+        top: 5px;
+        right: 5px;
+        font-size: 18px;
+    }
+}

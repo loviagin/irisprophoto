@@ -50,6 +50,7 @@
   border: none;
   border-radius: 25px;
   cursor: pointer;
+  font-weight: bold;
   animation: buttonEnterAnimation 2s ease 0s 1 normal forwards;
   transition: transform 0.3s ease, background 0.3s ease;
   will-change: transform;

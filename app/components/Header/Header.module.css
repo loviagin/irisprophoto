@@ -66,3 +66,57 @@
   display: flex;
   align-items: center; /* Выравниваем иконку по центру */
 }
+
+@media (max-width: 768px) {
+  .menuWrapper {
+    position: relative;
+  }
+
+  .menuButton {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .nav {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: black;
+    border-radius: 5px;
+    padding: 10px;
+    list-style: none;
+    display: none;
+    width: 200px; /* Увеличенная ширина */
+  }
+
+  .navOpen {
+    display: block;
+  }
+
+  .navList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%; /* Подстраиваем ширину под родительский контейнер */
+  }
+
+  .navList li {
+    padding: 12px 16px;
+    text-align: left;
+  }
+}
+
+@media (min-width: 769px) {
+  .menuButton {
+    display: none;
+  }
+
+  .nav {
+    display: flex;
+    gap: 20px;
+  }
+}
