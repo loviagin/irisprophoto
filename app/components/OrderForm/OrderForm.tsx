@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import firebase from "@/app/firebase/firebase";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import styles from "./OrderForm.module.css";
-import { getAnalytics, logEvent } from "firebase/analytics";
 
 interface PopupProps {
     onClose: () => void;
@@ -14,7 +13,6 @@ export default function OrderForm({ onClose }: PopupProps) {
     const [isSending, setIsSending] = useState(false);
     const auth = getAuth(firebase);
     const [user, setUser] = useState<User | null>(null);
-    const analytics = getAnalytics(firebase);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -23,8 +21,6 @@ export default function OrderForm({ onClose }: PopupProps) {
                 setFormData({ name: user.displayName || "", email: user.email || "", details: "" });
             }
         });
-
-        logEvent(analytics, 'order_form_opened');
 
         return () => unsubscribe();
     }, [auth]);
