@@ -48,3 +48,14 @@
     font-size: 14px;
     margin-top: 10px;
 }
+
+@media (max-width: 768px) {
+    .right {
+        width: 90%;
+        padding-right: 20px;
+    }
+
+    .right h2 {
+        font-size: 24px;
+    }
+}

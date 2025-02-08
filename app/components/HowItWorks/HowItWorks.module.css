@@ -22,29 +22,24 @@
 
 /* Список обёртка */
 .list {
-    display: flex;
-    flex-wrap: wrap;         /* Чтобы на мобильных карточки переносились */
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
     gap: 15px;
-    justify-content: center;
-    align-items: center;     /* Выравниваем по центру */
+
+    list-style: none;
 }
 
 /* Одна карточка */
 .card {
+    height: 300px; /* Фиксированная высота */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     
-    width: 400px;            /* Можно скорректировать под нужный вам размер */
-    height: 300px;           /* Делаем равной ширине, чтобы была "квадратная" */
-    
     padding: 20px;
     border-radius: 15px;
-    background-color: #fff;
+    background-color: aliceblue;
     color: black;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -58,8 +53,8 @@
 
 /* Изображение внутри карточки */
 .image {
-    width: 80%;              
-    max-height: 100px;       
+    width: 80%;
+    max-height: 100px;
     object-fit: contain;
     margin-bottom: 10px;
 }
@@ -76,17 +71,17 @@
     color: #666;
 }
 
-/* Мобильная адаптация */
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
     .list {
-        flex-direction: column;
-        align-items: stretch; /* чтобы карточки растягивались по ширине родителя */
+        grid-template-columns: repeat(2, 1fr);
     }
+}
 
+@media (max-width: 576px) {
+    .list {
+        grid-template-columns: 1fr;
+    }
     .card {
-        width: auto;           /* ширину берём «автоматически» (чтобы margin работал корректно) */
-        max-width: 400px;      /* но не больше 400px */
-        margin: 0 0 20px;   /* отступы по бокам (16px), снизу (20px), сверху (0) */
-        height: auto;          /* высота уже по содержимому */
+        height: auto; /* На мобильных можно убрать жёсткую высоту, если хотите */
     }
 }
