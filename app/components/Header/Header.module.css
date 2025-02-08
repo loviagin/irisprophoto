@@ -4,13 +4,11 @@
   left: 0;
   width: 100%;
   max-width: 100vw;
-  /* Ограничивает ширину */
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 40px;
   background: transparent;
-  /* Фон прозрачный по умолчанию */
   color: white;
   z-index: 100;
   box-sizing: border-box;
@@ -68,6 +66,10 @@
 }
 
 @media (max-width: 768px) {
+  .header {
+    padding: 15px 20px;
+  }
+  
   .menuWrapper {
     position: relative;
   }
