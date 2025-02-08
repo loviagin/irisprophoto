@@ -3,20 +3,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px 0;
     margin: 30px;
-    padding-bottom: 20px;
+    padding: 20px 0;
 }
 
-.image {
-    width: 100%;
-    height: 100%;
-    max-height: 80px;
-    object-fit: contain;
-    padding-bottom: 10px;
-    margin-top: 10px;
-}
-
+/* Заголовки */
 .section h2 {
     font-size: 37px;
     font-weight: bold;
@@ -30,36 +21,50 @@
     margin-bottom: 40px;
 }
 
+/* Список обёртка */
 .list {
     display: flex;
+    flex-wrap: wrap;         /* Чтобы на мобильных карточки переносились */
     list-style: none;
     padding: 0;
     margin: 0;
     gap: 15px;
     justify-content: center;
-    align-items: stretch;
-    flex-wrap: wrap;
+    align-items: center;     /* Выравниваем по центру */
 }
 
+/* Одна карточка */
 .card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    max-width: 400px;
-    aspect-ratio: 4 / 2.5; /* Ширина:высота = 4:3 */
+    justify-content: center;
+    
+    /* Задаем фиксированные пропорции, чтобы все карточки были одинаковыми */
+    width: 400px;            /* Можно скорректировать под нужный вам размер */
+    height: 300px;           /* Делаем равной ширине, чтобы была "квадратная" */
+    
     padding: 20px;
     border-radius: 15px;
     background-color: #fff;
     color: black;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
     text-align: center;
+    transition: all 0.3s ease-in-out;
 }
 
 .card:hover {
     transform: translateY(-10px);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Изображение внутри карточки */
+.image {
+    /* Чтобы логотип/картинка умещались внутри заданных размеров */
+    width: 80%;              
+    max-height: 100px;       
+    object-fit: contain;
+    margin-bottom: 10px;
 }
 
 .card h3 {
@@ -74,53 +79,21 @@
     color: #666;
 }
 
-/* Адаптация для планшетов */
-@media (max-width: 1024px) {
-    .section {
-        padding: 15px 0;
-        margin: 20px;
-    }
-
-    .list {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .card {
-        max-width: 90%;     /* На мобильных устройствах карточка занимает 90% ширины экрана */
-        padding: 15px;      /* Немного уменьшаем отступы */
-        aspect-ratio: 6 / 2;
-    }
-}
-
-/* Адаптация для мобильных устройств */
+/* Мобильная адаптация */
 @media (max-width: 768px) {
-    .section h2 {
-        font-size: 28px;
-    }
-
-    .section h6 {
-        font-size: 14px;
-        margin-bottom: 20px;
-    }
-
     .list {
         flex-direction: column;
-        gap: 15px;
     }
-
+    
     .card {
-        width: 90%;
-        max-width: 100%;
-        padding: 15px;
-    }
-
-    .card h3 {
-        font-size: 20px;
-        margin-bottom: 8px;
-    }
-
-    .card p {
-        font-size: 15px;
+        width: 90vw;      /* Занимаем почти всю ширину экрана */
+        max-width: 400px; /* Ограничиваем максимальную ширину */
+        height: auto;     /* Или оставляем auto, если хотим растягивать по содержимому */
+        
+        /* 
+          Если нужно, чтобы карточки и на мобильном оставались квадратами, 
+          уберите height: auto и поставьте, например:
+          height: 90vw;
+        */
     }
 }
