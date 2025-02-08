@@ -26,8 +26,8 @@ export default function Header() {
         </button>
         <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ""}`}>
           <ul className={styles.navList}>
-            <li><a href="#about" onClick={() => setIsMenuOpen(false)}>About Us</a></li>
-            <li><a href="#portfolio" onClick={() => setIsMenuOpen(false)}>Portfolio</a></li>
+            <li><a href="#howitworks" onClick={() => setIsMenuOpen(false)}>How It Works</a></li>
+            <li><a href="#why-choose-us" onClick={() => setIsMenuOpen(false)}>Why choose Us</a></li>
             <li><a href="#contacts" onClick={() => setIsMenuOpen(false)}>Contacts</a></li>
             <AccountButton />
           </ul>

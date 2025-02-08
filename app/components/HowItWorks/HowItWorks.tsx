@@ -3,7 +3,7 @@ import styles from './HowItWorks.module.css';
 
 export default function HowItWorks() {
     return (
-        <section className={styles.section}>
+        <section className={styles.section} id="howitworks">
             <h2>How It Works</h2>
             <h6>Here is a step-by-step guide on how to use our service:</h6>
             <ol className={styles.list}>

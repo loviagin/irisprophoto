@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /adm-dash
+Disallow: /adm-dash/*
+Disallow: /api/*
+Allow: /
+
+Sitemap: https://www.example.com/sitemap.xml
