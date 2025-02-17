@@ -1,33 +1,77 @@
 .left {
     flex: 1;
     padding-right: 20px;
-}
-
-.left form {
+  }
+  
+  .left form {
     display: flex;
     flex-direction: column;
     padding-top: 10px;
     gap: 15px;
-}
-
-.left input,
-.left textarea {
+  }
+  
+  .left input,
+  .left textarea {
     width: 100%;
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 15px;
-}
-
-.left button {
+  }
+  
+  .left button {
     width: 100%;
     padding: 10px;
     font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    background: black;
-    color: white;
+    background: #000;
+    color: #fff;
     border: none;
+    border-radius: 15px;
     cursor: pointer;
-    margin: 10px;
-}
+    margin: 10px 0;
+  }
+  
+  /* Для планшетов (до 1024px) */
+  @media (max-width: 1024px) {
+    .left {
+      padding-right: 15px;
+    }
+  
+    .left input,
+    .left textarea,
+    .left button {
+      padding: 12px;
+      font-size: 16px;
+    }
+  }
+  
+  /* Для мобильных устройств (до 768px) */
+  @media (max-width: 768px) {
+    .left {
+      width: 90%;
+      margin: 0 auto;
+      padding-right: 15px;
+      text-align: center;
+    }
+  
+    .left input,
+    .left textarea,
+    .left button {
+      padding: 12px;
+      font-size: 16px;
+    }
+  }
+  
+  /* Дополнительная настройка для маленьких экранов (до 480px) */
+  @media (max-width: 480px) {
+    .left {
+      padding-right: 10px;
+    }
+  
+    .left input,
+    .left textarea,
+    .left button {
+      padding: 10px;
+      font-size: 14px;
+    }
+  }

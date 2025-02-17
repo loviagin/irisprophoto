@@ -51,7 +51,8 @@
 
 .account p {
   display: flex;
-  align-items: center; /* Выравниваем иконку по центру */
+  align-items: center;
+  /* Выравниваем иконку по центру */
   gap: 6px;
   padding: 5px 10px;
   border: 1px solid white;
@@ -61,19 +62,35 @@
 .account {
   font-weight: bold;
   display: flex;
-  align-items: center; /* Выравниваем иконку по центру */
+  align-items: center;
+  /* Выравниваем иконку по центру */
 }
 
+/* Правила для экранов до 1324px */
+@media (max-width: 1324px) {
+  .header {
+    padding: 15px 60px;
+  }
+}
+
+/* Правила для экранов до 1024px */
+@media (max-width: 1024px) {
+  .header {
+    padding: 15px 60px;
+  }
+}
+
+/* Мобильная версия – экраны до 768px */
 @media (max-width: 768px) {
   .header {
+    padding: 15px 20px; /* Уменьшенные горизонтальные отступы */
     width: 100%;
     right: 0;
     left: 0;
-    padding: 15px 0;
     margin: 0;
-    color: red;
+    z-index: 500;
   }
-  
+
   .menuWrapper {
     position: relative;
   }
@@ -96,7 +113,7 @@
     padding: 10px;
     list-style: none;
     display: none;
-    width: 200px; /* Увеличенная ширина */
+    width: 200px;
   }
 
   .navOpen {
@@ -107,7 +124,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 100%; /* Подстраиваем ширину под родительский контейнер */
+    width: 100%;
   }
 
   .navList li {
@@ -116,18 +133,7 @@
   }
 }
 
-@media (max-width: 1324px) {
-  .header {
-    padding: 15px 60px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .header {
-    padding: 15px 60px;
-  }
-}
-
+/* Правила для экранов от 769px */
 @media (min-width: 769px) {
   .menuButton {
     display: none;

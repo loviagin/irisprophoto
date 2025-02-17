@@ -97,9 +97,9 @@ export default function LoginForm({ onClose }: PopupProps) {
             <p className={styles.errorMessage}>{errorMessage}</p>
 
             {isRegistration ?
-                <p className={styles.signUp}>Have an account? <a className={styles.signUp} onClick={() => setIsRegistration(false)}>Sign in</a></p>
+                <p className={styles.signUp}>Have an account? <a onClick={() => setIsRegistration(false)}>Sign in</a></p>
                 :
-                <p className={styles.signUp}>Don't have an account? <a className={styles.signUp} onClick={() => setIsRegistration(true)}>Sign Up</a></p>
+                <p className={styles.signUp}>Don't have an account? <a onClick={() => setIsRegistration(true)}>Sign Up</a></p>
             }
         </div>
     );

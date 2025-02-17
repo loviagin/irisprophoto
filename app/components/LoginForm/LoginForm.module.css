@@ -1,8 +1,14 @@
-/* Правая часть: Вход */
+/* Глобальный сброс и box-sizing */
+:global(*) {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Основной стиль для правой части */
 .right {
     flex: 1;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 20px;
 }
 
 .right h2 {
@@ -29,19 +35,26 @@
     width: 100%;
     padding: 10px;
     font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    background: black;
-    color: white;
+    background: #000;
+    color: #fff;
     border: none;
+    border-radius: 15px;
     cursor: pointer;
-    margin: 10px;
+    margin: 10px 0;
 }
 
 .signUp {
-    font-size: 15px;
+    font-size: 16px !important;
+    /* Дополнительно можно сбросить отступы, если это <p> или другой элемент */
+    margin: 0;
+}
+
+/* Если "Sign Up" — это ссылка, задаём ей нужный вес */
+.signUp a {
     font-weight: bold;
-    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    /* чтобы цвет наследовался */
 }
 
 .errorMessage {
@@ -50,15 +63,66 @@
     margin-top: 10px;
 }
 
+/* Для планшетов (до 1024px) */
+@media (max-width: 1024px) {
+    .right {
+        padding: 15px;
+    }
+
+    .right h2 {
+        font-size: 26px;
+    }
+
+    .right input,
+    .right button {
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+
+/* Для мобильных устройств (до 768px) */
 @media (max-width: 768px) {
     .right {
         width: 90%;
-        padding-right: 20px;
-        padding-left: 0;
+        margin: 0 auto;
+        padding: 15px;
         text-align: center;
     }
 
     .right h2 {
         font-size: 24px;
+    }
+
+    .signUp {
+        font-size: 16px;
+    }
+
+    .signUp p {
+        font-size: 16px;
+    }
+
+    .errorMessage {
+        font-size: 13px;
+    }
+}
+
+/* Дополнительная настройка для маленьких экранов (до 480px) */
+@media (max-width: 480px) {
+    .right {
+        padding: 10px;
+    }
+
+    .right h2 {
+        font-size: 20px;
+    }
+
+    .right input,
+    .right button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .signUp {
+        font-size: 14px;
     }
 }
