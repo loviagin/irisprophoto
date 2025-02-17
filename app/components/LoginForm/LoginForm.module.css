@@ -1,12 +1,9 @@
-/* Глобальный сброс и box-sizing */
-:global(*) {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 /* Основной стиль для правой части */
 .right {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     flex: 1;
     padding: 20px;
 }
