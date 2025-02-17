@@ -1,5 +1,6 @@
 .content {
     display: flex;
+    z-index: 99;
     justify-content: space-between; /* Размещаем элементы равномерно */
     align-items: stretch; /* Выровнять по высоте */
     gap: 20px;
@@ -81,6 +82,8 @@
 
     .left, .right {
         width: 100%;
+        right: 0;
+        left: 0;
     }
 
     .divider {
