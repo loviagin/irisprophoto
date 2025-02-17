@@ -9,7 +9,7 @@ interface PopupProps {
 }
 
 export default function OrderForm({ onClose }: PopupProps) {
-    const [formData, setFormData] = useState({ name: "", email: "", details: "" });
+    const [formData, setFormData] = useState({ name: "", email: "", phone: "", details: "" });
     const [isSending, setIsSending] = useState(false);
     const auth = getAuth(firebase);
     const [user, setUser] = useState<User | null>(null);
@@ -18,7 +18,7 @@ export default function OrderForm({ onClose }: PopupProps) {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
-                setFormData({ name: user.displayName || "", email: user.email || "", details: "" });
+                setFormData({ name: user.displayName || "", email: user.email || "", phone: user.phoneNumber || "", details: "" });
             }
         });
 
@@ -44,7 +44,8 @@ export default function OrderForm({ onClose }: PopupProps) {
 
         if (result.success) {
             alert("Thanks for your order! We will contact you soon.");
-            setFormData({ name: "", email: "", details: "" });
+            onClose();
+            setFormData({ name: "", email: "", phone: "", details: "" });
         } else {
             alert("❌ Error: " + result.error);
         }
@@ -71,9 +72,16 @@ export default function OrderForm({ onClose }: PopupProps) {
                         placeholder="Your Email"
                         value={formData.email}
                         onChange={handleChange}
-                        required
                     />
                 }
+
+                <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Your Phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                />
 
                 <textarea
                     name="details"
