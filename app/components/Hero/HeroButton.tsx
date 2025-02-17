@@ -24,15 +24,15 @@ export default function HeroButton({ text }: HeroButtonProps) {
     });
   }, []);
 
-  useEffect(() => {
-    if (isPopupOpen) {
-      document.body.classList.add("no-scroll"); // Запрещаем скролл
-    } else {
-      document.body.classList.remove("no-scroll"); // Разрешаем скролл
-    }
+  // useEffect(() => {
+  //   if (isPopupOpen) {
+  //     document.body.classList.add("no-scroll"); // Запрещаем скролл
+  //   } else {
+  //     document.body.classList.remove("no-scroll"); // Разрешаем скролл
+  //   }
 
-    return () => document.body.classList.remove("no-scroll"); // Чистим при размонтировании
-  }, [isPopupOpen]);
+  //   return () => document.body.classList.remove("no-scroll"); // Чистим при размонтировании
+  // }, [isPopupOpen]);
 
   return (
     <>

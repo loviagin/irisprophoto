@@ -1,23 +1,30 @@
 .content {
     display: flex;
-    z-index: 99;
-    justify-content: space-between; /* Размещаем элементы равномерно */
-    align-items: stretch; /* Выровнять по высоте */
+    z-index: 100;
+    justify-content: space-between;
+    /* Размещаем элементы равномерно */
+    align-items: stretch;
+    /* Выровнять по высоте */
     gap: 20px;
     width: 100%;
 }
 
 .left,
 .right {
-    flex: 1; /* Гарантированно заставляет колонки занимать равное пространство */
-    width: 50%; /* Дублируем для надёжности */
-    min-width: 0; /* Убираем возможное переполнение */
+    z-index: 200;
+    flex: 1;
+    /* Гарантированно заставляет колонки занимать равное пространство */
+    width: 50%;
+    /* Дублируем для надёжности */
+    min-width: 0;
+    /* Убираем возможное переполнение */
 }
 
 .divider {
     width: 2px;
     background: #ddd;
-    flex-shrink: 0; /* Запрещаем сжимать разделитель */
+    flex-shrink: 0;
+    /* Запрещаем сжимать разделитель */
 }
 
 .left h2 {
@@ -35,10 +42,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 3000 !important;
 }
 
 .popup {
+    position: relative;
+    top: 50;
     background: rgb(68, 68, 68);
     width: 900px;
     max-width: 90%;
@@ -78,9 +87,11 @@
     .content {
         flex-direction: column;
         align-items: center;
+        z-index: 3000 !important;
     }
 
-    .left, .right {
+    .left,
+    .right {
         width: 100%;
         right: 0;
         left: 0;
@@ -96,6 +107,7 @@
     }
 
     .popup {
+        top: 50;
         width: 95%;
         padding: 15px;
     }
