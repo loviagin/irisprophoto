@@ -33,7 +33,7 @@ export default function HowItWorks() {
                         ))}
                     </div>
 
-                    {/* <WhyChooseUs /> */}
+                    <WhyChooseUs />
                 </div>
             </div>
         </section>

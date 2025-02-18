@@ -4,8 +4,8 @@ export async function POST(req: Request) {
     try {
         const { name, email, details } = await req.json();
 
-        const TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN; // Храним токен в .env
-        const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID; // Храним chat_id в .env
+        const TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN; 
+        const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
 
         const message = `📩 *New Order Without Registration* 📩\n\n` +
                         `👤 *Name:* ${name}\n` +

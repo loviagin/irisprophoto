@@ -33,6 +33,12 @@ export default function OrderForm({ onClose }: PopupProps) {
         e.preventDefault();
         setIsSending(true);
 
+        if (!formData.email && !formData.phone) {
+            alert("Please provide either an email or phone number");
+            setIsSending(false);
+            return;
+        }
+
         const response = await fetch(user !== null ? "api/userOrder" : "/api/sendOrder", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
