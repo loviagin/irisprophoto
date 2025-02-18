@@ -1,0 +1,78 @@
+.portfolio {
+    /* Градиентный фон фиолетовых оттенков */
+    background: linear-gradient(135deg, #6B05EA, #110026);
+    padding: 80px 20px;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 3rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* Контейнер для карточек: 4 колонки на больших экранах,
+     адаптивно перестраивается при сужении экрана */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    justify-items: center;
+  }
+  
+  /* Одна карточка */
+  .card {
+    background-color: #fff;
+    color: #333;
+    border-radius: 12px;
+    padding: 40px 20px;
+    width: 100%;
+    max-width: 240px; /* ограничение ширины, чтобы карточки не растягивались слишком */
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Картинка или иконка внутри карточки */
+  .cardImage {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+  }
+  
+  /* Подпись/название работы */
+  .cardTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  /* Адаптивность: при сужении экрана уменьшаем число колонок */
+  @media (max-width: 1024px) {
+    .cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }

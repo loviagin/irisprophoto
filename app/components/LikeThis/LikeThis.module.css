@@ -1,0 +1,140 @@
+.likeThisSection {
+    /* Градиентный фиолетовый фон */
+    background: linear-gradient(135deg, #110026, #000000);
+    text-align: center;
+    color: #fff;
+}
+
+/* Делаем этот блок родителем для псевдоэлементов */
+.background {
+    position: relative;
+    /* обязательно, чтобы ::before и ::after позиционировались */
+    overflow: hidden;
+    /* чтобы не вылезали за границы (опционально) */
+    padding: 200px 20px;
+}
+
+/* Псевдоэлементы - кружки */
+.background::before,
+.background::after {
+    content: "";
+    position: absolute;
+    width: 267px;
+    height: 267px;
+    background-color: #C76803;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.8;
+    z-index: 0;
+    /* кружки будут ниже контента */
+}
+
+/* Первый кружок */
+.background::before {
+    top: 15%;
+    left: 10%;
+}
+
+/* Второй кружок */
+.background::after {
+    bottom: 10%;
+    right: 25%;
+}
+
+/* Контейнер для остального контента */
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+    /* Если хотите, чтобы контент был над кружками, можно 
+       задать z-index: 1, но только при position != static: */
+    z-index: 1;
+}
+
+/* Заголовок */
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+/* Ряд изображений */
+.imagesRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* Блок с изображением */
+.imageWrapper {
+    height: 187px;
+    width: fit-content;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.imageWrapper:hover {
+    transform: translateY(-4px);
+}
+
+.imageWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Ряд кнопок */
+.buttonsRow {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Кнопка 2: прозрачная с белой границей */
+.secondaryBtn {
+    background-color: transparent;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: 2px solid #fff;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.secondaryBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 1320px) {
+    .background {
+        padding: 130px 20px;
+    }
+
+    .imageWrapper {
+        border-radius: 25px;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .secondaryBtn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    /* .imageWrapper {
+        width: auto;
+        height: 180px;
+    } */
+}
