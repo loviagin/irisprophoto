@@ -1,7 +1,6 @@
 .contactUs {
     /* Градиентный фон */
     background: #110026;
-    padding: 80px 130px;
     color: #fff;
     text-align: left;
     /* текст в левой колонке выравниваем по левому краю */
@@ -17,6 +16,11 @@
     margin: 0 auto;
     align-items: start;
     /* выравнивание по верхнему краю */
+}
+
+.background {
+    padding: 80px 130px;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Левая колонка */
@@ -128,7 +132,6 @@
         padding: 0 60px;
     }
 }
-
 
 /* Адаптивность: при ширине <= 768px уходим в 1 колонку */
 @media (max-width: 768px) {

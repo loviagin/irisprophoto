@@ -48,23 +48,25 @@ const portfolioItems = [
 export default function Portfolio() {
   return (
     <section id="portfolio" className={styles.portfolio}>
-      <div className={styles.container}>
-        <h2 className={styles.title}>Our portfolio</h2>
-        <p className={styles.subtitle}>Just a few of our works</p>
+      <div className={styles.background}>
+        <div className={styles.container}>
+          <h2 className={styles.title}>Our portfolio</h2>
+          <p className={styles.subtitle}>Just a few of our works</p>
 
-        <div className={styles.cards}>
-          {portfolioItems.map((item) => (
-            <div key={item.id} className={styles.card}>
-              {/* Изображение/иконка */}
-              <img
-                src={item.imgSrc}
-                alt={`Portfolio item ${item.id}`}
-                className={styles.cardImage}
-              />
-              {/* Подпись */}
-              <p className={styles.cardTitle}>{item.title}</p>
-            </div>
-          ))}
+          <div className={styles.cards}>
+            {portfolioItems.map((item) => (
+              <div key={item.id} className={styles.card}>
+                {/* Изображение/иконка */}
+                <img
+                  src={item.imgSrc}
+                  alt={`Portfolio item ${item.id}`}
+                  className={styles.cardImage}
+                />
+                {/* Подпись */}
+                <p className={styles.cardTitle}>{item.title}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
