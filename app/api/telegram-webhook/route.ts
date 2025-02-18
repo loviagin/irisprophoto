@@ -56,37 +56,29 @@ export async function POST(req: Request) {
             }
             // Если нажата кнопка со статусом (например, "status_new", "status_in_progress", и т.д.)
             else if (callbackData.startsWith("status_")) {
-                // Получаем новый статус в виде строки, убираем префикс и приводим к верхнему регистру
                 const newStatusStr = callbackData.replace("status_", "").toUpperCase();
+                console.log("New status:", newStatusStr);
 
-                // Получаем оригинальный текст сообщения
                 const oldText: string = update.callback_query.message.text || "";
-                // Обновляем только часть, где указан статус.
-                // Предполагаем, что в оригинальном сообщении строка со статусом имеет вид:
-                // "👤 *Order status:* <OLD_STATUS>"
+                console.log("Old text before update:", oldText);
+
+                // Если текст не содержит ожидаемой строки, можно сформировать его заново
                 const newText = oldText + "\nOrder status changed to: " + newStatusStr;
+                console.log("New text to set:", newText);
 
-                // Используем messageId как идентификатор заказа (или другой способ, в зависимости от логики)
                 const orderId = String(messageId);
+                // await updateOrderStatus(orderId, newStatusStr);
 
-                // Обновляем статус заказа в Firestore
-                await updateOrderStatus(orderId, newStatusStr);
-
-                // Формируем объект клавиатуры, чтобы после обновления статус можно менять повторно
                 const newKeyboard = {
                     inline_keyboard: [
                         [
-                            {
-                                text: "Изменить статус заказа",
-                                callback_data: "open_status"
-                            }
+                            { text: "Изменить статус заказа", callback_data: "open_status" }
                         ]
                     ]
                 };
 
-                // Редактируем текст сообщения с обновлённым статусом и оставляем клавиатуру
                 const editMessageTextUrl = `https://api.telegram.org/bot${TOKEN}/editMessageText`;
-                await fetch(editMessageTextUrl, {
+                const editResponse = await fetch(editMessageTextUrl, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -94,17 +86,20 @@ export async function POST(req: Request) {
                         message_id: messageId,
                         text: newText,
                         parse_mode: "Markdown",
-                        reply_markup: newKeyboard // Передаём клавиатуру, чтобы она осталась
+                        reply_markup: newKeyboard
                     }),
                 });
+                const editResult = await editResponse.json();
+                console.log("editMessageText result:", editResult);
 
-                // Отвечаем на callback-запрос, чтобы убрать индикатор загрузки в Telegram
                 const answerUrl = `https://api.telegram.org/bot${TOKEN}/answerCallbackQuery`;
-                await fetch(answerUrl, {
+                const answerResponse = await fetch(answerUrl, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ callback_query_id: callbackQueryId }),
                 });
+                const answerResult = await answerResponse.json();
+                console.log("answerCallbackQuery result:", answerResult);
             }
         }
 
