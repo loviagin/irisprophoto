@@ -17,9 +17,9 @@ const db = admin.firestore();
 
 export async function POST(req: Request) {
     try {
-        const { name, email, details } = await req.json();
+        const { name, email, phone, details } = await req.json();
 
-        console.log("Received order:", { name, email, details });
+        console.log("Received order:", { name, email, phone, details });
 
         const TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
         const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
@@ -29,9 +29,10 @@ export async function POST(req: Request) {
         console.log("Received order:", { name, email, details });
 
         const message = `📩 *New Order Without Registration* 📩\n\n` +
-            `👤 *Order status:* NEW\n` +
+            `⚡️ *Order status:* NEW\n` +
             `👤 *Name:* ${name}\n` +
             `📧 *Email:* ${email}\n` +
+            `📞 *Phone:* ${phone}\n` +
             `📝 *Details:*\n${details}`;
 
         const url = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
