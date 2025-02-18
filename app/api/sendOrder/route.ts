@@ -1,4 +1,3 @@
-//sendOrder
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -8,12 +7,17 @@ export async function POST(req: Request) {
         const TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN; 
         const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
 
+        console.log("TOKEN:", TOKEN);
+        console.log("CHAT_ID:", CHAT_ID);
+        console.log("Received order:", { name, email, details });
+
         const message = `📩 *New Order Without Registration* 📩\n\n` +
                         `👤 *Name:* ${name}\n` +
                         `📧 *Email:* ${email}\n` +
                         `📝 *Details:*\n${details}`;
 
         const url = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+        console.log("Request URL:", url);
 
         const response = await fetch(url, {
             method: "POST",
@@ -36,10 +40,12 @@ export async function POST(req: Request) {
         });
 
         const result = await response.json();
+        console.log("Telegram API response:", result);
         if (!result.ok) throw new Error(result.description);
 
         return NextResponse.json({ success: true });
     } catch (error) {
+        console.error("Error in sendOrder:", error);
         return NextResponse.json({ success: false, error: (error as Error).message }, { status: 500 });
     }
 }
