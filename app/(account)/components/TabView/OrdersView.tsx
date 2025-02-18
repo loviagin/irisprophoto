@@ -20,8 +20,6 @@ const OrdersView = () => {
     const [userId, setUserId] = useState<string | null>(null);
     const [orders, setOrders] = useState<Order[]>([]);
 
-    
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user && user.email) {
