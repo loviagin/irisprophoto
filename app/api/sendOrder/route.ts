@@ -66,11 +66,11 @@ export async function POST(req: Request) {
         console.log("Extracted messageId:", messageId);
 
         // Добавляем документ в коллекцию "orders" Firestore с данными заказа и messageId
-        await db.collection("orders").add({
+        await db.collection("orders").doc(messageId.toString()).set({
             name,
             email,
             details,
-            messageId,
+            status: "NEW",
             createdAt: new Date(),
         });
 
