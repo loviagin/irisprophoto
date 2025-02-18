@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: linear-gradient(135deg, #110026, #6B05EA);
+    background: linear-gradient(135deg, #110026, #000000);
     color: white;
     overflow-x: hidden;
     margin-top: -80px;
