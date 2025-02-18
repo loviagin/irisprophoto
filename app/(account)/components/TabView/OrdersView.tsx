@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import firebase from "@/app/firebase/firebase";
-import { getAuth, onAuthStateChanged, updateProfile } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
 import styles from "./OrdersView.module.css";
 
