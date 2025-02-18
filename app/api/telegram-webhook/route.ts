@@ -27,7 +27,7 @@ export async function POST(req: Request) {
                     inline_keyboard: [
                         [
                             { text: "Новый", callback_data: "status_new" },
-                            { text: "В работе", callback_data: "status_in_progress" }
+                            { text: "В работе", callback_data: "status_inProgress" }
                         ],
                         [
                             { text: "Завершён", callback_data: "status_completed" },
