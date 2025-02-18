@@ -9,7 +9,7 @@ const benefits = [
 
 export default function WhyChooseUs() {
     return (
-        <section className={styles.whyChooseUs}>
+        <section id="why-choose-us" className={styles.whyChooseUs}>
             <div className={styles.left}>
                 <h2>Why choose Us</h2>
                 <p>Our Goal — Show You the World Through Your Eyes</p>
