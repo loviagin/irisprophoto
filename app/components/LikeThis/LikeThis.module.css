@@ -133,6 +133,12 @@
         font-size: 14px;
     }
 
+    /* this action should hide second and third child in .imageWrapper */
+    .imageWrapper:nth-child(2),
+    .imageWrapper:nth-child(3) {
+        display: none;
+    }
+
     /* .imageWrapper {
         width: auto;
         height: 180px;
