@@ -1,4 +1,3 @@
-import CallToAction from "../../components/CallToAction/CallToAction";
 import HeroSection from "../../components/Hero/HeroSection";
 import HowItWorks from "../../components/HowItWorks/HowItWorks";
 import WhyChooseUs from "../../components/WhyChooseUs/WhyChooseUs";
@@ -10,7 +9,6 @@ export default function Home() {
       <HeroSection />
       <HowItWorks />
       <WhyChooseUs />
-      <CallToAction />
       <p className={styles.version}>Version 1.0.6</p>
     </main>
   );
