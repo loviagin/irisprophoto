@@ -2,7 +2,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 130px;
+    margin-top: 230px;
+    margin-bottom: 50px;
     color: white;
     /* background: linear-gradient(135deg, #6B05EA, #110026); */
 }
