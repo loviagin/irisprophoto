@@ -5,6 +5,11 @@ import LikeThis from "../components/LikeThis/LikeThis";
 import Portfolio from "../components/Portfoilio/Portfolio";
 // import styles from "./page.module.css";
 
+export const metadata = {
+    title: "Iris PRO Photo",
+    description: "Order professional photo irises",
+};
+
 export default function Home() {
     return (
         <main>

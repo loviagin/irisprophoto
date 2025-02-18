@@ -1,0 +1,45 @@
+.footer {
+    background-color: #000;
+    /* чёрный фон */
+    color: #fff;
+    /* белый текст */
+    padding: 20px 130px;
+    /* отступы сверху/снизу 20px, слева/справа 130px */
+    display: flex;
+    /* располагаем элементы в одну строку */
+    justify-content: space-between;
+    /* пространство между элементами */
+    align-items: center;
+    /* выравнивание по вертикали */
+}
+
+/* Стили левой части (текст о правах) */
+.left {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Стили правой части (ссылка на Privacy Policy) */
+.right {
+    font-size: 14px;
+    opacity: 0.9;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.right:hover {
+    opacity: 1;
+}
+
+@media (max-width: 1320px) {
+    .footer {
+        padding: 20px 60px;
+    }
+}
+
+/* Адаптивность: при ширине <= 768px уходим в 1 колонку */
+@media (max-width: 768px) {
+    .footer {
+        padding: 30px 20px;
+    }
+}

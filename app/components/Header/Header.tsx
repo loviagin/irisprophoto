@@ -19,7 +19,7 @@ export default function Header() {
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
-      <div className={styles.logo}>IRISPROPHOTO</div>
+      <div className={styles.logo}><a href="/">IRISPROPHOTO</a></div>
       <div className={styles.menuWrapper}>
         <button className={styles.menuButton} onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <FaTimes /> : <FaBars />}

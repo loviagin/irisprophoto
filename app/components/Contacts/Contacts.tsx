@@ -1,4 +1,3 @@
-"use client";
 import HeroButton from "../Hero/HeroButton";
 import styles from "./Contacts.module.css";
 
