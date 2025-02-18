@@ -128,14 +128,14 @@
 }
 
 @media (max-width: 1320px) {
-    .contactUs {
+    .background {
         padding: 0 60px;
     }
 }
 
 /* Адаптивность: при ширине <= 768px уходим в 1 колонку */
 @media (max-width: 768px) {
-    .contactUs {
+    .background {
         padding: 0 20px;
     }
 
