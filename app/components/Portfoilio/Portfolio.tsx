@@ -5,23 +5,43 @@ import styles from "./Portfolio.module.css";
 const portfolioItems = [
   {
     id: 1,
-    title: "Our work #1",
-    imgSrc: "/images/portfolio-icon1.png",
+    title: "Explosin",
+    imgSrc: "/works/work1.webp",
   },
   {
     id: 2,
-    title: "Our work #2",
-    imgSrc: "/images/portfolio-icon2.png",
+    title: "Fire",
+    imgSrc: "/works/work2.webp",
   },
   {
     id: 3,
-    title: "Our work #3",
-    imgSrc: "/images/portfolio-icon3.png",
+    title: "Halo hard",
+    imgSrc: "/works/work3.webp",
   },
   {
     id: 4,
-    title: "Our work #4",
-    imgSrc: "/images/portfolio-icon4.png",
+    title: "Light beams hard",
+    imgSrc: "/works/work4.webp",
+  },
+  {
+    id: 5,
+    title: "Meteor",
+    imgSrc: "/works/work5.webp",
+  },
+  {
+    id: 6,
+    title: "Radiance",
+    imgSrc: "/works/work6.webp",
+  },
+  {
+    id: 7,
+    title: "Sand",
+    imgSrc: "/works/work7.webp",
+  },
+  {
+    id: 8,
+    title: "Water",
+    imgSrc: "/works/work8.webp",
   },
 ];
 
