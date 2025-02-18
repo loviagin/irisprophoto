@@ -14,6 +14,7 @@ export async function POST(req: Request) {
         console.log("Received order:", { name, email, details });
 
         const message = `📩 *New Order Without Registration* 📩\n\n` +
+                        `👤 *Order status:* NEW\n` +
                         `👤 *Name:* ${name}\n` +
                         `📧 *Email:* ${email}\n` +
                         `📝 *Details:*\n${details}`;
