@@ -4,6 +4,8 @@ export async function POST(req: Request) {
     try {
         const { name, email, details } = await req.json();
 
+        console.log("Received order:", { name, email, details });
+
         const TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN; 
         const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
 
