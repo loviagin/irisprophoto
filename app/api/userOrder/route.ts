@@ -1,11 +1,12 @@
+//sendOrder
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     try {
         const { name, email, details } = await req.json();
 
-        const TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN; // Храним токен в .env
-        const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID; // Храним chat_id в .env
+        const TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN; 
+        const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
 
         const message = `📩 *New Order From a Registered User* 📩\n\n` +
                         `👤 *Name:* ${name}\n` +
@@ -21,6 +22,16 @@ export async function POST(req: Request) {
                 chat_id: CHAT_ID,
                 text: message,
                 parse_mode: "Markdown",
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: "Изменить статус заказа",
+                                callback_data: "open_status"
+                            }
+                        ]
+                    ]
+                },
             }),
         });
 
