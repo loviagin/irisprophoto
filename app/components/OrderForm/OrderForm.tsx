@@ -39,7 +39,7 @@ export default function OrderForm({ onClose }: PopupProps) {
             return;
         }
 
-        const response = await fetch(user !== null ? "/api/userOrder" : "/api/sendOrder", {
+        const response = await fetch(user !== null ? "https://irisprophoto.me/api/userOrder" : "https://irisprophoto.me/api/sendOrder", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData),
