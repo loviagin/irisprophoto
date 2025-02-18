@@ -21,6 +21,16 @@ export async function POST(req: Request) {
                 chat_id: CHAT_ID,
                 text: message,
                 parse_mode: "Markdown",
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: "Изменить статус заказа",
+                                callback_data: "open_status"
+                            }
+                        ]
+                    ]
+                },
             }),
         });
 
