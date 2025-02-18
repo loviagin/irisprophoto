@@ -7,6 +7,7 @@ import { FaListUl } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 
 import OrderForm from "@/app/components/OrderForm/OrderForm";
+import OrdersView from "./OrdersView";
 
 export default function TabView() {
     const [activeTab, setActiveTab] = useState("home");
@@ -43,11 +44,23 @@ export default function TabView() {
                 {
                     activeTab === "home" &&
                     <div>
-                        <OrderForm onClose={() => console.log("close")}/>
+                        <OrderForm onClose={() => console.log("close")} />
                     </div>
                 }
-                {activeTab === "orders" && <div>No Orders</div>}
-                {activeTab === "settings" && <div>⚙️ Settings are not available now</div>}
+
+                {
+                    activeTab === "orders" &&
+                    <div>
+                        <OrdersView />
+                    </div>
+                }
+
+                {
+                    activeTab === "settings" &&
+                    <div>
+                        ⚙️ Settings are not available now
+                    </div>
+                }
             </div>
         </div>
     );

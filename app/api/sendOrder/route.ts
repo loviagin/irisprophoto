@@ -26,7 +26,6 @@ export async function POST(req: Request) {
 
         console.log("TOKEN:", TOKEN);
         console.log("CHAT_ID:", CHAT_ID);
-        console.log("Received order:", { name, email, details });
 
         const message = `📩 *New Order Without Registration* 📩\n\n` +
             `⚡️ *Order status:* NEW\n` +

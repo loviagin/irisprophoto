@@ -1,0 +1,73 @@
+.container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: "Roboto", sans-serif;
+    color: #333;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+  }
+  
+  /* Обёртка для таблицы с горизонтальной прокруткой при необходимости */
+  .tableWrapper {
+    overflow-x: auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Таблица без отдельного заголовка */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Ячейки таблицы */
+  .table td {
+    padding: 1rem;
+    font-size: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+    transition: background-color 0.2s ease;
+  }
+  
+  /* Альтернативное окрашивание строк */
+  .table tr:nth-child(even) td {
+    background-color: #fafafa;
+  }
+  
+  .table tr:hover td {
+    background-color: #f1f9ff;
+  }
+  
+  /* Стилизация ячейки с иконкой */
+  .iconCell {
+    width: 60px;
+    text-align: center;
+    font-size: 1.8rem;
+    background-color: #e8f0fe;
+    border-right: 1px solid #f0f0f0;
+  }
+  
+  /* Внутри ячеек добавим подписи */
+  .label {
+    font-weight: 600;
+    color: #555;
+    margin-right: 0.5rem;
+  }
+  
+  /* Если заказ не обновлялся, делаем дату обновления более блеклой */
+  .updatedDate {
+    color: #999;
+  }
+  
+  /* Убираем границу у последней строки */
+  .table tr:last-child td {
+    border-bottom: none;
+  }
