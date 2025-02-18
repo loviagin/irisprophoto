@@ -1,0 +1,157 @@
+.howItWorks {
+    width: 100%;
+    text-align: center;
+    color: white;
+    background: #6B05EA;
+}
+
+/* Контейнер с сохранёнными отступами для десктопа */
+.container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0 130px;
+    box-sizing: border-box;
+}
+
+.background {
+    padding: 80px 0;
+    padding-bottom: 130px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.title {
+    font-size: 44px;
+    margin-bottom: 5px;
+}
+
+.description {
+    font-size: 24px;
+    margin-bottom: 60px;
+}
+
+/* Флекс-контейнер для карточек */
+.steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    align-items: stretch;
+    /* карточки в одном ряду будут иметь одинаковую высоту */
+}
+
+/* Карточка */
+.step {
+    flex: 1 1 calc(25% - 50px);
+    /* 4 карточки в ряду */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Верхняя часть карточки: номер, иконка, стрелка */
+.stepTop {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stepTitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.stepText {
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+/* Маленький кружок с номером */
+.number {
+    width: 24px;
+    height: 24px;
+    background: white;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Круг с иконкой */
+.circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle img {
+    width: 50px;
+    height: 50px;
+}
+
+/* Стрелка */
+.arrow {
+    font-size: 24px;
+    color: white;
+}
+
+/* Текстовый блок, растягивается, чтобы занять оставшееся пространство карточки */
+.textBox {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 12px;
+    color: black;
+    text-align: left;
+    flex-grow: 1;
+}
+
+@media (max-width: 1324px) {
+    .container {
+        padding: 0 60px;
+    }
+}
+
+/* Планшет: 2 карточки в ряду */
+@media (max-width: 1024px) {
+    .step {
+        flex: 1 1 calc(50% - 50px);
+    }
+}
+
+/* Мобильная версия: 1 карточка в ряду и уменьшение боковых отступов */
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding: 0 20px;
+        margin: 0;
+    }
+
+    .step {
+        margin: 0;
+        padding: 0;
+        flex: 1 1 100%;
+    }
+
+    .stepTop {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .arrow {
+        display: none;
+        /* transform: rotate(90deg); */
+    }
+
+    .textBox {
+        width: 100%;
+        text-align: center;
+    }
+}

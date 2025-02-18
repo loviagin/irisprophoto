@@ -1,0 +1,84 @@
+.whyChooseUs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 80px;
+    margin-top: 130px;
+    color: white;
+    /* background: linear-gradient(135deg, #6B05EA, #110026); */
+}
+
+.left {
+    width: 30%;
+    text-align: left;
+    padding-left: 5%;
+}
+
+.left h2 {
+    font-size: 32px;
+}
+
+.right {
+    width: 60%;
+}
+
+.benefit {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    color: black;
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+.icon img {
+    width: 40px;
+    height: 40px;
+}
+
+.textBox h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+/* 📱 Адаптация под мобильные */
+@media (max-width: 768px) {
+    .whyChooseUs {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .left {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 30px;
+        padding-left: 0;
+    }
+
+    .right {
+        width: 100%;
+    }
+
+    .benefit {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .icon {
+        margin-bottom: 10px;
+    }
+}
