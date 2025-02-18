@@ -76,7 +76,7 @@ export async function POST(req: Request) {
                 const newKeyboard = {
                     inline_keyboard: [
                         [
-                            { text: "Новый", callback_data: "status_new" },
+                            { text: "В обработке", callback_data: "status_waiting" },
                             { text: "В работе", callback_data: "status_in_progress" }
                         ],
                         [
