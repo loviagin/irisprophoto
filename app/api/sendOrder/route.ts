@@ -1,4 +1,19 @@
 import { NextResponse } from "next/server";
+import admin from "firebase-admin";
+
+if (!admin.apps.length) {
+    admin.initializeApp({
+        credential: admin.credential.cert({
+            projectId: process.env.FIREBASE_PROJECT_ID,
+            clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+            privateKey: process.env.FIREBASE_PRIVATE_KEY
+                ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n")
+                : undefined,
+        }),
+    });
+}
+
+const db = admin.firestore();
 
 export async function POST(req: Request) {
     try {
@@ -6,7 +21,7 @@ export async function POST(req: Request) {
 
         console.log("Received order:", { name, email, details });
 
-        const TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN; 
+        const TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
         const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
 
         console.log("TOKEN:", TOKEN);
@@ -14,10 +29,10 @@ export async function POST(req: Request) {
         console.log("Received order:", { name, email, details });
 
         const message = `📩 *New Order Without Registration* 📩\n\n` +
-                        `👤 *Order status:* NEW\n` +
-                        `👤 *Name:* ${name}\n` +
-                        `📧 *Email:* ${email}\n` +
-                        `📝 *Details:*\n${details}`;
+            `👤 *Order status:* NEW\n` +
+            `👤 *Name:* ${name}\n` +
+            `📧 *Email:* ${email}\n` +
+            `📝 *Details:*\n${details}`;
 
         const url = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
         console.log("Request URL:", url);
@@ -46,7 +61,20 @@ export async function POST(req: Request) {
         console.log("Telegram API response:", result);
         if (!result.ok) throw new Error(result.description);
 
-        return NextResponse.json({ success: true });
+        // Извлекаем message_id из ответа Telegram API
+        const messageId = result.result.message_id;
+        console.log("Extracted messageId:", messageId);
+
+        // Добавляем документ в коллекцию "orders" Firestore с данными заказа и messageId
+        await db.collection("orders").add({
+            name,
+            email,
+            details,
+            messageId,
+            createdAt: new Date(),
+        });
+
+        return NextResponse.json({ success: true, messageId });
     } catch (error) {
         console.error("Error in sendOrder:", error);
         return NextResponse.json({ success: false, error: (error as Error).message }, { status: 500 });

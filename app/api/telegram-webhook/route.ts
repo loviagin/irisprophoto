@@ -1,12 +1,28 @@
 import { NextResponse } from "next/server";
+import admin from "firebase-admin";
 
-// Пример функции обновления заказа в Firestore
+// Инициализация firebase-admin (если ещё не инициализирован)
+if (!admin.apps.length) {
+    admin.initializeApp({
+        credential: admin.credential.cert({
+            projectId: process.env.FIREBASE_PROJECT_ID,
+            clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+            // Если privateKey содержит переносы строк, заменяем их корректно
+            privateKey: process.env.FIREBASE_PRIVATE_KEY
+                ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n")
+                : undefined,
+        }),
+    });
+}
+
+const db = admin.firestore();
+
 async function updateOrderStatus(orderId: string, newStatus: string): Promise<void> {
-    console.log(`Обновление заказа ${orderId} новым статусом: ${newStatus}`);
-    // Здесь реализуйте обновление заказа в Firestore, например:
-    // const db = getFirestore();
-    // const orderRef = doc(db, "orders", orderId);
-    // await updateDoc(orderRef, { status: newStatus });
+    const orderRef = db.collection("orders").doc(orderId);
+    await orderRef.update({
+        status: newStatus,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
 }
 
 export async function POST(req: Request) {
@@ -67,7 +83,7 @@ export async function POST(req: Request) {
                 console.log("New text to set:", newText);
 
                 const orderId = String(messageId);
-                // await updateOrderStatus(orderId, newStatusStr);
+                await updateOrderStatus(orderId, newStatusStr);
 
                 const newKeyboard = {
                     inline_keyboard: [
