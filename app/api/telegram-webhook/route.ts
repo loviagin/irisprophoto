@@ -64,10 +64,7 @@ export async function POST(req: Request) {
                 // Обновляем только часть, где указан статус.
                 // Предполагаем, что в оригинальном сообщении строка со статусом имеет вид:
                 // "👤 *Order status:* <OLD_STATUS>"
-                const newText = oldText.replace(
-                    /(👤 \*Order status:\*\s*)[^\n]*/,
-                    `$1${newStatusStr}`
-                );
+                const newText = oldText + "\nOrder status changed to: " + newStatusStr;
 
                 // Используем messageId как идентификатор заказа (или другой способ, в зависимости от логики)
                 const orderId = String(messageId);
