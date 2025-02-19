@@ -1,7 +1,7 @@
 .section {
     display: flex;
     flex-direction: row;
-    padding: 65px 30px;
+    padding: 65px 130px;
     margin: 50px 0;
     gap: 40px;
 }
@@ -77,6 +77,13 @@
     transform: scale(1.05);
     transition: 0.5s;
 }
+
+@media (max-width: 1024px) {
+    .section {
+        padding: 65px 60px;
+    }
+}
+
 
 @media (max-width: 1024px) {
     .section {
