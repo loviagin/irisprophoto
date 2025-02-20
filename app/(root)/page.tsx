@@ -3,7 +3,6 @@ import Hero from "../components/Hero-2/Hero";
 import HowItWorks from "../components/HowItWorks-2/HowItWorks";
 import LikeThis from "../components/LikeThis/LikeThis";
 import Portfolio from "../components/Portfoilio/Portfolio";
-// import styles from "./page.module.css";
 
 export const metadata = {
     title: "Iris PRO Photo",
