@@ -1,7 +1,9 @@
+import LikeThis from "@/app/components/LikeThis-old/LikeThis";
 import HeroSection from "../../components/Hero/HeroSection";
 import HowItWorks from "../../components/HowItWorks/HowItWorks";
 import WhyChooseUs from "../../components/WhyChooseUs/WhyChooseUs";
-import styles from "./page.module.css";
+import Portfolio from "@/app/components/Portfoilio-old/Portfolio";
+import ContactUs from "@/app/components/Contacts-old/Contacts";
 
 export default function Home() {
   return (
@@ -9,7 +11,9 @@ export default function Home() {
       <HeroSection />
       <HowItWorks />
       <WhyChooseUs />
-      <p className={styles.version}>Version 1.0.6</p>
+      <LikeThis />
+      <Portfolio />
+      <ContactUs />
     </main>
   );
 }

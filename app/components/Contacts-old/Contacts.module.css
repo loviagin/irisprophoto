@@ -1,0 +1,181 @@
+.contactUs {
+    /* Градиентный фон */
+    background: #000000;
+    color: #fff;
+    text-align: left;
+    /* текст в левой колонке выравниваем по левому краю */
+}
+
+.container {
+    /* Две колонки: левая (контакты+форма) и правая (карта) */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 100%;
+    padding: 50px 0;
+    margin: 0 auto;
+    align-items: start;
+    /* выравнивание по верхнему краю */
+}
+
+.background {
+    padding: 80px 130px;
+}
+
+/* Левая колонка */
+.left {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    /* расстояние между блоками (список и форма) */
+}
+
+/* Заголовок и подзаголовок */
+.title {
+    font-size: 44px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 24px;
+    margin: 8px 0 16px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Список контактов */
+.contactInfo {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    line-height: 1.7;
+}
+
+.contactInfo li {
+    margin-bottom: 8px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Форма */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 400px;
+}
+
+.inputField {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.inputField input,
+.inputField textarea {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    color: #333;
+}
+
+.privacyNote {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-top: -4px;
+    /* чуть поджать */
+}
+
+.sendButton {
+    background-color: #fff;
+    color: #000;
+    font-weight: 600;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: fit-content;
+    /* чтобы кнопка не тянулась на всю ширину */
+}
+
+.sendButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.15);
+}
+
+/* Правая колонка - карта */
+.right {
+    display: flex;
+    align-items: flex-start;
+    /* карта прижата к верху, как и левый блок */
+    justify-content: center;
+}
+
+/* Карта */
+.map {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 600px;
+
+    height: auto;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.socialIcons {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+    justify-content: start;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background-color: #f1f1f1;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    font-size: 20px;
+    color: #333;
+}
+
+.icon:hover {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 6px 10px rgba(0, 123, 255, 0.3);
+}
+
+@media (max-width: 1320px) {
+    .background {
+        padding: 0 60px;
+    }
+}
+
+/* Адаптивность: при ширине <= 768px уходим в 1 колонку */
+@media (max-width: 768px) {
+    .background {
+        padding: 0 20px;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .title {
+        font-size: 32px;
+    }
+
+    .map {
+        height: 300px;
+    }
+}
