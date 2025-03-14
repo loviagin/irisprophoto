@@ -115,7 +115,6 @@ const NewTestimonials = () => {
               <motion.div
                 key={page}
                 custom={direction}
-                variants={variants}
                 initial="enter"
                 animate="center"
                 exit="exit"
