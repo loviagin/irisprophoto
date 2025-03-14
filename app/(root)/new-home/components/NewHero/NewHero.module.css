@@ -1,0 +1,243 @@
+.hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 60px 20px;
+}
+
+.gradientBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #000B18, #0A2342);
+    z-index: -2;
+}
+
+.decorativeElements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.circle1, .circle2 {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.circle1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(97, 175, 239, 0.1) 0%, rgba(25, 89, 146, 0.1) 100%);
+    top: -100px;
+    right: -100px;
+}
+
+.circle2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(97, 175, 239, 0.15) 0%, rgba(25, 89, 146, 0.15) 100%);
+    bottom: -50px;
+    left: -50px;
+}
+
+.content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.textContent {
+    color: white;
+}
+
+.textContent h1 {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #FFFFFF 0%, #A5D8FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.textContent p {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #A5D8FF;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.ctaButtons {
+    display: flex;
+    gap: 20px;
+}
+
+.primaryButton, .secondaryButton {
+    padding: 16px 32px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.primaryButton {
+    background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+    color: white;
+    border: none;
+}
+
+.primaryButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+
+.secondaryButton {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.secondaryButton:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.imageContent {
+    position: relative;
+}
+
+.irisPreview {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.irisPreview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.previewOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%);
+}
+
+.scanLine {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #3B82F6, transparent);
+    box-shadow: 0 0 20px #3B82F6;
+}
+
+.stats {
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-around;
+    gap: 40px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.statItem {
+    text-align: center;
+    color: white;
+}
+
+.statNumber {
+    display: block;
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #FFFFFF 0%, #A5D8FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.statLabel {
+    font-size: 16px;
+    color: #A5D8FF;
+    opacity: 0.9;
+}
+
+@media (max-width: 1024px) {
+    .content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .textContent h1 {
+        font-size: 48px;
+    }
+
+    .ctaButtons {
+        justify-content: center;
+    }
+
+    .stats {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 40px 20px;
+    }
+
+    .textContent h1 {
+        font-size: 36px;
+    }
+
+    .textContent p {
+        font-size: 18px;
+    }
+
+    .ctaButtons {
+        flex-direction: column;
+    }
+
+    .primaryButton, .secondaryButton {
+        width: 100%;
+    }
+
+    .stats {
+        padding: 20px;
+    }
+
+    .statNumber {
+        font-size: 36px;
+    }
+} 

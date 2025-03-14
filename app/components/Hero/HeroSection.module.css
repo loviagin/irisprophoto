@@ -44,12 +44,12 @@
 }
 
 .button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background: white;
+  padding: 15px 35px;
+  font-size: 18px;
+  background: rgb(224, 207, 17);
   color: black;
   border: none;
-  border-radius: 25px;
+  border-radius: 30px;
   cursor: pointer;
   font-weight: bold;
   animation: buttonEnterAnimation 2s ease 0s 1 normal forwards;
@@ -88,8 +88,7 @@
   }
 
   .button {
-    padding: 8px 16px;
-    font-size: 14px;
+    padding: 12px 25px;
+    font-size: 16px;
   }
-  
 }
