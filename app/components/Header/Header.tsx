@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 import styles from "./Header.module.css";
-import AccountButton from "./AccountButton";
+// import AccountButton from "./AccountButton";
 import { FaBars, FaTimes } from "react-icons/fa";
+import HeroButton from "../Hero/HeroButton";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,7 +30,7 @@ export default function Header() {
             <li><a href="#howitworks" onClick={() => setIsMenuOpen(false)}>How It Works</a></li>
             <li><a href="#why-choose-us" onClick={() => setIsMenuOpen(false)}>Why choose Us</a></li>
             <li><a href="#contacts" onClick={() => setIsMenuOpen(false)}>Contacts</a></li>
-            <AccountButton />
+            <HeroButton text="Place an order" />
           </ul>
         </nav>
       </div>

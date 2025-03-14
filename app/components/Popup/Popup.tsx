@@ -16,15 +16,15 @@ export default function Popup({ onClose }: PopupProps) {
                     {/* Левая часть: Форма заказа */}
 
                     <div className={styles.left}>
-                        <h2>Order Without Registration</h2>
+                        <h2>Make an order</h2>
                         <OrderForm onClose={onClose} />
                     </div>
 
                     {/* Разделитель */}
-                    <div className={styles.divider}></div>
+                    {/* <div className={styles.divider}></div> */}
 
                     {/* Правая часть: Вход */}
-                    <LoginForm onClose={onClose}/>
+                    {/* <LoginForm onClose={onClose}/> */}
                 </div>
             </div>
         </div>

@@ -1,24 +1,22 @@
-import LikeThis from "@/app/components/LikeThis-old/LikeThis";
-import HeroSection from "../../components/Hero/HeroSection";
-import HowItWorks from "../../components/HowItWorks/HowItWorks";
-import WhyChooseUs from "../../components/WhyChooseUs/WhyChooseUs";
-import Portfolio from "@/app/components/Portfoilio-old/Portfolio";
-import ContactUs from "@/app/components/Contacts-old/Contacts";
+import Contacts from "@/app/components/Contacts/Contacts";
+import Hero from "@/app/components/Hero-2/Hero";
+import HowItWorks from "@/app/components/HowItWorks-2/HowItWorks";
+import LikeThis from "@/app/components/LikeThis/LikeThis";
+import Portfolio from "@/app/components/Portfoilio/Portfolio";
 
 export const metadata = {
-  title: "Iris PRO Photo",
-  description: "Order professional photo irises",
+    title: "Iris PRO Photo",
+    description: "Order professional photo irises",
 };
 
 export default function Home() {
-  return (
-    <main>
-      <HeroSection />
-      <HowItWorks />
-      <WhyChooseUs />
-      <LikeThis />
-      <Portfolio />
-      <ContactUs />
-    </main>
-  );
+    return (
+        <main>
+            <Hero />
+            <HowItWorks />
+            <LikeThis />
+            <Portfolio />
+            <Contacts />
+        </main>
+    );
 }
