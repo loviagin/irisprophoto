@@ -104,7 +104,7 @@ export default function Header() {
             <button
               className={styles.menuButton}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label={isMenuOpen ? "Закрыть меню" : "Открыть меню"}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMenuOpen ? <FaTimes /> : <FaBars />}
             </button>
@@ -153,23 +153,23 @@ export default function Header() {
                 >
                   <motion.ul className={styles.mobileNavList}>
                     <motion.li variants={itemVariants}>
-                      <button onClick={() => scrollToSection('portfolio')} className={styles.navLink}>
-                        Портфолио
+                      <button onClick={() => scrollToSection('WHYCHOOSEUS')} className={styles.navLink}>
+                      Why Choose Us
                       </button>
                     </motion.li>
                     <motion.li variants={itemVariants}>
-                      <button onClick={() => scrollToSection('services')} className={styles.navLink}>
-                        Услуги
+                      <button onClick={() => scrollToSection('GALLERY')} className={styles.navLink}>
+                      Gallery
                       </button>
                     </motion.li>
                     <motion.li variants={itemVariants}>
-                      <button onClick={() => scrollToSection('about')} className={styles.navLink}>
-                        Обо мне
+                      <button onClick={() => scrollToSection('Process')} className={styles.navLink}>
+                      Process
                       </button>
                     </motion.li>
                     <motion.li variants={itemVariants}>
-                      <button onClick={() => scrollToSection('contacts')} className={styles.navLink}>
-                        Контакты
+                      <button onClick={() => scrollToSection('Contacts')} className={styles.navLink}>
+                      Contacts
                       </button>
                     </motion.li>
                     <motion.li variants={itemVariants}>

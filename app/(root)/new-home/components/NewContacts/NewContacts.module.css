@@ -7,6 +7,8 @@
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 40px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .content {
@@ -150,5 +152,9 @@
     width: 40px;
     height: 40px;
     font-size: 1rem;
+  }
+
+  .container {
+    padding: 0 20px;
   }
 } 

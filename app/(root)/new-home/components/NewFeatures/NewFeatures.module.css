@@ -1,11 +1,14 @@
 .features {
-    padding: 100px 20px;
-    background: #FFFFFF;
+    padding: 100px 0;
+    background: #fff;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1440px;
     margin: 0 auto;
+    padding: 0 40px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .header {
@@ -44,21 +47,21 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 40px;
 }
 
 .feature {
+    background: #fff;
     padding: 40px;
-    background: white;
     border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
 .feature:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .iconWrapper {
@@ -77,21 +80,24 @@
 }
 
 .feature h3 {
-    font-size: 24px;
-    font-weight: 600;
-    color: #1A1A1A;
-    margin-bottom: 16px;
+    font-size: 1.5rem;
+    margin: 0 0 20px;
+    color: #2d3436;
 }
 
 .feature p {
-    font-size: 16px;
-    color: #666666;
+    color: #636e72;
     line-height: 1.6;
+    margin: 0;
 }
 
 @media (max-width: 768px) {
     .features {
-        padding: 60px 20px;
+        padding: 60px 0;
+    }
+
+    .container {
+        padding: 0 20px;
     }
 
     .header h2 {
