@@ -38,3 +38,21 @@
   font-size: 0.875rem;
   color: #666;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 40px 20px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+  }
+
+  .footer {
+    font-size: 0.75rem;
+  }
+}
