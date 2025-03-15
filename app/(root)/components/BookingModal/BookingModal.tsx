@@ -11,12 +11,20 @@ interface BookingModalProps {
 }
 
 export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
+  const getCurrentDate = () => {
+    const today = new Date()
+    const year = today.getFullYear()
+    const month = String(today.getMonth() + 1).padStart(2, '0')
+    const day = String(today.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+  }
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
     shootingType: 'one-two',
-    date: '',
+    date: getCurrentDate(),
     details: ''
   })
 
@@ -52,7 +60,14 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
     if (result.success) {
       alert("Thanks for your order! We will contact you soon.");
       onClose();
-      setFormData({ name: "", email: "", phone: "", shootingType: "wedding", date: "", details: "" });
+      setFormData({ 
+        name: "", 
+        email: "", 
+        phone: "", 
+        shootingType: "wedding", 
+        date: getCurrentDate(),
+        details: "" 
+      });
     } else {
       alert("❌ Error: " + result.error);
     }
