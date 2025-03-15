@@ -63,9 +63,9 @@ export default function NewContacts() {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.info}>
-            <h2>Свяжитесь со мной</h2>
+            <h2>Get in touch</h2>
             <p className={styles.description}>
-              Готовы запечатлеть ваши особенные моменты? Свяжитесь со мной любым удобным способом, и мы обсудим все детали вашей фотосессии.
+              Are you ready to capture your special moments? Contact me in any convenient way and we will discuss all the details of your photo shoot.
             </p>
 
             <div className={styles.contactItems}>
@@ -74,7 +74,7 @@ export default function NewContacts() {
                   <FaPhone />
                 </div>
                 <div className={styles.contactInfo}>
-                  <h3>Телефон</h3>
+                  <h3>Phone number</h3>
                   <a href="tel:+19048359485">+1 (904) 835-94-85</a>
                 </div>
               </div>
@@ -85,7 +85,7 @@ export default function NewContacts() {
                 </div>
                 <div className={styles.contactInfo}>
                   <h3>Email</h3>
-                  <a href="mailto:info@irisprophoto.com">info@irisprophoto.com</a>
+                  <a href="mailto:voroninsfamily@irisprophoto.org">voroninsfamily@irisprophoto.org</a>
                 </div>
               </div>
 
@@ -94,7 +94,7 @@ export default function NewContacts() {
                   <FaMapMarkerAlt />
                 </div>
                 <div className={styles.contactInfo}>
-                  <h3>Адрес</h3>
+                  <h3>Address</h3>
                   <p>123 St George St</p>
                   <p>Saint Augustine, FL</p>
                 </div>
@@ -112,7 +112,7 @@ export default function NewContacts() {
                 onUnmount={onUnmount}
                 options={options}
               >
-                <Marker 
+                <Marker
                   position={center}
                   title="123 St George St, Saint Augustine"
                 />

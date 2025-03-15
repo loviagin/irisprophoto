@@ -4,20 +4,21 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: transparent;
-  transition: all 0.3s ease-in-out;
-  backdrop-filter: blur(0);
+  transition: all 0.3s ease;
 }
 
 .scrolled {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.scrolled .navLink,
-.scrolled .logoText {
-  color: #000;
+.scrolled .menuButton {
+  color: #4b5563;
+}
+
+.scrolled .navLink {
+  color: #4b5563;
 }
 
 .headerContent {
@@ -37,16 +38,28 @@
 }
 
 .logoText {
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: 700;
-  color: #fff;
-  letter-spacing: 1px;
-  transition: color 0.3s ease;
+  background: var(--primary-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease;
 }
 
-.menuWrapper {
-  display: flex;
-  align-items: center;
+.menuButton {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.menuButton:hover {
+  color: var(--primary-color);
+  transform: scale(1.1);
 }
 
 .nav {
@@ -57,207 +70,53 @@
 .navList {
   display: flex;
   gap: 40px;
-  align-items: center;
+  list-style: none;
   margin: 0;
   padding: 0;
-  list-style: none;
+  align-items: center;
 }
 
 .navLink {
-  color: #fff;
+  color: white;
   text-decoration: none;
-  font-size: 1rem;
   font-weight: 500;
   transition: all 0.3s ease;
-  position: relative;
   background: none;
   border: none;
-  padding: 0;
   cursor: pointer;
+  padding: 0;
+  font-size: 16px;
 }
 
-.navLink:after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
-  transition: width 0.3s ease;
-}
-
-.navLink:hover:after {
-  width: 100%;
+.navLink:hover {
+  color: var(--primary-color);
+  transform: translateY(-2px);
 }
 
 .ctaButton {
-  background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+  background: var(--primary-color);
   color: white;
-  border: none;
   padding: 12px 24px;
-  border-radius: 30px;
-  font-weight: 500;
+  border-radius: 25px;
+  border: none;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 .ctaButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
-.menuButton {
+.mobileNav {
   display: none;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 2;
 }
 
-/* Модальное окно */
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1100;
-  padding: 20px;
-}
-
-.modal {
-  background: white;
-  border-radius: 20px;
-  width: 100%;
-  max-width: 600px;
-  position: relative;
-  overflow: hidden;
-}
-
-.modalClose {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: #636e72;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 2;
-}
-
-.modalClose:hover {
-  color: #FF6B6B;
-  transform: rotate(90deg);
-}
-
-.modalContent {
-  padding: 40px;
-}
-
-.modalContent h2 {
-  margin: 0 0 10px;
-  font-size: 2rem;
-  background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.modalContent p {
-  color: #636e72;
-  margin-bottom: 30px;
-}
-
-.bookingForm {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.formRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.formGroup {
-  position: relative;
-}
-
-.formIcon {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #636e72;
-  font-size: 1.2rem;
-}
-
-.formGroup input,
-.formGroup select,
-.formGroup textarea {
-  width: 100%;
-  padding: 12px 20px;
-  border: 2px solid #eee;
-  border-radius: 10px;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  background: #fff;
-}
-
-.formGroup input:focus,
-.formGroup select:focus,
-.formGroup textarea:focus {
-  border-color: #4ECDC4;
-  outline: none;
-}
-
-.formGroup input[type="date"] {
-  padding-right: 20px;
-}
-
-.formGroup textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-.formIcon + input,
-.formIcon + select {
-  padding-left: 45px;
-}
-
-.submitButton {
-  background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
-  color: white;
-  border: none;
-  padding: 15px 30px;
-  border-radius: 30px;
-  font-size: 1.1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 10px;
-}
-
-.submitButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-@media (max-width: 768px) {
+@media (max-width: 968px) {
   .headerContent {
-    padding: 15px 20px;
+    padding: 20px 40px;
   }
 
   .menuButton {
@@ -265,47 +124,54 @@
   }
 
   .nav {
+    display: none;
+  }
+
+  .mobileNav {
+    display: block;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    background: rgba(255, 255, 255, 0.98);
+    background: rgba(17, 24, 39, 0.95);
     backdrop-filter: blur(10px);
-    display: none;
-    justify-content: center;
-    align-items: center;
     z-index: 1;
+    padding: 100px 20px 20px;
   }
 
-  .navOpen {
+  .mobileNavList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-  }
-
-  .navList {
     flex-direction: column;
-    gap: 30px;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .mobileNavList .navLink {
+    font-size: 24px;
+    color: white;
+    opacity: 0.9;
+  }
+
+  .mobileNavList .navLink:hover {
+    opacity: 1;
+    color: var(--primary-color);
+  }
+
+  .mobileNavList .ctaButton {
+    width: 100%;
+    max-width: 300px;
     text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
   }
+}
 
-  .navLink {
-    color: #000;
-    font-size: 1.2rem;
-  }
-
-  .scrolled .menuButton {
-    color: #000;
-  }
-
-  .formRow {
-    grid-template-columns: 1fr;
-  }
-
-  .modalContent {
-    padding: 30px 20px;
-  }
-
-  .modalContent h2 {
-    font-size: 1.5rem;
+@media (max-width: 768px) {
+  .headerContent {
+    padding: 20px;
   }
 }

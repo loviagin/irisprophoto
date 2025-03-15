@@ -7,31 +7,31 @@ import styles from './NewTestimonials.module.css';
 const testimonials = [
   {
     id: 1,
-    name: 'Анна Петрова',
-    role: 'Свадебная фотосессия',
-    image: '/images/testimonials/anna.webp',
-    quote: 'Отзыв вау',
+    name: 'Jane Doe',
+    role: 'Single photo session',
+    image: '/images/user.webp',
+    quote: 'I had a great experience with this photographer. He made me feel comfortable and relaxed during the photo shoot. The final photos were amazing and I would definitely recommend him to anyone looking for a professional photographer.',
     rating: 5
   },
   {
     id: 2,
-    name: 'Михаил Соколов',
-    role: 'Семейная фотосессия',
-    image: '/images/testimonials/mikhail.webp',
-    quote: 'Отзыв 2',
+    name: 'Michael Smith',
+    role: 'Family photo session',
+    image: '/images/user.webp',
+    quote: 'We had a great time during the photo session. The photographer was very professional and made us feel comfortable. The final photos were amazing and we are very happy with the results. We would definitely recommend him to anyone.',
     rating: 5
   },
   {
     id: 3,
-    name: 'Екатерина Волкова',
-    role: 'Портретная съёмка',
-    image: '/images/testimonials/ekaterina.webp',
-    quote: 'Это была моя первая профессиональная фотосессия',
+    name: 'John Brown',
+    role: 'Friends photo session',
+    image: '/images/user.webp',
+    quote: 'The photographer was very professional and made us feel comfortable during the photo session. The final photos were amazing and we are very happy with the results. We would definitely recommend him to anyone looking for a photographer.',
     rating: 5
   }
 ];
 
-const AUTO_SCROLL_INTERVAL = 5000;
+const AUTO_SCROLL_INTERVAL = 7000;
 
 const NewTestimonials = () => {
   const [[page, direction], setPage] = useState([0, 0]);
@@ -55,42 +55,39 @@ const NewTestimonials = () => {
 
   const variants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 500 : -500,
+      x: direction > 0 ? 200 : -200,
       opacity: 0,
-      scale: 0.9,
-      position: 'absolute'
+      scale: 0.95,
     }),
     center: {
       x: 0,
       opacity: 1,
       scale: 1,
-      position: 'relative',
       transition: {
-        duration: 0.4,
-        ease: [0.4, 0.0, 0.2, 1]
+        duration: 0.5,
+        ease: "easeOut"
       }
     },
     exit: (direction: number) => ({
-      x: direction < 0 ? 500 : -500,
+      x: direction < 0 ? 200 : -200,
       opacity: 0,
-      scale: 0.9,
-      position: 'absolute',
+      scale: 0.95,
       transition: {
-        duration: 0.4,
-        ease: [0.4, 0.0, 0.2, 1]
+        duration: 0.5,
+        ease: "easeOut"
       }
     })
   };
 
   const contentVariants = {
-    initial: { opacity: 0, y: 20 },
+    initial: { opacity: 0, y: 10 },
     animate: (custom: number) => ({
       opacity: 1,
       y: 0,
       transition: {
-        delay: custom * 0.1,
-        duration: 0.4,
-        ease: [0.4, 0.0, 0.2, 1]
+        delay: custom * 0.05,
+        duration: 0.5,
+        ease: "easeOut"
       }
     })
   };
@@ -100,9 +97,9 @@ const NewTestimonials = () => {
       <div className={styles.background}></div>
       <div className={styles.container}>
         <div className={styles.header}>
-          <span className={styles.subtitle}>Отзывы</span>
-          <h2>Что говорят наши клиенты</h2>
-          <p>Узнайте, что думают о нашей работе те, кто уже доверил нам свои важные моменты</p>
+          <span className={styles.subtitle}>Reviews</span>
+          <h2>What our customers say</h2>
+          <p>Find out what those who have already entrusted their important points to us think about our work.</p>
         </div>
 
         <div 
@@ -111,7 +108,7 @@ const NewTestimonials = () => {
           onMouseLeave={() => setIsHovered(false)}
         >
           <div className={styles.carouselWrapper}>
-            <AnimatePresence initial={false} custom={direction}>
+            <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.div
                 key={page}
                 custom={direction}

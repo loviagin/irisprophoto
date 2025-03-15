@@ -1,12 +1,11 @@
 import Link from 'next/link';
-import { FaInstagram, FaFacebook, FaWhatsapp } from 'react-icons/fa';
 import styles from "./Footer.module.css";
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
-        <div className={styles.footerMain}>
+         {/*<div className={styles.footerMain}>
           <div className={styles.footerSection}>
             <h3>IRISPROPHOTO</h3>
             <p>Профессиональная фотография для ваших особенных моментов</p>
@@ -51,15 +50,14 @@ export default function Footer() {
               <li>Москва, Россия</li>
             </ul>
           </div>
-        </div>
+        </div> */}
 
         <div className={styles.footerBottom}>
           <div className={styles.copyright}>
-            © {new Date().getFullYear()} IrisProPhoto. Все права защищены
+            © {new Date().getFullYear()} IrisProPhoto. All rights reserved 2025.
           </div>
           <div className={styles.legal}>
-            <Link href="/privacy">Политика конфиденциальности</Link>
-            <Link href="/terms">Условия использования</Link>
+            <Link href="/privacypolicy">Privacy Policy</Link>
           </div>
         </div>
       </div>

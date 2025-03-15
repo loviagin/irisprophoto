@@ -12,18 +12,18 @@ const processSteps = [
   },
   {
     icon: <FaRegLightbulb size={32} />,
-    title: 'Планирование',
-    description: 'Разработаем концепцию съемки, подберем образы и реквизит'
+    title: 'Planning',
+    description: 'We will develop a shooting concept, select images and props.'
   },
   {
     icon: <FaCameraRetro size={32} />,
-    title: 'Фотосессия',
-    description: 'Проведем съемку в выбранной локации, создадим атмосферные кадры'
+    title: 'Photo session',
+    description: 'We will shoot in the selected location, create atmospheric shots.'
   },
   {
     icon: <FaRegImages size={32} />,
-    title: 'Обработка',
-    description: 'Отберем лучшие фотографии и выполним профессиональную ретушь'
+    title: 'Processing',
+    description: 'We will select the best photos and perform professional retouching.'
   }
 ];
 
@@ -53,7 +53,7 @@ const itemVariants = {
 
 const NewProcess = () => {
   return (
-    <section className={styles.process} id='Process'>
+    <section className={styles.process} id='process'>
       <div className={styles.background}></div>
       <div className={styles.container}>
         <div className={styles.header}>

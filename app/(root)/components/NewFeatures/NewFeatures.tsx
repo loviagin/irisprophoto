@@ -46,7 +46,7 @@ const itemVariants = {
 
 export default function NewFeatures() {
   return (
-    <section className={styles.features} id='WHYCHOOSEUS'>
+    <section className={styles.features} id='whychooseus'>
       <motion.div 
         className={styles.container}
         variants={containerVariants}

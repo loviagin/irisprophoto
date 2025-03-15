@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useState, useCallback } from "react";
 import styles from "./HeroSection.module.css";
 import HeroButton from "./HeroButton";
 import { motion, useSpring, useTransform, useScroll } from "framer-motion";

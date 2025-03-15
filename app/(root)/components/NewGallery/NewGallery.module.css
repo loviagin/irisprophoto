@@ -1,6 +1,6 @@
 .gallery {
     position: relative;
-    padding: 100px 20px;
+    padding: 100px 0;
     background: #F8FAFC;
     overflow: hidden;
 }
@@ -18,8 +18,11 @@
 
 .container {
     position: relative;
-    max-width: 1200px;
+    max-width: 1440px;
     margin: 0 auto;
+    padding: 0 40px;
+    width: 100%;
+    box-sizing: border-box;
     z-index: 2;
 }
 
@@ -104,6 +107,12 @@
     align-items: center;
     padding: 20px;
     text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.imageWrapper:hover .overlay {
+    opacity: 1;
 }
 
 .overlay h3 {
@@ -111,11 +120,23 @@
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 8px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease;
 }
 
 .overlay span {
     color: #A5D8FF;
     font-size: 16px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease 0.1s;
+}
+
+.imageWrapper:hover .overlay h3,
+.imageWrapper:hover .overlay span {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .cta {
@@ -147,7 +168,11 @@
 
 @media (max-width: 768px) {
     .gallery {
-        padding: 60px 20px;
+        padding: 60px 0;
+    }
+
+    .container {
+        padding: 0 20px;
     }
 
     .header h2 {

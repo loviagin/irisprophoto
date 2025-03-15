@@ -1,42 +1,45 @@
 'use client'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import styles from './NewGallery.module.css'
+import BookingModal from '../BookingModal/BookingModal'
 
 const galleryItems = [
   {
-    image: '/images/gallery/iris1.webp',
-    title: 'Azure Dreams',
-    category: 'Color Enhanced'
+    image: '/works/work1.webp',
+    title: 'Explosin',
+    category: ''
   },
   {
-    image: '/images/gallery/iris2.webp',
-    title: 'Golden Hour',
-    category: 'Natural Light'
+    image: '/works/work2.webp',
+    title: 'Fire',
+    category: ''
   },
   {
-    image: '/images/gallery/iris3.webp',
-    title: 'Mystic Pattern',
-    category: 'Black & White'
+    image: '/works/work3.webp',
+    title: 'Halo hard',
+    category: ''
   },
   {
-    image: '/images/gallery/iris4.webp',
-    title: 'Ocean Depths',
-    category: 'Color Enhanced'
+    image: '/works/work4.webp',
+    title: 'Light beams hard',
+    category: ''
   },
   {
-    image: '/images/gallery/iris5.webp',
-    title: 'Emerald Vision',
-    category: 'Natural Light'
+    image: '/works/work5.webp',
+    title: 'Meteor',
+    category: ''
   },
   {
-    image: '/images/gallery/iris6.webp',
-    title: 'Crystal Clear',
-    category: 'Macro'
+    image: '/works/work6.webp',
+    title: 'Radiance',
+    category: ''
   }
 ]
 
 export default function NewGallery() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -46,14 +49,14 @@ export default function NewGallery() {
   const y = useTransform(scrollYProgress, [0, 1], [0, -100])
 
   return (
-    <section className={styles.gallery} ref={containerRef} id='GALLERY'>
-      <motion.div 
+    <section className={styles.gallery} ref={containerRef} id='gallery'>
+      <motion.div
         className={styles.background}
         style={{ y }}
       />
-      
+
       <div className={styles.container}>
-        <motion.div 
+        <motion.div
           className={styles.header}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -77,7 +80,7 @@ export default function NewGallery() {
             >
               <div className={styles.imageWrapper}>
                 <img src={item.image} alt={item.title} />
-                <motion.div 
+                <motion.div
                   className={styles.overlay}
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
@@ -98,9 +101,14 @@ export default function NewGallery() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <button className={styles.button}>View Full Gallery</button>
+          <button className={styles.button} onClick={() => setIsModalOpen(true)}>Make an order</button>
         </motion.div>
       </div>
+
+      <BookingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   )
 } 

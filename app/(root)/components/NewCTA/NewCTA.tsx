@@ -1,22 +1,24 @@
 "use client";
 import React from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { FaCamera, FaHeart, FaImages } from 'react-icons/fa';
 import styles from './NewCTA.module.css';
+import BookingModal from '../BookingModal/BookingModal';
 
 const features = [
   {
     icon: <FaCamera />,
-    text: 'Профессиональная съемка'
+    text: 'Professional photography'
   },
   {
     icon: <FaHeart />,
-    text: 'Индивидуальный подход'
+    text: 'Individual approach'
   },
   {
     icon: <FaImages />,
-    text: 'Быстрая обработка'
+    text: 'Fast processing'
   }
 ];
 
@@ -45,14 +47,16 @@ const itemVariants = {
 };
 
 const NewCTA = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   return (
     <section className={styles.cta}>
       <div className={styles.background}>
         <div className={styles.overlay}></div>
       </div>
-      
+
       <div className={styles.container}>
-        <motion.div 
+        <motion.div
           className={styles.content}
           variants={containerVariants}
           initial="hidden"
@@ -60,19 +64,19 @@ const NewCTA = () => {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.h2 variants={itemVariants}>
-            Готовы запечатлеть ваши особенные моменты?
+            Are you ready to capture your special moments?
           </motion.h2>
-          
+
           <motion.p variants={itemVariants}>
-            Давайте создадим вместе незабываемые фотографии, которые будут радовать вас долгие годы
+            Let's create unforgettable photos together that will delight you for many years to come.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             className={styles.features}
             variants={containerVariants}
           >
             {features.map((feature, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 className={styles.feature}
                 variants={itemVariants}
@@ -83,19 +87,24 @@ const NewCTA = () => {
             ))}
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className={styles.buttons}
             variants={itemVariants}
           >
-            <Link href="/contact" className={styles.primaryButton}>
-              Записаться на съемку
-            </Link>
-            <Link href="/portfolio" className={styles.secondaryButton}>
-              Посмотреть портфолио
+            <button className={styles.primaryButton} onClick={() => setIsModalOpen(true)}>
+              Sign up for a shoot
+            </button>
+            <Link href="#gallery" className={styles.secondaryButton}>
+              View the portfolio
             </Link>
           </motion.div>
         </motion.div>
       </div>
+
+      <BookingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 };

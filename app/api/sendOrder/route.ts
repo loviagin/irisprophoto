@@ -17,7 +17,7 @@ const db = admin.firestore();
 
 export async function POST(req: Request) {
     try {
-        const { name, email, phone, details } = await req.json();
+        const { name, phone, email, shootingType, date, details } = await req.json();
 
         console.log("Received order:", { name, email, phone, details });
 
@@ -32,6 +32,8 @@ export async function POST(req: Request) {
             `👤 *Name:* ${name}\n` +
             `📧 *Email:* ${email}\n` +
             `📞 *Phone:* ${phone}\n` +
+            `📸 *Shooting type:* ${shootingType}\n` +
+            `📅 *Date:* ${date}\n` +
             `📝 *Details:*\n${details}`;
 
         const url = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
