@@ -1,0 +1,40 @@
+.container {
+  background: white;
+  max-width: 800px;
+  min-height: 100vh;
+  margin: 40px auto;
+  padding: 40px 20px;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.date {
+  color: #666;
+}
+
+.paragraph {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.link {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+.footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  font-size: 0.875rem;
+  color: #666;
+}

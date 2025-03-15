@@ -123,24 +123,24 @@ export default function Header() {
           <nav className={styles.nav}>
             <ul className={styles.navList}>
               <li>
-                <button onClick={() => scrollToSection('whychooseus')} className={styles.navLink}>
+                <Link href='/#whychooseus' className={styles.navLink}>
                   Why Choose Us
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => scrollToSection('gallery')} className={styles.navLink}>
+                <Link href='/#gallery' className={styles.navLink}>
                   Gallery
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => scrollToSection('process')} className={styles.navLink}>
+                <Link href='/#process' className={styles.navLink}>
                   Process
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => scrollToSection('contacts')} className={styles.navLink}>
+                <Link href='/#contacts' className={styles.navLink}>
                   Contacts
-                </button>
+                </Link>
               </li>
               <li>
                 <button
@@ -167,24 +167,24 @@ export default function Header() {
                   variants={containerVariants}
                 >
                   <motion.li variants={itemVariants}>
-                    <button onClick={() => scrollToSection('whychooseus')} className={styles.navLink}>
+                   <Link href='/#whychooseus' className={styles.navLink}>
                       Why Choose Us
-                    </button>
+                    </Link>
                   </motion.li>
                   <motion.li variants={itemVariants}>
-                    <button onClick={() => scrollToSection('gallery')} className={styles.navLink}>
+                    <Link href='/#gallery' className={styles.navLink}>
                       Gallery
-                    </button>
+                    </Link>
                   </motion.li>
                   <motion.li variants={itemVariants}>
-                    <button onClick={() => scrollToSection('process')} className={styles.navLink}>
+                    <Link href='/#process' className={styles.navLink}>
                       Process
-                    </button>
+                    </Link>
                   </motion.li>
                   <motion.li variants={itemVariants}>
-                    <button onClick={() => scrollToSection('contacts')} className={styles.navLink}>
+                    <Link href='/#contacts' className={styles.navLink}>
                       Contacts
-                    </button>
+                    </Link>
                   </motion.li>
                   <motion.li variants={itemVariants}>
                     <button

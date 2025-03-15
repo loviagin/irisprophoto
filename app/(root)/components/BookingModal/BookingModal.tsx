@@ -15,7 +15,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
     name: '',
     phone: '',
     email: '',
-    shootingType: 'wedding',
+    shootingType: 'one-two',
     date: '',
     details: ''
   })
