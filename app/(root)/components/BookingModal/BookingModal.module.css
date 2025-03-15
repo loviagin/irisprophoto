@@ -157,6 +157,7 @@
   }
   
   .formRow {
+    display: flex;
     flex-direction: column;
   }
   
