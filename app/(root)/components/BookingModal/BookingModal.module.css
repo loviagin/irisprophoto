@@ -224,4 +224,42 @@
   background: #2a2a2a;
   color: white;
   padding: 12px;
+}
+
+.dateInput {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #ffffff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 16px; /* Предотвращает автоматическое масштабирование на iOS */
+}
+
+/* Специальные стили для Safari на iOS */
+@supports (-webkit-touch-callout: none) {
+  .dateInput {
+    position: relative;
+    display: block;
+    padding-right: 30px; /* Место для иконки календаря */
+  }
+  
+  /* Убираем стандартную иконку календаря в Safari */
+  .dateInput::-webkit-calendar-picker-indicator {
+    background: transparent;
+    color: transparent;
+    cursor: pointer;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+/* Стили для неактивного состояния (placeholder) */
+.dateInput:not(:valid) {
+  color: #757575;
 } 

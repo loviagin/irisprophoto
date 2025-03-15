@@ -155,6 +155,8 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     value={formData.date}
                     onChange={handleInputChange}
                     required
+                    className={styles.dateInput}
+                    placeholder="Select date"
                   />
                 </div>
 
