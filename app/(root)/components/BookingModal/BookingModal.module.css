@@ -11,6 +11,8 @@
   align-items: center;
   z-index: 1100;
   padding: 20px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal {
@@ -20,6 +22,9 @@
   max-width: 600px;
   position: relative;
   overflow: hidden;
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: 20px;
 }
 
 .modalClose {
@@ -41,7 +46,9 @@
 }
 
 .modalContent {
-  padding: 40px;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .modalContent h2 {
@@ -143,8 +150,18 @@
 }
 
 @media (max-width: 768px) {
+  .modal {
+    width: 90%;
+    margin: 10px;
+    padding: 15px;
+  }
+  
   .formRow {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+  
+  .formGroup {
+    margin-bottom: 10px;
   }
 
   .modalContent {

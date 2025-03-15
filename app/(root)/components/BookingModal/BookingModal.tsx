@@ -161,7 +161,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                 <div className={styles.formGroup}>
                   <textarea
                     name="details"
-                    placeholder="Ваши пожелания или вопросы"
+                    placeholder="Your suggestions or questions"
                     value={formData.details}
                     onChange={handleInputChange}
                     rows={4}
