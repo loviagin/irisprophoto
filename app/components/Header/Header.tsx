@@ -4,7 +4,6 @@ import styles from "./Header.module.css";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import BookingModal from "../../(root)/components/BookingModal/BookingModal";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -203,11 +202,6 @@ export default function Header() {
           </AnimatePresence>
         </div>
       </header>
-
-      <BookingModal 
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
     </>
   );
 }
