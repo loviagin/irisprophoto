@@ -71,6 +71,9 @@ export async function POST(req: Request) {
         await db.collection("orders").doc(messageId.toString()).set({
             name,
             email,
+            phone,
+            shootingType,
+            date,
             details,
             status: "NEW",
             createdAt: new Date(),
