@@ -6,7 +6,6 @@ import { FaPlus } from "react-icons/fa";
 import { FaListUl } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 
-import OrderForm from "@/app/components/OrderForm/OrderForm";
 import OrdersView from "./OrdersView";
 
 export default function TabView() {
@@ -44,7 +43,7 @@ export default function TabView() {
                 {
                     activeTab === "home" &&
                     <div>
-                        <OrderForm onClose={() => console.log("close")} />
+                        
                     </div>
                 }
 

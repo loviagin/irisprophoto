@@ -2,14 +2,24 @@ import { NextResponse } from "next/server";
 import admin from "firebase-admin";
 
 if (!admin.apps.length) {
+    const serviceAccount = {
+        projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+        clientEmail: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL,
+        privateKey: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY
+            ? process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n').replace(/\n/g, '\n')
+            : undefined,
+    };
+
+    if (!serviceAccount.projectId) {
+        throw new Error("FIREBASE_PROJECT_ID is not defined in environment variables");
+    }
+
+    if (!serviceAccount.privateKey) {
+        throw new Error("FIREBASE_PRIVATE_KEY is not defined in environment variables");
+    }
+
     admin.initializeApp({
-        credential: admin.credential.cert({
-            projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-            clientEmail: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL,
-            privateKey: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY
-                ? process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n")
-                : undefined,
-        }),
+        credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
     });
 }
 
