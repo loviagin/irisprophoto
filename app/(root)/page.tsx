@@ -1,21 +1,22 @@
-import NewHero from './components/NewHero/NewHero';
-import NewFeatures from './components/NewFeatures/NewFeatures';
-import NewGallery from './components/NewGallery/NewGallery';
-import NewProcess from './components/NewProcess/NewProcess';
-import NewTestimonials from './components/NewTestimonials/NewTestimonials';
-import NewCTA from './components/NewCTA/NewCTA';
-import NewContacts from './components/NewContacts/NewContacts';
+import Contacts from "@/app/components/Contacts/Contacts";
+import Hero from "@/app/components/Hero-2/Hero";
+import HowItWorks from "@/app/components/HowItWorks-2/HowItWorks";
+import LikeThis from "@/app/components/LikeThis/LikeThis";
+import Portfolio from "@/app/components/Portfoilio/Portfolio";
 
-export default function NewHome() {
-  return (
-    <main>
-      <NewHero />
-      <NewFeatures />
-      <NewGallery />
-      <NewProcess />
-      <NewTestimonials />
-      <NewCTA />
-      <NewContacts />
-    </main>
-  );
-} 
+export const metadata = {
+    title: "Iris PRO Photo",
+    description: "Order professional photo irises",
+};
+
+export default function Home() {
+    return (
+        <main>
+            <Hero />
+            <HowItWorks />
+            <LikeThis />
+            <Portfolio />
+            <Contacts />
+        </main>
+    );
+}
