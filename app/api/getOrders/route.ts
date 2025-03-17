@@ -1,7 +1,7 @@
 import firebase from "@/app/firebase/firebase";
 import { getFirestore } from "firebase/firestore";
 import { NextResponse } from "next/server";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import { Timestamp } from "firebase/firestore"; // используем из firebase/firestore
 
 interface Order {
@@ -9,9 +9,16 @@ interface Order {
   details: string;
   email: string;
   name: string;
-  phone?: string;
-  status?: string;
+  phone: string;
+  shootingType: string,
+  date: string,
+  status: string;
   updatedAt?: Timestamp;
+}
+
+interface OrderGroup {
+  date: Date,
+  orders: Order[] 
 }
 
 export async function GET(req: Request) {
@@ -26,17 +33,38 @@ export async function GET(req: Request) {
     );
   }
 
+  if (userId !== 'moinnuHhdn82938ujdsi') {
+    return NextResponse.json(
+      { error: "User ID is not correct" },
+      { status: 400 }
+    );
+  }
+
   const db = getFirestore(firebase);
   const ordersRef = collection(db, "orders");
-  const q = query(ordersRef, where("email", "==", userId));
-  console.log("UserID:", userId);
+  const q = query(ordersRef, orderBy("createdAt", "desc"));
 
   const querySnapshot = await getDocs(q);
-  const orders: Order[] = [];
+  const groupedOrders: Record<string, { date: Date; orders: Order[] }> = {};
+
   querySnapshot.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data());
-    orders.push(doc.data() as Order);
+    const order = doc.data() as Order;
+
+    // Преобразуем Timestamp в объект Date
+    const createdAtDate = order.createdAt.toDate();
+
+    // Получаем строку в формате YYYY-MM-DD для группировки
+    const createdAtKey = createdAtDate.toISOString().split("T")[0];
+
+    if (!groupedOrders[createdAtKey]) {
+      groupedOrders[createdAtKey] = { date: createdAtDate, orders: [] };
+    }
+
+    groupedOrders[createdAtKey].orders.push(order);
   });
 
-  return NextResponse.json(orders);
+  // Преобразуем объект в массив
+  const orderGroups: OrderGroup[] = Object.values(groupedOrders);
+
+  return NextResponse.json(orderGroups);
 }
