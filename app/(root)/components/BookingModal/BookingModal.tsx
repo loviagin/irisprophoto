@@ -49,10 +49,15 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
       return;
     }
 
+    const formDataToSend = {
+      ...formData,
+      date: new Date(formData.date)
+    };
+
     const response = await fetch("https://irisprophoto.me/api/sendOrder", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(formDataToSend),
     });
 
     const result = await response.json();

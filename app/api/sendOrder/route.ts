@@ -37,13 +37,15 @@ export async function POST(req: Request) {
         console.log("TOKEN:", TOKEN);
         console.log("CHAT_ID:", CHAT_ID);
 
+        const formattedDate = new Date(date).toLocaleDateString();
+
         const message = `📩 *New Order Without Registration* 📩\n\n` +
             `⚡️ *Order status:* NEW\n` +
             `👤 *Name:* ${name}\n` +
             `📧 *Email:* ${email}\n` +
             `📞 *Phone:* ${phone}\n` +
             `📸 *Shooting type:* ${shootingType}\n` +
-            `📅 *Date:* ${date}\n` +
+            `📅 *Date:* ${formattedDate}\n` +
             `📝 *Details:*\n${details}`;
 
         const url = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
@@ -83,7 +85,7 @@ export async function POST(req: Request) {
             email,
             phone,
             shootingType,
-            date,
+            date: new Date(date),
             details,
             status: "NEW",
             createdAt: new Date(),
