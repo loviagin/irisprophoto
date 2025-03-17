@@ -2,10 +2,9 @@ import firebase from "@/app/firebase/firebase";
 import { getFirestore } from "firebase/firestore";
 import { NextResponse } from "next/server";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
-import { Timestamp } from "firebase/firestore"; // используем из firebase/firestore
 
 interface Order {
-  createdAt: Timestamp;
+  createdAt: Date;
   details: string;
   email: string;
   name: string;
@@ -13,12 +12,7 @@ interface Order {
   shootingType: string,
   date: string,
   status: string;
-  updatedAt?: Timestamp;
-}
-
-interface OrderGroup {
-  date: Timestamp,
-  orders: Order[] 
+  updatedAt?: Date;
 }
 
 export async function GET(req: Request) {
