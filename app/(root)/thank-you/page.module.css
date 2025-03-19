@@ -1,0 +1,211 @@
+.container {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero {
+  position: relative;
+  padding: 120px 20px 60px;
+  text-align: center;
+  /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
+  overflow: hidden;
+}
+
+.gradientBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, #0e4181 0%, rgba(59, 130, 246, 0) 30%);
+  opacity: 0.65;
+  z-index: 1;
+}
+
+.decorativeElements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.circle1, .circle2 {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+.circle1 {
+  width: 300px;
+  height: 300px;
+  background: #4a90e2;
+  top: -100px;
+  right: -100px;
+}
+
+.circle2 {
+  width: 200px;
+  height: 200px;
+  background: #e2844a;
+  bottom: -50px;
+  left: -50px;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+  font-size: 1.2rem;
+  color: #34495e;
+  line-height: 1.6;
+}
+
+.content {
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.iconWrapper {
+  margin-bottom: 30px;
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.details {
+  margin-bottom: 40px;
+}
+
+.details p {
+  font-size: 1.1rem;
+  color: #34495e;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.importantInfo {
+  text-align: left;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.importantInfo h3 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.importantInfo ul {
+  list-style: none;
+  padding: 0;
+}
+
+.importantInfo li {
+  color: #34495e;
+  margin-bottom: 10px;
+  padding-left: 25px;
+  position: relative;
+}
+
+.importantInfo li:before {
+  content: "•";
+  color: #4a90e2;
+  position: absolute;
+  left: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.button {
+  background: #4a90e2;
+  color: white;
+}
+
+.secondaryButton {
+  background: transparent;
+  border: 2px solid #4a90e2;
+  color: #4a90e2;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+}
+
+.secondaryButton:hover {
+  background: #4a90e2;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1rem;
+  }
+
+  .card {
+    padding: 30px 20px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .button {
+    width: 100%;
+  }
+} 
