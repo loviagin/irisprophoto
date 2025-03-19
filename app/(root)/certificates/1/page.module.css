@@ -1,0 +1,264 @@
+.container {
+  min-height: 100vh;
+  background: #fff;
+  padding: 120px 0 80px;
+}
+
+.content {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.productLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 80px;
+}
+
+.imageSection {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.certificateImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-width: 600px;
+}
+
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #3B82F6;
+  margin-bottom: 40px;
+}
+
+.buyButton {
+  width: 100%;
+  padding: 25px;
+  background: #3B82F6;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  max-width: 400px;
+}
+
+.buyButton:hover {
+  background: #2563EB;
+  transform: translateY(-2px);
+}
+
+.descriptionSection {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 0;
+  border-top: 1px solid #f1f5f9;
+}
+
+.description {
+  font-size: 1.3rem;
+  color: #4B5563;
+  line-height: 1.8;
+  margin-bottom: 60px;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 25px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.featureItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.featureItem svg {
+  color: #3B82F6;
+  font-size: 1.5rem;
+  background: rgba(59, 130, 246, 0.1);
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.featureItem span {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #1A1A1A;
+}
+
+.details {
+  background: #f8fafc;
+  border-radius: 20px;
+  padding: 40px;
+  margin-bottom: 40px;
+}
+
+.details h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.detailItem {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.detailItem h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detailItem h3::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 24px;
+  background: #3B82F6;
+  border-radius: 2px;
+}
+
+.detailItem p {
+  color: #666666;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .productLayout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .imageSection {
+    height: 400px;
+  }
+
+  .buyButton {
+    margin: 0 auto;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+  }
+
+  .detailsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 100px 0 60px;
+  }
+
+  .content {
+    padding: 0 20px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .price {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1.1rem;
+  }
+
+  .imageSection {
+    height: 300px;
+    padding: 20px;
+  }
+
+  .descriptionSection {
+    padding: 60px 0;
+  }
+
+  .featureItem {
+    padding: 20px;
+  }
+
+  .featureItem svg {
+    font-size: 1.3rem;
+    padding: 12px;
+  }
+
+  .featureItem span {
+    font-size: 1rem;
+  }
+
+  .details {
+    padding: 30px 20px;
+  }
+
+  .details h2 {
+    font-size: 1.8rem;
+  }
+} 

@@ -90,14 +90,6 @@ export default function Header() {
     },
   };
 
-  const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
-    }
-  };
-
   return (
     <>
       <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
@@ -143,6 +135,11 @@ export default function Header() {
                 </Link>
               </li>
               <li>
+                <Link href='/certificates' className={styles.navLink}>
+                  Certificates
+                </Link>
+              </li>
+              <li>
                 <button
                   className={styles.ctaButton}
                   onClick={() => setIsModalOpen(true)}
@@ -184,6 +181,11 @@ export default function Header() {
                   <motion.li variants={itemVariants}>
                     <Link href='/#contacts' className={styles.navLink}>
                       Contacts
+                    </Link>
+                  </motion.li>
+                  <motion.li variants={itemVariants}>
+                    <Link href='/certificates' className={styles.navLink}>
+                      Сертификаты
                     </Link>
                   </motion.li>
                   <motion.li variants={itemVariants}>

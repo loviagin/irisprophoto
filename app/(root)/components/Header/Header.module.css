@@ -89,7 +89,7 @@
   }
   
   .navLink:hover {
-    color: var(--primary-color);
+    color: #3B82F6;
     transform: translateY(-2px);
   }
   
