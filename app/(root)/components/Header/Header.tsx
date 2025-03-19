@@ -57,16 +57,16 @@ export default function Header() {
 
   const itemVariants = {
     initial: { opacity: 0, y: 20 },
-    animate: { 
-      opacity: 1, 
+    animate: {
+      opacity: 1,
       y: 0,
       transition: {
         duration: 0.3,
         ease: [0.6, -0.05, 0.01, 0.99],
       },
     },
-    exit: { 
-      opacity: 0, 
+    exit: {
+      opacity: 0,
       y: 20,
       transition: {
         duration: 0.2,
@@ -162,12 +162,12 @@ export default function Header() {
                 exit="exit"
                 variants={menuVariants}
               >
-                <motion.ul 
+                <motion.ul
                   className={styles.mobileNavList}
                   variants={containerVariants}
                 >
                   <motion.li variants={itemVariants}>
-                   <Link href='/#whychooseus' className={styles.navLink}>
+                    <Link href='/#whychooseus' className={styles.navLink}>
                       Why Choose Us
                     </Link>
                   </motion.li>
@@ -204,9 +204,12 @@ export default function Header() {
         </div>
       </header>
 
-      <BookingModal 
+      <BookingModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        workStartTime="10:00"
+        workEndTime="18:00"
+        bookingInterval={30} // интервал в минутах
       />
     </>
   );

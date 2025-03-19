@@ -25,31 +25,54 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 
-export async function POST(req: Request) {
-    try {
-        const { name, phone, email, shootingType, date, details } = await req.json();
+interface OrderData {
+    name: string;
+    phone: string;
+    email: string;
+    shootingType: string;
+    date: Date;
+    details: string;
+}
 
-        console.log("Received order:", { name, email, phone, details });
+export async function POST(request: Request) {
+    try {
+        const rawData = await request.json();
+        
+        // Преобразуем строку даты в объект Date
+        const data: OrderData = {
+            ...rawData,
+            date: new Date(rawData.date)
+        };
+
+        if (!data.name || !data.date) {
+            return NextResponse.json(
+                { success: false, error: "Missing required fields" },
+                { status: 400 }
+            );
+        }
 
         const TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
         const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
 
-        console.log("TOKEN:", TOKEN);
-        console.log("CHAT_ID:", CHAT_ID);
-
-        const formattedDate = new Date(date).toLocaleDateString();
+        const formattedDate = data.date.toLocaleString('ru-RU', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        });
 
         const message = `📩 *New Order Without Registration* 📩\n\n` +
             `⚡️ *Order status:* NEW\n` +
-            `👤 *Name:* ${name}\n` +
-            `📧 *Email:* ${email}\n` +
-            `📞 *Phone:* ${phone}\n` +
-            `📸 *Shooting type:* ${shootingType}\n` +
+            `👤 *Name:* ${data.name}\n` +
+            `📧 *Email:* ${data.email}\n` +
+            `📞 *Phone:* ${data.phone}\n` +
+            `📸 *Shooting type:* ${data.shootingType}\n` +
             `📅 *Date:* ${formattedDate}\n` +
-            `📝 *Details:*\n${details}`;
+            `📝 *Details:*\n${data.details}`;
 
         const url = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
-        console.log("Request URL:", url);
 
         const response = await fetch(url, {
             method: "POST",
@@ -72,21 +95,18 @@ export async function POST(req: Request) {
         });
 
         const result = await response.json();
-        console.log("Telegram API response:", result);
         if (!result.ok) throw new Error(result.description);
 
-        // Извлекаем message_id из ответа Telegram API
         const messageId = result.result.message_id;
-        console.log("Extracted messageId:", messageId);
 
-        // Добавляем документ в коллекцию "orders" Firestore с данными заказа и messageId
+        // Сохраняем в Firestore с объектом Date
         await db.collection("orders").doc(messageId.toString()).set({
-            name,
-            email,
-            phone,
-            shootingType,
-            date: new Date(date),
-            details,
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            shootingType: data.shootingType,
+            date: data.date, // Теперь это объект Date
+            details: data.details,
             status: "NEW",
             createdAt: new Date(),
         });

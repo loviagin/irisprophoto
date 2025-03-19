@@ -2,15 +2,28 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaTimes, FaCamera, FaCalendarAlt, FaEnvelope } from "react-icons/fa"
+import { FaTimes, FaCamera, FaCalendarAlt, FaEnvelope, FaClock } from "react-icons/fa"
 import styles from './BookingModal.module.css'
 
 interface BookingModalProps {
   isOpen: boolean
   onClose: () => void
+  workStartTime: string // формат "HH:mm"
+  workEndTime: string // формат "HH:mm"
+  bookingInterval: number // в минутах
+  bookedSlots?: Array<{
+    dateTime: Date
+  }>
 }
 
-export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
+export default function BookingModal({ 
+  isOpen, 
+  onClose, 
+  workStartTime, 
+  workEndTime, 
+  bookingInterval,
+  bookedSlots = []
+}: BookingModalProps) {
   const getCurrentDate = () => {
     const today = new Date()
     const year = today.getFullYear()
@@ -19,12 +32,49 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
     return `${year}-${month}-${day}`
   }
 
+  const generateTimeSlots = () => {
+    const slots: string[] = []
+    const [startHour, startMinute] = workStartTime.split(':').map(Number)
+    const [endHour, endMinute] = workEndTime.split(':').map(Number)
+    
+    let currentTime = new Date()
+    currentTime.setHours(startHour, startMinute, 0, 0)
+    
+    const endTime = new Date()
+    endTime.setHours(endHour, endMinute, 0, 0)
+    
+    while (currentTime < endTime) {
+      const timeString = currentTime.toLocaleTimeString('ru-RU', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: false 
+      })
+
+      // Проверяем, не занято ли это время
+      const isBooked = bookedSlots.some(slot => {
+        const slotDate = new Date(slot.dateTime)
+        const currentDate = new Date(formData.dateTime)
+        return slotDate.toDateString() === currentDate.toDateString() &&
+               slotDate.getHours() === currentTime.getHours() &&
+               slotDate.getMinutes() === currentTime.getMinutes()
+      })
+
+      if (!isBooked) {
+        slots.push(timeString)
+      }
+
+      currentTime.setMinutes(currentTime.getMinutes() + bookingInterval)
+    }
+    
+    return slots
+  }
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
     shootingType: 'one-two',
-    date: getCurrentDate(),
+    dateTime: new Date(),
     details: ''
   })
 
@@ -49,9 +99,14 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
       return;
     }
 
+    // Форматируем дату и время для отправки
     const formDataToSend = {
-      ...formData,
-      date: new Date(formData.date)
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      shootingType: formData.shootingType,
+      date: formData.dateTime.toISOString(), // Отправляем полную дату и время в ISO формате
+      details: formData.details
     };
 
     const response = await fetch("https://irisprophoto.me/api/sendOrder", {
@@ -70,7 +125,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
         email: "", 
         phone: "", 
         shootingType: "wedding", 
-        date: getCurrentDate(),
+        dateTime: new Date(),
         details: "" 
       });
     } else {
@@ -82,10 +137,38 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
+    if (name === 'date' || name === 'time') {
+      const newDateTime = new Date(formData.dateTime)
+      if (name === 'date') {
+        newDateTime.setFullYear(parseInt(value.split('-')[0]))
+        newDateTime.setMonth(parseInt(value.split('-')[1]) - 1)
+        newDateTime.setDate(parseInt(value.split('-')[2]))
+      } else {
+        const [hours, minutes] = value.split(':').map(Number)
+        newDateTime.setHours(hours, minutes, 0, 0)
+      }
+      setFormData(prev => ({
+        ...prev,
+        dateTime: newDateTime
+      }))
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }))
+    }
+  }
+
+  // Функция для форматирования даты и времени для отображения
+  const formatDateTime = (date: Date) => {
+    return date.toLocaleString('ru-RU', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
   }
 
   return (
@@ -167,18 +250,42 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                   />
                 </div>
 
-                <div className={styles.formGroup}>
-                  <FaCalendarAlt className={styles.formIcon} />
-                  <input
-                    type="date"
-                    name="date"
-                    value={formData.date}
-                    onChange={handleInputChange}
-                    required
-                    className={styles.dateInput}
-                    placeholder="Select date"
-                  />
-                </div>
+                {/* <div className={styles.formRow}> */}
+                  <div className={styles.formGroup}>
+                    <FaCalendarAlt className={styles.formIcon} />
+                    <input
+                      type="date"
+                      name="date"
+                      value={formData.dateTime.toISOString().split('T')[0]}
+                      onChange={handleInputChange}
+                      required
+                      className={styles.dateInput}
+                      placeholder="Select date"
+                      min={getCurrentDate()}
+                    />
+                  </div>
+                  {/* <div className={styles.formGroup}>
+                    <FaClock className={styles.formIcon} />
+                    <select
+                      name="time"
+                      value={formData.dateTime.toLocaleTimeString('ru-RU', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false
+                      })}
+                      onChange={handleInputChange}
+                      required
+                      className={styles.customSelect}
+                    >
+                      <option value="">Выберите время</option>
+                      {generateTimeSlots().map((time) => (
+                        <option key={time} value={time}>
+                          {time}
+                        </option>
+                      ))}
+                    </select>
+                  </div> */}
+                {/* </div> */}
 
                 <div className={styles.formGroup}>
                   <textarea

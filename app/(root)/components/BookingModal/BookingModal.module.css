@@ -195,17 +195,23 @@
 
 .customSelect {
   width: 100%;
-  padding: 14px 40px;
+  padding: 12px 40px 12px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
   font-size: 16px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  color: white;
+  height: 48px;
+  background-color: white;
+  color: #333;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   transition: all 0.3s ease;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
 }
 
 .customSelect:hover {
@@ -230,33 +236,19 @@
   -webkit-appearance: none;
   appearance: none;
   background-color: #ffffff;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 12px 40px 12px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  height: 48px;
   width: 100%;
-  font-size: 16px; /* Предотвращает автоматическое масштабирование на iOS */
+  color: #333;
 }
 
-/* Специальные стили для Safari на iOS */
-@supports (-webkit-touch-callout: none) {
-  .dateInput {
-    position: relative;
-    display: block;
-    padding-right: 30px; /* Место для иконки календаря */
-  }
-  
-  /* Убираем стандартную иконку календаря в Safari */
-  .dateInput::-webkit-calendar-picker-indicator {
-    background: transparent;
-    color: transparent;
-    cursor: pointer;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-  }
+.dateInput::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
 }
 
 /* Стили для неактивного состояния (placeholder) */

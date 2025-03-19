@@ -71,6 +71,9 @@ export default function NewHero() {
         <BookingModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
+          workStartTime="10:00"
+          workEndTime="18:00"
+          bookingInterval={30} // интервал в минутах
         />
 
         <motion.div
@@ -85,10 +88,10 @@ export default function NewHero() {
               <motion.div
                 className={styles.scanLine}
                 animate={{
-                  y: [0, 100, 0],
+                  y: [0, 650, 0],
                 }}
                 transition={{
-                  duration: 3,
+                  duration: 4,
                   repeat: Infinity,
                   ease: "linear"
                 }}
