@@ -1,12 +1,11 @@
 import styles from './page.module.css';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FaClock, FaCalendarAlt } from 'react-icons/fa';
-import Script from 'next/script';
 
 export default function CertificatePage() {
     return (
         <div className={styles.container}>
-            <Script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD" strategy="afterInteractive" />
             <div className={styles.content}>
                 <div className={styles.productLayout}>
                     <div className={styles.imageSection}>
@@ -22,10 +21,9 @@ export default function CertificatePage() {
                     <div className={styles.infoSection}>
                         <h1 className={styles.title}>Family Photo Certificate</h1>
                         <div className={styles.price}>$ 100</div>
-                        <div dangerouslySetInnerHTML={{ __html: '<paypal-add-to-cart-button data-id="BCBKSJFD2DCQE"></paypal-add-to-cart-button>' }} />
-                        <Script id="paypal-cart" strategy="afterInteractive">
-                            {`cartPaypal.AddToCart({ id: "BCBKSJFD2DCQE" })`}
-                        </Script>
+                        <Link href={'https://www.paypal.com/ncp/payment/VYQF958VRQPW4'} className={styles.buyButton} target='_blank'>
+                            Купить сертификат
+                        </Link>
                     </div>
                 </div>
 

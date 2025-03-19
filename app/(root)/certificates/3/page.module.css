@@ -80,6 +80,7 @@
 .buyButton {
   width: 100%;
   padding: 25px;
+  text-align: center;
   background: #3B82F6;
   color: white;
   border: none;
@@ -97,9 +98,9 @@
 }
 
 .descriptionSection {
-  max-width: 1000px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 80px 0;
+  padding: 60px 0;
   border-top: 1px solid #f1f5f9;
 }
 
@@ -206,76 +207,76 @@
 
 @media (max-width: 1024px) {
   .productLayout {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    text-align: center;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      text-align: center;
   }
 
   .imageSection {
-    height: 400px;
+      height: 400px;
   }
 
   .buyButton {
-    margin: 0 auto;
+      margin: 0 auto;
   }
 
   .features {
-    grid-template-columns: 1fr;
+      grid-template-columns: 1fr;
   }
 
   .detailsGrid {
-    grid-template-columns: 1fr;
+      grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: 100px 0 60px;
+      padding: 100px 0 60px;
   }
 
   .content {
-    padding: 0 20px;
+      padding: 0 20px;
   }
 
   .title {
-    font-size: 2.5rem;
+      font-size: 2.5rem;
   }
 
   .price {
-    font-size: 2rem;
+      font-size: 2rem;
   }
 
   .description {
-    font-size: 1.1rem;
+      font-size: 1.1rem;
   }
 
   .imageSection {
-    height: 300px;
-    padding: 20px;
+      height: 300px;
+      padding: 20px;
   }
 
   .descriptionSection {
-    padding: 60px 0;
+      padding: 60px 0;
   }
 
   .featureItem {
-    padding: 20px;
+      padding: 20px;
   }
 
   .featureItem svg {
-    font-size: 1.3rem;
-    padding: 12px;
+      font-size: 1.3rem;
+      padding: 12px;
   }
 
   .featureItem span {
-    font-size: 1rem;
+      font-size: 1rem;
   }
 
   .details {
-    padding: 30px 20px;
+      padding: 30px 20px;
   }
 
   .details h2 {
-    font-size: 1.8rem;
+      font-size: 1.8rem;
   }
-} 
+}
