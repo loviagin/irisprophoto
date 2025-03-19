@@ -185,7 +185,7 @@ export default function Header() {
                   </motion.li>
                   <motion.li variants={itemVariants}>
                     <Link href='/certificates' className={styles.navLink}>
-                      Сертификаты
+                      Certificates
                     </Link>
                   </motion.li>
                   <motion.li variants={itemVariants}>

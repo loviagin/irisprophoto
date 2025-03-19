@@ -20,8 +20,8 @@ export default function CertificatePage() {
                     </div>
 
                     <div className={styles.infoSection}>
-                        <h1 className={styles.title}>Certificate for one person</h1>
-                        <div className={styles.price}>$ 25</div>
+                        <h1 className={styles.title}>Family Photo Certificate</h1>
+                        <div className={styles.price}>$ 100</div>
                         <div dangerouslySetInnerHTML={{ __html: '<paypal-add-to-cart-button data-id="BCBKSJFD2DCQE"></paypal-add-to-cart-button>' }} />
                         <Script id="paypal-cart" strategy="afterInteractive">
                             {`cartPaypal.AddToCart({ id: "BCBKSJFD2DCQE" })`}

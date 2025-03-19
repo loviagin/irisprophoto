@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styles from './page.module.css';
+import Link from 'next/link';
 
 const certificates = [
   {
@@ -127,9 +128,9 @@ export default function CertificatesPage() {
                     <span className={styles.price}>
                       {certificate.price}
                     </span>
-                    <button className={styles.button}>
+                    <Link href={`/certificates/${certificate.id}`} className={styles.button}>
                       <span>Go to product page</span>
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
