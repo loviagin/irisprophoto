@@ -1,8 +1,34 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './page.module.css';
 
 export default function ThankYouPage() {
+    const [valid, setValid] = useState<boolean | null>(null);
+
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tx = urlParams.get("tx");
+
+        if (tx) {
+            fetch("/api/verify-payment", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ tx }),
+            })
+                .then((res) => res.json())
+                .then((data) => setValid(data.valid))
+                .catch(() => setValid(false));
+        } else {
+            setValid(false);
+        }
+    }, []);
+
+    if (valid === null) return <section className={styles.hero}><p>Проверка оплаты...</p> </section>;
+    if (valid === false) return <section className={styles.hero}><p>Ошибка: транзакция недействительна.</p></section>;
+
     return (
         <main className={styles.container}>
             <section className={styles.hero}>

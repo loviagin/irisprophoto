@@ -2,6 +2,12 @@ import styles from './page.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaClock, FaCalendarAlt } from 'react-icons/fa';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Gift certificate for two people – Iris Pro Photo",
+  description: "We are a team of professional photographers and we are offering our services of iris photography for you. We are capturing the moments for a long time."
+};
 
 export default function CertificatePage() {
     return (
