@@ -26,7 +26,7 @@ export default function CertificatePage() {
 
                     <div className={styles.infoSection}>
                         <h1 className={styles.title}>Certificate for two people</h1>
-                        <div className={styles.price}>$ 50</div>
+                        <div className={styles.price}>$ 185</div>
                         <Link href={'https://www.paypal.com/ncp/payment/Z5TN7RESEAJVG'} className={styles.buyButton} target='_blank'>
                             Купить сертификат
                         </Link>
@@ -43,7 +43,7 @@ export default function CertificatePage() {
                     <div className={styles.features}>
                         <div className={styles.featureItem}>
                             <FaClock />
-                            <span>30 minutes of photo shoot</span>
+                            <span>20 minutes of photo shoot</span>
                         </div>
                         <div className={styles.featureItem}>
                             <FaCalendarAlt />

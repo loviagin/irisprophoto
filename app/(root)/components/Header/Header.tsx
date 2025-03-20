@@ -4,8 +4,11 @@ import styles from "./Header.module.css";
 import { FaBars, FaTimes, FaUser, FaChevronDown } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import BookingModal from "../BookingModal/BookingModal";
 import AuthModal from "../AuthModal/AuthModal";
+import firebase from "@/app/firebase/firebase";
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,7 +16,10 @@ export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const auth = getAuth(firebase);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,6 +52,14 @@ export default function Header() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
 
   const menuVariants = {
     initial: {
@@ -103,6 +117,15 @@ export default function Header() {
         staggerDirection: -1,
       },
     },
+  };
+
+  const handleAccountClick = () => {
+    if (user) {
+      router.push('/account');
+    } else {
+      setIsAuthModalOpen(true);
+    }
+    setIsDropdownOpen(false);
   };
 
   return (
@@ -188,13 +211,10 @@ export default function Header() {
                       >
                         <button
                           className={styles.dropdownItem}
-                          onClick={() => {
-                            setIsAuthModalOpen(true)
-                            setIsDropdownOpen(false);
-                          }}
+                          onClick={handleAccountClick}
                         >
                           <FaUser className={styles.menuItemIcon} />
-                          Account
+                          {user ? 'Account' : 'Sign in'}
                         </button>
                       </motion.div>
                     )}
@@ -245,13 +265,10 @@ export default function Header() {
                   <motion.li variants={itemVariants}>
                     <button
                       className={styles.navLink}
-                      onClick={() => {
-                        setIsAuthModalOpen(true)
-                        setIsDropdownOpen(false);
-                      }}
+                      onClick={handleAccountClick}
                     >
                       <FaUser className={styles.menuItemIcon} />
-                      Account
+                      {user ? 'Account' : 'Sign in'}
                     </button>
                   </motion.li>
                   <motion.li variants={itemVariants}>
