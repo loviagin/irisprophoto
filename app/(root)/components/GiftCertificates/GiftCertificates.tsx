@@ -6,19 +6,19 @@ const certificates = [
   {
     title: 'Certificate for one person',
     description: 'A gift certificate for a professional iris shot for one person. The perfect gift for those who want to preserve the special moments of their lives.',
-    price: '$ 25',
+    price: '$ 115',
     icon: FaGift
   },
   {
     title: 'Certificate for two people',
     description: 'A gift certificate for a professional iris shot for a couple. Create unforgettable memories together. Two iris on one photo.',
-    price: '$ 50',
+    price: '$ 185',
     icon: FaUserFriends
   },
   {
     title: 'Family Photo Certificate',
     description: 'A gift certificate for a professional image of the iris of a family of up to 4 people. Capture the happy moments of family life.',
-    price: '$ 100',
+    price: '$ 295',
     icon: FaUsers
   }
 ];
