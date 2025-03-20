@@ -6,7 +6,8 @@ import { FaPlus } from "react-icons/fa";
 import { FaListUl } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 
-import OrdersView from "./OrdersView";
+import OrdersView from "./OrdersView/OrdersView";
+import NewOrder from "./NewOrder/NewOrder";
 
 export default function TabView() {
     const [activeTab, setActiveTab] = useState("home");
@@ -43,7 +44,7 @@ export default function TabView() {
                 {
                     activeTab === "home" &&
                     <div>
-                        
+                        <NewOrder />
                     </div>
                 }
 

@@ -93,11 +93,19 @@
     transform: translateY(-2px);
   }
   
-  .ctaButton {
+  .ctaButtonWrapper {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
     background: var(--primary-color);
+    border-radius: 25px;
+    overflow: hidden;
+  }
+  
+  .ctaButton {
+    background: none;
     color: white;
     padding: 12px 24px;
-    border-radius: 25px;
     border: none;
     font-weight: 600;
     cursor: pointer;
@@ -106,12 +114,121 @@
   }
   
   .ctaButton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .dropdownToggle {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 0 16px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .dropdownToggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .chevronIcon {
+    font-size: 12px;
+    transition: transform 0.3s ease;
   }
   
   .mobileNav {
     display: none;
+  }
+  
+  .dropdownContainer {
+    position: relative;
+  }
+  
+  .dropdownButton {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .scrolled .dropdownButton {
+    color: #4b5563;
+  }
+  
+  .dropdownButton:hover {
+    color: var(--primary-color);
+  }
+  
+  .userIcon {
+    font-size: 20px;
+  }
+  
+  .dropdownMenu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
+    min-width: 200px;
+    z-index: 1000;
+  }
+  
+  .dropdownItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 20px;
+    color: #4b5563;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropdownItem:hover {
+    background: #f3f4f6;
+    color: var(--primary-color);
+  }
+  
+  .menuItemIcon {
+    font-size: 14px;
+  }
+  
+  .authButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: none;
+    border: 2px solid #333;
+    border-radius: 6px;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .authButton:hover {
+    background-color: #333;
+    color: white;
+  }
+  
+  .authIcon {
+    font-size: 1.1rem;
   }
   
   @media (max-width: 968px) {
@@ -154,6 +271,9 @@
       font-size: 24px;
       color: white;
       opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
   
     .mobileNavList .navLink:hover {
@@ -161,12 +281,31 @@
       color: var(--primary-color);
     }
   
-    .mobileNavList .ctaButton {
+    .mobileNavList .menuItemIcon {
+      font-size: 20px;
+    }
+  
+    .mobileNavList .ctaButtonWrapper {
       width: 100%;
       max-width: 300px;
+      margin: 20px auto 0;
+      background: var(--primary-color);
+      border-radius: 25px;
+    }
+  
+    .mobileNavList .ctaButton {
+      width: 100%;
       text-align: center;
-      margin-top: 20px;
       font-size: 18px;
+      padding: 16px 24px;
+    }
+  
+    .dropdownToggle {
+      display: none;
+    }
+  
+    .dropdownMenu {
+      display: none;
     }
   }
   

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaTimes, FaCamera, FaCalendarAlt, FaEnvelope, FaClock } from "react-icons/fa"
+import { FaTimes, FaCamera, FaCalendarAlt, FaEnvelope } from "react-icons/fa"
 import styles from './BookingModal.module.css'
 import Portal from '../Portal/Portal'
 

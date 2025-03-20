@@ -5,10 +5,12 @@ import TabView from '../components/TabView/TabView'
 
 const Account = () => {
   return (
-    <main className={styles.content}>
-      <Welcome />
-      <TabView />
-    </main>
+    <div className={styles.page}>
+      <main className={styles.content}>
+        <Welcome />
+        <TabView />
+      </main>
+    </div>
   )
 }
 

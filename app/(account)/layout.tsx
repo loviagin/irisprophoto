@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "../globals.css";
 import Header from "./components/Header/Header";
-import CheckUser from "./components/CheckUser/CheckUser";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -10,7 +9,7 @@ const nunito = Nunito({
 
 export const metadata: Metadata = {
   title: "Account | Iris PRO Photo",
-  description: "",
+  description: "We are a team of professional photographers and we are offering our services of iris photography for you. We are capturing the moments for a long time.",
 };
 
 export default function RootLayout({
@@ -21,7 +20,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito.className}`}>
-        <CheckUser />
         <Header />
         {children}
       </body>

@@ -1,15 +1,19 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./Header.module.css";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaUser, FaChevronDown } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import BookingModal from "../BookingModal/BookingModal";
+import AuthModal from "../AuthModal/AuthModal";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +35,17 @@ export default function Header() {
       document.body.style.overflow = 'unset';
     };
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const menuVariants = {
     initial: {
@@ -140,12 +155,51 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <button
-                  className={styles.ctaButton}
-                  onClick={() => setIsModalOpen(true)}
-                >
-                  Order a photo shoot
-                </button>
+                <div className={styles.dropdownContainer} ref={dropdownRef}>
+                  <div className={styles.ctaButtonWrapper}>
+                    <button
+                      className={styles.ctaButton}
+                      onClick={() => setIsModalOpen(true)}
+                    >
+                      Order a photo shoot
+                    </button>
+                    <button
+                      className={styles.dropdownToggle}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsDropdownOpen(!isDropdownOpen);
+                      }}
+                      aria-label="Open menu"
+                    >
+                      <FaChevronDown
+                        className={styles.chevronIcon}
+                        style={{ transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0)' }}
+                      />
+                    </button>
+                  </div>
+                  <AnimatePresence>
+                    {isDropdownOpen && (
+                      <motion.div
+                        className={styles.dropdownMenu}
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <button
+                          className={styles.dropdownItem}
+                          onClick={() => {
+                            setIsAuthModalOpen(true)
+                            setIsDropdownOpen(false);
+                          }}
+                        >
+                          <FaUser className={styles.menuItemIcon} />
+                          Account
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </li>
             </ul>
           </nav>
@@ -190,14 +244,28 @@ export default function Header() {
                   </motion.li>
                   <motion.li variants={itemVariants}>
                     <button
-                      className={styles.ctaButton}
+                      className={styles.navLink}
                       onClick={() => {
-                        setIsModalOpen(true);
-                        setIsMenuOpen(false);
+                        setIsAuthModalOpen(true)
+                        setIsDropdownOpen(false);
                       }}
                     >
-                      Order a photo shoot
+                      <FaUser className={styles.menuItemIcon} />
+                      Account
                     </button>
+                  </motion.li>
+                  <motion.li variants={itemVariants}>
+                    <div className={styles.ctaButtonWrapper}>
+                      <button
+                        className={styles.ctaButton}
+                        onClick={() => {
+                          setIsModalOpen(true);
+                          setIsMenuOpen(false);
+                        }}
+                      >
+                        Order a photo shoot
+                      </button>
+                    </div>
                   </motion.li>
                 </motion.ul>
               </motion.nav>
@@ -212,6 +280,11 @@ export default function Header() {
         workStartTime="10:00"
         workEndTime="18:00"
         bookingInterval={30} // интервал в минутах
+      />
+
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
       />
     </>
   );

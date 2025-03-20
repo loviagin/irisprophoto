@@ -1,42 +1,57 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.tabBar {
+  display: flex;
+  background: #f7fafc;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tabBar button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: transparent;
+  color: #718096;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.tabBar button:hover {
+  background: #edf2f7;
+  color: #4a5568;
+}
+
+.tabBar button.active {
+  background: #ffffff;
+  color: #4a5568;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.content {
+  padding: 2rem;
+  min-height: 400px;
+}
+
+@media (max-width: 768px) {
   .tabBar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 10px;
-    border-radius: 8px;
+    flex-direction: column;
   }
-  
-  .tabBar button {
-    display: flex;
-    vertical-align: middle;
-    gap: 8px;
-    border: none;
-    background: none;
-    padding: 10px 60px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: color 0.2s ease-in-out;
-  }
-  
-  .tabBar button.active {
-    font-weight: bold;
-    color: #00d0ff;
-    border-bottom: 2px solid #00d0ff;
-  }
-  
+
   .content {
-    text-align: center;
-    width: 100%;
-    max-width: 1000px;
-    margin-top: 20px;
-    padding: 20px;
+    padding: 1rem;
   }
+}

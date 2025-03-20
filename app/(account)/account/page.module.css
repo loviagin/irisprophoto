@@ -1,4 +1,20 @@
-.content {
+.page {
     min-height: 100vh;
-    background-color: rgba(83, 44, 96, 0.633);
+    background: #f7fafc;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: calc(100vh - 64px);
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .content {
+        padding: 1rem;
+    }
 }
