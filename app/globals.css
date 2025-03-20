@@ -1,7 +1,13 @@
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
-  --primary-color: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+  --primary-color: #3B82F6;
+  --primary-dark: #2563EB;
+  --primary-light: #60A5FA;
+  --text-color: #1F2937;
+  --text-light: #6B7280;
+  --background: #FFFFFF;
+  --background-alt: #F3F4F6;
+  --error: #EF4444;
+  --success: #10B981;
 }
 
 /* @media (prefers-color-scheme: dark) {

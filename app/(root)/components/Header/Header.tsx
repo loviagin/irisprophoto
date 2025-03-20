@@ -114,7 +114,7 @@ export default function Header() {
 
           <nav className={styles.nav}>
             <ul className={styles.navList}>
-              <li>
+              {/* <li>
                 <Link href='/#whychooseus' className={styles.navLink}>
                   Why Choose Us
                 </Link>
@@ -128,7 +128,7 @@ export default function Header() {
                 <Link href='/#process' className={styles.navLink}>
                   Process
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href='/#contacts' className={styles.navLink}>
                   Contacts
@@ -163,7 +163,7 @@ export default function Header() {
                   className={styles.mobileNavList}
                   variants={containerVariants}
                 >
-                  <motion.li variants={itemVariants}>
+                  {/* <motion.li variants={itemVariants}>
                     <Link href='/#whychooseus' className={styles.navLink}>
                       Why Choose Us
                     </Link>
@@ -177,7 +177,7 @@ export default function Header() {
                     <Link href='/#process' className={styles.navLink}>
                       Process
                     </Link>
-                  </motion.li>
+                  </motion.li> */}
                   <motion.li variants={itemVariants}>
                     <Link href='/#contacts' className={styles.navLink}>
                       Contacts

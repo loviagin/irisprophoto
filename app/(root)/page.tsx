@@ -1,6 +1,7 @@
 import NewHero from './components/NewHero/NewHero';
 import NewFeatures from './components/NewFeatures/NewFeatures';
 import NewGallery from './components/NewGallery/NewGallery';
+import GiftCertificates from './components/GiftCertificates/GiftCertificates';
 import NewProcess from './components/NewProcess/NewProcess';
 import NewTestimonials from './components/NewTestimonials/NewTestimonials';
 import NewCTA from './components/NewCTA/NewCTA';
@@ -18,6 +19,7 @@ export default function NewHome() {
       <NewHero />
       <NewFeatures />
       <NewGallery />
+      <GiftCertificates />
       <NewProcess />
       <NewTestimonials />
       <NewCTA />

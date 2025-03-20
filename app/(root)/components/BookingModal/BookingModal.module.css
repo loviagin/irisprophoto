@@ -9,14 +9,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1100;
+  z-index: 9999;
   padding: 20px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
 
 .modal {
-  background: white;
+  background: var(--background);
   border-radius: 20px;
   width: 100%;
   max-width: 600px;
@@ -25,6 +25,8 @@
   max-height: 90vh;
   overflow-y: auto;
   margin: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
 }
 
 .modalClose {
@@ -34,19 +36,19 @@
   background: none;
   border: none;
   font-size: 24px;
-  color: #636e72;
+  color: var(--text-light);
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 2;
 }
 
 .modalClose:hover {
-  color: #FF6B6B;
+  color: var(--error);
   transform: rotate(90deg);
 }
 
 .modalContent {
-  padding: 20px;
+  padding: 40px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -54,15 +56,14 @@
 .modalContent h2 {
   margin: 0 0 10px;
   font-size: 2rem;
-  background: var(--primary-color);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary-color);
+  font-weight: 700;
 }
 
 .modalContent p {
-  color: #636e72;
+  color: var(--text-light);
   margin-bottom: 30px;
+  font-size: 1.1rem;
 }
 
 .bookingForm {
@@ -87,7 +88,7 @@
   left: 14px;
   top: 50%;
   transform: translateY(-50%);
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--primary-color);
   font-size: 18px;
   z-index: 1;
   pointer-events: none;
@@ -98,19 +99,20 @@
 .formGroup textarea {
   width: 100%;
   padding: 12px 20px;
-  border: 2px solid #eee;
+  border: 2px solid var(--background-alt);
   border-radius: 10px;
   font-size: 1rem;
   transition: all 0.3s ease;
-  background: #fff;
-  color: black;
+  background: var(--background);
+  color: var(--text-color);
 }
 
 .formGroup input:focus,
 .formGroup select:focus,
 .formGroup textarea:focus {
-  border-color: #1D4ED8;
+  border-color: var(--primary-color);
   outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .formGroup input[type="date"] {
@@ -127,10 +129,6 @@
   padding-left: 45px;
 }
 
-.formIcon {
-  color: var(--primary-color);
-}
-
 .submitButton {
   background: var(--primary-color);
   color: white;
@@ -145,15 +143,75 @@
 }
 
 .submitButton:hover {
+  background: var(--primary-dark);
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.customSelect {
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  border: 2px solid var(--background-alt);
+  border-radius: 10px;
+  font-size: 16px;
+  height: 48px;
+  background-color: var(--background);
+  color: var(--text-color);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: all 0.3s ease;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.customSelect:hover {
+  border-color: var(--primary-light);
+}
+
+.customSelect:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.customSelect option {
+  background: var(--background);
+  color: var(--text-color);
+  padding: 12px;
+}
+
+.dateInput {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: var(--background);
+  padding: 12px 40px 12px 12px;
+  border: 2px solid var(--background-alt);
+  border-radius: 10px;
+  font-size: 16px;
+  height: 48px;
+  width: 100%;
+  color: var(--text-color);
+}
+
+.dateInput::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 12px;
+  color: var(--primary-color);
+}
+
+.dateInput:not(:valid) {
+  color: var(--text-light);
 }
 
 @media (max-width: 768px) {
   .modal {
     width: 90%;
     margin: 10px;
-    padding: 15px;
   }
   
   .formRow {
