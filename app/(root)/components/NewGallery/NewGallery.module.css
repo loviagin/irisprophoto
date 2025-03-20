@@ -143,21 +143,49 @@
     text-align: center;
 }
 
-.button {
-    padding: 16px 32px;
-    font-size: 18px;
-    font-weight: 600;
-    color: white;
-    background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.buttonGroup {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
 }
 
-.button:hover {
+.button {
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.button:first-child {
+    background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.button:last-child {
+    background: transparent;
+    color: #3B82F6;
+    border: 2px solid #3B82F6;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+}
+
+.button:first-child:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.button:last-child:hover {
+    transform: translateY(-2px);
+    background: rgba(59, 130, 246, 0.1);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.2);
 }
 
 @media (max-width: 1024px) {
@@ -186,5 +214,15 @@
 
     .overlay h3 {
         font-size: 20px;
+    }
+
+    .buttonGroup {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .button {
+        width: 100%;
+        max-width: 300px;
     }
 } 

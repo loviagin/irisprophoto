@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef, useState } from 'react'
 import styles from './NewGallery.module.css'
 import BookingModal from '../BookingModal/BookingModal'
+import Link from 'next/link'
 
 const galleryItems = [
   {
@@ -101,7 +102,12 @@ export default function NewGallery() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <button className={styles.button} onClick={() => setIsModalOpen(true)}>Make an order</button>
+          <div className={styles.buttonGroup}>
+            <button className={styles.button} onClick={() => setIsModalOpen(true)}>Make an order</button>
+            <Link href="/gallery" className={styles.button}>
+              Explore Full Collection →
+            </Link>
+          </div>
         </motion.div>
       </div>
 

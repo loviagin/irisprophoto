@@ -168,13 +168,18 @@ export default function Header() {
                 </Link>
               </li> */}
               <li>
-                <Link href='/#contacts' className={styles.navLink}>
-                  Contacts
+                <Link href='/gallery' className={styles.navLink}>
+                  Gallery
                 </Link>
               </li>
               <li>
                 <Link href='/certificates' className={styles.navLink}>
                   Certificates
+                </Link>
+              </li>
+              <li>
+                <Link href='/#contacts' className={styles.navLink}>
+                  Contacts
                 </Link>
               </li>
               <li>
@@ -253,13 +258,18 @@ export default function Header() {
                     </Link>
                   </motion.li> */}
                   <motion.li variants={itemVariants}>
-                    <Link href='/#contacts' className={styles.navLink}>
-                      Contacts
+                    <Link href='/gallery' className={styles.navLink}>
+                      Gallery
                     </Link>
                   </motion.li>
                   <motion.li variants={itemVariants}>
                     <Link href='/certificates' className={styles.navLink}>
                       Certificates
+                    </Link>
+                  </motion.li>
+                  <motion.li variants={itemVariants}>
+                    <Link href='/#contacts' className={styles.navLink}>
+                      Contacts
                     </Link>
                   </motion.li>
                   <motion.li variants={itemVariants}>
