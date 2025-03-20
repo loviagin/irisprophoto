@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from './GiftCertificates.module.css';
-import { FaGift, FaUsers, FaHome } from 'react-icons/fa';
+import { FaGift, FaUserFriends, FaUsers } from 'react-icons/fa';
 
 const certificates = [
   {
@@ -13,13 +13,13 @@ const certificates = [
     title: 'Certificate for two people',
     description: 'A gift certificate for a professional iris shot for a couple. Create unforgettable memories together. Two iris on one photo.',
     price: '$ 50',
-    icon: FaUsers
+    icon: FaUserFriends
   },
   {
     title: 'Family Photo Certificate',
     description: 'A gift certificate for a professional image of the iris of a family of up to 4 people. Capture the happy moments of family life.',
     price: '$ 100',
-    icon: FaHome
+    icon: FaUsers
   }
 ];
 
@@ -44,7 +44,7 @@ const GiftCertificates = () => {
                   <div className={styles.iconWrapper}>
                     <Icon className={styles.icon} />
                   </div>
-                  <h3 className={styles.certificateTitle}>{certificate.title}</h3>
+                  <Link href={`/certificates/${index + 1}`}><h3 className={styles.certificateTitle}>{certificate.title}</h3></Link>
                   <p className={styles.certificateDescription}>{certificate.description}</p>
                   <div className={styles.certificatePrice}>{certificate.price}</div>
                 </div>

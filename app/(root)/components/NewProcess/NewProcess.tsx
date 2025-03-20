@@ -2,26 +2,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './NewProcess.module.css';
-import { FaRegComments, FaRegLightbulb, FaCameraRetro, FaRegImages } from 'react-icons/fa';
+import Image from 'next/image';
 
 const processSteps = [
   {
-    icon: <FaRegComments size={32} />,
+    image: '/images/how/img3.webp',
     title: 'Consultation',
     description: 'We will discuss your ideas and wishes, determine the shooting format and location.'
   },
   {
-    icon: <FaRegLightbulb size={32} />,
+    image: '/images/how/img2.webp',
     title: 'Planning',
     description: 'We will develop a shooting concept, select images and props.'
   },
   {
-    icon: <FaCameraRetro size={32} />,
+    image: '/images/how/img1.webp',
     title: 'Photo session',
     description: 'We will shoot in the selected location, create atmospheric shots.'
   },
   {
-    icon: <FaRegImages size={32} />,
+    image: '/images/how/img4.webp',
     title: 'Processing',
     description: 'We will select the best photos and perform professional retouching.'
   }
@@ -76,7 +76,13 @@ const NewProcess = () => {
               variants={itemVariants}
             >
               <div className={styles.iconWrapper}>
-                {step.icon}
+                <Image
+                  src={step.image}
+                  alt={step.title}
+                  width={200}
+                  height={150}
+                  className={styles.processImage}
+                />
               </div>
               <div className={styles.stepNumber}>0{index + 1}</div>
               <h3>{step.title}</h3>
