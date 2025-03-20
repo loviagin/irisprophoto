@@ -27,8 +27,8 @@ export default function CertificatePage() {
                     <div className={styles.infoSection}>
                         <h1 className={styles.title}>Certificate for one person</h1>
                         <div className={styles.price}>$ 115</div>
-                        <Link href={'https://www.paypal.com/ncp/payment/6V9MH3Y5TJ69L'} className={styles.buyButton} target='_blank'>
-                            Купить сертификат
+                        <Link href={'#'} className={styles.buyButton} target='_blank'>
+                            You can buy a certificate in our office
                         </Link>
                     </div>
                 </div>

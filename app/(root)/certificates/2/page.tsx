@@ -5,8 +5,8 @@ import { FaClock, FaCalendarAlt } from 'react-icons/fa';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Gift certificate for two people – Iris Pro Photo",
-  description: "We are a team of professional photographers and we are offering our services of iris photography for you. We are capturing the moments for a long time."
+    title: "Gift certificate for two people – Iris Pro Photo",
+    description: "We are a team of professional photographers and we are offering our services of iris photography for you. We are capturing the moments for a long time."
 };
 
 export default function CertificatePage() {
@@ -27,8 +27,8 @@ export default function CertificatePage() {
                     <div className={styles.infoSection}>
                         <h1 className={styles.title}>Certificate for two people</h1>
                         <div className={styles.price}>$ 185</div>
-                        <Link href={'https://www.paypal.com/ncp/payment/Z5TN7RESEAJVG'} className={styles.buyButton} target='_blank'>
-                            Купить сертификат
+                        <Link href={'#'} className={styles.buyButton} target='_blank'>
+                            You can buy a certificate in our office
                         </Link>
                     </div>
                 </div>
