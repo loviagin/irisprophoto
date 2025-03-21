@@ -5,8 +5,27 @@ import { FaClock, FaCalendarAlt } from 'react-icons/fa';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Family Photo Session Gift Certificate | Professional Photography | Iris Pro Photo",
-    description: "Give the perfect gift of memories with our professional family photo session certificate. Includes 20-40 minute shoot, expert photo processing, and high-quality prints. Valid for 6 months. Book your session with Iris Pro Photo today."
+    title: "Family Photo Gift Certificate | Iris Pro Photo",
+    description: "Give the perfect gift of memories with our professional family photo session certificate. Includes 20-40 minute shoot, expert photo processing, and high-quality prints. Valid for 6 months. Book your session with Iris Pro Photo today.",
+    keywords: "family photo certificate, gift certificate, professional photography, photo session, iris photography, family portraits, photo gift, professional photo shoot",
+    openGraph: {
+        title: "Family Photo Gift Certificate | Iris Pro Photo",
+        description: "Give the perfect gift of memories with our professional family photo session certificate. Includes 20-40 minute shoot, expert photo processing, and high-quality prints.",
+        images: [
+            {
+                url: "/certificates/certificate.jpeg",
+                width: 600,
+                height: 500,
+                alt: "Gift certificate Iris PRO Photo"
+            }
+        ]
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Family Photo Gift Certificate | Iris Pro Photo",
+        description: "Give the perfect gift of memories with our professional family photo session certificate. Includes 20-40 minute shoot, expert photo processing, and high-quality prints.",
+        images: ["/certificates/certificate.jpeg"]
+    }
 };
 
 export default function CertificatePage() {

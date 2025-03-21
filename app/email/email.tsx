@@ -5,7 +5,7 @@ interface EmailProps {
   url: string;
 }
 
-export function Email(props: EmailProps) {
+function Email(props: EmailProps) {
   const { url } = props;
 
   return (
