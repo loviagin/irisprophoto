@@ -1,13 +1,13 @@
 .hero {
     position: relative;
-    min-height: 100vh;
-    width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    overflow: hidden;
+    justify-content: center;
+    width: 100%;
     padding: 60px 0;
+    min-height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .gradientBackground {
@@ -36,30 +36,30 @@
 }
 
 .circle1 {
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(97, 175, 239, 0.1) 0%, rgba(25, 89, 146, 0.1) 100%);
     top: -100px;
     right: -100px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgb(97 175 239 / 10%) 0%, rgb(25 89 146 / 10%) 100%);
 }
 
 .circle2 {
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(97, 175, 239, 0.15) 0%, rgba(25, 89, 146, 0.15) 100%);
     bottom: -50px;
     left: -50px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgb(97 175 239 / 15%) 0%, rgb(25 89 146 / 15%) 100%);
 }
 
 .content {
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
     display: grid;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    max-width: 1440px;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
-    align-items: center;
-    padding: 0 40px;
     box-sizing: border-box;
 }
 
@@ -72,8 +72,8 @@
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 24px;
-    background: linear-gradient(135deg, #FFFFFF 0%, #A5D8FF 100%);
-    -webkit-background-clip: text;
+    background: linear-gradient(135deg, #FFF 0%, #A5D8FF 100%);
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -100,25 +100,25 @@
 }
 
 .primaryButton {
-    background: var(--primary-color);
     color: white;
+    background: var(--primary-color);
     border: none;
 }
 
 .primaryButton:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 8px 20px rgb(59 130 246 / 30%);
 }
 
 .secondaryButton {
-    background: transparent;
     color: white;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    border: 2px solid rgb(255 255 255 / 20%);
 }
 
 .secondaryButton:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgb(255 255 255 / 10%);
+    border-color: rgb(255 255 255 / 30%);
 }
 
 .imageContent {
@@ -131,7 +131,7 @@
     aspect-ratio: 1;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px rgb(0 0 0 / 30%);
 }
 
 .irisPreview img {
@@ -146,7 +146,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%);
+    background: linear-gradient(135deg, rgb(59 130 246 / 10%) 0%, rgb(29 78 216 / 10%) 100%);
     overflow: hidden;
 }
 
@@ -160,18 +160,18 @@
 }
 
 .stats {
-    width: 100%;
-    max-width: 1400px;
-    margin-top: 60px;
     display: flex;
     justify-content: space-around;
+    width: 100%;
+    padding: 0 40px;
+    background: rgb(255 255 255 / 3%);
+    max-width: 1400px;
+    margin-top: 60px;
     gap: 40px;
-    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgb(255 255 255 / 10%);
     box-sizing: border-box;
-    padding: 0 40px;
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -188,8 +188,8 @@
     font-size: 48px;
     font-weight: 700;
     margin-bottom: 8px;
-    background: linear-gradient(135deg, #FFFFFF 0%, #A5D8FF 100%);
-    -webkit-background-clip: text;
+    background: linear-gradient(135deg, #FFF 0%, #A5D8FF 100%);
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -199,7 +199,7 @@
     opacity: 0.9;
 }
 
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
     .content {
         grid-template-columns: 1fr;
         text-align: center;
@@ -221,7 +221,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
     .hero {
         padding: 160px 0;
     }

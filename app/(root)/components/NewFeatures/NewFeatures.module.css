@@ -4,10 +4,10 @@
 }
 
 .container {
-    max-width: 1440px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 40px;
-    width: 100%;
+    max-width: 1440px;
     box-sizing: border-box;
 }
 
@@ -19,10 +19,10 @@
 .subtitle {
     display: inline-block;
     padding: 8px 16px;
-    background: rgba(59, 130, 246, 0.1);
-    color: #3B82F6;
-    border-radius: 20px;
     font-size: 14px;
+    color: #3B82F6;
+    background: rgb(59 130 246 / 10%);
+    border-radius: 20px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -38,10 +38,10 @@
 }
 
 .header p {
-    font-size: 18px;
-    color: #666666;
-    max-width: 600px;
     margin: 0 auto;
+    font-size: 18px;
+    color: #666;
+    max-width: 600px;
     line-height: 1.6;
 }
 
@@ -52,26 +52,26 @@
 }
 
 .feature {
-    background: #fff;
     padding: 40px;
+    background: #fff;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgb(0 0 0 / 10%);
     transition: all 0.3s ease;
 }
 
 .feature:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 20px 40px rgb(0 0 0 / 15%);
 }
 
 .iconWrapper {
-    width: 64px;
-    height: 64px;
-    background: rgba(59, 130, 246, 0.1);
-    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: rgb(59 130 246 / 10%);
+    border-radius: 16px;
     margin-bottom: 24px;
 }
 
@@ -80,18 +80,18 @@
 }
 
 .feature h3 {
-    font-size: 1.5rem;
     margin: 0 0 20px;
+    font-size: 1.5rem;
     color: #2d3436;
 }
 
 .feature p {
+    margin: 0;
     color: #636e72;
     line-height: 1.6;
-    margin: 0;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
     .features {
         padding: 60px 0;
     }

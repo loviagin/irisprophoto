@@ -1,7 +1,7 @@
 .welcomeContainer {
+  padding: 2rem;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   border-radius: 20px;
-  padding: 2rem;
   margin-bottom: 2rem;
 }
 
@@ -19,17 +19,17 @@
 }
 
 .avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: #ffffff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
-  border: 4px solid #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 120px;
+  height: 120px;
+  background: #fff;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+  border: 4px solid #fff;
 }
 
 .avatar img {
@@ -50,13 +50,13 @@
 .uploadButton {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: #ffffff;
+  font-size: 0.875rem;
+  color: #4a5568;
+  background: #fff;
+  gap: 0.5rem;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  color: #4a5568;
-  font-size: 0.875rem;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -80,24 +80,24 @@
 }
 
 .welcome {
+  margin: 0;
   font-size: 2rem;
   color: #2d3748;
-  margin: 0;
   margin-bottom: 0.5rem;
 }
 
 .email {
-  color: #718096;
   margin: 0;
   font-size: 1.1rem;
+  color: #718096;
 }
 
 .stats {
   display: grid;
+  padding: 1.5rem;
+  background: rgb(255 255 255 / 80%);
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 1.5rem;
   border-radius: 12px;
   margin-top: 2rem;
 }
@@ -117,11 +117,11 @@
 }
 
 .statLabel {
-  color: #718096;
   font-size: 1rem;
+  color: #718096;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .welcomeContainer {
     padding: 1rem;
   }

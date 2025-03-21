@@ -1,13 +1,10 @@
 .modalOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  inset: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  background-color: rgb(0 0 0 / 70%);
   z-index: 1000;
   backdrop-filter: blur(8px);
 }
@@ -19,30 +16,30 @@
 }
 
 .modalContent {
-  background-color: white;
-  padding: 2.5rem;
-  border-radius: 24px;
-  width: 100%;
-  max-width: 420px;
   position: relative;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 2.5rem;
+  background-color: white;
+  border-radius: 24px;
+  max-width: 420px;
+  box-shadow: 0 20px 50px rgb(0 0 0 / 10%);
 }
 
 .closeButton {
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: #94a3b8;
-  transition: all 0.2s;
-  padding: 0.5rem;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  color: #94a3b8;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 50%;
 }
 
 .closeButton:hover {
@@ -52,23 +49,23 @@
 }
 
 .tabs {
+  position: relative;
   display: flex;
   margin-bottom: 2.5rem;
   border-bottom: 2px solid #eee;
-  position: relative;
 }
 
 .tab {
-  flex: 1;
+  position: relative;
   padding: 1rem;
-  border: none;
-  background: none;
   font-size: 1.1rem;
+  color: #666;
+  background: none;
+  flex: 1;
+  border: none;
   font-weight: 500;
   cursor: pointer;
-  color: #666;
   transition: all 0.2s;
-  position: relative;
 }
 
 .tab:disabled {
@@ -109,22 +106,22 @@
 }
 
 .toggleButton {
-  flex: 1;
   padding: 0.75rem 1.5rem;
-  border: none;
+  font-size: 0.95rem;
+  color: #64748b;
   background: none;
+  flex: 1;
+  border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 0.95rem;
   font-weight: 500;
-  color: #64748b;
 }
 
 .toggleButton.active {
   background-color: white;
   color: #0f172a;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 5%);
 }
 
 .toggleButton:hover:not(.active) {
@@ -140,8 +137,8 @@
 .inputIcon {
   position: absolute;
   left: 1rem;
-  color: #94a3b8;
   font-size: 1rem;
+  color: #94a3b8;
   transition: color 0.2s;
 }
 
@@ -164,7 +161,7 @@
   outline: none;
   border-color: #3b82f6;
   background-color: white;
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 4px rgb(59 130 246 / 10%);
 }
 
 .inputGroup input:focus + .inputIcon {
@@ -185,22 +182,22 @@
   position: absolute;
   bottom: -1.25rem;
   left: 0;
-  color: #ef4444;
   font-size: 0.8rem;
+  color: #ef4444;
   font-weight: 500;
 }
 
 .togglePassword {
   position: absolute;
   right: 1rem;
-  background: none;
-  border: none;
-  color: #94a3b8;
-  cursor: pointer;
-  padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0.5rem;
+  color: #94a3b8;
+  background: none;
+  border: none;
+  cursor: pointer;
   transition: all 0.2s;
 }
 
@@ -214,11 +211,11 @@
   justify-content: center;
   width: 100%;
   padding: 1rem;
-  background-color: #3b82f6;
+  font-size: 1rem;
   color: white;
+  background-color: #3b82f6;
   border: none;
   border-radius: 12px;
-  font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
@@ -228,7 +225,7 @@
 .submitButton:hover:not(:disabled) {
   background-color: #2563eb;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 4px 12px rgb(59 130 246 / 20%);
 }
 
 .submitButton:disabled {
@@ -249,23 +246,23 @@
 }
 
 .resendTimer {
-  text-align: center;
-  color: #64748b;
-  font-size: 0.9rem;
   margin: 1rem 0;
+  font-size: 0.9rem;
+  color: #64748b;
+  text-align: center;
   font-weight: 500;
 }
 
 .resendButton {
   display: block;
   width: 100%;
-  padding: 0.75rem;
   margin: 0.5rem 0;
+  padding: 0.75rem;
+  font-size: 0.9rem;
+  color: #3b82f6;
   background: none;
   border: none;
-  color: #3b82f6;
   cursor: pointer;
-  font-size: 0.9rem;
   font-weight: 500;
   text-align: center;
   transition: all 0.2s;
@@ -287,6 +284,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -321,13 +319,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
   padding: 0.8rem;
+  font-size: 1rem;
+  color: #333;
+  gap: 0.5rem;
   border: 1px solid #eee;
   border-radius: 8px;
   background-color: white;
-  color: #333;
-  font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -353,31 +351,31 @@
 }
 
 .passwordRequirements p {
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.5rem;
   font-size: 0.9rem;
   color: #666;
 }
 
 .passwordRequirements ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
   flex-direction: column;
   gap: 0.3rem;
 }
 
 .passwordRequirements li {
-  font-size: 0.85rem;
-  color: #666;
   display: flex;
   align-items: center;
+  font-size: 0.85rem;
+  color: #666;
   gap: 0.5rem;
 }
 
 .passwordRequirements li::before {
   content: '•';
-  color: #ff4444;
+  color: #f44;
 }
 
 .passwordRequirements li.valid {

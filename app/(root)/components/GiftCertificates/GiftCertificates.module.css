@@ -1,28 +1,25 @@
 .section {
-  padding: 8rem 0;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(37, 99, 235, 0.05) 100%);
   position: relative;
+  padding: 8rem 0;
+  background: linear-gradient(135deg, rgb(59 130 246 / 5%) 0%, rgb(37 99 235 / 5%) 100%);
   overflow: hidden;
 }
 
 .section::before {
-  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.5) 50%, rgba(37, 99, 235, 0.5) 100%);
+  inset: 0;
+  background: linear-gradient(135deg, rgb(59 130 246 / 50%) 50%, rgb(37 99 235 / 50%) 100%);
+  content: '';
   pointer-events: none;
 }
 
 .container {
-  max-width: 1440px;
+  position: relative;
+  width: 100%;
   margin: 0 auto;
   padding: 0 40px;
-  position: relative;
+  max-width: 1440px;
   z-index: 1;
-  width: 100%;
   box-sizing: border-box;
 }
 
@@ -32,15 +29,15 @@
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: black;
-  margin-bottom: 1.5rem;
-  background: white;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   position: relative;
   display: inline-block;
+  font-size: 2.5rem;
+  color: black;
+  background: white;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .title::after {
@@ -55,13 +52,13 @@
   border-radius: 0.125rem;
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .title {
     font-size: 3.5rem;
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .container {
     padding: 0 20px;
   }
@@ -88,37 +85,37 @@
   margin-bottom: 4rem;
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .certificatesGrid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 .certificateCard {
-  background: white;
-  padding: 2.5rem 2rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  padding: 2.5rem 2rem;
+  background: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
 
 .certificateCard::before {
-  content: '';
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
+  left: 0;
   height: 4px;
   background: linear-gradient(90deg, #3B82F6, #2563EB);
+  content: '';
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .certificateCard:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 10%), 0 10px 10px -5px rgb(0 0 0 / 4%);
 }
 
 .certificateCard:hover::before {
@@ -126,14 +123,14 @@
 }
 
 .iconWrapper {
-  width: 4rem;
-  height: 4rem;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.1));
-  border-radius: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 4rem;
+  height: 4rem;
   margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, rgb(59 130 246 / 10%), rgb(37 99 235 / 10%));
+  border-radius: 1rem;
   transition: transform 0.3s ease;
 }
 
@@ -166,7 +163,7 @@
   color: #3B82F6;
   margin-bottom: 1rem;
   background: linear-gradient(135deg, #3B82F6, #2563EB);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -178,7 +175,7 @@
   margin-top: 3rem;
 }
 
-@media (min-width: 640px) {
+@media (width >= 640px) {
   .buttonContainer {
     flex-direction: row;
   }
@@ -187,38 +184,38 @@
 .primaryButton {
   display: inline-block;
   padding: 12px 24px;
-  background: var(--primary-color);
+  font-size: 16px;
   color: white;
+  background: var(--primary-color);
   border-radius: 25px;
   border: none;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 16px;
   text-decoration: none;
 }
 
 .primaryButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 12px rgb(99 102 241 / 30%);
 }
 
 .secondaryButton {
   display: inline-block;
   padding: 12px 24px;
-  background: transparent;
+  font-size: 16px;
   color: var(--primary-color);
+  background: transparent;
   border: 2px solid var(--primary-color);
   border-radius: 25px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 16px;
   text-decoration: none;
 }
 
 .secondaryButton:hover {
-  background: rgba(99, 102, 241, 0.1);
+  background: rgb(99 102 241 / 10%);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 4px 12px rgb(99 102 241 / 10%);
 } 

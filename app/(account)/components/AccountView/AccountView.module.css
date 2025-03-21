@@ -1,11 +1,11 @@
 
 .account {
-    padding-right: 17px;
-    padding-top: 10px;
+    position: relative; /* Чтобы мини-меню позиционировалось относительно этого блока */
     display: flex;
     align-items: center;
+    padding-right: 17px;
+    padding-top: 10px;
     gap: 15px;
-    position: relative; /* Чтобы мини-меню позиционировалось относительно этого блока */
     cursor: pointer;
 }
 
@@ -14,26 +14,26 @@
     position: absolute;
     top: 60px;
     right: 0;
-    background: rgb(0, 0, 0);
-    border-radius: 15px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     width: 150px;
+    background: rgb(0 0 0);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
     z-index: 100;
 }
 
 .dropdownMenu ul {
-    list-style: none;
-    padding: 0 10px;
     margin: 0;
+    padding: 0 10px;
+    list-style: none;
 }
 
 .dropdownMenu li {
     display: flex;
-    justify-content: left;
     align-items: center;
-    gap: 8px;
+    justify-content: left;
     padding: 10px;
     font-size: 16px;
+    gap: 8px;
     border-bottom: 1px solid #ddd;
     cursor: pointer;
     transition: background 0.2s;
@@ -49,5 +49,5 @@
 
 .logout {
     vertical-align: bottom;
-    color: #ff0000;
+    color: #f00;
 }

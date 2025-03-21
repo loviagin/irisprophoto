@@ -1,0 +1,42 @@
+{
+    "extends": [
+        "stylelint-config-standard"
+    ],
+    "plugins": [
+        "stylelint-order"
+    ],
+    "rules": {
+        "indentation": [
+            "tab"
+        ],
+        "color-hex-case": "upper",
+        "order/order": [
+            "custom-properties",
+            "dollar-variables",
+            "at-variables",
+            "declarations",
+            {
+                "type": "rule",
+                "name": "media"
+            },
+            "rules"
+        ],
+        "order/properties-order": [
+            "position",
+            "top",
+            "right",
+            "bottom",
+            "left",
+            "display",
+            "align-items",
+            "justify-content",
+            "width",
+            "height",
+            "margin",
+            "padding",
+            "font-size",
+            "color",
+            "background"
+        ]
+    }
+}

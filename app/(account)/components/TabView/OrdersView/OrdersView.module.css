@@ -2,7 +2,7 @@
     max-width: 1000px;
     margin: 2rem auto;
     padding: 0 1rem;
-    font-family: "Roboto", sans-serif;
+    font-family: Roboto, sans-serif;
     color: #333;
   }
   
@@ -19,7 +19,7 @@
     overflow-x: auto;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
   }
   
   /* Таблица без отдельного заголовка */

@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
+    "stylelint": "stylelint \"**/*.{css,scss}\" --fix",
     "lint": "next lint"
   },
   "dependencies": {
@@ -28,6 +29,9 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-input-mask": "^3.0.6",
+    "stylelint": "^16.16.0",
+    "stylelint-config-standard": "^37.0.0",
+    "stylelint-order": "^6.0.4",
     "typescript": "^5"
   }
 }

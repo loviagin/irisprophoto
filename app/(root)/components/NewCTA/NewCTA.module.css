@@ -1,11 +1,11 @@
 .cta {
     position: relative;
-    padding: 80px 20px;
-    overflow: hidden;
-    color: white;
-    min-height: 80vh;
     display: flex;
     align-items: center;
+    padding: 80px 20px;
+    color: white;
+    overflow: hidden;
+    min-height: 80vh;
     isolation: isolate;
 }
 
@@ -25,6 +25,7 @@
     from {
         transform: scale(1);
     }
+
     to {
         transform: scale(1.1);
     }
@@ -37,9 +38,9 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, 
-        rgba(59, 130, 246, 0.7) 0%,
-        rgba(37, 99, 235, 0.8) 50%,
-        rgba(29, 78, 216, 0.9) 100%);
+        rgb(59 130 246 / 70%) 0%,
+        rgb(37 99 235 / 80%) 50%,
+        rgb(29 78 216 / 90%) 100%);
     backdrop-filter: blur(5px);
     z-index: 2;
     animation: gradientShift 15s ease infinite;
@@ -49,9 +50,11 @@
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
@@ -59,17 +62,17 @@
 
 .container {
     position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    z-index: 3;
     width: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+    z-index: 3;
 }
 
 .content {
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
     position: relative;
+    margin: 0 auto;
+    max-width: 900px;
+    text-align: center;
 }
 
 .content::before {
@@ -79,7 +82,7 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgb(255 255 255 / 10%) 0%, transparent 70%);
     animation: rotate 20s linear infinite;
     z-index: -1;
 }
@@ -88,22 +91,23 @@
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
 }
 
 .content h2 {
+    position: relative;
+    display: inline-block;
     font-size: 52px;
+    background: linear-gradient(to right, #fff, #e2e8f0);
     font-weight: 800;
     margin-bottom: 16px;
     line-height: 1.1;
-    background: linear-gradient(to right, #ffffff, #e2e8f0);
-    -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
-    display: inline-block;
+    text-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 }
 
 .content h2::after {
@@ -114,7 +118,7 @@
     transform: translateX(-50%);
     width: 100px;
     height: 4px;
-    background: linear-gradient(to right, transparent, #ffffff, transparent);
+    background: linear-gradient(to right, transparent, #fff, transparent);
     border-radius: 2px;
 }
 
@@ -124,7 +128,7 @@
     margin-bottom: 32px;
     line-height: 1.6;
     font-weight: 300;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 1px 2px rgb(0 0 0 / 10%);
 }
 
 .features {
@@ -140,45 +144,45 @@
     align-items: center;
     gap: 12px;
     padding: 12px 24px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgb(255 255 255 / 8%);
     border-radius: 50px;
     backdrop-filter: blur(10px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgb(255 255 255 / 10%);
     transform-style: preserve-3d;
 }
 
 .feature:hover {
     transform: translateY(-5px) rotateX(5deg);
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: rgb(255 255 255 / 12%);
+    border-color: rgb(255 255 255 / 20%);
+    box-shadow: 0 10px 30px rgb(0 0 0 / 20%);
 }
 
 .icon {
-    width: 48px;
-    height: 48px;
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 48px;
+    height: 48px;
     font-size: 24px;
+    background: rgb(255 255 255 / 12%);
+    border-radius: 50%;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgb(255 255 255 / 10%);
 }
 
 .feature:hover .icon {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgb(255 255 255 / 20%);
     transform: scale(1.1) rotate(5deg);
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: rgb(255 255 255 / 30%);
 }
 
 .text {
     font-size: 18px;
     font-weight: 500;
     letter-spacing: 0.5px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 1px 2px rgb(0 0 0 / 10%);
 }
 
 .buttons {
@@ -189,17 +193,17 @@
 }
 
 .primaryButton {
+    position: relative;
     padding: 16px 32px;
-    background: white;
-    color: #3B82F6;
-    border-radius: 50px;
     font-size: 18px;
+    color: #3B82F6;
+    background: white;
+    border-radius: 50px;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: 2px solid transparent;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
+    box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
     overflow: hidden;
 }
 
@@ -213,7 +217,7 @@
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(255, 255, 255, 0.2),
+        rgb(255 255 255 / 20%),
         transparent
     );
     transition: 0.5s;
@@ -225,22 +229,22 @@
 
 .primaryButton:hover {
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 12px 24px rgb(0 0 0 / 15%);
+    border-color: rgb(255 255 255 / 50%);
 }
 
 .secondaryButton {
+    position: relative;
     padding: 16px 32px;
-    background: rgba(255, 255, 255, 0.08);
-    color: white;
-    border-radius: 50px;
     font-size: 18px;
+    color: white;
+    background: rgb(255 255 255 / 8%);
+    border-radius: 50px;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgb(255 255 255 / 20%);
     backdrop-filter: blur(10px);
-    position: relative;
     overflow: hidden;
 }
 
@@ -254,7 +258,7 @@
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(255, 255, 255, 0.1),
+        rgb(255 255 255 / 10%),
         transparent
     );
     transition: 0.5s;
@@ -265,13 +269,13 @@
 }
 
 .secondaryButton:hover {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgb(255 255 255 / 12%);
     transform: translateY(-3px) scale(1.02);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-color: rgb(255 255 255 / 30%);
+    box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
 }
 
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
     .cta {
         padding: 60px 16px;
         min-height: 70vh;
@@ -314,7 +318,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
     .cta {
         padding: 40px 12px;
         min-height: 60vh;
@@ -336,9 +340,9 @@
     }
 
     .feature {
+        justify-content: center;
         width: 100%;
         max-width: 280px;
-        justify-content: center;
     }
 
     .icon {
@@ -365,7 +369,7 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
     .cta {
         padding: 32px 8px;
         min-height: 50vh;

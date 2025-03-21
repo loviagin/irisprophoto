@@ -5,15 +5,15 @@
 
 .hero {
   position: relative;
-  min-height: 60vh;
-  width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  overflow: hidden;
+  justify-content: center;
+  width: 100%;
   padding: 120px 0 80px;
   background: linear-gradient(135deg, #000B18, #0A2342);
+  min-height: 60vh;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .gradientBackground {
@@ -42,29 +42,29 @@
 }
 
 .circle1 {
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(97, 175, 239, 0.1) 0%, rgba(25, 89, 146, 0.1) 100%);
   top: -100px;
   right: -100px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgb(97 175 239 / 10%) 0%, rgb(25 89 146 / 10%) 100%);
 }
 
 .circle2 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(97, 175, 239, 0.15) 0%, rgba(25, 89, 146, 0.15) 100%);
   bottom: -50px;
   left: -50px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgb(97 175 239 / 15%) 0%, rgb(25 89 146 / 15%) 100%);
 }
 
 .heroContent {
+  position: relative;
+  margin: 0 auto;
+  padding: 0 40px;
+  color: white;
   text-align: center;
   max-width: 800px;
-  margin: 0 auto;
-  color: white;
-  padding: 0 40px;
   box-sizing: border-box;
-  position: relative;
   z-index: 1;
 }
 
@@ -73,8 +73,8 @@
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, #FFFFFF 0%, #A5D8FF 100%);
-  -webkit-background-clip: text;
+  background: linear-gradient(135deg, #FFF 0%, #A5D8FF 100%);
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -91,10 +91,10 @@
 }
 
 .content {
-  max-width: 1440px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 40px;
-  width: 100%;
+  max-width: 1440px;
   box-sizing: border-box;
 }
 
@@ -105,42 +105,42 @@
   margin-bottom: 80px;
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 .infoSection {
-  background: white;
   padding: 80px 0;
+  background: white;
   border-top: 1px solid #E2E8F0;
 }
 
 .infoGrid {
   display: grid;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 40px;
   grid-template-columns: 1fr;
   gap: 40px;
   max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 40px;
-  width: 100%;
   box-sizing: border-box;
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .infoGrid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .heroContent {
     padding: 0 20px;
   }
@@ -163,19 +163,19 @@
 }
 
 .infoCard {
-  background: #F8FAFC;
   padding: 40px;
+  background: #F8FAFC;
   border-radius: 20px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%);
 }
 
 .infoCard h3 {
-  font-size: 24px;
-  font-weight: 700;
-  color: #1E293B;
-  margin-bottom: 20px;
   display: flex;
   align-items: center;
+  font-size: 24px;
+  color: #1E293B;
+  font-weight: 700;
+  margin-bottom: 20px;
   gap: 12px;
 }
 
@@ -189,54 +189,54 @@
 }
 
 .infoCard ul {
-  list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .infoCard li {
+  position: relative;
   color: #64748B;
   margin-bottom: 12px;
   padding-left: 24px;
-  position: relative;
 }
 
 .infoCard li::before {
-  content: '•';
-  color: #3B82F6;
   position: absolute;
   left: 0;
+  color: #3B82F6;
+  content: '•';
 }
 
 .infoCard p {
+  margin: 0;
   color: #64748B;
   line-height: 1.6;
-  margin: 0;
 }
 
 .card {
   background-color: white;
   border-radius: 20px;
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px -5px rgb(0 0 0 / 10%);
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgb(0 0 0 / 5%);
 }
 
 .card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 40px -5px rgb(0 0 0 / 15%);
 }
 
 .card::before {
-  content: '';
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
+  left: 0;
   height: 4px;
   background: linear-gradient(90deg, #3B82F6, #2563EB);
+  content: '';
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -273,26 +273,26 @@
 }
 
 .description {
+  font-size: 16px;
   color: #64748B;
   margin-bottom: 24px;
   line-height: 1.6;
-  font-size: 16px;
 }
 
 .cardFooter {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   padding-top: 16px;
   border-top: 1px solid #E2E8F0;
 }
 
 .price {
-  font-size: 28px;
-  font-weight: 800;
-  color: #1E293B;
   display: flex;
   align-items: center;
+  font-size: 28px;
+  color: #1E293B;
+  font-weight: 800;
   gap: 8px;
 }
 
@@ -303,16 +303,16 @@
 }
 
 .button {
-  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
-  color: white;
+  position: relative;
   padding: 12px 28px;
+  font-size: 16px;
+  color: white;
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
   border-radius: 12px;
   font-weight: 600;
-  font-size: 16px;
   transition: all 0.3s ease;
   border: none;
   cursor: pointer;
-  position: relative;
   overflow: hidden;
 }
 
@@ -330,7 +330,7 @@
 
 .button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 8px 20px rgb(37 99 235 / 20%);
 }
 
 .button:hover::before {
@@ -343,32 +343,32 @@
 }
 
 .features {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 24px;
   display: flex;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
   flex-direction: column;
   gap: 12px;
 }
 
 .features li {
-  color: #64748B;
-  font-size: 15px;
   display: flex;
   align-items: center;
+  font-size: 15px;
+  color: #64748B;
   gap: 8px;
 }
 
 .features li::before {
-  content: '✓';
-  color: #3B82F6;
-  font-weight: bold;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 20px;
   height: 20px;
-  background: rgba(59, 130, 246, 0.1);
-  border-radius: 50%;
   font-size: 12px;
+  color: #3B82F6;
+  background: rgb(59 130 246 / 10%);
+  content: '✓';
+  font-weight: bold;
+  border-radius: 50%;
 } 

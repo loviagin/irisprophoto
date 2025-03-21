@@ -1,9 +1,9 @@
 .container {
+  margin: 40px auto;
+  padding: 40px 20px;
   background: white;
   max-width: 800px;
   min-height: 100vh;
-  margin: 40px auto;
-  padding: 40px 20px;
 }
 
 .title {
@@ -27,7 +27,7 @@
 }
 
 .link {
-  color: #0066cc;
+  color: #06c;
   text-decoration: underline;
 }
 
@@ -39,7 +39,7 @@
   color: #666;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .container {
     padding: 40px 20px;
   }

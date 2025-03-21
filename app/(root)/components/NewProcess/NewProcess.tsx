@@ -6,24 +6,24 @@ import Image from 'next/image';
 
 const processSteps = [
   {
-    image: '/images/how/img3.webp',
-    title: 'Consultation',
-    description: 'We will discuss your ideas and wishes, determine the shooting format and location.'
+    image: '/images/how/img1.webp',
+    title: 'Image Capture',
+    description: 'High-detail macro photography of the iris.'
   },
   {
     image: '/images/how/img2.webp',
-    title: 'Planning',
-    description: 'We will develop a shooting concept, select images and props.'
+    title: 'Digital Processing',
+    description: 'Color enhancement, retouching, and artistic effects.'
   },
   {
-    image: '/images/how/img1.webp',
-    title: 'Photo session',
-    description: 'We will shoot in the selected location, create atmospheric shots.'
+    image: '/images/how/img3.webp',
+    title: 'Printing',
+    description: 'Canon printing with Lucia Pro 2 inks, lasting 100 years.'
   },
   {
     image: '/images/how/img4.webp',
-    title: 'Processing',
-    description: 'We will select the best photos and perform professional retouching.'
+    title: 'Final Product',
+    description: '100+ framing options: canvas, acrylic, photo paper.'
   }
 ];
 
