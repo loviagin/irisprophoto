@@ -312,4 +312,46 @@
 /* Стили для неактивного состояния (placeholder) */
 .dateInput:not(:valid) {
   color: #757575;
+}
+
+.phoneInput {
+  width: 100%;
+  padding: 12px 20px 12px 45px !important;
+  border: 2px solid var(--background-alt);
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: var(--background);
+  color: var(--text-color);
+}
+
+.phoneInput:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.phoneInput:disabled {
+  background-color: var(--background-alt);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Обновляем стили для иконок в полях ввода */
+.formIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary-color);
+  font-size: 18px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Обновляем отступы для всех полей с иконками */
+.formIcon + input,
+.formIcon + .phoneInput,
+.formIcon + select {
+  padding-left: 45px !important;
 } 

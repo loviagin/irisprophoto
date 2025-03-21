@@ -68,7 +68,7 @@ const OrdersView = () => {
                 <div className={styles.tableWrapper}>
                     <table className={styles.table}>
                         <tbody>
-                            {orders.map((order) => (
+                            {/* {orders.map((order) => (
                                 <tr key={order.createdAt.seconds}>
                                     <td className={styles.iconCell}>🛒</td>
                                     <td>
@@ -102,7 +102,7 @@ const OrdersView = () => {
                                         </p>
                                     </td>
                                 </tr>
-                            ))}
+                            ))} */}
                         </tbody>
                     </table>
                 </div>

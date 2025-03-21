@@ -76,7 +76,11 @@ export default function RegisterForm({ onSubmit, isLoading = false }: RegisterFo
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      onSubmit(formData);
+      onSubmit({
+        email: formData.email,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword
+      });
     }
   };
 
@@ -178,15 +182,13 @@ export default function RegisterForm({ onSubmit, isLoading = false }: RegisterFo
         </ul>
       </div>
 
-      <p className={styles.registrationInfo}>Regisration is not available yet</p>
-
-      {/* <button 
+      <button 
         type="submit" 
         className={`${styles.submitButton} ${isLoading ? styles.loading : ''}`}
         disabled={isLoading}
       >
         {isLoading ? "Registration..." : "Register"}
-      </button> */}
+      </button>
     </motion.form>
   );
 } 

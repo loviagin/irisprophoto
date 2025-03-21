@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { AnimatePresence } from 'framer-motion'
-import { FaCamera, FaCalendarAlt, FaEnvelope } from "react-icons/fa"
+import { AnimatePresence, motion } from 'framer-motion'
+import { FaCamera, FaCalendarAlt, FaEnvelope, FaPhone } from "react-icons/fa"
+import { PatternFormat } from 'react-number-format'
 import styles from './NewOrder.module.css'
 
 export default function NewOrder() {
@@ -108,6 +109,14 @@ export default function NewOrder() {
     }
   }
 
+  const handlePhoneNumberChange = (values: any) => {
+    const { value } = values;
+    setFormData(prev => ({
+      ...prev,
+      phone: value.startsWith('+') ? value : '+' + value
+    }));
+  };
+
   return (
     <AnimatePresence>
       <div className={styles.modalContent}>
@@ -141,13 +150,18 @@ export default function NewOrder() {
               />
             </div>
             <div className={styles.formGroup}>
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone number"
+              <FaPhone className={styles.formIcon} />
+              <PatternFormat
+                format="+1 (###) ###-####"
                 value={formData.phone}
-                onChange={handleInputChange}
-
+                onValueChange={handlePhoneNumberChange}
+                name="phone"
+                type="tel"
+                placeholder="+1 (555) 555-5555"
+                customInput={motion.input}
+                className={styles.phoneInput}
+                allowEmptyFormatting
+                mask="_"
               />
             </div>
           </div>

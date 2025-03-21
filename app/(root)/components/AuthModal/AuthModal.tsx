@@ -6,13 +6,15 @@ import { FaTimes } from "react-icons/fa";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import firebase from "@/app/firebase/firebase";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+type LoginData = { email: string; password: string } | { phoneNumber: string };
 
 export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const [isLogin, setIsLogin] = useState(true);
@@ -21,15 +23,21 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const router = useRouter();
   const auth = getAuth(firebase);
 
-  const handleLogin = async (data: { email: string; password: string }) => {
+  const handleLogin = async (data: LoginData) => {
     setIsLoading(true);
     setError(null);
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
-      const user = userCredential.user;
-      await auth.updateCurrentUser(user);
-      onClose();
-      router.push("/account");
+      if ('phoneNumber' in data) {
+        // Для телефонной авторизации пользователь уже авторизован к этому моменту
+        onClose();
+        router.push("/account");
+      } else {
+        const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
+        const user = userCredential.user;
+        await auth.updateCurrentUser(user);
+        onClose();
+        router.push("/account");
+      }
     } catch (error: any) {
       let errorMessage = "An error occurred during sign in";
       if (error.code === "auth/user-not-found") {
@@ -49,10 +57,21 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     setIsLoading(true);
     setError(null);
     try {
-      // Здесь будет логика регистрации
-      console.log("Register data:", data);
+      const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
+      const user = userCredential.user;
+      await auth.updateCurrentUser(user);
+      onClose();
+      router.push("/account");
     } catch (error: any) {
-      setError(error.message);
+      let errorMessage = "An error occurred during registration";
+      if (error.code === "auth/email-already-in-use") {
+        errorMessage = "This email is already registered";
+      } else if (error.code === "auth/invalid-email") {
+        errorMessage = "Invalid email format";
+      } else if (error.code === "auth/weak-password") {
+        errorMessage = "Password is too weak";
+      }
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }

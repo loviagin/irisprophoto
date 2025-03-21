@@ -23,7 +23,13 @@ const Header = () => {
   }, [auth]);
 
   const handleSignOut = async () => {
-    router.push("/");
+    try {
+      await auth.signOut();
+      setUser(null);
+      router.push("/");
+    } catch (error) {
+      console.error("Ошибка при выходе из системы:", error);
+    }
   };
 
   return (

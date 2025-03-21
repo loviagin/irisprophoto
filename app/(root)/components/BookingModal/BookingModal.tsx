@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaTimes, FaCamera, FaCalendarAlt, FaEnvelope } from "react-icons/fa"
+import { FaTimes, FaCamera, FaCalendarAlt, FaEnvelope, FaPhone } from "react-icons/fa"
 import styles from './BookingModal.module.css'
 import Portal from '../Portal/Portal'
+import { PatternFormat } from 'react-number-format'
 
 interface BookingModalProps {
   isOpen: boolean
@@ -160,6 +161,14 @@ export default function BookingModal({
     }
   }
 
+  const handlePhoneNumberChange = (values: any) => {
+    const { value } = values;
+    setFormData(prev => ({
+      ...prev,
+      phone: value.startsWith('+') ? value : '+' + value
+    }));
+  };
+
   // Функция для форматирования даты и времени для отображения
   const formatDateTime = (date: Date) => {
     return date.toLocaleString('ru-RU', {
@@ -229,13 +238,18 @@ export default function BookingModal({
                       />
                     </div>
                     <div className={styles.formGroup}>
-                      <input
-                        type="tel"
-                        name="phone"
-                        placeholder="Phone number"
+                      <FaPhone className={styles.formIcon} />
+                      <PatternFormat
+                        format="+1 (###) ###-####"
                         value={formData.phone}
-                        onChange={handleInputChange}
-                        
+                        onValueChange={handlePhoneNumberChange}
+                        name="phone"
+                        type="tel"
+                        placeholder="+1 (555) 555-5555"
+                        customInput={motion.input}
+                        className={styles.phoneInput}
+                        allowEmptyFormatting
+                        mask="_"
                       />
                     </div>
                   </div>
@@ -248,7 +262,6 @@ export default function BookingModal({
                       placeholder="Email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      
                     />
                   </div>
 

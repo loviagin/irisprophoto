@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(8px);
 }
 
 .registrationInfo {
@@ -21,11 +21,11 @@
 .modalContent {
   background-color: white;
   padding: 2.5rem;
-  border-radius: 16px;
+  border-radius: 24px;
   width: 100%;
   max-width: 420px;
   position: relative;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
 }
 
 .closeButton {
@@ -34,9 +34,9 @@
   right: 1.5rem;
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
-  color: #666;
+  color: #94a3b8;
   transition: all 0.2s;
   padding: 0.5rem;
   border-radius: 50%;
@@ -46,8 +46,9 @@
 }
 
 .closeButton:hover {
-  color: #333;
-  background-color: #f5f5f5;
+  color: #475569;
+  background-color: #f1f5f9;
+  transform: rotate(90deg);
 }
 
 .tabs {
@@ -94,7 +95,40 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
+}
+
+.authToggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  background-color: #f8fafc;
+  padding: 0.375rem;
+  border-radius: 12px;
+  gap: 0.5rem;
+}
+
+.toggleButton {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.toggleButton.active {
+  background-color: white;
+  color: #0f172a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.toggleButton:hover:not(.active) {
+  color: #334155;
 }
 
 .inputGroup {
@@ -106,42 +140,54 @@
 .inputIcon {
   position: absolute;
   left: 1rem;
-  color: #666;
-  font-size: 1.1rem;
+  color: #94a3b8;
+  font-size: 1rem;
+  transition: color 0.2s;
 }
 
 .inputGroup input {
   width: 100%;
-  padding: 1rem 1rem 1rem 2.8rem;
-  border: 2px solid #eee;
-  border-radius: 8px;
-  font-size: 1rem;
+  padding: 1rem 1rem 1rem 3rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 0.95rem;
   transition: all 0.2s;
-  background-color: #f9f9f9;
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.inputGroup input::placeholder {
+  color: #94a3b8;
 }
 
 .inputGroup input:focus {
   outline: none;
-  border-color: #333;
+  border-color: #3b82f6;
   background-color: white;
-  box-shadow: 0 0 0 3px rgba(51, 51, 51, 0.1);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.inputGroup input:focus + .inputIcon {
+  color: #3b82f6;
 }
 
 .inputGroup input:disabled {
-  background-color: #f5f5f5;
+  background-color: #f1f5f9;
   cursor: not-allowed;
+  color: #64748b;
 }
 
 .inputError {
-  border-color: #ff4444 !important;
+  border-color: #ef4444 !important;
 }
 
 .errorMessage {
   position: absolute;
-  bottom: -1.5rem;
+  bottom: -1.25rem;
   left: 0;
-  color: #ff4444;
-  font-size: 0.85rem;
+  color: #ef4444;
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 .togglePassword {
@@ -149,62 +195,98 @@
   right: 1rem;
   background: none;
   border: none;
-  color: #666;
+  color: #94a3b8;
   cursor: pointer;
   padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s;
+  transition: all 0.2s;
 }
 
 .togglePassword:hover {
-  color: #333;
+  color: #475569;
 }
 
 .submitButton {
-  background-color: #333;
-  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   padding: 1rem;
+  background-color: #3b82f6;
+  color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
+  border-radius: 12px;
+  font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .submitButton:hover:not(:disabled) {
-  background-color: #444;
+  background-color: #2563eb;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
 }
 
 .submitButton:disabled {
-  opacity: 0.7;
+  background-color: #93c5fd;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submitButton.loading {
+  background-color: #93c5fd;
+  cursor: wait;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+.resendTimer {
+  text-align: center;
+  color: #64748b;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+  font-weight: 500;
+}
+
+.resendButton {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  background: none;
+  border: none;
+  color: #3b82f6;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.resendButton:hover:not(:disabled) {
+  color: #2563eb;
+  text-decoration: none;
+  background-color: #f0f9ff;
+  border-radius: 8px;
+}
+
+.resendButton:disabled {
+  color: #94a3b8;
   cursor: not-allowed;
 }
 
-.loading {
-  position: relative;
-  color: transparent;
-}
-
-.loading::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 20px;
-  height: 20px;
-  margin: -10px 0 0 -10px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
 @keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
   to {
     transform: rotate(360deg);
   }
