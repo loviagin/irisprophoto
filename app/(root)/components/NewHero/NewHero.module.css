@@ -147,10 +147,12 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%);
+    overflow: hidden;
 }
 
 .scanLine {
     position: absolute;
+    left: 0;
     width: 100%;
     height: 2px;
     background: linear-gradient(90deg, transparent, #3B82F6, transparent);

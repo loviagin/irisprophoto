@@ -88,11 +88,12 @@ export default function NewHero() {
               <motion.div
                 className={styles.scanLine}
                 animate={{
-                  y: [0, 650, 0],
+                  top: ["0%", "100%"]
                 }}
                 transition={{
-                  duration: 4,
+                  duration: 2,
                   repeat: Infinity,
+                  repeatType: "reverse",
                   ease: "linear"
                 }}
               />
