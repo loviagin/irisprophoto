@@ -4,8 +4,28 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Gift certificates – Iris Pro Photo",
-  description: "We are a team of professional photographers and we are offering our services of iris photography for you. We are capturing the moments for a long time."
+  title: "Gift Certificates | Iris Pro Photo",
+  description: "Give the unique gift of professional iris photography. Choose from individual, couple, or family sessions. High-quality prints on Pro Satin Paper, flexible booking, and instant digital delivery. Perfect for special occasions.",
+  keywords: "iris photography, gift certificates, professional photography, unique gifts, family photos, couple photography, eye photography",
+  openGraph: {
+    title: "Gift Certificates | Iris Pro Photo",
+    description: "Give the unique gift of professional iris photography. Choose from individual, couple, or family sessions. High-quality prints on Pro Satin Paper.",
+    type: "website",
+    images: [
+      {
+        url: "/certificates/certificate.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Iris Photography Gift Certificate"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Professional Iris Photography Gift Certificates",
+    description: "Give the unique gift of professional iris photography. High-quality prints and flexible booking.",
+    images: ["/certificates/certificate.jpeg"]
+  }
 };
 
 const certificates = [

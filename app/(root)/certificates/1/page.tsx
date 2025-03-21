@@ -3,10 +3,24 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaClock, FaCalendarAlt } from 'react-icons/fa';
 import { Metadata } from 'next';
+import BuyButton from './BuyButton';
 
 export const metadata: Metadata = {
-  title: "Gift certificate for one person – Iris Pro Photo",
-  description: "We are a team of professional photographers and we are offering our services of iris photography for you. We are capturing the moments for a long time."
+    title: "Gift certificate for one person – Iris Pro Photo",
+    description: "Give the gift of professional iris photography with our exclusive gift certificate. Includes a 10-minute professional photo session, expert retouching, and high-quality prints. Valid for 6 months.",
+    keywords: "iris photography, gift certificate, professional photo session, iris photo studio, eye photography",
+    openGraph: {
+        title: "Professional Iris Photography Gift Certificate | Iris Pro Photo Studio",
+        description: "Give the gift of professional iris photography with our exclusive gift certificate. Includes a 10-minute professional photo session, expert retouching, and high-quality prints.",
+        images: [
+            {
+                url: '/certificates/certificate.jpeg',
+                width: 600,
+                height: 500,
+                alt: 'Professional Iris Photography Gift Certificate',
+            },
+        ],
+    }
 };
 
 export default function CertificatePage() {
@@ -27,9 +41,7 @@ export default function CertificatePage() {
                     <div className={styles.infoSection}>
                         <h1 className={styles.title}>Certificate for one person</h1>
                         <div className={styles.price}>$ 115</div>
-                        <Link href={'#'} className={styles.buyButton} target='_blank'>
-                            You can buy a certificate in our office
-                        </Link>
+                        <BuyButton />
                     </div>
                 </div>
 

@@ -38,6 +38,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       images: ['https://irisprophoto.me/images/favicon.webp'],
     },
     {
+      url: 'https://irisprophoto.me/gallery',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 1,
+      images: ['https://irisprophoto.me/images/favicon.webp'],
+    },
+    {
       url: 'https://irisprophoto.me/privacypolicy',
       lastModified: new Date(),
       changeFrequency: 'weekly',

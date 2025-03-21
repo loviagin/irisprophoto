@@ -1,7 +1,10 @@
+# Allow all search engines to crawl the site
 User-agent: *
-Disallow: /adm-dash
-Disallow: /adm-dash/*
-Disallow: /api/*
 Allow: /
 
-Sitemap: https://www.example.com/sitemap.xml
+# Sitemap location
+Sitemap: https://irisprophoto.me/sitemap.xml
+
+# Disallow access to specific directories (if needed in future)
+# Disallow: /private/
+# Disallow: /admin/

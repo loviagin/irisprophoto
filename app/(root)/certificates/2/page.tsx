@@ -5,8 +5,22 @@ import { FaClock, FaCalendarAlt } from 'react-icons/fa';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Gift certificate for two people – Iris Pro Photo",
-    description: "We are a team of professional photographers and we are offering our services of iris photography for you. We are capturing the moments for a long time."
+    title: "Gift Certificate for Two persons | Iris Pro Photo",
+    description: "Give the gift of professional iris photography with our exclusive certificate for two. Includes 20-minute photoshoot, expert processing, and high-quality prints. Valid for 6 months.",
+    keywords: "iris photography, gift certificate, professional photography, photo session for two, iris photo shoot",
+    openGraph: {
+        title: "Gift Certificate for Two persons | Iris Pro Photo",
+        description: "Give the gift of professional iris photography with our exclusive certificate for two. Includes 20-minute photoshoot, expert processing, and high-quality prints.",
+        images: [
+            {
+                url: '/certificates/certificate.jpeg',
+                width: 600,
+                height: 500,
+                alt: 'Iris Pro Photo Gift Certificate'
+            }
+        ],
+        type: 'website',
+    }
 };
 
 export default function CertificatePage() {

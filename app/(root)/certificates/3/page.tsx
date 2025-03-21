@@ -5,8 +5,8 @@ import { FaClock, FaCalendarAlt } from 'react-icons/fa';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Family Photo Certificate – Iris Pro Photo",
-    description: "We are a team of professional photographers and we are offering our services of iris photography for you. We are capturing the moments for a long time."
+    title: "Family Photo Session Gift Certificate | Professional Photography | Iris Pro Photo",
+    description: "Give the perfect gift of memories with our professional family photo session certificate. Includes 20-40 minute shoot, expert photo processing, and high-quality prints. Valid for 6 months. Book your session with Iris Pro Photo today."
 };
 
 export default function CertificatePage() {

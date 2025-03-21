@@ -105,7 +105,7 @@ export default function NewGallery() {
           <div className={styles.buttonGroup}>
             <button className={styles.button} onClick={() => setIsModalOpen(true)}>Make an order</button>
             <Link href="/gallery" className={styles.button}>
-              Explore Full Collection →
+              View Full Gallery
             </Link>
           </div>
         </motion.div>

@@ -9,8 +9,26 @@ import NewContacts from './components/NewContacts/NewContacts';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Iris Pro Photo – capturing the moments for a long time",
-  description: "We are a team of professional photographers and we are offering our services of iris photography for you. We are capturing the moments for a long time."
+  title: "Iris Pro Photo | Professional Iris Photography",
+  description: "Professional high-resolution iris photography capturing the unique beauty of your eyes forever. Expert photographers, state-of-the-art equipment, and gift certificates available.",
+  keywords: "iris photography, eye photography, professional photographer, gift certificates, unique portraits, eye photos",
+  authors: [{ name: "Iris Pro Photo" }],
+  openGraph: {
+    title: "Iris Pro Photo | Professional Iris Photography",
+    description: "Professional high-resolution iris photography capturing the unique beauty of your eyes forever. Expert photographers and gift certificates available.",
+    type: "website",
+    locale: "en_US",
+    siteName: "Iris Pro Photo"
+  },
+  robots: {
+    index: true,
+    follow: true
+  },
+  themeColor: "#2563EB",
+  viewport: "width=device-width, initial-scale=1",
+  alternates: {
+    canonical: "https://irisprophoto.com"
+  }
 };
 
 export default function NewHome() {

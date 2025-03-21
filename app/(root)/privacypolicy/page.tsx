@@ -59,8 +59,10 @@ export default function PrivacyPolicyPage() {
       <h2 className={styles.subtitle}>6. Your Rights</h2>
       <p className={styles.paragraph}>
         You have the right to access, update, or delete your personal
-        information. To exercise these rights, please contact us at
-        [emailcompany@example.com].
+        information. To exercise these rights, please contact us at &nbsp;
+        <a href={`mailto:${contactEmail}`} className={styles.link}>
+           {contactEmail}
+        </a>.
       </p>
 
       <h2 className={styles.subtitle}>7. Changes to This Policy</h2>
