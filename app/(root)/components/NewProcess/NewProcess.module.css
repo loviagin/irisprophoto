@@ -136,6 +136,10 @@
     .grid::before {
         display: none;
     }
+
+    .stepNumber {
+        right: 50px;
+    }
 }
 
 @media (width <= 768px) {
@@ -154,5 +158,9 @@
 
     .step {
         padding: 0;
+    }
+
+    .stepNumber {
+        right: 20px;
     }
 } 
