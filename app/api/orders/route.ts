@@ -1,7 +1,22 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { Client } from '@notionhq/client'
+import jwt from 'jsonwebtoken'
 
 const notion = new Client({ auth: process.env.NEXT_PUBLIC_NOTION_API_KEY })
+const JWT_SECRET = process.env.NEXT_PUBLIC_JWT_SECRET!
+
+function verifyToken(req: NextRequest): boolean {
+    const authHeader = req.headers.get('authorization')
+    if (!authHeader || !authHeader.startsWith('Bearer ')) return false
+
+    const token = authHeader.split(' ')[1]
+    try {
+        jwt.verify(token, JWT_SECRET)
+        return true
+    } catch (err) {
+        return false
+    }
+}
 
 type Status = 'None' | 'Paid' | 'Photo taken' | 'Photo Sent' | 'Photo Edited' | 'Printed' | 'Decorated' | 'Printing' | 'Completed' | 'Completed +'
 type Decor = 'None' | 'Black' | 'Silver' | 'Gold' | 'Wood' | 'Wood light' | 'White'
@@ -34,7 +49,11 @@ export interface Order {
     effect: Effect
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+    if (!verifyToken(req)) {
+        return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
+    }
+
     const response = await notion.databases.query({
         database_id: process.env.NEXT_PUBLIC_DATABASE_ID!,
     })
@@ -73,6 +92,10 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+    if (!verifyToken(req)) {
+        return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
+    }
+
     const data: Partial<Order> = await req.json()
 
     try {
