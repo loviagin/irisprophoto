@@ -74,140 +74,144 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
     const data: Partial<Order> = await req.json()
-  
+
     try {
-      const response = await notion.pages.create({
-        parent: {
-          database_id: process.env.NEXT_PUBLIC_DATABASE_ID!,
-        },
-        properties: {
-            'Order': {
-              title: [
-                {
-                  text: {
-                    content: data.order || 'Без названия',
-                  },
+        const response = await notion.pages.create({
+            parent: {
+                database_id: process.env.NEXT_PUBLIC_DATABASE_ID!,
+            },
+            properties: {
+                'Order': {
+                    title: [
+                        {
+                            text: {
+                                content: data.order || 'Без названия',
+                            },
+                        },
+                    ],
                 },
-              ],
-            },
-            'Status': {
-              status: {
-                name: data.status || 'None',
-              },
-            },
-            'Date': data.date
-              ? {
-                  date: {
-                    start: data.date,
-                  },
-                }
-              : { date: null },
-            'Adress': {
-              rich_text: [
-                {
-                  text: {
-                    content: data.adress || '',
-                  },
+                'Status': {
+                    status: {
+                        name: data.status || 'None',
+                    },
                 },
-              ],
-            },
-            'Comment': {
-              rich_text: [
-                {
-                  text: {
-                    content: data.comment || '',
-                  },
+                'Date': data.date
+                    ? {
+                        date: {
+                            start: data.date,
+                        },
+                    }
+                    : { date: null },
+                'Adress': {
+                    rich_text: [
+                        {
+                            text: {
+                                content: data.adress || '',
+                            },
+                        },
+                    ],
                 },
-              ],
-            },
-            'Companies': {
-              select: {
-                name: data.companies || '',
-              },
-            },
-            'Decor': {
-              status: {
-                name: data.decor || 'None',
-              },
-            },
-            'Email': {
-              email: data.email || '',
-            },
-            'Frame #': {
-              rich_text: [
-                {
-                  text: {
-                    content: data.frame || '',
-                  },
+                'Comment': {
+                    rich_text: [
+                        {
+                            text: {
+                                content: data.comment || '',
+                            },
+                        },
+                    ],
                 },
-              ],
-            },
-            'Material': {
-              select: {
-                name: data.material || 'Acrilic',
-              },
-            },
-            'Name': {
-              rich_text: [
-                {
-                  text: {
-                    content: data.name || '',
-                  },
+                'Decor': {
+                    status: {
+                        name: data.decor || 'None',
+                    },
                 },
-              ],
-            },
-            'Phone number': {
-              rich_text: [
-                {
-                  text: {
-                    content: data.phone || '',
-                  },
+                'Email': {
+                    email: data.email || '',
                 },
-              ],
-            },
-            'Position': {
-              select: {
-                name: data.position || 'Circle',
-              },
-            },
-            'Size': {
-              select: {
-                name: data.size || '20x36',
-              },
-            },
-            'Track #': {
-              rich_text: [
-                {
-                  text: {
-                    content: data.track1 || '',
-                  },
+                'Frame #': {
+                    rich_text: [
+                        {
+                            text: {
+                                content: data.frame || '',
+                            },
+                        },
+                    ],
                 },
-              ],
-            },
-            'Track # 1': {
-              rich_text: [
-                {
-                  text: {
-                    content: data.track2 || '',
-                  },
+                'Material': {
+                    select: {
+                        name: data.material || 'Acrilic',
+                    },
                 },
-              ],
+                'Name': {
+                    rich_text: [
+                        {
+                            text: {
+                                content: data.name || '',
+                            },
+                        },
+                    ],
+                },
+                'Phone number': {
+                    rich_text: [
+                        {
+                            text: {
+                                content: data.phone || '',
+                            },
+                        },
+                    ],
+                },
+                'Position': {
+                    select: {
+                        name: data.position || 'Circle',
+                    },
+                },
+                'Size': {
+                    select: {
+                        name: data.size || '20x36',
+                    },
+                },
+                'Track #': {
+                    rich_text: [
+                        {
+                            text: {
+                                content: data.track1 || '',
+                            },
+                        },
+                    ],
+                },
+                'Track # 1': {
+                    rich_text: [
+                        {
+                            text: {
+                                content: data.track2 || '',
+                            },
+                        },
+                    ],
+                },
+                'Type of delivery': {
+                    select: {
+                        name: data.typeOfDelivery || 'Pick up',
+                    },
+                },
+                'effect': {
+                    select: {
+                        name: data.effect || 'Radiance',
+                    },
+                },
+                ...(data.companies
+                    ? {
+                        'Companies': {
+                            select: {
+                                name: data.companies,
+                            },
+                        },
+                    }
+                    : {}),
             },
-            'Type of delivery': {
-              select: {
-                name: data.typeOfDelivery || 'Pick up',
-              },
-            },
-            'effect': {
-              select: {
-                name: data.effect || 'Radiance',
-              },
-            },
-          },
-      })
-  
-      return NextResponse.json({ success: true, id: response.id })
+        })
+
+        return NextResponse.json({ success: true, id: response.id })
     } catch (error: any) {
-      return NextResponse.json({ success: false, error: error.message }, { status: 500 })
+        return NextResponse.json({ success: false, error: error.message }, { status: 500 })
     }
-  }
+}
