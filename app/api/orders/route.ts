@@ -121,13 +121,9 @@ export async function POST(req: NextRequest) {
               ],
             },
             'Companies': {
-              rich_text: [
-                {
-                  text: {
-                    content: data.companies || '',
-                  },
-                },
-              ],
+              select: {
+                name: data.companies || '',
+              },
             },
             'Decor': {
               status: {
