@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+/app/api/token
 
 # next.js
 /.next/

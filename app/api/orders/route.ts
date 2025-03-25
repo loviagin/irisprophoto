@@ -32,7 +32,7 @@ export interface Order {
     order: string
     status: Status
     date?: string
-    adress?: string
+    address?: string
     comment?: string
     companies?: Companies
     decor: Decor
@@ -66,7 +66,7 @@ export async function GET(req: NextRequest) {
             order: item.properties['Order'].title?.[0]?.plain_text || '',
             status: item.properties['Status'].status?.name || '',
             date: item.properties['Date'].date?.start || '',
-            adress: item.properties['Adress'].rich_text?.[0]?.plain_text || '',
+            address: item.properties['Address'].rich_text?.[0]?.plain_text || '',
             comment: item.properties['Comment'].rich_text?.[0]?.plain_text || '',
             companies: item.properties['Companies'].select?.name || '',
             decor: item.properties['Decor'].select?.name || '',
@@ -125,11 +125,11 @@ export async function POST(req: NextRequest) {
                         },
                     }
                     : { date: null },
-                'Adress': {
+                'Address': {
                     rich_text: [
                         {
                             text: {
-                                content: data.adress || '',
+                                content: data.address || '',
                             },
                         },
                     ],
