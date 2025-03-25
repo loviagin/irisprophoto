@@ -1,6 +1,8 @@
 # Allow all search engines to crawl the site
 User-agent: *
 Allow: /
+Disallow: /account
+Disallow: /account/*
 
 # Sitemap location
 Sitemap: https://irisprophoto.me/sitemap.xml
