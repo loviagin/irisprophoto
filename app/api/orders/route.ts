@@ -10,6 +10,7 @@ type Position = 'Circle' | 'Squere' | 'Vertical' | 'Horizontal'
 type Size = '20x36' | '24x48' | '24x36' | '24x30' | '24x24' | '20x30' | '20x28' | '20x24' | '20x20' | '18x24' | '16x20' | '12x36' | '13x19' | '12x18' | '12x16' | '12x12' | '11x17' | '11x14' | '8.5x11' | '8x12' | '8x10' | '8x8' | '20x36' | '20x48'
 type Delivery = 'Pick up' | 'Local dilivery' | 'Post Dilivery' | 'OUTSORSING'
 type Effect = 'Radiance' | 'Light beams hard' | 'Light beams' | 'Two halves of the whole 2' | 'Sand' | 'Halo hard' | 'Halo light' | 'Meteor' | 'Sparks' | 'Yin & yang meteor 2' | 'Yin & yang 2' | 'Collision water 2' | 'Collision 2' | 'Hurricane' | 'Galaxy' | 'Water' | 'Fire' | 'Explision' | 'Infinity 2'
+type Companies = 'Poster Jack' | 'ZNO'
 
 export interface Order {
     id: string
@@ -18,7 +19,7 @@ export interface Order {
     date?: string
     adress?: string
     comment?: string
-    companies?: string
+    companies?: Companies
     decor: Decor
     email?: string
     frame?: string
@@ -48,7 +49,7 @@ export async function GET() {
             date: item.properties['Date'].date?.start || '',
             adress: item.properties['Adress'].rich_text?.[0]?.plain_text || '',
             comment: item.properties['Comment'].rich_text?.[0]?.plain_text || '',
-            companies: item.properties['Companies'].rich_text?.[0]?.plain_text || '',
+            companies: item.properties['Companies'].select?.name || '',
             decor: item.properties['Decor'].select?.name || '',
             email: item.properties['Email'].email || '',
             frame: item.properties['Frame #'].rich_text?.[0]?.plain_text || '',
@@ -201,7 +202,7 @@ export async function POST(req: NextRequest) {
                 name: data.typeOfDelivery || 'Pick up',
               },
             },
-            'Effect': {
+            'effect': {
               select: {
                 name: data.effect || 'Radiance',
               },
