@@ -20,7 +20,7 @@ export async function GET() {
     // Получение самого нового заказа из Notion
     const response = await notion.databases.query({
       database_id: databaseId,
-      sorts: [{ property: 'createdAt', direction: 'descending' }],
+      sorts: [{ property: 'Date', direction: 'descending' }],
       page_size: 1,
     })
 
