@@ -6,4 +6,6 @@ const DeviceSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
 })
 
+DeviceSchema.index({ token: 1 }, { unique: true }) // 👈 важная строка
+
 export default models.Device || mongoose.model('Device', DeviceSchema)
