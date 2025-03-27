@@ -4,7 +4,7 @@ declare global {
   var mongoose: { conn: any; promise: any } | undefined
 }
 
-const MONGODB_URI = process.env.NEXT_PUBLIC_MONGODB_URI!
+const MONGODB_URI = process.env.MONGODB_URI!
 
 let cached = global.mongoose || { conn: null, promise: null }
 
