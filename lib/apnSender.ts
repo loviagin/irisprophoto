@@ -9,8 +9,8 @@ const keyPath = path.resolve('./AuthKey_5SA8A55MT8.p8')
 const apnProvider = new apn.Provider({
   token: {
     key: fs.readFileSync(keyPath),
-    keyId: process.env.APN_KEY_ID!,
-    teamId: process.env.APN_TEAM_ID!,
+    keyId: process.env.NEXT_PUBLIC_APN_KEY_ID!,
+    teamId: process.env.NEXT_PUBLIC_APN_TEAM_ID!,
   },
   production: false, // поставь true, если в продакшене
 })
@@ -18,7 +18,7 @@ const apnProvider = new apn.Provider({
 export async function sendApnPush(deviceToken: string, title: string, body: string) {
   const notification = new apn.Notification()
 
-  notification.topic = process.env.APN_BUNDLE_ID! // Bundle ID приложения
+  notification.topic = process.env.NEXT_PUBLIC_APN_BUNDLE_ID! // Bundle ID приложения
   notification.alert = { title, body }
   notification.sound = 'default'
   notification.payload = { type: 'new_order' }
