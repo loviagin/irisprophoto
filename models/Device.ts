@@ -1,0 +1,9 @@
+import mongoose, { Schema, models } from 'mongoose'
+
+const DeviceSchema = new Schema({
+  token: { type: String, required: true, unique: true },
+  userId: { type: String }, // если понадобится
+  createdAt: { type: Date, default: Date.now },
+})
+
+export default models.Device || mongoose.model('Device', DeviceSchema)

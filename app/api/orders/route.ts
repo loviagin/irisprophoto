@@ -18,7 +18,7 @@ function verifyToken(req: NextRequest): boolean {
     }
 }
 
-type Status = 'None' | 'Paid' | 'Photo taken' | 'Photo Sent' | 'Photo Edited' | 'Printed' | 'Decorated' | 'Printing' | 'Completed' | 'Completed +'
+type Status = 'None' | 'Paid' | 'Photo taken' | 'Photo Sent' | 'Photo Edited' | 'Printed' | 'Decorated' | 'Delivering' | 'Printing' | 'Canceled' | 'Completed' | 'Completed +'
 type Decor = 'None' | 'Black' | 'Silver' | 'Gold' | 'Wood' | 'Wood light' | 'White'
 type Material = 'Acrilic' | 'Film' | 'Canvas' | 'Metalic' | 'Avrora' | 'Pro Satin'
 type Position = 'Circle' | 'Squere' | 'Vertical' | 'Horizontal'
@@ -47,6 +47,7 @@ export interface Order {
     track2?: string
     typeOfDelivery: Delivery
     effect: Effect
+    createdAt?: string
 }
 
 export async function GET(req: NextRequest) {
@@ -81,6 +82,7 @@ export async function GET(req: NextRequest) {
             track2: item.properties['Track # 1'].rich_text?.[0]?.plain_text || '',
             typeOfDelivery: item.properties['Type of delivery'].select?.name || '',
             effect: item.properties['effect'].select?.name || '',
+            createdAt: item.properties['createdAt'].date?.start || ''
         }
     })
 
@@ -219,6 +221,11 @@ export async function POST(req: NextRequest) {
                 'effect': {
                     select: {
                         name: data.effect || 'Radiance',
+                    },
+                },
+                'createdAt': {
+                    date: {
+                        start: data.createdAt || new Date().toISOString(),
                     },
                 },
                 ...(data.companies
