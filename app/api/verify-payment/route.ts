@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!;
-const PAYPAL_SECRET = process.env.NEXT_PUBLIC_PAYPAL_SECRET!;
+const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID!;
+const PAYPAL_SECRET = process.env.PAYPAL_SECRET!;
 const PAYPAL_URL = "https://api-m.paypal.com"; // Используйте sandbox.paypal.com для тестирования
 
 // Функция для получения OAuth-токена

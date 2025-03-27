@@ -4,8 +4,8 @@ import { connectToDatabase } from '@/lib/db'
 import Device from '@/models/Device'
 import { sendApnPush } from '@/lib/apnSender'
 
-const notion = new Client({ auth: process.env.NEXT_PUBLIC_NOTION_API_KEY })
-const databaseId = process.env.NEXT_PUBLIC_NOTION_DATABASE_ID!
+const notion = new Client({ auth: process.env.NOTION_API_KEY })
+const databaseId = process.env.NOTION_DATABASE_ID!
 
 let lastKnownId: string | null = null
 

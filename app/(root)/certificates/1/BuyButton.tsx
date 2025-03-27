@@ -4,7 +4,7 @@ import styles from './page.module.css';
 
 const BuyButton = () => {
 
-    const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const handleClick = async () => {
         const res = await fetch('/api/send-email', {

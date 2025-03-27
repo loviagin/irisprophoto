@@ -5,7 +5,7 @@ import { render } from '@react-email/render';
 import * as React from 'react';
 
 export async function POST() {
-    const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const html = await render(React.createElement(Email, { url: 'https://irisprophoto.me' }));
 

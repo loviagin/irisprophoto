@@ -2,8 +2,8 @@ import { NextResponse, NextRequest } from 'next/server'
 import { Client } from '@notionhq/client'
 import jwt from 'jsonwebtoken'
 
-const notion = new Client({ auth: process.env.NEXT_PUBLIC_NOTION_API_KEY })
-const JWT_SECRET = process.env.NEXT_PUBLIC_JWT_SECRET!
+const notion = new Client({ auth: process.env.NOTION_API_KEY })
+const JWT_SECRET = process.env.JWT_SECRET!
 
 function verifyToken(req: NextRequest): boolean {
     const authHeader = req.headers.get('authorization')
@@ -56,7 +56,7 @@ export async function GET(req: NextRequest) {
     }
 
     const response = await notion.databases.query({
-        database_id: process.env.NEXT_PUBLIC_DATABASE_ID!,
+        database_id: process.env.NOTION_DATABASE_ID!,
     })
 
     //   console.log(JSON.stringify(response.results[0], null, 2))
@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
     try {
         const response = await notion.pages.create({
             parent: {
-                database_id: process.env.NEXT_PUBLIC_DATABASE_ID!,
+                database_id: process.env.NOTION_DATABASE_ID!,
             },
             properties: {
                 'Order': {

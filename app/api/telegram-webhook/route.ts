@@ -5,9 +5,9 @@ if (!admin.apps.length) {
     admin.initializeApp({
         credential: admin.credential.cert({
             projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-            clientEmail: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL,
-            privateKey: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY
-                ? process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n")
+            clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+            privateKey: process.env.FIREBASE_PRIVATE_KEY
+                ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n")
                 : undefined,
         }),
     });
@@ -26,7 +26,7 @@ async function updateOrderStatus(orderId: string, newStatus: string): Promise<vo
 export async function POST(req: Request) {
     try {
         const update = await req.json();
-        const TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
+        const TOKEN = process.env.TELEGRAM_BOT_TOKEN;
         if (!TOKEN) throw new Error("Telegram bot token is not provided.");
 
         if (update.callback_query) {

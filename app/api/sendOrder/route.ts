@@ -4,9 +4,9 @@ import admin from "firebase-admin";
 if (!admin.apps.length) {
     const serviceAccount = {
         projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-        clientEmail: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL,
-        privateKey: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY
-            ? process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n').replace(/\n/g, '\n')
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY
+            ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n').replace(/\n/g, '\n')
             : undefined,
     };
 
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
             );
         }
 
-        const TOKEN = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
+        const TOKEN = process.env.TELEGRAM_BOT_TOKEN;
         const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
 
         const formattedDate = data.date.toLocaleString('ru-RU', {
