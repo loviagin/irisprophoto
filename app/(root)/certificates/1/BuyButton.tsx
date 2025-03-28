@@ -1,11 +1,7 @@
 'use client';
-import { Resend } from 'resend';
 import styles from './page.module.css';
 
 const BuyButton = () => {
-
-    const resend = new Resend(process.env.RESEND_API_KEY);
-
     const handleClick = async () => {
         const res = await fetch('/api/send-email', {
           method: 'POST',
