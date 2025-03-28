@@ -43,23 +43,6 @@ const OrdersView = () => {
         return () => unsubscribe();
     }, [auth]);
 
-    useEffect(() => {
-        const fetchOrders = async () => {
-            if (!userId) return;
-            const response = await fetch(`/api/getOrders?userId=${encodeURIComponent(userId)}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            const data = await response.json();
-            setOrders(data);
-            console.log("API response:", data);
-        };
-
-        fetchOrders();
-    }, [userId]);
-
     return (
         <div className={styles.container}>
             {orders.length === 0 ? (
