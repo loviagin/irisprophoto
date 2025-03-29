@@ -8,7 +8,6 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
     const lastUpdated = "February 28, 2025";
-    const contactEmail = "voroninsfamily@irisprophoto.org";
 
     return (
         <main className={styles.container}>
@@ -21,9 +20,9 @@ export default function PrivacyPolicyPage() {
 
             <h2 className={styles.subtitle}>1. General Provisions</h2>
             <ul>
-                <li>1.1. By using the website, the User agrees to this Agreement.</li>
-                <li>1.2. If the User does not agree with the terms, they must stop using the website immediately.</li>
-                <li>1.3. The website provides digital and informational services, including iris photography, image processing, and the ability to order physical products.</li>
+                <li>By using the website, the User agrees to this Agreement.</li>
+                <li>If the User does not agree with the terms, they must stop using the website immediately.</li>
+                <li>The website provides digital and informational services, including iris photography, image processing, and the ability to order physical products.</li>
             </ul>
 
             <h2 className={styles.subtitle}>2. Rights and Obligations of the Parties</h2>
@@ -44,29 +43,36 @@ export default function PrivacyPolicyPage() {
 
             <h2 className={styles.subtitle}>3. Personal Data</h2>
             <ul>
-                <li>3.1. The User agrees to the processing of their personal data in accordance with the website’s Privacy Policy.</li>
-                <li>3.2. The Administration shall take reasonable measures to protect personal data in accordance with applicable laws.</li>
+                <li>The User agrees to the processing of their personal data in accordance with the website’s Privacy Policy.</li>
+                <li>The Administration shall take reasonable measures to protect personal data in accordance with applicable laws.</li>
             </ul>
 
             <h2 className={styles.subtitle}>4. Orders and Payment</h2>
             <ul>
-                <li>4.1. Orders are placed through the website interface.</li>
-                <li>4.2. The prices of services are listed on the corresponding pages and may be changed unilaterally.</li>
-                <li>4.3. Payments are made online via available payment methods. Refunds are provided in cases stipulated by law and the Refund Policy.</li>
+                <li>Orders are placed through the website interface.</li>
+                <li>The prices of services are listed on the corresponding pages and may be changed unilaterally.</li>
+                <li>Payments are made online via available payment methods. Refunds are provided in cases stipulated by law and the Refund Policy.</li>
             </ul>
 
             <h2 className={styles.subtitle}>5. Limitation of Liability</h2>
             <ul>
-                <li>5.1. The website is provided “as is.” The Administration is not liable for temporary technical issues or interruptions in the website’s operation.</li>
-                <li>5.2. The Administration is not responsible for the actions of third parties, including payment providers.</li>
-                <li>5.3. Neither party is liable for failure to fulfill obligations due to force majeure circumstances.</li>
+                <li>The website is provided “as is.” The Administration is not liable for temporary technical issues or interruptions in the website’s operation.</li>
+                <li>The Administration is not responsible for the actions of third parties, including payment providers.</li>
+                <li>Neither party is liable for failure to fulfill obligations due to force majeure circumstances.</li>
             </ul>
 
-            <h2 className={styles.subtitle}>6. Final Provisions</h2>
+            <h2 className={styles.subtitle}>6. Developer Information</h2>
             <ul>
-                <li>6.1. This Agreement may be amended by the Administration at any time. Changes take effect upon publication.</li>
-                <li>6.2. Continued use of the website after amendments constitutes acceptance of the new terms.</li>
-                <li>6.3. All disputes shall be resolved in accordance with the laws of the country where the Administration is registered.</li>
+                <li>The website was developed by UK IT-Developer company <a href='https://lovigin.com'>LOVIGIN LTD</a>.</li>
+                <li>All technical questions or proposals regarding the website functionality may be sent to the following email: <a href='mailto:support@lovigin.com'>support@lovigin.com</a>.</li>
+                <li>The developer is not responsible for business decisions, order fulfillment, or content management of the website unless explicitly stated.</li>
+            </ul>
+
+            <h2 className={styles.subtitle}>7. Final Provisions</h2>
+            <ul>
+                <li>This Agreement may be amended by the Administration at any time. Changes take effect upon publication.</li>
+                <li>Continued use of the website after amendments constitutes acceptance of the new terms.</li>
+                <li>All disputes shall be resolved in accordance with the laws of the country where the Administration is registered.</li>
             </ul>
         </main>
     );

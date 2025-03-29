@@ -1,7 +1,7 @@
 'use client'
 import { useState, useCallback } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaInstagram } from 'react-icons/fa';
 import styles from './NewContacts.module.css';
 
 const center = {
@@ -97,6 +97,16 @@ export default function NewContacts() {
                   <h3>Address</h3>
                   <p>123 St George St</p>
                   <p>Saint Augustine, FL</p>
+                </div>
+              </div>
+
+              <div className={styles.contactItem}>
+                <div className={styles.iconWrapper}>
+                  <FaInstagram />
+                </div>
+                <div className={styles.contactInfo}>
+                  <h3>Instagram</h3>
+                  <a href="https://www.instagram.com/irisprophoto/">@irisprophoto</a>
                 </div>
               </div>
             </div>

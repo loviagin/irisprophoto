@@ -7,9 +7,10 @@ export default function Footer() {
             <div className={styles.footerContent}>
                 <div className={styles.footerBottom}>
                     <div className={styles.copyright}>
-                        © {new Date().getFullYear()} IrisProPhoto. All rights reserved 2025.
+                        © {new Date().getFullYear()} IrisProPhoto. All rights reserved.
                     </div>
                     <div className={styles.legal}>
+                        <Link href="/terms">Terms of Service</Link>
                         <Link href="/privacypolicy">Privacy Policy</Link>
                     </div>
                 </div>
