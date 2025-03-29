@@ -6,6 +6,8 @@ import { FaTimes, FaCamera, FaCalendarAlt, FaEnvelope, FaPhone } from "react-ico
 import styles from './BookingModal.module.css'
 import Portal from '../Portal/Portal'
 import { PatternFormat } from 'react-number-format'
+import { Order, Status, Companies, Decor, Material, Position, Size, Delivery, Effect } from '@/app/types/Order'
+import { randomUUID } from 'crypto'
 
 interface BookingModalProps {
   isOpen: boolean
@@ -111,10 +113,22 @@ export default function BookingModal({
       details: formData.details
     };
 
-    const response = await fetch("https://irisprophoto.me/api/sendOrder", {
+    const order: Order = {
+      id: crypto.randomUUID(),
+      order: 'New order from site',
+      status: 'New',
+      date: formDataToSend.date,
+      comment: formDataToSend.details,
+      email: formDataToSend.email,
+      name: formDataToSend.name,
+      phone: formDataToSend.phone,
+      createdAt: new Date().toISOString()
+    }
+
+    const response = await fetch("https://irisprophoto.me/orders", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formDataToSend),
+      headers: { "Authorization": `Bearer ${process.env.TOKEN}`, "Content-Type": "application/json" },
+      body: JSON.stringify(order),
     });
 
     const result = await response.json();
