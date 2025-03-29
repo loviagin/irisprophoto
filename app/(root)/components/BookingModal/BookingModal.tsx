@@ -118,9 +118,9 @@ export default function BookingModal({
       status: 'New',
       date: formDataToSend.date,
       comment: formDataToSend.details,
-      email: formDataToSend.email,
+      email: formDataToSend.email || undefined,
       name: formDataToSend.name,
-      phone: formDataToSend.phone,
+      phone: formDataToSend.phone || undefined,
       createdAt: new Date().toISOString()
     }
 
