@@ -191,7 +191,7 @@ export default function Header() {
                     >
                       Order a photo shoot
                     </button>
-                    <button
+                    {/* <button
                       className={styles.dropdownToggle}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -203,9 +203,9 @@ export default function Header() {
                         className={styles.chevronIcon}
                         style={{ transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0)' }}
                       />
-                    </button>
+                    </button> */}
                   </div>
-                  <AnimatePresence>
+                  {/* <AnimatePresence>
                     {isDropdownOpen && (
                       <motion.div
                         className={styles.dropdownMenu}
@@ -223,7 +223,7 @@ export default function Header() {
                         </button>
                       </motion.div>
                     )}
-                  </AnimatePresence>
+                  </AnimatePresence> */}
                 </div>
               </li>
             </ul>
@@ -272,7 +272,7 @@ export default function Header() {
                       Contacts
                     </Link>
                   </motion.li>
-                  <motion.li variants={itemVariants}>
+                  {/* <motion.li variants={itemVariants}>
                     <button
                       className={styles.navLink}
                       onClick={handleAccountClick}
@@ -280,7 +280,7 @@ export default function Header() {
                       <FaUser className={styles.menuItemIcon} />
                       {user ? 'Account' : 'Sign in'}
                     </button>
-                  </motion.li>
+                  </motion.li> */}
                   <motion.li variants={itemVariants}>
                     <div className={styles.ctaButtonWrapper}>
                       <button
