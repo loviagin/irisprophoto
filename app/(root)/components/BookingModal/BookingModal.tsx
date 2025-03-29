@@ -6,8 +6,7 @@ import { FaTimes, FaCamera, FaCalendarAlt, FaEnvelope, FaPhone } from "react-ico
 import styles from './BookingModal.module.css'
 import Portal from '../Portal/Portal'
 import { PatternFormat } from 'react-number-format'
-import { Order, Status, Companies, Decor, Material, Position, Size, Delivery, Effect } from '@/app/types/Order'
-import { randomUUID } from 'crypto'
+import { Order } from '@/app/types/Order'
 
 interface BookingModalProps {
   isOpen: boolean
