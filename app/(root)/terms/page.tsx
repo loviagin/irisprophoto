@@ -63,7 +63,7 @@ export default function PrivacyPolicyPage() {
 
             <h2 className={styles.subtitle}>6. Developer Information</h2>
             <ul>
-                <li>The website was developed by UK IT-Developer company <a href='https://lovigin.com'>LOVIGIN LTD</a>.</li>
+                <li>The website was developed by UK IT-Developer company <a href='https://lovigin.com' target='_blank'>LOVIGIN LTD</a>.</li>
                 <li>All technical questions or proposals regarding the website functionality may be sent to the following email: <a href='mailto:support@lovigin.com'>support@lovigin.com</a>.</li>
                 <li>The developer is not responsible for business decisions, order fulfillment, or content management of the website unless explicitly stated.</li>
             </ul>
