@@ -12,6 +12,7 @@ const nunito = Nunito({
 export const metadata: Metadata = {
   title: "Iris PRO Photo",
   description: "",
+  authors: [{ name: "LOVIGIN LTD", url: "https://lovigin.com" }],
 };
 
 export default function RootLayout({

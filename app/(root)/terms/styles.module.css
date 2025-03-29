@@ -1,0 +1,58 @@
+.container {
+  margin: 40px auto;
+  padding: 40px 20px;
+  background: white;
+  max-width: 800px;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.date {
+  color: #666;
+}
+
+.paragraph {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.link {
+  color: #06c;
+  text-decoration: underline;
+}
+
+.footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+@media (width <= 768px) {
+  .container {
+    padding: 40px 20px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+  }
+
+  .footer {
+    font-size: 0.75rem;
+  }
+}
