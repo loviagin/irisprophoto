@@ -105,8 +105,8 @@ export default function BookingModal({
     // Форматируем дату и время для отправки
     const formDataToSend = {
       name: formData.name,
-      phone: formData.phone,
-      email: formData.email,
+      phone: `+1${formData.phone}`,
+      email: formData.email || null,
       shootingType: formData.shootingType,
       date: formData.dateTime.toISOString(), // Отправляем полную дату и время в ISO формате
       details: formData.details
@@ -126,7 +126,7 @@ export default function BookingModal({
 
     console.log(JSON.stringify(order))
 
-    const response = await fetch("https://irisprophoto.me/api/orders", {
+    const response = await fetch("/api/orders", {
       method: "POST",
       headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
       body: JSON.stringify(order),

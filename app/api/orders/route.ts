@@ -68,6 +68,7 @@ export async function POST(req: NextRequest) {
     }
 
     const data: Partial<Order> = await req.json()
+    console.log(data)
 
     try {
         const response = await notion.pages.create({
@@ -120,7 +121,7 @@ export async function POST(req: NextRequest) {
                     },
                 },
                 'Email': {
-                    email: data.email || '',
+                    email: data.email || null,
                 },
                 'Frame #': {
                     rich_text: [
@@ -146,13 +147,13 @@ export async function POST(req: NextRequest) {
                     ],
                 },
                 'Phone number': {
-                    rich_text: [
+                    rich_text: data.phone ? [
                         {
                             text: {
-                                content: data.phone || '',
+                                content: data.phone,
                             },
                         },
-                    ],
+                    ] : [],
                 },
                 'Position': {
                     select: {
