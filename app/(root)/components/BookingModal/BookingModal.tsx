@@ -129,7 +129,7 @@ export default function BookingModal({
 
     const response = await fetch("https://irisprophoto.me/api/orders", {
       method: "POST",
-      headers: { "Authorization": `Bearer ${process.env.TOKEN}`, "Content-Type": "application/json" },
+      headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
       body: JSON.stringify(order),
     });
 
