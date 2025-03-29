@@ -134,7 +134,7 @@ export async function POST(req: NextRequest) {
                 },
                 'Material': {
                     select: {
-                        name: data.material || 'Acrilic',
+                        name: data.material || 'None',
                     },
                 },
                 'Name': {
@@ -157,12 +157,12 @@ export async function POST(req: NextRequest) {
                 },
                 'Position': {
                     select: {
-                        name: data.position || 'Circle',
+                        name: data.position || 'None',
                     },
                 },
                 'Size': {
                     select: {
-                        name: data.size || '20x36',
+                        name: data.size || 'None',
                     },
                 },
                 'Track #': {
@@ -185,12 +185,12 @@ export async function POST(req: NextRequest) {
                 },
                 'Type of delivery': {
                     select: {
-                        name: data.typeOfDelivery || 'Pick up',
+                        name: data.typeOfDelivery || 'None',
                     },
                 },
                 'effect': {
                     select: {
-                        name: data.effect || 'Radiance',
+                        name: data.effect || 'None',
                     },
                 },
                 'createdAt': {

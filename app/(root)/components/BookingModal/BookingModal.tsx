@@ -105,7 +105,7 @@ export default function BookingModal({
     // Форматируем дату и время для отправки
     const formDataToSend = {
       name: formData.name,
-      phone: `+1${formData.phone}`,
+      phone: `+1${formData.phone.replace('+', '')}`,
       email: formData.email || null,
       shootingType: formData.shootingType,
       date: formData.dateTime.toISOString(), // Отправляем полную дату и время в ISO формате
