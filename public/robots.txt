@@ -6,7 +6,3 @@ Disallow: /account/*
 
 # Sitemap location
 Sitemap: https://irisprophoto.me/sitemap.xml
-
-# Disallow access to specific directories (if needed in future)
-# Disallow: /private/
-# Disallow: /admin/

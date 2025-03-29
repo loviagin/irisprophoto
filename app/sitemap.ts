@@ -5,7 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: 'https://irisprophoto.me',
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: 'hourly',
       priority: 1,
       images: ['https://irisprophoto.me/images/favicon.webp'],
     },
@@ -47,14 +47,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: 'https://irisprophoto.me/privacypolicy',
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'monthly',
       priority: 1,
       images: ['https://irisprophoto.me/images/favicon.webp'],
     },
     {
-      url: 'https://irisprophoto.me/account',
+      url: 'https://irisprophoto.me/terms',
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'monthly',
       priority: 1,
       images: ['https://irisprophoto.me/images/favicon.webp'],
     },
