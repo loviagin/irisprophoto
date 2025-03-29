@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
             page_id: orderId,
             properties: {
                 [field]: {
-                    select: {
+                    status: {
                         name: data || 'None',
                     },
                 },
