@@ -125,7 +125,9 @@ export default function BookingModal({
       createdAt: new Date().toISOString()
     }
 
-    const response = await fetch("https://irisprophoto.me/orders", {
+    console.log(JSON.stringify(order))
+
+    const response = await fetch("https://irisprophoto.me/api/orders", {
       method: "POST",
       headers: { "Authorization": `Bearer ${process.env.TOKEN}`, "Content-Type": "application/json" },
       body: JSON.stringify(order),
