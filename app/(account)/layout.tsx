@@ -50,8 +50,8 @@ export default function RootLayout({
             />
           </div>
         </noscript>
-        <Header />
-        {children}
+        {/* <Header /> */}
+        {/* {children} */}
       </body>
 
       {/* Google Tag Manager */}
