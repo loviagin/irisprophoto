@@ -60,6 +60,11 @@
   transition: transform 0.3s ease;
 }
 
+
+.iconInstagram {
+  background: linear-gradient(135deg, #f50541 0%, #fffb06 100%);
+}
+
 .contactItem:hover .iconWrapper {
   transform: scale(1.1) rotate(5deg);
 }

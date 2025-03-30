@@ -11,7 +11,7 @@ const center = {
 
 const mapContainerStyle = {
   width: '100%',
-  height: '400px',
+  height: '450px',
   borderRadius: '20px'
 };
 
@@ -71,26 +71,6 @@ export default function NewContacts() {
             <div className={styles.contactItems}>
               <div className={styles.contactItem}>
                 <div className={styles.iconWrapper}>
-                  <FaPhone />
-                </div>
-                <div className={styles.contactInfo}>
-                  <h3>Phone number</h3>
-                  <a href="tel:+19048359485">+1 (904) 835-94-85</a>
-                </div>
-              </div>
-
-              <div className={styles.contactItem}>
-                <div className={styles.iconWrapper}>
-                  <FaEnvelope />
-                </div>
-                <div className={styles.contactInfo}>
-                  <h3>Email</h3>
-                  <a href="mailto:voroninsfamily@irisprophoto.org">voroninsfamily@irisprophoto.org</a>
-                </div>
-              </div>
-
-              <div className={styles.contactItem}>
-                <div className={styles.iconWrapper}>
                   <FaMapMarkerAlt />
                 </div>
                 <div className={styles.contactInfo}>
@@ -102,6 +82,17 @@ export default function NewContacts() {
 
               <div className={styles.contactItem}>
                 <div className={styles.iconWrapper}>
+                  <FaPhone />
+                </div>
+                <div className={styles.contactInfo}>
+                  <h3>Contacts</h3>
+                  <a href="tel:+19048359485"><b>Phone: </b>+1 (904) 835-94-85</a><br /> 
+                  <a href="mailto:voroninsfamily@irisprophoto.org"><b>Email: </b>voroninsfamily@irisprophoto.org</a>
+                </div>
+              </div>
+
+              <div className={styles.contactItem}>
+                <div className={`${styles.iconInstagram} ${styles.iconWrapper}`}>
                   <FaInstagram />
                 </div>
                 <div className={styles.contactInfo}>
