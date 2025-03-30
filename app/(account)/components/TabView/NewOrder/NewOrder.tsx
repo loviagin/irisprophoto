@@ -62,7 +62,7 @@ export default function NewOrder() {
       details: formData.details
     };
 
-    const response = await fetch("https://irisprophoto.me/api/sendOrder", {
+    const response = await fetch("/api/sendOrder", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formDataToSend),
