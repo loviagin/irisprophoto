@@ -1,25 +1,26 @@
 'use client';
+import { useState } from 'react';
 import styles from './page.module.css';
+import PaymentModal from './PaymentModal';
 
 const BuyButton = () => {
-    const handleClick = async () => {
-        const res = await fetch('/api/send-email', {
-          method: 'POST',
-        });
-    
-        const result = await res.json();
-        if (result.success) {
-          alert('Email sent!');
-        } else {
-          alert('Failed to send email: ' + result.error);
-        }
-      };
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        <button className={styles.buyButton} onClick={handleClick}>
-            You can buy a certificate in our office
-        </button>
-    )
-}
+        <>
+            <button 
+                className={styles.buyButton} 
+                onClick={() => setIsModalOpen(true)}
+            >
+                Оплатить $115
+            </button>
+            {/* <PaymentModal 
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                amount={115}
+            /> */}
+        </>
+    );
+};
 
-export default BuyButton
+export default BuyButton;
