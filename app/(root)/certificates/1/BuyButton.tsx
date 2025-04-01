@@ -12,7 +12,7 @@ const BuyButton = () => {
                 className={styles.buyButton}
                 onClick={() => setIsModalOpen(true)}
             >
-                Оплатить $115
+                Buy for $115
             </button>
 
             <PaymentModal

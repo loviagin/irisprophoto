@@ -21,12 +21,12 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
                 <button className={styles.closeButton} onClick={onClose}>×</button>
-                <h2 className={styles.modalTitle}>Оплата сертификата</h2>
+                <h2 className={styles.modalTitle}>Payment for certificate</h2>
                 <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Введите ваш email"
+                    placeholder="Enter your email"
                     className={styles.emailInput}
                     required
                 />
@@ -38,7 +38,7 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
                         console.log(result);
 
                         if (result?.order?.id) {
-                            console.log("✅ Успешная оплата. ID заказа:", result.order.id);
+                            console.log("✅ Successful payment. Order ID:", result.order.id);
                             const res = await fetch('/api/send-email', {
                                 method: 'POST',
                                 headers: {
@@ -49,13 +49,15 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
                             });
 
                             if (res.ok) {
-                                console.log("✅ Email отправлен.");
+                                console.log("✅ Email sent.");
                                 onClose();
                             } else {
-                                console.warn("⚠️ Email не отправлен.");
+                                alert("Email not sent. Please try again.");
+                                console.warn("⚠️ Email not sent.");
                             }
                         } else {
-                            console.warn("⚠️ Заказ не создан.");
+                            alert("Order not created. Please try again.");
+                            console.warn("⚠️ Order not created.");
                         }
                     }}
                 >
