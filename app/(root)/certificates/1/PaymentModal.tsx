@@ -38,14 +38,14 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
                         currencyCode: "USD",
                         total: {
                             label: "Certificate Payment",
-                            amount: (amount * 100).toString(),
+                            amount: (amount).toString(),
                         },
                     })}
                     cardTokenizeResponseReceived={async (token) => {
                         const result = await submitPayment({ amount: amount * 100 });
                         console.log(result);
 
-                        if (result?.order?.id) {
+                        if (result?.order?.state === 'COMPLETED') {
                             console.log("✅ Successful payment. Order ID:", result.order.id);
                             const res = await fetch('/api/send-email', {
                                 method: 'POST',
