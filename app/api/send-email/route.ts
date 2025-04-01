@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
         const data = await resend.emails.send({
             from: 'noreply@irisprophoto.me',
             to: email,
-            cc: 'support@lovigin.com',
+            cc: 'voroninsfamily@irisprophoto.org',
             subject: 'New certificate purchase on Iris Pro Photo',
             html,
         });
