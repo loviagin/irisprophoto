@@ -44,7 +44,7 @@ function Email(props: EmailProps) {
 
             <Button
               style={button}
-              href="https://irisprophoto.com/"
+              href="https://irisprophoto.me/"
             >
               Book a photo session
             </Button>
