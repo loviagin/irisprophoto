@@ -135,33 +135,36 @@ export default function BookingModal({
     // const result = await response.json();
 
     // if (result.success) {
-      // alert("Thanks for your order! We will contact you soon.");
+    // alert("Thanks for your order! We will contact you soon.");
 
-      if (formDataToSend.email) {
-        const response = await fetch("/api/email-order", {
-          method: "POST",
-          headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ name: formDataToSend.name, email: formDataToSend.email }),
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-          alert("Thanks for your order! We will contact you soon.");
-        } else {
-          alert("❌ Error: " + result.error);
-        }
-      }
-
-      onClose();
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        shootingType: "wedding",
-        dateTime: new Date(),
-        details: ""
+    if (formDataToSend.email) {
+      const res = await fetch('/api/email-order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`
+        },
+        body: JSON.stringify({ name: formDataToSend.name, email: formDataToSend.email }),
       });
+
+      const result = await res.json();
+
+      if (result.success) {
+        alert("Thanks for your order! We will contact you soon.");
+      } else {
+        alert("❌ Error: " + result.error);
+      }
+    }
+
+    onClose();
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      shootingType: "wedding",
+      dateTime: new Date(),
+      details: ""
+    });
     // } else {
     //   alert("❌ Error: " + result.error);
     // }
