@@ -117,7 +117,7 @@ export default function BookingModal({
       order: 'New order from site',
       status: 'New',
       date: formDataToSend.date,
-      comment: formDataToSend.details,
+      comment: formDataToSend.shootingType + ' ' + formDataToSend.details,
       email: formDataToSend.email || undefined,
       name: formDataToSend.name,
       phone: formDataToSend.phone || undefined,
