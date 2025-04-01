@@ -126,30 +126,47 @@ export default function BookingModal({
 
     console.log(JSON.stringify(order))
 
-    const response = await fetch("/api/orders", {
-      method: "POST",
-      headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
-      body: JSON.stringify(order),
-    });
+    // const response = await fetch("/api/orders", {
+    //   method: "POST",
+    //   headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
+    //   body: JSON.stringify(order),
+    // });
 
-    const result = await response.json();
+    // const result = await response.json();
 
-    if (result.success) {
-      alert("Thanks for your order! We will contact you soon.");
-      onClose();
-      setFormData({ 
-        name: "", 
-        email: "", 
-        phone: "", 
-        shootingType: "wedding", 
-        dateTime: new Date(),
-        details: "" 
+    // if (result.success) {
+      // alert("Thanks for your order! We will contact you soon.");
+
+    if (formDataToSend.email) {
+      const response = await fetch("/api/email-order", {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ name: formDataToSend.name, email: formDataToSend.email }),
       });
-    } else {
-      alert("❌ Error: " + result.error);
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert("Thanks for your order! We will contact you soon.");
+      } else {
+        alert("❌ Error: " + result.error);
+      }
     }
 
-    onClose()
+    //   onClose();
+    //   setFormData({ 
+    //     name: "", 
+    //     email: "", 
+    //     phone: "", 
+    //     shootingType: "wedding", 
+    //     dateTime: new Date(),
+    //     details: "" 
+    //   });
+    // } else {
+    //   alert("❌ Error: " + result.error);
+    // }
+
+    // onClose()
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
