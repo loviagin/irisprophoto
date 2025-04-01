@@ -38,6 +38,10 @@ export default function RootLayout({
             });
           `}
         </Script>
+        <Script
+          src="https://web.squarecdn.com/v1/square.js"
+          strategy="beforeInteractive"
+        />
       </head>
       <body className={`${nunito.className}`}>
         <noscript>
