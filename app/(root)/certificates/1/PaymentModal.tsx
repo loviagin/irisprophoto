@@ -68,12 +68,12 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
                                 alert("Email not sent. Please try again.");
                             }
                         } else {
-                            alert("❌ Order creation failed: " +
-                                result?.order?.state +
-                                result?.order?.id +
-                                result?.errors
-                            );
-                            alert("Order not created. Please try again.");
+                            console.error("❌ Order creation failed:", {
+                                orderState: result?.order?.state,
+                                orderId: result?.order?.id,
+                                errors: result?.errors
+                            });
+                            alert(`Order not created. State: ${result?.order?.state || 'unknown'}. Please try again.`);
                         }
                     }}
                 >
