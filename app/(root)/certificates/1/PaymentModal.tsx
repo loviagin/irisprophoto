@@ -43,7 +43,7 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
                     })}
                     cardTokenizeResponseReceived={async (token) => {
                         const result = await submitPayment({ amount: amount * 100 });
-                        console.log(result);
+                        console.log("Payment submission result:", result);
 
                         if (result?.order?.state === 'COMPLETED') {
                             console.log("✅ Successful payment. Order ID:", result.order.id);
@@ -60,12 +60,20 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
                                 console.log("✅ Email sent.");
                                 onClose();
                             } else {
+                                alert("❌ Email sending failed: " +
+                                    res.status +
+                                    res.statusText +
+                                    await res.text()
+                                );
                                 alert("Email not sent. Please try again.");
-                                console.warn("⚠️ Email not sent.");
                             }
                         } else {
+                            alert("❌ Order creation failed: " +
+                                result?.order?.state +
+                                result?.order?.id +
+                                result?.errors
+                            );
                             alert("Order not created. Please try again.");
-                            console.warn("⚠️ Order not created.");
                         }
                     }}
                 >
