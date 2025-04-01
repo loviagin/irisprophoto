@@ -18,7 +18,7 @@ const BuyButton = () => {
             <PaymentModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                amount={115}
+                amount={1}
             />
         </>
     );

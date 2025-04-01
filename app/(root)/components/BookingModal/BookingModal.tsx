@@ -19,11 +19,11 @@ interface BookingModalProps {
   }>
 }
 
-export default function BookingModal({ 
-  isOpen, 
-  onClose, 
-  workStartTime, 
-  workEndTime, 
+export default function BookingModal({
+  isOpen,
+  onClose,
+  workStartTime,
+  workEndTime,
   bookingInterval,
   bookedSlots = []
 }: BookingModalProps) {
@@ -39,18 +39,18 @@ export default function BookingModal({
     const slots: string[] = []
     const [startHour, startMinute] = workStartTime.split(':').map(Number)
     const [endHour, endMinute] = workEndTime.split(':').map(Number)
-    
+
     let currentTime = new Date()
     currentTime.setHours(startHour, startMinute, 0, 0)
-    
+
     const endTime = new Date()
     endTime.setHours(endHour, endMinute, 0, 0)
-    
+
     while (currentTime < endTime) {
-      const timeString = currentTime.toLocaleTimeString('ru-RU', { 
-        hour: '2-digit', 
+      const timeString = currentTime.toLocaleTimeString('ru-RU', {
+        hour: '2-digit',
         minute: '2-digit',
-        hour12: false 
+        hour12: false
       })
 
       // Проверяем, не занято ли это время
@@ -58,8 +58,8 @@ export default function BookingModal({
         const slotDate = new Date(slot.dateTime)
         const currentDate = new Date(formData.dateTime)
         return slotDate.toDateString() === currentDate.toDateString() &&
-               slotDate.getHours() === currentTime.getHours() &&
-               slotDate.getMinutes() === currentTime.getMinutes()
+          slotDate.getHours() === currentTime.getHours() &&
+          slotDate.getMinutes() === currentTime.getMinutes()
       })
 
       if (!isBooked) {
@@ -68,7 +68,7 @@ export default function BookingModal({
 
       currentTime.setMinutes(currentTime.getMinutes() + bookingInterval)
     }
-    
+
     return slots
   }
 
@@ -126,47 +126,47 @@ export default function BookingModal({
 
     console.log(JSON.stringify(order))
 
-    // const response = await fetch("/api/orders", {
-    //   method: "POST",
-    //   headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
-    //   body: JSON.stringify(order),
-    // });
+    const response = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
+      body: JSON.stringify(order),
+    });
 
-    // const result = await response.json();
+    const result = await response.json();
 
-    // if (result.success) {
+    if (result.success) {
       // alert("Thanks for your order! We will contact you soon.");
 
-    if (formDataToSend.email) {
-      const response = await fetch("/api/email-order", {
-        method: "POST",
-        headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ name: formDataToSend.name, email: formDataToSend.email }),
-      });
+      if (formDataToSend.email) {
+        const response = await fetch("/api/email-order", {
+          method: "POST",
+          headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
+          body: JSON.stringify({ name: formDataToSend.name, email: formDataToSend.email }),
+        });
 
-      const result = await response.json();
+        const result = await response.json();
 
-      if (result.success) {
-        alert("Thanks for your order! We will contact you soon.");
-      } else {
-        alert("❌ Error: " + result.error);
+        if (result.success) {
+          alert("Thanks for your order! We will contact you soon.");
+        } else {
+          alert("❌ Error: " + result.error);
+        }
       }
+
+      onClose();
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        shootingType: "wedding",
+        dateTime: new Date(),
+        details: ""
+      });
+    } else {
+      alert("❌ Error: " + result.error);
     }
 
-    //   onClose();
-    //   setFormData({ 
-    //     name: "", 
-    //     email: "", 
-    //     phone: "", 
-    //     shootingType: "wedding", 
-    //     dateTime: new Date(),
-    //     details: "" 
-    //   });
-    // } else {
-    //   alert("❌ Error: " + result.error);
-    // }
-
-    // onClose()
+    onClose()
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {

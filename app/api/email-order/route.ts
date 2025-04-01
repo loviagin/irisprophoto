@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
         const data = await resend.emails.send({
             from: 'noreply@irisprophoto.me',
             to: email,
-            // cc: 'voroninsfamily@irisprophoto.org',
+            cc: 'voroninsfamily@irisprophoto.org',
             subject: 'New order from site on Iris Pro Photo',
             html,
         });
