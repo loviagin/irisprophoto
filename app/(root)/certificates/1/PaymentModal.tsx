@@ -66,7 +66,8 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
                             });
 
                             if (res.ok) {
-                                console.log("5. Email sent successfully");
+                                const responseData = await res.json();
+                                console.log("5. Email sent successfully:", responseData);
                                 alert("✅ Payment successful! Check your email for the certificate.");
                                 onClose();
                             } else {

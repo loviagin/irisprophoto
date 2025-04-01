@@ -21,21 +21,29 @@ function verifyToken(req: NextRequest): boolean {
 }
 
 export async function POST(req: NextRequest) {
+    console.log("1. Received email request");
+    
     if (!verifyToken(req)) {
+        console.error("2. Token verification failed");
         return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
     }
+    console.log("2. Token verified successfully");
 
     const { orderId, email, type } = await req.json();
+    console.log("3. Request data:", { orderId, email, type });
+
     const resend = new Resend(process.env.RESEND_API_KEY);
     const promocode = `IRIS_${randomUUID().slice(0, 8)}`;
+    console.log("4. Generated promocode:", promocode);
+
     const html = await render(React.createElement(Email, { type, orderId, promocode }));
+    console.log("5. Email template rendered");
 
     try {
-        console.log("Sending email with values:", {
+        console.log("6. Attempting to send email with values:", {
             from: 'noreply@irisprophoto.me',
             to: email,
             subject: 'New certificate purchase',
-            html,
         });
 
         const data = await resend.emails.send({
@@ -46,9 +54,10 @@ export async function POST(req: NextRequest) {
             html,
         });
 
+        console.log("7. Email sent successfully:", data);
         return NextResponse.json({ success: true, data });
     } catch (error) {
-        console.error('Email error:', error);
+        console.error('8. Email error:', error);
         return NextResponse.json({ success: false, error: String(error) }, { status: 500 });
     }
 }
