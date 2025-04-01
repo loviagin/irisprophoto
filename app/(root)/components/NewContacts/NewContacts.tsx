@@ -1,7 +1,7 @@
 'use client'
 import { useState, useCallback } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaInstagram } from 'react-icons/fa';
+import { FaPhone, FaMapMarkerAlt, FaInstagram } from 'react-icons/fa';
 import styles from './NewContacts.module.css';
 
 const center = {

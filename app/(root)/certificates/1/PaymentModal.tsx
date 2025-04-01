@@ -1,5 +1,5 @@
 'use client';
-import { CreditCard, PaymentForm } from "react-square-web-payments-sdk";
+import { ApplePay, CreditCard, PaymentForm } from "react-square-web-payments-sdk";
 import styles from './page.module.css';
 import { submitPayment } from '@/lib/submitPayment';
 import { useState } from "react";
@@ -33,6 +33,14 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
                 <PaymentForm
                     applicationId={appId}
                     locationId={locationId}
+                    createPaymentRequest={() => ({
+                        countryCode: "US",
+                        currencyCode: "USD",
+                        total: {
+                            label: "Certificate Payment",
+                            amount: (amount * 100).toString(),
+                        },
+                    })}
                     cardTokenizeResponseReceived={async (token) => {
                         const result = await submitPayment({ amount: amount * 100 });
                         console.log(result);
@@ -62,6 +70,7 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
                     }}
                 >
                     <CreditCard />
+                    <ApplePay />
                 </PaymentForm>
             </div>
         </div>
