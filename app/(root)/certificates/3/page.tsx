@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaClock, FaCalendarAlt } from 'react-icons/fa';
 import { Metadata } from 'next';
+import BuyButton from './BuyButton';
 
 export const metadata: Metadata = {
     title: "Family Photo Gift Certificate | Iris Pro Photo",
@@ -46,9 +47,7 @@ export default function CertificatePage() {
                     <div className={styles.infoSection}>
                         <h1 className={styles.title}>Family Photo Certificate</h1>
                         <div className={styles.price}>$ 295</div>
-                        <Link href={'#'} className={styles.buyButton} target='_blank'>
-                            You can buy a certificate in our office
-                        </Link>
+                        <BuyButton />
                     </div>
                 </div>
 
