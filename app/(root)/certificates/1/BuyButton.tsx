@@ -8,17 +8,18 @@ const BuyButton = () => {
 
     return (
         <>
-            <button 
-                className={styles.buyButton} 
+            <button
+                className={styles.buyButton}
                 onClick={() => setIsModalOpen(true)}
             >
                 Оплатить $115
             </button>
-            {/* <PaymentModal 
+
+            <PaymentModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                amount={115}
-            /> */}
+                amount={1}
+            />
         </>
     );
 };

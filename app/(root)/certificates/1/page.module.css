@@ -301,6 +301,16 @@
     background: #fee2e2;
 }
 
+.emailInput {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1rem;
+    color: #1A1A1A;
+}
+
 .modalOverlay {
     position: fixed;
     top: 0;

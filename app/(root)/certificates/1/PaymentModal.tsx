@@ -1,6 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { CreditCard, PaymentForm } from "react-square-web-payments-sdk";
 import styles from './page.module.css';
+import { submitPayment } from '@/lib/submitPayment';
+import { useState } from "react";
 
 interface PaymentModalProps {
     isOpen: boolean;
@@ -9,70 +11,9 @@ interface PaymentModalProps {
 }
 
 const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
-    const [payments, setPayments] = useState<any>(null);
-    const [card, setCard] = useState<any>(null);
-    const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState('');
-
-    useEffect(() => {
-        if (isOpen) {
-            const loadSquare = async () => {
-                const paymentsSdk = await (window as any).Square.payments(
-                    process.env.NEXT_PUBLIC_SQUARE_APP_ID,
-                    process.env.NEXT_PUBLIC_SQUARE_LOCATION_ID
-                );
-
-                const card = await paymentsSdk.card();
-                await card.attach('#card-container');
-                setPayments(paymentsSdk);
-                setCard(card);
-            };
-
-            const script = document.createElement('script');
-            script.src = 'https://sandbox.web.squarecdn.com/v1/square.js';
-            script.onload = loadSquare;
-            document.body.appendChild(script);
-
-            return () => {
-                document.body.removeChild(script);
-            };
-        }
-    }, [isOpen]);
-
-    const handlePayment = async () => {
-        setLoading(true);
-        try {
-            const result = await card.tokenize();
-            if (result.status === 'OK') {
-                const res = await fetch('/api/checkout', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        sourceId: result.token,
-                        amount: amount * 100, // Конвертируем доллары в центы
-                        currency: 'USD',
-                    }),
-                });
-
-                const data = await res.json();
-                if (data.payment) {
-                    setMessage('Оплата прошла успешно!');
-                    setTimeout(() => {
-                        window.location.href = '/thank-you';
-                    }, 1500);
-                } else {
-                    setMessage('Ошибка оплаты');
-                }
-            } else {
-                setMessage('Ошибка при получении токена');
-            }
-        } catch (error) {
-            setMessage('Произошла ошибка при обработке платежа');
-        }
-        setLoading(false);
-    };
+    const appId = process.env.NEXT_PUBLIC_SQUARE_APP_ID!;
+    const locationId = process.env.NEXT_PUBLIC_SQUARE_LOCATION_ID!;
+    const [email, setEmail] = useState('');
 
     if (!isOpen) return null;
 
@@ -81,15 +22,45 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
             <div className={styles.modalContent}>
                 <button className={styles.closeButton} onClick={onClose}>×</button>
                 <h2 className={styles.modalTitle}>Оплата сертификата</h2>
-                <div id="card-container" className={styles.cardContainer}></div>
-                <button 
-                    className={styles.buyButton} 
-                    onClick={handlePayment}
-                    disabled={loading}
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Введите ваш email"
+                    className={styles.emailInput}
+                    required
+                />
+                <PaymentForm
+                    applicationId={appId}
+                    locationId={locationId}
+                    cardTokenizeResponseReceived={async (token) => {
+                        const result = await submitPayment({ amount: amount * 100 });
+                        console.log(result);
+
+                        if (result?.order?.id) {
+                            console.log("✅ Успешная оплата. ID заказа:", result.order.id);
+                            const res = await fetch('/api/send-email', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`
+                                },
+                                body: JSON.stringify({ orderId: result.order.id, email: email, type: 'Certificate for one person' }),
+                            });
+
+                            if (res.ok) {
+                                console.log("✅ Email отправлен.");
+                                onClose();
+                            } else {
+                                console.warn("⚠️ Email не отправлен.");
+                            }
+                        } else {
+                            console.warn("⚠️ Заказ не создан.");
+                        }
+                    }}
                 >
-                    {loading ? 'Обработка...' : `Оплатить $${amount}`}
-                </button>
-                {message && <p className={styles.message}>{message}</p>}
+                    <CreditCard />
+                </PaymentForm>
             </div>
         </div>
     );

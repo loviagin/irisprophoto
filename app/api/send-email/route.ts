@@ -4,7 +4,7 @@ import Email from '@/app/email/email';
 import { render } from '@react-email/render';
 import * as React from 'react';
 import jwt from 'jsonwebtoken'
-
+import { randomUUID } from 'crypto';
 const JWT_SECRET = process.env.JWT_SECRET!
 
 function verifyToken(req: NextRequest): boolean {
@@ -25,21 +25,24 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
     }
 
+    const { orderId, email, type } = await req.json();
     const resend = new Resend(process.env.RESEND_API_KEY);
-    const html = await render(React.createElement(Email, { url: 'https://irisprophoto.me' }));
+    const promocode = `IRIS_${randomUUID().slice(0, 8)}`;
+    const html = await render(React.createElement(Email, { type, orderId, promocode }));
 
     try {
         console.log("Sending email with values:", {
             from: 'noreply@irisprophoto.me',
-            to: 'ilia.loviagin@gmail.com',
+            to: email,
             subject: 'New certificate purchase',
             html,
         });
 
         const data = await resend.emails.send({
             from: 'noreply@irisprophoto.me',
-            to: 'ilia.loviagin@gmail.com',
-            subject: 'New certificate purchase',
+            to: email,
+            cc: 'support@lovigin.com',
+            subject: 'New certificate purchase on Iris Pro Photo',
             html,
         });
 
