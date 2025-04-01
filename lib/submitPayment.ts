@@ -50,11 +50,22 @@ export async function submitPayment({ amount, sourceId }: SubmitPaymentProps) {
                 idempotencyKey: randomUUID()
             });
 
+            console.log("Payment result:", JSON.stringify(payment, null, 2));
+
             if (payment.payment?.status === 'COMPLETED') {
+                console.log("Payment completed successfully");
                 return {
                     order: {
                         ...order.order,
                         state: 'COMPLETED'
+                    }
+                };
+            } else {
+                console.error("Payment not completed:", payment.payment?.status);
+                return {
+                    order: {
+                        ...order.order,
+                        state: payment.payment?.status || 'FAILED'
                     }
                 };
             }

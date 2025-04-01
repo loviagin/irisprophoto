@@ -42,19 +42,20 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
                         },
                     })}
                     cardTokenizeResponseReceived={async (token) => {
-                        console.log("Received token:", token);
+                        console.log("1. Received token:", token);
                         if (!token.token) {
                             console.error("No token received");
                             return;
                         }
+                        console.log("2. Submitting payment with amount:", amount * 100);
                         const result = await submitPayment({ 
                             amount: amount * 100,
                             sourceId: token.token
                         });
-                        console.log("Payment submission result:", result);
+                        console.log("3. Payment submission result:", JSON.stringify(result, null, 2));
 
                         if (result?.order?.state === 'COMPLETED') {
-                            console.log("✅ Successful payment. Order ID:", result.order.id);
+                            console.log("4. Payment completed, sending email to:", email);
                             const res = await fetch('/api/send-email', {
                                 method: 'POST',
                                 headers: {
@@ -65,22 +66,25 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
                             });
 
                             if (res.ok) {
-                                console.log("✅ Email sent.");
+                                console.log("5. Email sent successfully");
+                                alert("✅ Payment successful! Check your email for the certificate.");
                                 onClose();
                             } else {
-                                alert("❌ Email sending failed: " +
-                                    res.status +
-                                    res.statusText +
-                                    await res.text()
-                                );
-                                alert("Email not sent. Please try again.");
+                                const errorText = await res.text();
+                                console.error("5. Email sending failed:", {
+                                    status: res.status,
+                                    statusText: res.statusText,
+                                    error: errorText
+                                });
+                                alert("❌ Payment successful, but email not sent. Please contact support.");
                             }
                         } else {
-                            console.error("❌ Order creation failed:", {
+                            console.error("4. Order not completed:", {
                                 orderState: result?.order?.state,
-                                orderId: result?.order?.id
+                                orderId: result?.order?.id,
+                                fullResult: JSON.stringify(result, null, 2)
                             });
-                            alert(`Order not created. State: ${result?.order?.state || 'unknown'}. Please try again.`);
+                            alert(`❌ Payment failed. State: ${result?.order?.state || 'unknown'}. Please try again.`);
                         }
                     }}
                 >
