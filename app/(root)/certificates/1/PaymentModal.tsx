@@ -90,7 +90,7 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
                     }}
                 >
                     <CreditCard />
-                    {/* <ApplePay /> */}
+                    <ApplePay />
                 </PaymentForm>
             </div>
         </div>
