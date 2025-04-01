@@ -15,9 +15,10 @@ const locationID = process.env.SQUARE_LOCATION_ID!;
 
 interface SubmitPaymentProps {
     amount: number;
+    sourceId: string;
 }
 
-export async function submitPayment({ amount }: SubmitPaymentProps) {
+export async function submitPayment({ amount, sourceId }: SubmitPaymentProps) {
     try {
         const idempotencyKey = randomUUID();
         const order = await client.orders.create({
@@ -36,6 +37,29 @@ export async function submitPayment({ amount }: SubmitPaymentProps) {
                 ],
             },
         });
+
+        if (order.order?.id) {
+            const payment = await client.payments.create({
+                sourceId: sourceId,
+                amountMoney: {
+                    amount: BigInt(amount),
+                    currency: "USD"
+                },
+                orderId: order.order.id,
+                locationId: locationID,
+                idempotencyKey: randomUUID()
+            });
+
+            if (payment.payment?.status === 'COMPLETED') {
+                return {
+                    order: {
+                        ...order.order,
+                        state: 'COMPLETED'
+                    }
+                };
+            }
+        }
+
         return order;
     } catch (error) {
         if (error instanceof SquareError) {
@@ -43,5 +67,6 @@ export async function submitPayment({ amount }: SubmitPaymentProps) {
         } else {
             console.error("Unexpected error occurred: ", error);
         }
+        throw error;
     }
 }

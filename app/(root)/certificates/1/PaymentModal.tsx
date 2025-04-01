@@ -42,7 +42,15 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
                         },
                     })}
                     cardTokenizeResponseReceived={async (token) => {
-                        const result = await submitPayment({ amount: amount * 100 });
+                        console.log("Received token:", token);
+                        if (!token.token) {
+                            console.error("No token received");
+                            return;
+                        }
+                        const result = await submitPayment({ 
+                            amount: amount * 100,
+                            sourceId: token.token
+                        });
                         console.log("Payment submission result:", result);
 
                         if (result?.order?.state === 'COMPLETED') {
@@ -70,8 +78,7 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
                         } else {
                             console.error("❌ Order creation failed:", {
                                 orderState: result?.order?.state,
-                                orderId: result?.order?.id,
-                                errors: result?.errors
+                                orderId: result?.order?.id
                             });
                             alert(`Order not created. State: ${result?.order?.state || 'unknown'}. Please try again.`);
                         }
