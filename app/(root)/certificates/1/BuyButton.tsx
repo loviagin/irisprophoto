@@ -17,16 +17,7 @@ const BuyButton = () => {
 
             <PaymentModal
                 isOpen={isModalOpen}
-                onClose={async () => {
-                    const res = await fetch('/api/send-email', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`
-                        },
-                        body: JSON.stringify({ orderId: "result.order.id", email: "ilia.loviagin@gmail.com", type: 'Certificate for one person' }),
-                    });
-                }}
+                onClose={() => setIsModalOpen(false)}
                 amount={1}
             />
         </>
