@@ -21,7 +21,7 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
                 <button className={styles.closeButton} onClick={onClose}>×</button>
-                <h2 className={styles.modalTitle}>Payment for certificate</h2>
+                <h2 className={styles.modalTitle}>Payment for certificate ${amount}</h2>
                 <input
                     type="email"
                     value={email}
