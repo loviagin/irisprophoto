@@ -29,17 +29,17 @@ export async function POST(req: NextRequest) {
     const html = await render(React.createElement(Email, { name }));
 
     try {
-        console.log("Sending email with values:", {
-            from: 'noreply@irisprophoto.me',
-            to: email,
-            subject: 'New order from site on Iris Pro Photo',
-            html,
-        });
+        // console.log("Sending email with values:", {
+        //     from: 'noreply@irisprophoto.me',
+        //     to: email,
+        //     subject: 'New order from site on Iris Pro Photo',
+        //     html,
+        // });
 
         const data = await resend.emails.send({
             from: 'noreply@irisprophoto.me',
             to: email,
-            cc: 'voroninsfamily@irisprophoto.org',
+            // cc: 'voroninsfamily@irisprophoto.org',
             subject: 'New order from site on Iris Pro Photo',
             html,
         });

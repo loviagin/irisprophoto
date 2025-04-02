@@ -71,9 +71,6 @@ export default function NewHero() {
         <BookingModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          workStartTime="10:00"
-          workEndTime="18:00"
-          bookingInterval={30} // интервал в минутах
         />
 
         <motion.div

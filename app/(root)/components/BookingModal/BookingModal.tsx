@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaTimes, FaCamera, FaCalendarAlt, FaEnvelope, FaPhone } from "react-icons/fa"
 import styles from './BookingModal.module.css'
@@ -11,22 +11,16 @@ import { Order } from '@/app/types/Order'
 interface BookingModalProps {
   isOpen: boolean
   onClose: () => void
-  workStartTime: string // формат "HH:mm"
-  workEndTime: string // формат "HH:mm"
-  bookingInterval: number // в минутах
-  bookedSlots?: Array<{
-    dateTime: Date
-  }>
 }
 
 export default function BookingModal({
   isOpen,
-  onClose,
-  workStartTime,
-  workEndTime,
-  bookingInterval,
-  bookedSlots = []
+  onClose
 }: BookingModalProps) {
+  const workStartTime = '12:00';
+  const workEndTime = '18:00';
+  const bookingInterval = 60;
+
   const getCurrentDate = () => {
     const today = new Date()
     const year = today.getFullYear()
@@ -34,6 +28,45 @@ export default function BookingModal({
     const day = String(today.getDate()).padStart(2, '0')
     return `${year}-${month}-${day}`
   }
+
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    shootingType: 'one-two',
+    dateTime: new Date(),
+    details: ''
+  })
+
+  const [bookedSlots, setBookedSlots] = useState<Array<{ bookingDateTime: string }>>([]);
+  const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchBookedSlots = async () => {
+      try {
+        const response = await fetch('/api/bookings');
+        const data = await response.json();
+        if (data.success) {
+          setBookedSlots(data.orders);
+          // Генерируем доступные слоты при получении занятых
+          const slots = generateTimeSlots();
+          setAvailableTimeSlots(slots);
+        }
+      } catch (error) {
+        console.error('Error fetching booked slots:', error);
+      }
+    };
+
+    if (isOpen) {
+      fetchBookedSlots();
+    }
+  }, [isOpen]);
+
+  // Обновляем доступные слоты при изменении даты
+  useEffect(() => {
+    const slots = generateTimeSlots();
+    setAvailableTimeSlots(slots);
+  }, [formData.dateTime]);
 
   const generateTimeSlots = () => {
     const slots: string[] = []
@@ -55,7 +88,7 @@ export default function BookingModal({
 
       // Проверяем, не занято ли это время
       const isBooked = bookedSlots.some(slot => {
-        const slotDate = new Date(slot.dateTime)
+        const slotDate = new Date(slot.bookingDateTime)
         const currentDate = new Date(formData.dateTime)
         return slotDate.toDateString() === currentDate.toDateString() &&
           slotDate.getHours() === currentTime.getHours() &&
@@ -72,15 +105,6 @@ export default function BookingModal({
     return slots
   }
 
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    shootingType: 'one-two',
-    dateTime: new Date(),
-    details: ''
-  })
-
   const modalVariants = {
     hidden: {
       opacity: 0,
@@ -95,14 +119,13 @@ export default function BookingModal({
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!formData.email && !formData.phone) {
-      alert("Please provide either an email or phone number");
+      alert("Пожалуйста, укажите email или телефон");
       return;
     }
 
-    // Форматируем дату и время для отправки
     const formDataToSend = {
       name: formData.name,
       phone: `+1${formData.phone.replace('+', '')}`,
@@ -112,11 +135,23 @@ export default function BookingModal({
       details: formData.details
     };
 
+    const notionId = crypto.randomUUID();
+    const contact = formData.email || formData.phone;
+
+    // Устанавливаем время начала рабочего дня, если время не выбрано
+    const [startHour, startMinute] = workStartTime.split(':').map(Number);
+    const selectedDateTime = new Date(formData.dateTime);
+
+    // Проверяем, установлено ли время (часы и минуты равны 0)
+    if (selectedDateTime.getHours() === 0 && selectedDateTime.getMinutes() === 0) {
+      selectedDateTime.setHours(startHour, startMinute, 0, 0);
+    }
+
     const order: Order = {
-      id: crypto.randomUUID(),
+      id: notionId,
       order: 'New order from site',
       status: 'New',
-      date: formDataToSend.date,
+      date: selectedDateTime.toISOString(),
       comment: formDataToSend.shootingType + ' ' + formDataToSend.details,
       email: formDataToSend.email || undefined,
       name: formDataToSend.name,
@@ -124,18 +159,38 @@ export default function BookingModal({
       createdAt: new Date().toISOString()
     }
 
+    try {
+      const response = await fetch("/api/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          contact,
+          notionId,
+          bookingDateTime: selectedDateTime.toISOString()
+        }),
+      });
+
+      const result = await response.json();
+    } catch (error) {
+      console.error('Error creating booking:', error);
+      alert("Произошла ошибка при создании заказа. Пожалуйста, попробуйте позже.");
+    }
+
     console.log(JSON.stringify(order))
 
-    const response = await fetch("/api/orders", {
-      method: "POST",
-      headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
-      body: JSON.stringify(order),
-    });
+    // const response = await fetch("/api/orders", {
+    //   method: "POST",
+    //   headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
+    //   body: JSON.stringify(order),
+    // });
 
-    const result = await response.json();
+    // const result = await response.json();
 
-    if (result.success) {
-      alert("Thanks for your order! We will contact you soon.");
+    // if (result.success) {
+    //   alert("Thanks for your order! We will contact you soon.");
 
       if (formDataToSend.email) {
         const res = await fetch('/api/email-order', {
@@ -151,7 +206,7 @@ export default function BookingModal({
       }
 
       alert("Thanks for your order! We will contact you soon.");
-     
+
       onClose();
       setFormData({
         name: "",
@@ -161,25 +216,28 @@ export default function BookingModal({
         dateTime: new Date(),
         details: ""
       });
-    } else {
-      alert("❌ Error: " + result.error);
-    }
+    // } else {
+    //   alert("❌ Error: " + result.error);
+    // }
 
     onClose()
-  }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    if (name === 'date' || name === 'time') {
+    if (name === 'date') {
       const newDateTime = new Date(formData.dateTime)
-      if (name === 'date') {
-        newDateTime.setFullYear(parseInt(value.split('-')[0]))
-        newDateTime.setMonth(parseInt(value.split('-')[1]) - 1)
-        newDateTime.setDate(parseInt(value.split('-')[2]))
-      } else {
-        const [hours, minutes] = value.split(':').map(Number)
-        newDateTime.setHours(hours, minutes, 0, 0)
-      }
+      newDateTime.setFullYear(parseInt(value.split('-')[0]))
+      newDateTime.setMonth(parseInt(value.split('-')[1]) - 1)
+      newDateTime.setDate(parseInt(value.split('-')[2]))
+      setFormData(prev => ({
+        ...prev,
+        dateTime: newDateTime
+      }))
+    } else if (name === 'time') {
+      const [hours, minutes] = value.split(':').map(Number)
+      const newDateTime = new Date(formData.dateTime)
+      newDateTime.setHours(hours, minutes, 0, 0)
       setFormData(prev => ({
         ...prev,
         dateTime: newDateTime
@@ -199,18 +257,6 @@ export default function BookingModal({
       phone: value.startsWith('+') ? value : '+' + value
     }));
   };
-
-  // Функция для форматирования даты и времени для отображения
-  const formatDateTime = (date: Date) => {
-    return date.toLocaleString('ru-RU', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
-    });
-  }
 
   return (
     <Portal>
@@ -239,8 +285,8 @@ export default function BookingModal({
               </button>
 
               <div className={styles.modalContent}>
-                <h2>Make an appointment</h2>
-                <p>Leave your details and we will contact you to discuss the details.</p>
+                <h2>Записаться на фотосессию</h2>
+                <p>Оставьте свои данные, и мы свяжемся с вами для обсуждения деталей.</p>
 
                 <form onSubmit={handleSubmit} className={styles.bookingForm}>
                   <div className={styles.formGroup}>
@@ -296,18 +342,40 @@ export default function BookingModal({
                     />
                   </div>
 
-                  <div className={styles.formGroup}>
-                    <FaCalendarAlt className={styles.formIcon} />
-                    <input
-                      type="date"
-                      name="date"
-                      value={formData.dateTime.toISOString().split('T')[0]}
-                      onChange={handleInputChange}
-                      required
-                      className={styles.dateInput}
-                      placeholder="Select date"
-                      min={getCurrentDate()}
-                    />
+                  <div className={styles.formRow}>
+                    <div className={styles.formGroup}>
+                      <FaCalendarAlt className={styles.formIcon} />
+                      <input
+                        type="date"
+                        name="date"
+                        value={formData.dateTime.toISOString().split('T')[0]}
+                        onChange={handleInputChange}
+                        required
+                        className={styles.dateInput}
+                        placeholder="Выберите дату"
+                        min={getCurrentDate()}
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <select
+                        name="time"
+                        value={formData.dateTime.toLocaleTimeString('ru-RU', {
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          hour12: false
+                        })}
+                        onChange={handleInputChange}
+                        required
+                        className={styles.timeSelect}
+                      >
+                        <option value="">Выберите время</option>
+                        {availableTimeSlots.map((time) => (
+                          <option key={time} value={time}>
+                            {time}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
 
                   <div className={styles.formGroup}>

@@ -40,11 +40,11 @@ export async function POST(req: NextRequest) {
     console.log("5. Email template rendered");
 
     try {
-        console.log("6. Attempting to send email with values:", {
-            from: 'noreply@irisprophoto.me',
-            to: email,
-            subject: 'New certificate purchase',
-        });
+        // console.log("6. Attempting to send email with values:", {
+        //     from: 'noreply@irisprophoto.me',
+        //     to: email,
+        //     subject: 'New certificate purchase',
+        // });
 
         const data = await resend.emails.send({
             from: 'noreply@irisprophoto.me',

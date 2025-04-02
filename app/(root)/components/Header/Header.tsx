@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import styles from "./Header.module.css";
-import { FaBars, FaTimes, FaUser, FaChevronDown } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -304,9 +304,6 @@ export default function Header() {
       <BookingModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        workStartTime="10:00"
-        workEndTime="18:00"
-        bookingInterval={30} // интервал в минутах
       />
 
       <AuthModal
