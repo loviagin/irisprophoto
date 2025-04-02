@@ -26,6 +26,7 @@ export async function POST(req: NextRequest) {
 
     try {
         const { name, email, date } = await req.json();
+        console.log(name, email, date)
         
         if (!name || !email || !date) {
             return NextResponse.json(
@@ -36,7 +37,7 @@ export async function POST(req: NextRequest) {
 
         const resend = new Resend(process.env.RESEND_API_KEY);
         const html = await render(React.createElement(Email, { name, date }));
-
+        console.log(html)
         const data = await resend.emails.send({
             from: 'noreply@irisprophoto.me',
             to: email,

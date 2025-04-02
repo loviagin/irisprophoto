@@ -8,20 +8,8 @@ interface EmailProps {
 
 function Email(props: EmailProps) {
   const { name, date } = props;
-  const bookingDate = new Date(date);
 
-  // Форматируем дату и время без конвертации часового пояса
-  const formattedDate = bookingDate.toLocaleDateString('en-US', { 
-    month: 'long', 
-    day: 'numeric'
-  });
-
-  const formattedTime = bookingDate.toLocaleTimeString('en-US', { 
-    hour: '2-digit', 
-    minute: '2-digit',
-    hour12: false // Используем 24-часовой формат
-  });
-
+  
   return (
     <Html lang="en">
       <Head />
@@ -39,11 +27,11 @@ function Email(props: EmailProps) {
             </Text>
 
             <Text style={text}>
-              Date: {formattedDate}
+              Date: {date.split('at')[0]}
             </Text>
-            {/* <Text style={text}>
-              Time: {formattedTime}
-            </Text> */}
+            <Text style={text}>
+              Time: {date.split('at')[1]}
+            </Text>
 
             <Text style={text}>
               We will contact you as soon as possible to arrange a time that is convenient for you.
