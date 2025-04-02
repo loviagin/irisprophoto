@@ -17,7 +17,6 @@ export default function BookingModal({
   isOpen,
   onClose
 }: BookingModalProps) {
-  const defaultTime = '1:00';
   const workStartTime = '12:00';
   const workEndTime = '18:00';
   const bookingInterval = 60;
@@ -140,7 +139,7 @@ export default function BookingModal({
     const contact = formData.email || `+1${formData.phone.replace('+', '')}`;
 
     // Устанавливаем время начала рабочего дня, если время не выбрано
-    const [startHour, startMinute] = defaultTime.split(':').map(Number);
+    const [startHour, startMinute] = workStartTime.split(':').map(Number);
     const selectedDateTime = new Date(formData.dateTime);
 
     // Проверяем, установлено ли время (часы и минуты равны 0)
