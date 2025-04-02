@@ -137,7 +137,7 @@ export default function BookingModal({
     };
 
     const notionId = crypto.randomUUID();
-    const contact = formData.email || formData.phone;
+    const contact = formData.email || `+1${formData.phone.replace('+', '')}`;
 
     // Устанавливаем время начала рабочего дня, если время не выбрано
     const [startHour, startMinute] = defaultTime.split(':').map(Number);
@@ -200,7 +200,7 @@ export default function BookingModal({
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`
           },
-          body: JSON.stringify({ name: formDataToSend.name, email: formDataToSend.email }),
+          body: JSON.stringify({ name: formDataToSend.name, email: formDataToSend.email, date: formData.dateTime }),
         });
 
         const result = await res.json();

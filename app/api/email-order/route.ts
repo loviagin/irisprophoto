@@ -24,9 +24,9 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { name, email } = await req.json();
+    const { name, email, date } = await req.json();
     const resend = new Resend(process.env.RESEND_API_KEY);
-    const html = await render(React.createElement(Email, { name }));
+    const html = await render(React.createElement(Email, { name, date }));
 
     try {
         // console.log("Sending email with values:", {
