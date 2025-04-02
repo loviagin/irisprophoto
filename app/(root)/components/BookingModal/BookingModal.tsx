@@ -198,29 +198,29 @@ export default function BookingModal({
         const result = await res.json();
       }
 
-    //   try {
-    //     const response = await fetch("/api/bookings", {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({
-    //         name: formData.name,
-    //         contact,
-    //         notionId,
-    //         bookingDateTime: selectedDateTime.toISOString()
-    //       }),
-    //     });
+      try {
+        const response = await fetch("/api/bookings", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            contact,
+            notionId,
+            bookingDateTime: selectedDateTime.toISOString()
+          }),
+        });
 
-    //     const result = await response.json();
-    //   } catch (error) {
-    //     console.error('Error creating booking:', error);
-    //     alert("An error occurred while creating an order. Please try again later.");
-    //   }
+        const result = await response.json();
+      } catch (error) {
+        console.error('Error creating booking:', error);
+        alert("An error occurred while creating an order. Please try again later.");
+      }
 
-    //   console.log(JSON.stringify(order))
+      console.log(JSON.stringify(order))
 
-    //   alert("Thanks for your order! We will contact you soon.");
+      alert("Thanks for your order! We will contact you soon.");
 
       setFormData({
         name: "",

@@ -41,9 +41,9 @@ function Email(props: EmailProps) {
             <Text style={text}>
               Date: {formattedDate}
             </Text>
-            <Text style={text}>
+            {/* <Text style={text}>
               Time: {formattedTime}
-            </Text>
+            </Text> */}
 
             <Text style={text}>
               We will contact you as soon as possible to arrange a time that is convenient for you.
