@@ -24,14 +24,6 @@ export default function BookingModal({
   const workEndTime = '18:00';
   const bookingInterval = 60;
 
-  const getCurrentDate = () => {
-    const today = new Date()
-    const year = today.getFullYear()
-    const month = String(today.getMonth() + 1).padStart(2, '0')
-    const day = String(today.getDate()).padStart(2, '0')
-    return `${year}-${month}-${day}`
-  }
-
   // Функция для проверки, является ли дата воскресеньем
   const isSunday = (date: Date) => {
     return date.getDay() === 0;
@@ -48,6 +40,7 @@ export default function BookingModal({
     while (isSunday(nextDate)) {
       nextDate.setDate(nextDate.getDate() + 1);
     }
+    nextDate.setHours(0, 0, 0, 0);
     return nextDate;
   }
 
@@ -163,7 +156,7 @@ export default function BookingModal({
     // Устанавливаем время 01:00 по умолчанию, если время не выбрано
     const selectedDateTime = new Date(formData.dateTime);
     if (selectedDateTime.getHours() === 0 && selectedDateTime.getMinutes() === 0) {
-      selectedDateTime.setHours(1, 0, 0, 0);
+      selectedDateTime.setHours(0, 0, 0, 0);
     }
 
     const order: Order = {
@@ -187,7 +180,6 @@ export default function BookingModal({
     const result = await response.json();
 
     if (result.success) {
-      alert("Thanks for your order! We will contact you soon.");
 
       if (formDataToSend.email) {
         const res = await fetch('/api/email-order', {
@@ -199,11 +191,7 @@ export default function BookingModal({
           body: JSON.stringify({
             name: formDataToSend.name,
             email: formDataToSend.email,
-            date: selectedDateTime.toLocaleDateString('en-US', { 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            })
+            date: selectedDateTime.toISOString()
           }),
         });
 
@@ -223,13 +211,13 @@ export default function BookingModal({
             bookingDateTime: selectedDateTime.toISOString()
           }),
         });
-  
+
         const result = await response.json();
       } catch (error) {
         console.error('Error creating booking:', error);
         alert("An error occurred while creating an order. Please try again later.");
       }
-  
+
       console.log(JSON.stringify(order))
 
       alert("Thanks for your order! We will contact you soon.");
@@ -257,6 +245,7 @@ export default function BookingModal({
       newDateTime.setFullYear(parseInt(value.split('-')[0]))
       newDateTime.setMonth(parseInt(value.split('-')[1]) - 1)
       newDateTime.setDate(parseInt(value.split('-')[2]))
+      newDateTime.setHours(0, 0, 0, 0)
 
       // Если выбранная дата - воскресенье, переносим на следующий день
       if (isSunday(newDateTime)) {
@@ -268,13 +257,22 @@ export default function BookingModal({
         dateTime: newDateTime
       }))
     } else if (name === 'time') {
-      const [hours, minutes] = value.split(':').map(Number)
-      const newDateTime = new Date(formData.dateTime)
-      newDateTime.setHours(hours, minutes, 0, 0)
-      setFormData(prev => ({
-        ...prev,
-        dateTime: newDateTime
-      }))
+      if (value === '') {
+        const newDateTime = new Date(formData.dateTime)
+        newDateTime.setHours(0, 0, 0, 0)
+        setFormData(prev => ({
+          ...prev,
+          dateTime: newDateTime
+        }))
+      } else {
+        const [hours, minutes] = value.split(':').map(Number)
+        const newDateTime = new Date(formData.dateTime)
+        newDateTime.setHours(hours, minutes, 0, 0)
+        setFormData(prev => ({
+          ...prev,
+          dateTime: newDateTime
+        }))
+      }
     } else {
       setFormData(prev => ({
         ...prev,
@@ -383,6 +381,7 @@ export default function BookingModal({
                         selected={formData.dateTime}
                         onChange={(date: Date | null) => {
                           if (date) {
+                            date.setHours(0, 0, 0, 0);
                             setFormData(prev => ({
                               ...prev,
                               dateTime: date
