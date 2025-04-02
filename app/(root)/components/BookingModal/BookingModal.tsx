@@ -366,7 +366,7 @@ export default function BookingModal({
                           hour12: false
                         })}
                         onChange={handleInputChange}
-                        required
+                        // required
                         className={styles.timeSelect}
                       >
                         <option value="">Select time</option>
