@@ -24,17 +24,18 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { name, email, date } = await req.json();
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    const html = await render(React.createElement(Email, { name, date }));
-
     try {
-        // console.log("Sending email with values:", {
-        //     from: 'noreply@irisprophoto.me',
-        //     to: email,
-        //     subject: 'New order from site on Iris Pro Photo',
-        //     html,
-        // });
+        const { name, email, date } = await req.json();
+        
+        if (!name || !email || !date) {
+            return NextResponse.json(
+                { success: false, error: 'Missing required fields' },
+                { status: 400 }
+            );
+        }
+
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        const html = await render(React.createElement(Email, { name, date }));
 
         const data = await resend.emails.send({
             from: 'noreply@irisprophoto.me',
@@ -47,6 +48,9 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: true, data });
     } catch (error) {
         console.error('Email error:', error);
-        return NextResponse.json({ success: false, error: String(error) }, { status: 500 });
+        return NextResponse.json(
+            { success: false, error: String(error) },
+            { status: 500 }
+        );
     }
 }

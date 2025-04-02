@@ -3,11 +3,12 @@ import { Html, Body, Container, Head, Heading, Hr, Preview, Section, Text } from
 
 interface EmailProps {
   name: string;
-  date: Date;
+  date: string;
 }
 
 function Email(props: EmailProps) {
   const { name, date } = props;
+  const bookingDate = new Date(date);
 
   return (
     <Html lang="en">
@@ -26,10 +27,10 @@ function Email(props: EmailProps) {
             </Text>
 
             <Text style={text}>
-              Date: {date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
+              Date: {bookingDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
             </Text>
             <Text style={text}>
-              Time: {date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+              Time: {bookingDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
             </Text>
 
             <Text style={text}>

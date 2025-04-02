@@ -199,7 +199,11 @@ export default function BookingModal({
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`
           },
-          body: JSON.stringify({ name: formDataToSend.name, email: formDataToSend.email, date: formData.dateTime }),
+          body: JSON.stringify({ 
+            name: formDataToSend.name, 
+            email: formDataToSend.email, 
+            date: formData.dateTime.toISOString() 
+          }),
         });
 
         const result = await res.json();
