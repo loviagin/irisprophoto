@@ -1,64 +1,56 @@
 .modalOverlay {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 20px;
-  background: rgb(0 0 0 / 70%);
-  backdrop-filter: blur(5px);
-  z-index: 9999;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  align-items: center;
+  z-index: 1000;
 }
 
 .modal {
-  position: relative;
-  width: 100%;
-  margin: 20px;
   background: var(--background);
   border-radius: 20px;
+  padding: 30px;
+  width: 90%;
   max-width: 600px;
-  overflow: hidden;
+  position: relative;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 40px rgb(0 0 0 / 20%);
-  z-index: 10000;
+  z-index: 1000;
 }
 
 .modalClose {
   position: absolute;
   top: 20px;
   right: 20px;
-  font-size: 24px;
-  color: var(--text-light);
   background: none;
   border: none;
+  color: var(--text-light);
   cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 2;
+  font-size: 1.5rem;
+  padding: 5px;
+  transition: color 0.3s ease;
 }
 
 .modalClose:hover {
-  color: var(--error);
-  transform: rotate(90deg);
+  color: var(--primary-color);
 }
 
 .modalContent {
-  width: 100%;
-  padding: 40px;
-  box-sizing: border-box;
+  text-align: center;
 }
 
 .modalContent h2 {
-  margin: 0 0 10px;
-  font-size: 2rem;
   color: var(--primary-color);
-  font-weight: 700;
+  margin-bottom: 10px;
+  font-size: 2rem;
 }
 
 .modalContent p {
-  font-size: 1.1rem;
   color: var(--text-light);
   margin-bottom: 30px;
 }
@@ -69,34 +61,16 @@
   gap: 20px;
 }
 
-.formRow {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
 .formGroup {
   position: relative;
-  flex: 1;
   width: 100%;
-}
-
-.formIcon {
-  position: absolute;
-  top: 50%;
-  left: 14px;
-  font-size: 18px;
-  color: var(--primary-color);
-  transform: translateY(-50%);
-  z-index: 1;
-  pointer-events: none;
 }
 
 .formGroup input,
-.formGroup select,
-.formGroup textarea {
+.formGroup textarea,
+.formGroup select {
   width: 100%;
-  padding: 12px 20px;
+  padding: 12px 20px 12px 35px;
   font-size: 1rem;
   color: var(--text-color);
   background: var(--background);
@@ -105,167 +79,79 @@
   transition: all 0.3s ease;
 }
 
-.formGroup input:focus,
-.formGroup select:focus,
-.formGroup textarea:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: 0 0 0 3px rgb(59 130 246 / 10%);
-}
-
-.formGroup input[type="date"] {
-  padding-right: 20px;
-}
-
 .formGroup textarea {
+  padding: 12px 20px;
   resize: vertical;
   min-height: 100px;
 }
 
-.formIcon + input,
-.formIcon + select,
-.formIcon + textarea {
-  padding-left: 45px;
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
 }
 
-.submitButton {
-  padding: 15px 30px;
-  font-size: 1.1rem;
-  color: white;
-  background: var(--primary-color);
-  border: none;
-  border-radius: 30px;
-  font-weight: 500;
-  cursor: pointer;
+.formIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary-color);
+  font-size: 1rem;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.formGroup input:focus + .formIcon,
+.formGroup select:focus + .formIcon,
+.formGroup textarea:focus + .formIcon {
+  opacity: 1;
+}
+
+.dateInput {
+  width: 100%;
+  padding: 12px 20px 12px 35px !important;
+  font-size: 1rem;
+  color: var(--text-color);
+  background: var(--background);
+  border: 2px solid var(--background-alt);
+  border-radius: 10px;
   transition: all 0.3s ease;
-  margin-top: 10px;
+  cursor: pointer;
 }
 
-.submitButton:hover {
-  background: var(--primary-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
+.dateInput:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+}
+
+.formRow {
+  display: flex;
+  gap: 20px;
 }
 
 .customSelect {
   width: 100%;
-  padding: 12px 40px 12px 45px;
+  padding: 12px 20px 12px 45px;
   font-size: 1rem;
   color: var(--text-color);
+  background: var(--background);
   border: 2px solid var(--background-alt);
   border-radius: 10px;
-  background-color: var(--background);
-  cursor: pointer;
   appearance: none;
+  cursor: pointer;
   transition: all 0.3s ease;
-}
-
-.customSelect:hover {
-  border-color: var(--primary-light);
 }
 
 .customSelect:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgb(59 130 246 / 10%);
-}
-
-.customSelect option {
-  padding: 12px;
-  color: var(--text-color);
-  background: var(--background);
-}
-
-/* DatePicker styles */
-:global(.react-datepicker-wrapper) {
-  width: 100% !important;
-  display: block !important;
-}
-
-:global(.react-datepicker__input-container) {
-  width: 100% !important;
-  display: block !important;
-}
-
-.dateInput {
-  width: 100% !important;
-  padding: 12px 20px 12px 45px !important;
-  font-size: 1rem;
-  color: var(--text-color);
-  background: var(--background);
-  border: 2px solid var(--background-alt);
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-:global(.react-datepicker) {
-  font-family: inherit;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  background: var(--background);
-  padding: 20px;
-}
-
-:global(.react-datepicker__header) {
-  background: transparent;
-  border-bottom: none;
-  padding-top: 0;
-}
-
-:global(.react-datepicker__current-month) {
-  color: var(--primary-color);
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: 15px;
-}
-
-:global(.react-datepicker__day-name) {
-  color: var(--text-light);
-  font-weight: 500;
-  width: 2.5rem;
-  margin: 0.2rem;
-}
-
-:global(.react-datepicker__day) {
-  color: var(--text-color);
-  border-radius: 8px;
-  margin: 0.2rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  line-height: 2.5rem;
-  transition: all 0.2s ease;
-}
-
-:global(.react-datepicker__day--selected) {
-  background-color: var(--primary-color) !important;
-  color: white !important;
-  border-radius: 8px;
-  font-weight: 500;
-}
-
-:global(.react-datepicker__day--disabled) {
-  color: var(--text-light) !important;
-  opacity: 0.5;
-  cursor: not-allowed !important;
-}
-
-.phoneInput {
-  width: 100%;
-  padding: 12px 20px 12px 45px !important;
-  font-size: 1rem;
-  color: var(--text-color);
-  background: var(--background);
-  border: 2px solid var(--background-alt);
-  border-radius: 10px;
-  transition: all 0.3s ease;
-}
-
-.phoneInput:focus {
   border-color: var(--primary-color);
   outline: none;
-  box-shadow: 0 0 0 3px rgb(59 130 246 / 10%);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
 }
 
 .timeSelect {
@@ -276,37 +162,46 @@
   background: var(--background);
   border: 2px solid var(--background-alt);
   border-radius: 10px;
-  transition: all 0.3s ease;
-  cursor: pointer;
   appearance: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8.825L3.175 6 4.238 4.938 6 6.7l3.3-3.3L10.363 4.5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 12px;
 }
 
 .timeSelect:focus {
   border-color: var(--primary-color);
   outline: none;
-  box-shadow: 0 0 0 3px rgb(59 130 246 / 10%);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
 }
 
-@media (width <= 768px) {
-  .modal {
-    width: 90%;
-    margin: 10px;
-  }
-  
+.submitButton {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.submitButton:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
   .formRow {
     flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 0;
-  }
-  
-  .formGroup {
-    margin-bottom: 0;
-    width: 100%;
-    flex: none;
   }
 
-  .modalContent {
-    padding: 30px 20px;
+  .modal {
+    width: 95%;
+    padding: 20px;
   }
 
   .modalContent h2 {

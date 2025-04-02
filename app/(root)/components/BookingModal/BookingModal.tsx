@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaTimes, FaCamera, FaCalendarAlt, FaEnvelope, FaPhone } from "react-icons/fa"
+import { FaTimes, FaCamera, FaCalendarAlt, FaEnvelope, FaPhone, FaClock, FaUser } from "react-icons/fa"
 import styles from './BookingModal.module.css'
 import Portal from '../Portal/Portal'
 import { PatternFormat } from 'react-number-format'
 import { Order } from '@/app/types/Order'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
+import "@/app/styles/datepicker.css"
 
 interface BookingModalProps {
   isOpen: boolean
@@ -177,16 +178,16 @@ export default function BookingModal({
       createdAt: new Date().toISOString()
     }
 
-    // const response = await fetch("/api/orders", {
-    //   method: "POST",
-    //   headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
-    //   body: JSON.stringify(order),
-    // });
+    const response = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
+      body: JSON.stringify(order),
+    });
 
-    // const result = await response.json();
+    const result = await response.json();
 
-    // if (result.success) {
-    //   alert("Thanks for your order! We will contact you soon.");
+    if (result.success) {
+      alert("Thanks for your order! We will contact you soon.");
 
       if (formDataToSend.email) {
         const res = await fetch('/api/email-order', {
@@ -233,18 +234,18 @@ export default function BookingModal({
 
       alert("Thanks for your order! We will contact you soon.");
 
-    //   onClose();
-    //   setFormData({
-    //     name: "",
-    //     email: "",
-    //     phone: "",
-    //     shootingType: "wedding",
-    //     dateTime: new Date(),
-    //     details: ""
-    //   });
-    // } else {
-    //   alert("❌ Error: " + result.error);
-    // }
+      onClose();
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        shootingType: "wedding",
+        dateTime: new Date(),
+        details: ""
+      });
+    } else {
+      alert("❌ Error: " + result.error);
+    }
 
     onClose()
   };
@@ -337,6 +338,7 @@ export default function BookingModal({
 
                   <div className={styles.formRow}>
                     <div className={styles.formGroup}>
+                      <FaUser className={styles.formIcon} />
                       <input
                         type="text"
                         name="name"
@@ -395,6 +397,7 @@ export default function BookingModal({
                       />
                     </div>
                     <div className={styles.formGroup}>
+                      <FaClock className={styles.formIcon} />
                       <select
                         name="time"
                         value={formData.dateTime.toLocaleTimeString('en-US', {
@@ -403,7 +406,6 @@ export default function BookingModal({
                           hour12: false
                         })}
                         onChange={handleInputChange}
-                        // required
                         className={styles.timeSelect}
                       >
                         <option value="">Select time</option>
