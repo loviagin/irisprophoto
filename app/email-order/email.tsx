@@ -10,17 +10,16 @@ function Email(props: EmailProps) {
   const { name, date } = props;
   const bookingDate = new Date(date);
 
-  // Форматируем дату и время с учетом часового пояса
+  // Форматируем дату и время без конвертации часового пояса
   const formattedDate = bookingDate.toLocaleDateString('en-US', { 
     month: 'long', 
-    day: 'numeric',
-    timeZone: 'America/New_York' // Указываем часовой пояс
+    day: 'numeric'
   });
 
   const formattedTime = bookingDate.toLocaleTimeString('en-US', { 
     hour: '2-digit', 
     minute: '2-digit',
-    timeZone: 'America/New_York' // Указываем часовой пояс
+    hour12: false // Используем 24-часовой формат
   });
 
   return (
