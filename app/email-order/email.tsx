@@ -3,10 +3,11 @@ import { Html, Body, Container, Head, Heading, Hr, Preview, Section, Text } from
 
 interface EmailProps {
   name: string;
+  date: Date;
 }
 
 function Email(props: EmailProps) {
-  const { name } = props;
+  const { name, date } = props;
 
   return (
     <Html lang="en">
@@ -22,6 +23,13 @@ function Email(props: EmailProps) {
             <Heading style={h2}>Dear {name},</Heading>
             <Text style={text}>
               Your photo session has been successfully booked! We are excited to create beautiful memories with you.
+            </Text>
+
+            <Text style={text}>
+              Date: {date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
+            </Text>
+            <Text style={text}>
+              Time: {date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
             </Text>
 
             <Text style={text}>
