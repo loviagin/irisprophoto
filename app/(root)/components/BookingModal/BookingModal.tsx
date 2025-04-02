@@ -171,15 +171,15 @@ export default function BookingModal({
       createdAt: new Date().toISOString()
     }
 
-    // const response = await fetch("/api/orders", {
-    //   method: "POST",
-    //   headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
-    //   body: JSON.stringify(order),
-    // });
+    const response = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
+      body: JSON.stringify(order),
+    });
 
-    // const result = await response.json();
+    const result = await response.json();
 
-    // if (result.success) {
+    if (result.success) {
 
       if (formDataToSend.email) {
         const res = await fetch('/api/email-order', {
@@ -222,7 +222,6 @@ export default function BookingModal({
 
     //   alert("Thanks for your order! We will contact you soon.");
 
-      onClose();
       setFormData({
         name: "",
         email: "",
@@ -231,9 +230,9 @@ export default function BookingModal({
         dateTime: new Date(),
         details: ""
       });
-    // } else {
-    //   alert("❌ Error: " + result.error);
-    // }
+    } else {
+      alert("❌ Error: " + result.error);
+    }
 
     onClose()
   };
