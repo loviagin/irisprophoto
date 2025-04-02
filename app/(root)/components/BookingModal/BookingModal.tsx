@@ -7,6 +7,8 @@ import styles from './BookingModal.module.css'
 import Portal from '../Portal/Portal'
 import { PatternFormat } from 'react-number-format'
 import { Order } from '@/app/types/Order'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css"
 
 interface BookingModalProps {
   isOpen: boolean
@@ -29,12 +31,31 @@ export default function BookingModal({
     return `${year}-${month}-${day}`
   }
 
+  // Функция для проверки, является ли дата воскресеньем
+  const isSunday = (date: Date) => {
+    return date.getDay() === 0;
+  }
+
+  // Функция для фильтрации дат (исключаем воскресенья)
+  const filterDate = (date: Date) => {
+    return !isSunday(date);
+  }
+
+  // Функция для получения следующей доступной даты
+  const getNextAvailableDate = (date: Date) => {
+    const nextDate = new Date(date);
+    while (isSunday(nextDate)) {
+      nextDate.setDate(nextDate.getDate() + 1);
+    }
+    return nextDate;
+  }
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
     shootingType: 'one-two',
-    dateTime: new Date(),
+    dateTime: getNextAvailableDate(new Date()), // Инициализируем с первой доступной датой
     details: ''
   })
 
@@ -181,16 +202,16 @@ export default function BookingModal({
 
     console.log(JSON.stringify(order))
 
-    // const response = await fetch("/api/orders", {
-    //   method: "POST",
-    //   headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
-    //   body: JSON.stringify(order),
-    // });
+    const response = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
+      body: JSON.stringify(order),
+    });
 
-    // const result = await response.json();
+    const result = await response.json();
 
-    // if (result.success) {
-    //   alert("Thanks for your order! We will contact you soon.");
+    if (result.success) {
+      alert("Thanks for your order! We will contact you soon.");
 
       if (formDataToSend.email) {
         const res = await fetch('/api/email-order', {
@@ -199,10 +220,10 @@ export default function BookingModal({
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`
           },
-          body: JSON.stringify({ 
-            name: formDataToSend.name, 
-            email: formDataToSend.email, 
-            date: formData.dateTime.toISOString() 
+          body: JSON.stringify({
+            name: formDataToSend.name,
+            email: formDataToSend.email,
+            date: formData.dateTime.toISOString()
           }),
         });
 
@@ -220,9 +241,9 @@ export default function BookingModal({
         dateTime: new Date(),
         details: ""
       });
-    // } else {
-    //   alert("❌ Error: " + result.error);
-    // }
+    } else {
+      alert("❌ Error: " + result.error);
+    }
 
     onClose()
   };
@@ -234,6 +255,12 @@ export default function BookingModal({
       newDateTime.setFullYear(parseInt(value.split('-')[0]))
       newDateTime.setMonth(parseInt(value.split('-')[1]) - 1)
       newDateTime.setDate(parseInt(value.split('-')[2]))
+
+      // Если выбранная дата - воскресенье, переносим на следующий день
+      if (isSunday(newDateTime)) {
+        newDateTime.setDate(newDateTime.getDate() + 1);
+      }
+
       setFormData(prev => ({
         ...prev,
         dateTime: newDateTime
@@ -349,15 +376,21 @@ export default function BookingModal({
                   <div className={styles.formRow}>
                     <div className={styles.formGroup}>
                       <FaCalendarAlt className={styles.formIcon} />
-                      <input
-                        type="date"
-                        name="date"
-                        value={formData.dateTime.toISOString().split('T')[0]}
-                        onChange={handleInputChange}
-                        required
+                      <DatePicker
+                        selected={formData.dateTime}
+                        onChange={(date: Date | null) => {
+                          if (date) {
+                            setFormData(prev => ({
+                              ...prev,
+                              dateTime: date
+                            }))
+                          }
+                        }}
+                        filterDate={filterDate}
+                        minDate={new Date()}
+                        dateFormat="MMMM d, yyyy"
                         className={styles.dateInput}
-                        placeholder="Select date"
-                        min={getCurrentDate()}
+                        placeholderText="Select date"
                       />
                     </div>
                     <div className={styles.formGroup}>
