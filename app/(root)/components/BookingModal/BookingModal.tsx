@@ -17,6 +17,7 @@ export default function BookingModal({
   isOpen,
   onClose
 }: BookingModalProps) {
+  const defaultTime = '1:00';
   const workStartTime = '12:00';
   const workEndTime = '18:00';
   const bookingInterval = 60;
@@ -80,7 +81,7 @@ export default function BookingModal({
     endTime.setHours(endHour, endMinute, 0, 0)
 
     while (currentTime < endTime) {
-      const timeString = currentTime.toLocaleTimeString('ru-RU', {
+      const timeString = currentTime.toLocaleTimeString('en-US', {
         hour: '2-digit',
         minute: '2-digit',
         hour12: false
@@ -122,7 +123,7 @@ export default function BookingModal({
     e.preventDefault();
 
     if (!formData.email && !formData.phone) {
-      alert("Пожалуйста, укажите email или телефон");
+      alert("Please specify email or phone");
       return;
     }
 
@@ -139,7 +140,7 @@ export default function BookingModal({
     const contact = formData.email || formData.phone;
 
     // Устанавливаем время начала рабочего дня, если время не выбрано
-    const [startHour, startMinute] = workStartTime.split(':').map(Number);
+    const [startHour, startMinute] = defaultTime.split(':').map(Number);
     const selectedDateTime = new Date(formData.dateTime);
 
     // Проверяем, установлено ли время (часы и минуты равны 0)
@@ -176,7 +177,7 @@ export default function BookingModal({
       const result = await response.json();
     } catch (error) {
       console.error('Error creating booking:', error);
-      alert("Произошла ошибка при создании заказа. Пожалуйста, попробуйте позже.");
+      alert("An error occurred while creating an order. Please try again later.");
     }
 
     console.log(JSON.stringify(order))
@@ -285,8 +286,8 @@ export default function BookingModal({
               </button>
 
               <div className={styles.modalContent}>
-                <h2>Записаться на фотосессию</h2>
-                <p>Оставьте свои данные, и мы свяжемся с вами для обсуждения деталей.</p>
+                <h2>Book a photo session</h2>
+                <p>Leave your data, and we will contact you to discuss the details.</p>
 
                 <form onSubmit={handleSubmit} className={styles.bookingForm}>
                   <div className={styles.formGroup}>
@@ -352,14 +353,14 @@ export default function BookingModal({
                         onChange={handleInputChange}
                         required
                         className={styles.dateInput}
-                        placeholder="Выберите дату"
+                        placeholder="Select date"
                         min={getCurrentDate()}
                       />
                     </div>
                     <div className={styles.formGroup}>
                       <select
                         name="time"
-                        value={formData.dateTime.toLocaleTimeString('ru-RU', {
+                        value={formData.dateTime.toLocaleTimeString('en-US', {
                           hour: '2-digit',
                           minute: '2-digit',
                           hour12: false
@@ -368,7 +369,7 @@ export default function BookingModal({
                         required
                         className={styles.timeSelect}
                       >
-                        <option value="">Выберите время</option>
+                        <option value="">Select time</option>
                         {availableTimeSlots.map((time) => (
                           <option key={time} value={time}>
                             {time}
