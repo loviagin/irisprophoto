@@ -159,13 +159,10 @@ export default function BookingModal({
     const notionId = crypto.randomUUID();
     const contact = formData.email || `+1${formData.phone.replace('+', '')}`;
 
-    // Устанавливаем время начала рабочего дня, если время не выбрано
-    const [startHour, startMinute] = workStartTime.split(':').map(Number);
+    // Устанавливаем время 01:00 по умолчанию, если время не выбрано
     const selectedDateTime = new Date(formData.dateTime);
-
-    // Проверяем, установлено ли время (часы и минуты равны 0)
     if (selectedDateTime.getHours() === 0 && selectedDateTime.getMinutes() === 0) {
-      selectedDateTime.setHours(startHour, startMinute, 0, 0);
+      selectedDateTime.setHours(1, 0, 0, 0);
     }
 
     const order: Order = {
@@ -180,38 +177,16 @@ export default function BookingModal({
       createdAt: new Date().toISOString()
     }
 
-    try {
-      const response = await fetch("/api/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          contact,
-          notionId,
-          bookingDateTime: selectedDateTime.toISOString()
-        }),
-      });
+    // const response = await fetch("/api/orders", {
+    //   method: "POST",
+    //   headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
+    //   body: JSON.stringify(order),
+    // });
 
-      const result = await response.json();
-    } catch (error) {
-      console.error('Error creating booking:', error);
-      alert("An error occurred while creating an order. Please try again later.");
-    }
+    // const result = await response.json();
 
-    console.log(JSON.stringify(order))
-
-    const response = await fetch("/api/orders", {
-      method: "POST",
-      headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
-      body: JSON.stringify(order),
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      alert("Thanks for your order! We will contact you soon.");
+    // if (result.success) {
+    //   alert("Thanks for your order! We will contact you soon.");
 
       if (formDataToSend.email) {
         const res = await fetch('/api/email-order', {
@@ -223,27 +198,53 @@ export default function BookingModal({
           body: JSON.stringify({
             name: formDataToSend.name,
             email: formDataToSend.email,
-            date: formData.dateTime.toISOString()
+            date: selectedDateTime.toLocaleDateString('en-US', { 
+              year: 'numeric', 
+              month: 'long', 
+              day: 'numeric' 
+            })
           }),
         });
 
         const result = await res.json();
       }
 
+      try {
+        const response = await fetch("/api/bookings", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            contact,
+            notionId,
+            bookingDateTime: selectedDateTime.toISOString()
+          }),
+        });
+  
+        const result = await response.json();
+      } catch (error) {
+        console.error('Error creating booking:', error);
+        alert("An error occurred while creating an order. Please try again later.");
+      }
+  
+      console.log(JSON.stringify(order))
+
       alert("Thanks for your order! We will contact you soon.");
 
-      onClose();
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        shootingType: "wedding",
-        dateTime: new Date(),
-        details: ""
-      });
-    } else {
-      alert("❌ Error: " + result.error);
-    }
+    //   onClose();
+    //   setFormData({
+    //     name: "",
+    //     email: "",
+    //     phone: "",
+    //     shootingType: "wedding",
+    //     dateTime: new Date(),
+    //     details: ""
+    //   });
+    // } else {
+    //   alert("❌ Error: " + result.error);
+    // }
 
     onClose()
   };
