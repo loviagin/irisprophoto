@@ -10,6 +10,19 @@ function Email(props: EmailProps) {
   const { name, date } = props;
   const bookingDate = new Date(date);
 
+  // Форматируем дату и время с учетом часового пояса
+  const formattedDate = bookingDate.toLocaleDateString('en-US', { 
+    month: 'long', 
+    day: 'numeric',
+    timeZone: 'America/New_York' // Указываем часовой пояс
+  });
+
+  const formattedTime = bookingDate.toLocaleTimeString('en-US', { 
+    hour: '2-digit', 
+    minute: '2-digit',
+    timeZone: 'America/New_York' // Указываем часовой пояс
+  });
+
   return (
     <Html lang="en">
       <Head />
@@ -27,10 +40,10 @@ function Email(props: EmailProps) {
             </Text>
 
             <Text style={text}>
-              Date: {bookingDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
+              Date: {formattedDate}
             </Text>
             <Text style={text}>
-              Time: {bookingDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+              Time: {formattedTime}
             </Text>
 
             <Text style={text}>
