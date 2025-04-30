@@ -102,11 +102,11 @@ const gallerySections = [
   {
     title: 'Triple eyes',
     items: [
-      // {
-      //   image: '/works/Explosin.webp',
-      //   title: 'Explosion',
-      //   category: ''
-      // },
+      {
+        image: '/works/water3.webp',
+        title: 'Water',
+        category: ''
+      },
       // {
       //   image: '/works/light beams.webp',
       //   title: 'Light beams',
