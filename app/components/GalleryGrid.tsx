@@ -83,7 +83,7 @@ const gallerySections = [
       //   category: ''
       // },
       {
-        image: '/works/Yin & Yan Meteor.webp',
+        image: '/works/work10.webp',
         title: 'Yin & Yan Meteor',
         category: ''
       },
