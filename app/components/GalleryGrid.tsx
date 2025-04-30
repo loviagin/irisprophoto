@@ -19,8 +19,8 @@ const galleryItems = [
     category: ''
   },
   {
-    image: '/works/work4.webp',
-    title: 'Light beams hard',
+    image: '/works/SuperNova.webp',
+    title: 'SuperNova',
     category: ''
   },
   {
