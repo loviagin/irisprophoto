@@ -7,37 +7,94 @@
 
 .header {
   text-align: center;
-  max-width: 800px;
-  margin: 0 auto 4rem;
+  margin-bottom: 4rem;
+  padding: 0 2rem;
 }
 
 .header h1 {
-  font-size: 3.5rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
-  background: linear-gradient(45deg, #3B82F6, #4ecdc4);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #fff;
 }
 
 .header p {
   font-size: 1.2rem;
-  color: #ccc;
-  line-height: 1.6;
+  color: #fff;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.section {
+  margin-bottom: 6rem;
+  padding: 0 2rem;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sectionHeader h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.sectionHeader p {
+  font-size: 1.1rem;
+  color: #fff;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.accordion {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.accordionItem {
+  margin-bottom: 2rem;
+}
+
+.accordionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.accordionHeader h2 {
+  font-size: 2rem;
+  color: #fff;
+  margin: 0;
+}
+
+.arrow {
+  font-size: 1.5rem;
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.accordionContent {
+  overflow: hidden;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding: 2rem 0;
 }
 
 .item {
   position: relative;
-  border-radius: 12px;
-  overflow: hidden;
   aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .imageWrapper {
@@ -53,44 +110,46 @@
   transition: transform 0.3s ease;
 }
 
-.item:hover .imageWrapper img {
+.item:hover img {
   transform: scale(1.05);
 }
 
 .overlay {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  background: rgb(0 0 0 / 70%);
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  color: white;
   text-align: center;
 }
 
 .overlay h3 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  color: #fff;
 }
 
 .overlay span {
   font-size: 1rem;
-  color: #4ecdc4;
+  opacity: 0.8;
 }
 
-@media (width <= 768px) {
-  .main {
-    padding: 8rem 1rem;
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
-
+  
   .header h1 {
     font-size: 2.5rem;
   }
-
-  .grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1rem;
+  
+  .accordionHeader h2 {
+    font-size: 1.5rem;
   }
 } 
