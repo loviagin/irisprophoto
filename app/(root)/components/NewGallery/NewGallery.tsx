@@ -17,13 +17,13 @@ const galleryItems = [
     category: ''
   },
   {
-    image: '/works/work3.webp',
-    title: 'Halo hard',
+    image: '/works/SuperNova.webp',
+    title: 'SuperNova',
     category: ''
   },
   {
-    image: '/works/work4.webp',
-    title: 'Light beams hard',
+    image: '/works/water.webp',
+    title: 'Water',
     category: ''
   },
   {
