@@ -97,28 +97,28 @@ export default function NewHero() {
             </div>
           </div>
         </motion.div>
-      </div>
 
-      {/* Статистика */}
-      <motion.div
-        className={styles.stats}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6, duration: 0.8 }}
-      >
-        <div className={styles.statItem}>
-          <span className={styles.statNumber}>5000+</span>
-          <span className={styles.statLabel}>Portraits Created</span>
-        </div>
-        <div className={styles.statItem}>
-          <span className={styles.statNumber}>98%</span>
-          <span className={styles.statLabel}>Satisfied Clients</span>
-        </div>
-        <div className={styles.statItem}>
-          <span className={styles.statNumber}>4.9</span>
-          <span className={styles.statLabel}>Average Rating</span>
-        </div>
-      </motion.div>
+        {/* Статистика */}
+        <motion.div
+          className={styles.stats}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+        >
+          <div className={styles.statItem}>
+            <span className={styles.statNumber}>5000+</span>
+            <span className={styles.statLabel}>Portraits Created</span>
+          </div>
+          <div className={styles.statItem}>
+            <span className={styles.statNumber}>98%</span>
+            <span className={styles.statLabel}>Satisfied Clients</span>
+          </div>
+          <div className={styles.statItem}>
+            <span className={styles.statNumber}>4.9</span>
+            <span className={styles.statLabel}>Average Rating</span>
+          </div>
+        </motion.div>
+      </div>
     </section>
   )
 } 
