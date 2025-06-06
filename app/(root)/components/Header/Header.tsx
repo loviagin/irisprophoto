@@ -258,17 +258,17 @@ export default function Header() {
                     </Link>
                   </motion.li> */}
                   <motion.li variants={itemVariants}>
-                    <Link href='/gallery' className={styles.navLink}>
+                    <Link href='/gallery' className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
                       Gallery
                     </Link>
                   </motion.li>
                   <motion.li variants={itemVariants}>
-                    <Link href='/certificates' className={styles.navLink}>
+                    <Link href='/certificates' className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
                       Certificates
                     </Link>
                   </motion.li>
                   <motion.li variants={itemVariants}>
-                    <Link href='/#contacts' className={styles.navLink}>
+                    <Link href='/#contacts' className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
                       Contacts
                     </Link>
                   </motion.li>
