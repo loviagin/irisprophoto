@@ -23,7 +23,7 @@ function Email(props: EmailProps) {
           <Section style={content}>
             <Heading style={h2}>Dear {name},</Heading>
             <Text style={text}>
-              Your photo session has been successfully booked! We are excited to create beautiful memories with you.
+              Your photo session has been successfully booked! We are looking forward to seeing you at our studio.
             </Text>
 
             <Text style={text}>
@@ -34,13 +34,17 @@ function Email(props: EmailProps) {
             </Text>
 
             <Text style={text}>
-              We will contact you as soon as possible to arrange a time that is convenient for you.
+              Please arrive 5-10 minutes before your scheduled time. We'll be waiting for you at the studio.
             </Text>
 
             <Hr style={hr} />
 
             <Text style={footer}>
-              If you need to reschedule or have any questions, please contact us by email: <a href="mailto:voroninsfamily@irisprophoto.org">voroninsfamily@irisprophoto.org</a>
+              If you have any questions or need to make changes, please contact us:
+              <br />
+              Email: <a href="mailto:voroninsfamily@irisprophoto.org">voroninsfamily@irisprophoto.org</a>
+              <br />
+              Phone: <a href="tel:+19048359485">+1 (904) 835-94-85</a>
             </Text>
           </Section>
         </Container>
