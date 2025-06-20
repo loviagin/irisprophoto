@@ -9,7 +9,7 @@ import { randomUUID } from "crypto";
 
 const client = new SquareClient({
     token: process.env.SQUARE_ACCESS_TOKEN,
-    environment: SquareEnvironment.Sandbox,
+    environment: SquareEnvironment.Production,
 });
 const locationID = process.env.SQUARE_LOCATION_ID!;
 
