@@ -4,12 +4,12 @@ import { SquareClient, SquareEnvironment, SquareError } from "square";
 import { randomUUID } from "crypto";
 
 (BigInt.prototype as any).toJSON = function () {
-    return Number(this); // 👈 важно: именно число, а не строка
+    return Number(this); 
 };
 
 const client = new SquareClient({
     token: process.env.SQUARE_ACCESS_TOKEN,
-    environment: SquareEnvironment.Production,
+    environment: SquareEnvironment.Sandbox,
 });
 const locationID = process.env.SQUARE_LOCATION_ID!;
 
