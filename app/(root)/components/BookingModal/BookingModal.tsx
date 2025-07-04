@@ -180,7 +180,6 @@ export default function BookingModal({
     const result = await response.json();
 
     if (result.success) {
-
       if (formDataToSend.email) {
         const res = await fetch('/api/email-order', {
           method: 'POST',

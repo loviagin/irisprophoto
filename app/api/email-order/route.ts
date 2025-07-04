@@ -4,6 +4,9 @@ import Email from '@/app/email-order/email';
 import { render } from '@react-email/render';
 import * as React from 'react';
 import jwt from 'jsonwebtoken'
+import { connectToDatabase } from '@/lib/db';
+import Device from '@/models/Device'
+import { sendApnPush } from '@/lib/apnSender';
 const JWT_SECRET = process.env.JWT_SECRET!
 
 function verifyToken(req: NextRequest): boolean {
@@ -26,6 +29,7 @@ export async function POST(req: NextRequest) {
 
     try {
         const { name, email, date } = await req.json();
+        await connectToDatabase();
         console.log(name, email, date)
         
         if (!name || !email || !date) {
@@ -45,6 +49,11 @@ export async function POST(req: NextRequest) {
             subject: 'New order from site on Iris Pro Photo',
             html,
         });
+
+        const tokens: string[] = await Device.find().distinct('token')
+        for (const token of tokens) {
+            await sendApnPush(token, `📷 Новый заказ от ${name}!`, 'Проверь в приложении')
+        }
 
         return NextResponse.json({ success: true, data });
     } catch (error) {
