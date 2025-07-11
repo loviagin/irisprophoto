@@ -55,6 +55,7 @@ export default function BookingModal({
 
   const [bookedSlots, setBookedSlots] = useState<Array<{ bookingDateTime: string }>>([]);
   const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchBookedSlots = async () => {
@@ -140,6 +141,8 @@ export default function BookingModal({
       alert("Please specify email or phone");
       return;
     }
+
+    setIsLoading(true);
 
     const formDataToSend = {
       name: formData.name,
@@ -241,6 +244,7 @@ export default function BookingModal({
     }
 
     onClose()
+    setIsLoading(false);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -432,8 +436,8 @@ export default function BookingModal({
                     />
                   </div>
 
-                  <button type="submit" className={styles.submitButton}>
-                    Order a photo shoot
+                  <button type="submit" className={styles.submitButton} disabled={isLoading}>
+                    {isLoading ? 'Loading...' : 'Order a photo shoot'}
                   </button>
                 </form>
               </div>
