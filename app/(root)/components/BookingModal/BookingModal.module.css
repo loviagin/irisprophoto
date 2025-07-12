@@ -299,37 +299,3 @@
     padding: 0 !important;
   }
 } 
-
-:global(.react-datepicker-popper) {
-  max-width: 300px !important;
-  width: 300px !important;
-}
-:global(.react-datepicker) {
-  max-width: 300px !important;
-  width: 300px !important;
-  font-size: 13px !important;
-}
-:global(.react-datepicker__month-container) {
-  max-width: 300px !important;
-  width: 300px !important;
-}
-:global(.react-datepicker__day),
-:global(.react-datepicker__day-name) {
-  width: 32px !important;
-  height: 32px !important;
-  line-height: 32px !important;
-  font-size: 13px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-} 
-
-:global(.react-datepicker-popper),
-:global(.react-datepicker),
-:global(.react-datepicker__month-container) {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-} 
-
-:global(.react-datepicker__current-month) {
-  font-size: 20px !important;
-} 

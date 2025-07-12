@@ -45,3 +45,36 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* Глобальные стили для react-datepicker */
+.react-datepicker-popper {
+  max-width: 300px !important;
+  width: 300px !important;
+}
+.react-datepicker {
+  max-width: 300px !important;
+  width: 300px !important;
+  font-size: 13px !important;
+}
+.react-datepicker__month-container {
+  max-width: 300px !important;
+  width: 300px !important;
+}
+.react-datepicker__day,
+.react-datepicker__day-name {
+  width: 32px !important;
+  height: 32px !important;
+  line-height: 32px !important;
+  font-size: 13px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.react-datepicker-popper,
+.react-datepicker,
+.react-datepicker__month-container {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+.react-datepicker__current-month {
+  font-size: 20px !important;
+}
