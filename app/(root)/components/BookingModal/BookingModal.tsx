@@ -72,7 +72,17 @@ export default function BookingModal({
 
     if (isOpen) {
       fetchBookedSlots();
+      // Prevent body scroll when modal is open
+      document.body.classList.add('modal-open');
+    } else {
+      // Restore body scroll when modal is closed
+      document.body.classList.remove('modal-open');
     }
+
+    // Cleanup function to restore body scroll
+    return () => {
+      document.body.classList.remove('modal-open');
+    };
   }, [isOpen]);
 
   // Обновляем доступные слоты при изменении даты
@@ -399,7 +409,7 @@ export default function BookingModal({
                         dateFormat="MMMM d, yyyy"
                         className={styles.dateInput}
                         placeholderText="Select date"
-                        popperPlacement="top-start"
+                        popperPlacement="bottom"
                       />
                     </div>
                     <div className={styles.formGroup}>

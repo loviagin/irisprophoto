@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  overflow: hidden;
 }
 
 .modal {
@@ -20,6 +21,8 @@
   position: relative;
   max-height: 90vh;
   z-index: 1000;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .modalClose {
@@ -121,6 +124,7 @@
   border-radius: 10px;
   transition: all 0.3s ease;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .dateInput:focus {
@@ -201,9 +205,131 @@
   .modal {
     width: 95%;
     padding: 20px;
+    max-height: 85vh;
+    margin: 20px;
   }
 
   .modalContent h2 {
     font-size: 1.5rem;
   }
+
+  .dateInput {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  /* Fix calendar positioning on mobile */
+  .react-datepicker-popper {
+    max-width: 250px !important;
+  }
+  .react-datepicker {
+    max-width: 250px !important;
+    font-size: 11px !important;
+  }
+
+  /* Prevent body scroll when modal is open */
+  body.modal-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+
+  /* Additional mobile calendar improvements */
+  .react-datepicker__header {
+    background-color: var(--background) !important;
+    border-bottom: 1px solid var(--background-alt) !important;
+  }
+
+  .react-datepicker__day {
+    color: var(--text-color) !important;
+    background-color: var(--background) !important;
+  }
+
+  .react-datepicker__day:hover {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+  }
+
+  .react-datepicker__day--selected {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+  }
+
+  .react-datepicker__day--keyboard-selected {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+  }
+
+  .react-datepicker__navigation {
+    color: var(--primary-color) !important;
+  }
+
+  .react-datepicker__current-month {
+    color: var(--text-color) !important;
+  }
+
+  .react-datepicker__day-name {
+    color: var(--text-light) !important;
+  }
+
+  /* Ensure form elements are properly sized on mobile */
+  .formGroup input,
+  .formGroup textarea,
+  .formGroup select {
+    min-height: 44px; /* Minimum touch target size */
+  }
+
+  /* Improve button touch target */
+  .submitButton {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  /* Ensure calendar elements fit properly */
+  .react-datepicker__month-container {
+    max-width: 250px !important;
+  }
+
+  .react-datepicker__day,
+  .react-datepicker__day-name {
+    width: 24px !important;
+    height: 24px !important;
+    line-height: 24px !important;
+    font-size: 11px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+} 
+
+:global(.react-datepicker-popper) {
+  max-width: 300px !important;
+  width: 300px !important;
+}
+:global(.react-datepicker) {
+  max-width: 300px !important;
+  width: 300px !important;
+  font-size: 13px !important;
+}
+:global(.react-datepicker__month-container) {
+  max-width: 300px !important;
+  width: 300px !important;
+}
+:global(.react-datepicker__day),
+:global(.react-datepicker__day-name) {
+  width: 32px !important;
+  height: 32px !important;
+  line-height: 32px !important;
+  font-size: 13px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+} 
+
+:global(.react-datepicker-popper),
+:global(.react-datepicker),
+:global(.react-datepicker__month-container) {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+} 
+
+:global(.react-datepicker__current-month) {
+  font-size: 20px !important;
 } 
