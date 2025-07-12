@@ -189,7 +189,7 @@ export default function Header() {
                       className={styles.ctaButton}
                       onClick={() => setIsModalOpen(true)}
                     >
-                      Order a photo shoot
+                      Order a photo session
                     </button>
                     {/* <button
                       className={styles.dropdownToggle}
@@ -290,7 +290,7 @@ export default function Header() {
                           setIsMenuOpen(false);
                         }}
                       >
-                        Order a photo shoot
+                        Order a photo session
                       </button>
                     </div>
                   </motion.li>

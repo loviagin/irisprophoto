@@ -25,21 +25,18 @@ export default function BookingModal({
   const bookingInterval = 60;
 
   // Функция для проверки, является ли дата воскресеньем
-  const isSunday = (date: Date) => {
-    return date.getDay() === 0;
-  }
+  // const isSunday = (date: Date) => {
+  //   return date.getDay() === 0;
+  // }
 
   // Функция для фильтрации дат (исключаем воскресенья)
   const filterDate = (date: Date) => {
-    return !isSunday(date);
+    return true;
   }
 
   // Функция для получения следующей доступной даты
   const getNextAvailableDate = (date: Date) => {
     const nextDate = new Date(date);
-    while (isSunday(nextDate)) {
-      nextDate.setDate(nextDate.getDate() + 1);
-    }
     nextDate.setHours(0, 0, 0, 0);
     return nextDate;
   }
@@ -257,9 +254,9 @@ export default function BookingModal({
       newDateTime.setHours(0, 0, 0, 0)
 
       // Если выбранная дата - воскресенье, переносим на следующий день
-      if (isSunday(newDateTime)) {
-        newDateTime.setDate(newDateTime.getDate() + 1);
-      }
+      // if (isSunday(newDateTime)) {
+      //   newDateTime.setDate(newDateTime.getDate() + 1);
+      // }
 
       setFormData(prev => ({
         ...prev,
@@ -402,6 +399,7 @@ export default function BookingModal({
                         dateFormat="MMMM d, yyyy"
                         className={styles.dateInput}
                         placeholderText="Select date"
+                        popperPlacement="top-start"
                       />
                     </div>
                     <div className={styles.formGroup}>
@@ -437,7 +435,7 @@ export default function BookingModal({
                   </div>
 
                   <button type="submit" className={styles.submitButton} disabled={isLoading}>
-                    {isLoading ? 'Loading...' : 'Order a photo shoot'}
+                    {isLoading ? 'Loading...' : 'Order a photo session'}
                   </button>
                 </form>
               </div>
