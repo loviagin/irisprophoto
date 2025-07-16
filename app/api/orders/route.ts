@@ -24,13 +24,22 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
     }
 
-    const response = await notion.databases.query({
-        database_id: process.env.NOTION_DATABASE_ID!,
-    })
+    let allResults: any[] = []
+    let hasMore = true
+    let startCursor: string | undefined = undefined
 
-    //   console.log(JSON.stringify(response.results[0], null, 2))
+    while (hasMore) {
+        const response = await notion.databases.query({
+            database_id: process.env.NOTION_DATABASE_ID!,
+            start_cursor: startCursor,
+        })
 
-    const orders: Order[] = response.results.map((item: any) => {
+        allResults = allResults.concat(response.results)
+        hasMore = response.has_more
+        startCursor = response.next_cursor || undefined
+    }
+
+    const orders: Order[] = allResults.map((item: any) => {
         return {
             id: item.id,
             order: item.properties['Order'].title?.[0]?.plain_text || '',
