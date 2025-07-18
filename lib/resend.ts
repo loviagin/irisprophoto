@@ -19,7 +19,7 @@ export const sendCertificateEmail = async ({
 }) => {
   try {
     const data = await resend.emails.send({
-      from: 'Iris Pro Photo <voroninsfamilyllc@gmail.com>',
+      from: 'Iris Pro Photo <noreply@irisprophoto.me>',
       to: email,
       subject: 'Ваш подарочный сертификат Iris Pro Photo',
       html: `
