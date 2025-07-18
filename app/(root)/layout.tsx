@@ -10,9 +10,31 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "Iris PRO Photo",
-  description: "",
+  title: "Iris PRO Photo – Art from Your Eye’s Iris",
+  description: "We turn a photo of your eye’s iris into stunning artwork with effects and print it as a memorable gift. Unique, personal, and beautiful.",
   authors: [{ name: "LOVIGIN LTD", url: "https://lovigin.com" }],
+  keywords: ["iris pro photo", "iris photo", "iris photography", "eye art", "iris artwork", "iris portrait", "personalized gift", "unique gift", "eye picture art", "irisprophoto", "eye print"],
+  openGraph: {
+    title: "Iris PRO Photo – Art from Your Eye’s Iris",
+    description: "We turn a photo of your eye’s iris into stunning artwork with effects and print it as a memorable gift. Unique, personal, and beautiful.",
+    images: ["/images/Galaxy 1.png"],
+  },
+  twitter: {  
+    card: "summary_large_image",
+    title: "Iris PRO Photo – Art from Your Eye’s Iris",
+    description: "We turn a photo of your eye’s iris into stunning artwork with effects and print it as a memorable gift. Unique, personal, and beautiful.",
+    images: ["/images/Galaxy 1.png"],
+  },
+  alternates: {
+    canonical: "https://irisprophoto.me",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
