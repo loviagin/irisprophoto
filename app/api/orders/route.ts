@@ -89,12 +89,12 @@ export async function POST(req: NextRequest) {
             parent: {
                 database_id: process.env.NOTION_DATABASE_ID!,
             },
-            icon: {
-                type: 'external',
-                external: {
-                    url: "https://www.notion.so/icons/compose_purple.svg"
-                }
-            },
+            // icon: {
+            //     type: 'external',
+            //     external: {
+            //         url: "https://www.notion.so/icons/compose_purple.svg"
+            //     }
+            // },
             properties: {
                 'Order': {
                     title: [
