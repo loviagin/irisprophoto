@@ -1,6 +1,8 @@
 import apn from 'apn'
 import fs from 'fs'
 import path from 'path'
+import { connectToDatabase } from './db'
+import Device from '@/models/Device'
 
 // Путь к .p8 ключу
 const keyPath = path.resolve('./AuthKey_5SA8A55MT8.p8')
@@ -29,6 +31,15 @@ export async function sendApnPush(deviceToken: string, title: string, body: stri
 
     if (result.failed.length > 0) {
       console.warn('❌ Ошибки отправки:', result.failed)
+      // Удаляем невалидные токены из базы
+      await connectToDatabase()
+      for (const fail of result.failed) {
+        if (fail.device && fail.error) {
+          // Удаляем токен устройства
+          await Device.deleteOne({ token: fail.device })
+          console.log(`Удалён невалидный токен устройства: ${fail.device}`)
+        }
+      }
     }
   } catch (err) {
     console.error('❌ Ошибка при отправке APNs:', err)
