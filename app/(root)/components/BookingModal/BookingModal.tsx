@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaTimes, FaCamera, FaCalendarAlt, FaEnvelope, FaPhone, FaClock, FaUser } from "react-icons/fa"
+import { FaTimes, FaCamera, FaCalendarAlt, FaEnvelope, FaPhone, FaClock, FaUser, FaGift } from "react-icons/fa"
 import styles from './BookingModal.module.css'
 import Portal from '../Portal/Portal'
 import { PatternFormat } from 'react-number-format'
@@ -47,7 +47,8 @@ export default function BookingModal({
     email: '',
     shootingType: 'one-two',
     dateTime: getNextAvailableDate(new Date()), // Инициализируем с первой доступной датой
-    details: ''
+    details: '',
+    promocode: ''
   })
 
   const [bookedSlots, setBookedSlots] = useState<Array<{ bookingDateTime: string }>>([]);
@@ -174,7 +175,7 @@ export default function BookingModal({
       order: 'New order from site',
       status: 'New',
       date: selectedDateTime.toISOString(),
-      comment: formDataToSend.shootingType + ' ' + formDataToSend.details,
+      comment: formDataToSend.shootingType + ' ' + (formData.promocode.length > 0 ? 'Promocode: ' + formData.promocode : '') + ' ' + formDataToSend.details,
       email: formDataToSend.email || undefined,
       name: formDataToSend.name,
       phone: formDataToSend.phone || undefined,
@@ -244,7 +245,8 @@ export default function BookingModal({
         phone: "",
         shootingType: "wedding",
         dateTime: new Date(),
-        details: ""
+        details: "",
+        promocode: ""
       });
     } else {
       alert("❌ Error: " + result.error);
@@ -441,6 +443,17 @@ export default function BookingModal({
                       value={formData.details}
                       onChange={handleInputChange}
                       rows={4}
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <FaGift className={styles.formIcon} />
+                    <input
+                      type="text"
+                      name="promocode"
+                      placeholder="Promocode (if you have one)"
+                      value={formData.promocode}
+                      onChange={handleInputChange}
                     />
                   </div>
 

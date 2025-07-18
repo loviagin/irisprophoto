@@ -87,7 +87,7 @@ export default function NewContacts() {
                 <div className={styles.contactInfo}>
                   <h3>Contacts</h3>
                   <a href="tel:+19048359485"><b>Phone: </b>+1 (904) 835-94-85</a><br /> 
-                  <a href="mailto:voroninsfamily@irisprophoto.org"><b>Email: </b>voroninsfamily@irisprophoto.org</a>
+                  <a href="mailto:voroninsfamilyllc@gmail.com"><b>Email: </b>Voroninsfamilyllc@gmail.com</a>
                 </div>
               </div>
 

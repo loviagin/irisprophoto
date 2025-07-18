@@ -44,7 +44,7 @@ function Email(props: EmailProps) {
 
             <Button
               style={button}
-              href="https://irisprophoto.me/"
+              href="https://irisprophoto.me/book"
             >
               Book a photo session
             </Button>
@@ -52,7 +52,7 @@ function Email(props: EmailProps) {
             <Hr style={hr} />
 
             <Text style={footer}>
-              If you have any questions, please contact us by email: <a href="mailto:voroninsfamily@irisprophoto.org">voroninsfamily@irisprophoto.org</a>
+              If you have any questions, please contact us by email: <a href="mailto:voroninsfamilyllc@gmail.com">Voroninsfamilyllc@gmail.com</a>
             </Text>
           </Section>
         </Container>

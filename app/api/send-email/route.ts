@@ -47,9 +47,9 @@ export async function POST(req: NextRequest) {
         // });
 
         const data = await resend.emails.send({
-            from: 'noreply@irisprophoto.me',
+            from: 'voroninsfamilyllc@gmail.com',
             to: email,
-            cc: 'voroninsfamily@irisprophoto.org',
+            cc: 'voroninsfamilyllc@gmail.com',
             subject: 'New certificate purchase on Iris Pro Photo',
             html,
         });

@@ -43,9 +43,9 @@ export async function POST(req: NextRequest) {
         const html = await render(React.createElement(Email, { name, date }));
         console.log(html)
         const data = await resend.emails.send({
-            from: 'noreply@irisprophoto.me',
+            from: 'voroninsfamilyllc@gmail.com',
             to: email,
-            cc: 'voroninsfamily@irisprophoto.org',
+            cc: 'voroninsfamilyllc@gmail.com',
             subject: 'New order from site on Iris Pro Photo',
             html,
         });

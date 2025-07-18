@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   const lastUpdated = "February 28, 2025";
-  const contactEmail = "voroninsfamily@irisprophoto.org";
+  const contactEmail = "voroninsfamilyllc@gmail.com";
 
   return (
     <main className={styles.container}>

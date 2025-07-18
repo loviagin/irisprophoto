@@ -42,7 +42,7 @@ function Email(props: EmailProps) {
             <Text style={footer}>
               If you have any questions or need to make changes, please contact us:
               <br />
-              Email: <a href="mailto:voroninsfamily@irisprophoto.org">voroninsfamily@irisprophoto.org</a>
+              Email: <a href="mailto:voroninsfamilyllc@gmail.com">Voroninsfamilyllc@gmail.com</a>
               <br />
               Phone: <a href="tel:+19048359485">+1 (904) 835-94-85</a>
             </Text>
