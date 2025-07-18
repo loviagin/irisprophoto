@@ -175,7 +175,7 @@ export default function BookingModal({
       order: 'New order from site',
       status: 'New',
       date: selectedDateTime.toISOString(),
-      comment: formDataToSend.shootingType + ' ' + (formData.promocode.length > 0 ? 'Promocode: ' + formData.promocode : '') + ' ' + formDataToSend.details,
+      comment: 'Type: ' + formDataToSend.shootingType + '. ' + (formData.promocode.length > 0 ? 'Promocode: ' + formData.promocode : '') + '. ' + formDataToSend.details,
       email: formDataToSend.email || undefined,
       name: formDataToSend.name,
       phone: formDataToSend.phone || undefined,
