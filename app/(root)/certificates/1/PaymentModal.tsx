@@ -38,8 +38,16 @@ const PaymentModal = ({ isOpen, onClose, amount }: PaymentModalProps) => {
                         currencyCode: "USD",
                         total: {
                             label: "Certificate Payment",
-                            amount: (amount).toString(),
+                            amount: amount.toString(),
                         },
+                        lineItems: [
+                            {
+                                label: "Gift Certificate",
+                                amount: amount.toString(),
+                                quantity: "1",
+                                catalogObjectId: "TYOQHATDKNHFSNGPVUUW67X2", // <-- подставьте id вашего сертификата
+                            },
+                        ],
                     })}
                     cardTokenizeResponseReceived={async (token) => {
                         console.log("1. Received token:", token);

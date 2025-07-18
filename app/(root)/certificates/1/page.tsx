@@ -1,6 +1,5 @@
 import styles from './page.module.css';
 import Image from 'next/image';
-import Link from 'next/link';
 import { FaClock, FaCalendarAlt } from 'react-icons/fa';
 import { Metadata } from 'next';
 import BuyButton from './BuyButton';

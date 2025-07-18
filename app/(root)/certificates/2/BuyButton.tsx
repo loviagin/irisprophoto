@@ -1,25 +1,17 @@
 'use client';
-import { useState } from 'react';
+import Link from 'next/link';
 import styles from './page.module.css';
-import PaymentModal from './PaymentModal';
 
 const BuyButton = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
     return (
         <>
-            <button
+             <Link
                 className={styles.buyButton}
-                onClick={() => setIsModalOpen(true)}
+                href="https://buy.stripe.com/28EcN602Rgl501IenB5Vu03"
+                target='_blank'
             >
                 Buy for $185
-            </button>
-
-            <PaymentModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                amount={185}
-            />
+            </Link>
         </>
     );
 };
