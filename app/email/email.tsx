@@ -39,7 +39,7 @@ function Email(props: EmailProps) {
             </Section>
 
             <Text style={text}>
-              To use the certificate, simply present the promo code when booking the photo session. Or simply dictate the code in our office during a photo shoot.
+              To use the certificate, simply present the promo code when booking the photo session. Or simply show the code in our office during a photo shoot.
             </Text>
 
             <Button

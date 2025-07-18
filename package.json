@@ -32,7 +32,8 @@
     "react-number-format": "^5.4.3",
     "react-square-web-payments-sdk": "^3.2.4-beta.1",
     "resend": "^4.1.2",
-    "square": "^42.0.0"
+    "square": "^42.0.0",
+    "stripe": "^18.3.0"
   },
   "devDependencies": {
     "@types/node": "^20",

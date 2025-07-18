@@ -7,27 +7,57 @@ import styles from './page.module.css';
 
 export default function ThankYouPage() {
     const [valid, setValid] = useState<boolean | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
-        const tx = urlParams.get("tx");
+        const sessionId = urlParams.get("session_id");
 
-        if (tx) {
-            fetch("/api/verify-payment", {
+        if (sessionId) {
+            // Проверяем статус сессии через Stripe
+            fetch("/api/verify-stripe-payment", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ tx }),
+                body: JSON.stringify({ session_id: sessionId }),
             })
                 .then((res) => res.json())
-                .then((data) => setValid(data.valid))
-                .catch(() => setValid(false));
+                .then((data) => {
+                    setValid(data.valid);
+                    setLoading(false);
+                })
+                .catch((error) => {
+                    console.error("Error verifying payment:", error);
+                    setValid(false);
+                    setLoading(false);
+                });
         } else {
             setValid(false);
+            setLoading(false);
         }
     }, []);
 
-    if (valid === null) return <section className={styles.hero}><p>Проверка оплаты...</p> </section>;
-    if (valid === false) return <section className={styles.hero}><p>Ошибка: транзакция недействительна.</p></section>;
+    if (loading) return (
+        <section className={styles.hero}>
+            <div className={styles.gradientBackground} />
+            <div className={styles.heroContent}>
+                <h1 className={styles.heroTitle}>Verifying payment...</h1>
+                <p className={styles.heroSubtitle}>Please wait while we confirm your payment.</p>
+            </div>
+        </section>
+    );
+
+    if (valid === false) return (
+        <section className={styles.hero}>
+            <div className={styles.gradientBackground} />
+            <div className={styles.heroContent}>
+                <h1 className={styles.heroTitle}>Payment verification failed</h1>
+                <p className={styles.heroSubtitle}>We couldn't verify your payment. Please contact support if you believe this is an error.</p>
+                <Link href="/#contacts" className={styles.button}>
+                    Contact support
+                </Link>
+            </div>
+        </section>
+    );
 
     return (
         <main className={styles.container}>
@@ -79,10 +109,10 @@ export default function ThankYouPage() {
                     </div>
 
                     <div className={styles.actions}>
-                        <Link href="/certificates" className={styles.button}>
-                            Back to certificates
+                        <Link href="/book" className={styles.button}>
+                            Book a photo session
                         </Link>
-                        <Link href="/contact" className={`${styles.button} ${styles.secondaryButton}`}>
+                        <Link href="/#contacts" className={`${styles.button} ${styles.secondaryButton}`}>
                             Contact us
                         </Link>
                     </div>
