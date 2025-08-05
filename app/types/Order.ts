@@ -28,4 +28,5 @@ export interface Order {
     typeOfDelivery?: Delivery
     effect?: Effect
     createdAt?: string
+    icon?: string
 }

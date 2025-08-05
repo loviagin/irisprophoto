@@ -28,9 +28,9 @@ export async function POST(req: NextRequest) {
     }
 
     try {
-        const { name, email, date } = await req.json();
+        const { name, email, date, orderId } = await req.json();
         await connectToDatabase();
-        console.log(name, email, date)
+        console.log(name, email, date, orderId)
         
         if (!name || !email || !date) {
             return NextResponse.json(
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
 
         const tokens: string[] = await Device.find().distinct('token')
         for (const token of tokens) {
-            await sendApnPush(token, `📷 Новый заказ от ${name}!`, 'Проверь в приложении')
+            await sendApnPush(token, `📷 Новый заказ от ${name}!`, 'Проверь в приложении', orderId)
         }
 
         return NextResponse.json({ success: true, data });

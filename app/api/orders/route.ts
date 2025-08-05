@@ -24,6 +24,52 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
     }
 
+    const id = req.nextUrl.searchParams.get('id')
+
+    if (id) {
+        try {
+            const page = await notion.pages.retrieve({ page_id: id })
+
+            if (!page || (page as any).object === 'error') {
+                return NextResponse.json({ success: false, error: 'Order not found' }, { status: 404 })
+            }
+
+            const order: Order = {
+                id: page.id,
+                order: (page as any).properties['Order'].title?.[0]?.plain_text || '',
+                status: (page as any).properties['Status'].status?.name || '',
+                date: (page as any).properties['Date'].date?.start || '',
+                address: (page as any).properties['Address'].rich_text?.[0]?.plain_text || '',
+                comment: (page as any).properties['Comment'].rich_text?.[0]?.plain_text || '',
+                companies: (page as any).properties['Companies'].select?.name || '',
+                decor: (page as any).properties['Decor'].select?.name || '',
+                email: (page as any).properties['Email'].email || '',
+                frame: (page as any).properties['Frame #'].rich_text?.[0]?.plain_text || '',
+                material: (page as any).properties['Material'].select?.name || '',
+                name: (page as any).properties['Name'].rich_text?.[0]?.plain_text || '',
+                phone: (page as any).properties['Phone number'].rich_text?.[0]?.plain_text || '',
+                position: (page as any).properties['Position'].select?.name || '',
+                size: (page as any).properties['Size'].select?.name || '',
+                track1: (page as any).properties['Track #'].rich_text?.[0]?.plain_text || '',
+                track2: (page as any).properties['Track # 1'].rich_text?.[0]?.plain_text || '',
+                typeOfDelivery: (page as any).properties['Type of delivery'].select?.name || '',
+                effect: (page as any).properties['effect'].select?.name || '',
+                createdAt: (page as any).properties['createdAt'].date?.start || '',
+                icon: (page as any).icon?.type === 'emoji'
+                    ? (page as any).icon.emoji
+                    : (page as any).icon?.type === 'external'
+                        ? (page as any).icon.external.url
+                        : null,
+            }
+
+            return NextResponse.json(order, {
+                headers: { 'Content-Type': 'application/json; charset=utf-8' },
+            })
+        } catch (err) {
+            return NextResponse.json({ success: false, error: 'Invalid ID' }, { status: 400 })
+        }
+    }
+
     let allResults: any[] = []
     let hasMore = true
     let startCursor: string | undefined = undefined
@@ -89,12 +135,12 @@ export async function POST(req: NextRequest) {
             parent: {
                 database_id: process.env.NOTION_DATABASE_ID!,
             },
-            // icon: {
-            //     type: 'external',
-            //     external: {
-            //         url: "https://www.notion.so/icons/compose_purple.svg"
-            //     }
-            // },
+            icon: {
+                type: 'external',
+                external: { //CHECK THE ICONS
+                    url: data.order === "New order from site" ? "https://www.notion.so/icons/compose_purple.svg" : "https://www.notion.so/icons/globe_purple.svg"
+                }
+            },
             properties: {
                 'Order': {
                     title: [
