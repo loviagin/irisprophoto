@@ -53,7 +53,7 @@ export async function GET(req: NextRequest) {
 
             const tokens: string[] = await Device.find().distinct('token')
             for (const token of tokens) {
-                await sendApnPush(token, '📷 Новый заказ!', 'Проверь в приложении')
+                await sendApnPush(token, '📷 Новый заказ!', 'Проверь в приложении', "")
             }
         }
 
