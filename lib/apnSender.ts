@@ -23,8 +23,11 @@ export async function sendApnPush(deviceToken: string, title: string, body: stri
   notification.topic = process.env.APN_BUNDLE_ID! // Bundle ID приложения
   notification.alert = { title, body }
   notification.sound = 'default'
-  notification.payload = { type: 'new_order', orderId: orderId }
-  notification.urlArgs = [`irisproadmin://open=${orderId}`]
+  notification.payload = { 
+    type: 'new_order', 
+    orderId,
+    deepLink: `irisproadmin://open=${orderId}` // передаём сюда
+  }
 
   try {
     const result = await apnProvider.send(notification, deviceToken)
