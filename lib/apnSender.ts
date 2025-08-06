@@ -14,7 +14,7 @@ const apnProvider = new apn.Provider({
     keyId: process.env.APN_KEY_ID!,
     teamId: process.env.APN_TEAM_ID!,
   },
-  production: true, 
+  production: false, // Изменено на false для тестирования
 })
 
 export async function sendApnPush(deviceToken: string, title: string, body: string, orderId: string) {
@@ -23,11 +23,31 @@ export async function sendApnPush(deviceToken: string, title: string, body: stri
   notification.topic = process.env.APN_BUNDLE_ID! // Bundle ID приложения
   notification.alert = { title, body }
   notification.sound = 'default'
-  notification.payload = { 
-    type: 'new_order', 
-    orderId,
-    deepLink: `irisproadmin://open=${orderId}` // передаём сюда
+  
+  // Структура как в OneSignal для работы с onOpenURL
+  notification.payload = {
+    aps: {
+      alert: {
+        title: title,
+        body: body
+      },
+      sound: 'default'
+    },
+    data: {
+      orderId: orderId,
+      deepLink: `irisproadmin://open=${orderId}`,
+      testData: "test_value",
+      timestamp: new Date().toISOString()
+    }
   }
+
+  console.log('🔧 APN настройки:', {
+    bundleId: process.env.APN_BUNDLE_ID,
+    keyId: process.env.APN_KEY_ID,
+    teamId: process.env.APN_TEAM_ID,
+    production: false,
+    payload: notification.payload
+  });
 
   try {
     const result = await apnProvider.send(notification, deviceToken)

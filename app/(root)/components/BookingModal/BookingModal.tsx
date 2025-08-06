@@ -54,6 +54,7 @@ export default function BookingModal({
   const [bookedSlots, setBookedSlots] = useState<Array<{ bookingDateTime: string }>>([]);
   const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [orderId, setOrderId] = useState('');
 
   useEffect(() => {
     const fetchBookedSlots = async () => {
@@ -189,10 +190,9 @@ export default function BookingModal({
     });
 
     const result = await response.json();
+    setOrderId(result.id);
 
     if (result.success) {
-      let orderId = ""
-
       try {
         const response = await fetch("/api/bookings", {
           method: "POST",
@@ -208,7 +208,6 @@ export default function BookingModal({
         });
 
         const result = await response.json();
-        orderId = result.order.id
       } catch (error) {
         console.error('Error creating booking:', error);
         alert("An error occurred while creating an order. Please try again later.");
