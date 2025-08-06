@@ -54,7 +54,6 @@ export default function BookingModal({
   const [bookedSlots, setBookedSlots] = useState<Array<{ bookingDateTime: string }>>([]);
   const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [orderId, setOrderId] = useState('');
 
   useEffect(() => {
     const fetchBookedSlots = async () => {
@@ -190,11 +189,10 @@ export default function BookingModal({
     });
 
     const result = await response.json();
-    setOrderId(result.id);
 
     if (result.success) {
       try {
-        const response = await fetch("/api/bookings", {
+        const bookingResponse = await fetch("/api/bookings", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -207,14 +205,14 @@ export default function BookingModal({
           }),
         });
 
-        const result = await response.json();
+        const bookingResult = await bookingResponse.json();
       } catch (error) {
         console.error('Error creating booking:', error);
         alert("An error occurred while creating an order. Please try again later.");
       }
 
       if (formDataToSend.email) {
-        const res = await fetch('/api/email-order', {
+        const emailResponse = await fetch('/api/email-order', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -231,11 +229,11 @@ export default function BookingModal({
               minute: '2-digit',
               hour12: false
             }),
-            orderId: orderId
+            orderId: result.id // Используем result.id напрямую
           }),
         });
 
-        const result = await res.json();
+        const emailResult = await emailResponse.json();
       }
 
       console.log(JSON.stringify(order))

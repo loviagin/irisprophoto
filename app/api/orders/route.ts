@@ -276,6 +276,7 @@ export async function POST(req: NextRequest) {
             },
         })
 
+        console.log(response.id)
         return NextResponse.json({ success: true, id: response.id })
     } catch (error: any) {
         return NextResponse.json({ success: false, error: error.message }, { status: 500 })
