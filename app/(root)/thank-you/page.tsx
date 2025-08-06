@@ -8,6 +8,9 @@ import styles from './page.module.css';
 export default function ThankYouPage() {
     const [valid, setValid] = useState<boolean | null>(null);
     const [loading, setLoading] = useState(true);
+    const [email, setEmail] = useState<string | null>(null);
+    const [orderId, setOrderId] = useState<string | null>(null);
+    const [emailSent, setEmailSent] = useState(false);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -23,6 +26,8 @@ export default function ThankYouPage() {
                 .then((res) => res.json())
                 .then((data) => {
                     setValid(data.valid);
+                    setEmail(data.email);
+                    setOrderId(data.orderNumber);
                     setLoading(false);
                 })
                 .catch((error) => {
@@ -35,6 +40,47 @@ export default function ThankYouPage() {
             setLoading(false);
         }
     }, []);
+
+    // Отдельный useEffect для отправки email
+    useEffect(() => {
+        const sendEmail = async () => {
+            if (valid === true && email && orderId && !emailSent) {
+                console.log("4. Payment completed, sending email to:", email);
+                try {
+                    const res = await fetch('/api/send-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`
+                        },
+                        body: JSON.stringify({ orderId: orderId, email: email, type: 'Family Photo Certificate' }),
+                    });
+
+                    if (res.ok) {
+                        const responseData = await res.json();
+                        console.log("5. Email sent successfully:", responseData);
+                        setEmailSent(true);
+                        alert("✅ Payment successful! Check your email for the certificate.");
+                    } else {
+                        const errorText = await res.text();
+                        console.error("5. Email sending failed:", {
+                            status: res.status,
+                            statusText: res.statusText,
+                            error: errorText
+                        });
+                        setEmailSent(true);
+                        alert("❌ Payment successful, but email not sent. Please contact support.");
+                    }
+                } catch (error) {
+                    console.error("Error sending email:", error);
+                    setEmailSent(true);
+                    alert("❌ Payment successful, but email not sent. Please contact support.");
+                }
+            }
+        };
+
+        sendEmail();
+    }, [valid, email, orderId, emailSent]);
 
     if (loading) return (
         <section className={styles.hero}>

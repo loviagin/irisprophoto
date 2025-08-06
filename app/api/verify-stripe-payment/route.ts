@@ -27,9 +27,21 @@ export async function POST(request: Request) {
     // Получаем информацию о сессии из Stripe
     const session = await stripe.checkout.sessions.retrieve(session_id);
 
+    // Получаем email покупателя
+    let email = session.customer_email;
+    if (!email && session.customer_details && session.customer_details.email) {
+      email = session.customer_details.email;
+    }
+
+    // Получаем номер заказа из metadata
+    let orderNumber = undefined;
+    if (session.metadata && session.metadata.order_id) {
+      orderNumber = session.metadata.order_id;
+    }
+
     // Проверяем статус платежа
     if (session.payment_status === 'paid' && session.status === 'complete') {
-      return NextResponse.json({ valid: true, session });
+      return NextResponse.json({ valid: true, email, orderNumber, session });
     } else {
       return NextResponse.json({ valid: false, session });
     }
