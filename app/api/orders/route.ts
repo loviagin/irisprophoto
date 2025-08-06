@@ -138,7 +138,7 @@ export async function POST(req: NextRequest) {
             icon: {
                 type: 'external',
                 external: { //CHECK THE ICONS
-                    url: data.order === "New order from site" ? "https://www.notion.so/icons/compose_purple.svg" : "https://www.notion.so/icons/globe_purple.svg"
+                    url: data.order === "New order from site" ? "https://www.notion.so/icons/globe_purple.svg" : "https://www.notion.so/icons/compose_purple.svg"
                 }
             },
             properties: {
