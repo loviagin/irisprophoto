@@ -55,20 +55,20 @@ export async function sendApnPush(deviceToken: string, title: string, body: stri
 
     if (result.failed.length > 0) {
       console.warn('❌ Ошибки отправки:', JSON.stringify(result.failed, null, 2))
-      await connectToDatabase();
-      for (const fail of result.failed) {
-        // Попробуем разные варианты названия поля
-        console.log(fail)
-        const token =
-          fail.device ||
-          fail['device'] 
-        if (token) {
-          await Device.deleteOne({ token });
-          console.log(`Удалён невалидный токен устройства: ${token}`);
-        } else {
-          console.warn('Не удалось определить токен устройства для удаления:', fail);
-        }
-      }
+    //   await connectToDatabase();
+    //   for (const fail of result.failed) {
+    //     // Попробуем разные варианты названия поля
+    //     console.log(fail)
+    //     const token =
+    //       fail.device ||
+    //       fail['device'] 
+    //     if (token) {
+    //       await Device.deleteOne({ token });
+    //       console.log(`Удалён невалидный токен устройства: ${token}`);
+    //     } else {
+    //       console.warn('Не удалось определить токен устройства для удаления:', fail);
+    //     }
+    //   }
     }
   } catch (err) {
     console.error('❌ Ошибка при отправке APNs:', err)
