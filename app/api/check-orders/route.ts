@@ -23,6 +23,28 @@ function verifyToken(req: NextRequest): boolean {
     }
 }
 
+async function getTodaysDeliveries(): Promise<number> {
+    try {
+        const today = new Date()
+        const todayString = today.toISOString().split('T')[0]
+
+        const notionResponse = await notion.databases.query({
+            database_id: databaseId,
+            filter: {
+                property: 'Delivery Date',
+                date: {
+                    equals: todayString
+                }
+            }
+        })
+
+        return notionResponse.results.length
+    } catch (error) {
+        console.error('❌ Ошибка при получении заказов на доставку:', error)
+        return 0
+    }
+}
+
 export async function GET(req: NextRequest) {
     if (!verifyToken(req)) {
         return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
@@ -90,19 +112,33 @@ export async function POST(req: NextRequest) {
         const todaysOrders = notionResponse.results
         const orderCount = todaysOrders.length
 
-        if (orderCount > 0) {
-            console.log(`📅 Найдено заказов на сегодня (${todayString}):`, orderCount)
+        // Получаем количество заказов на доставку на сегодня
+        const deliveryCount = await getTodaysDeliveries()
+
+            console.log(`📅 Найдено заказов на сегодня (${todayString}): ${orderCount}, доставок: ${deliveryCount}`)
 
             // Получаем все токены устройств
             const devices = await Device.find()
             
             if (devices.length > 0) {
+                // Формируем текст уведомления
+                let notificationTitle = '📅 Заказы и доставки на сегодня'
+                let notificationBody = ''
+
+                if (orderCount > 0 && deliveryCount > 0) {
+                    notificationBody = `У вас ${orderCount} заказ(ов) и ${deliveryCount} доставок на сегодня`
+                } else if (orderCount > 0) {
+                    notificationBody = `У вас ${orderCount} заказ(ов) на сегодня. Доставок на сегодня нет`
+                } else if (deliveryCount > 0) {
+                    notificationBody = `У вас ${deliveryCount} доставок на сегодня. Заказов на сегодня нет`
+                }
+
                 // Отправляем уведомление на все устройства
                 for (const device of devices) {
                     await sendApnPush(
                         device.token, 
-                        `📅 Заказы на сегодня`, 
-                        `У вас ${orderCount} заказ(ов) на сегодня`, 
+                        notificationTitle, 
+                        notificationBody, 
                         "today-orders"
                     )
                 }
@@ -111,13 +147,11 @@ export async function POST(req: NextRequest) {
             } else {
                 console.log('⚠️ Нет зарегистрированных устройств для отправки уведомлений')
             }
-        } else {
-            console.log(`📅 На сегодня (${todayString}) заказов нет`)
-        }
-
+    
         return NextResponse.json({ 
             success: true, 
             todaysOrders: orderCount,
+            todaysDeliveries: deliveryCount,
             date: todayString
         })
     } catch (error: any) {

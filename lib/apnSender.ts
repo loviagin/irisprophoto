@@ -14,7 +14,7 @@ const apnProvider = new apn.Provider({
     keyId: process.env.APN_KEY_ID!,
     teamId: process.env.APN_TEAM_ID!,
   },
-  production: true, // Изменено на false для тестирования
+  production: false, 
 })
 
 export async function sendApnPush(deviceToken: string, title: string, body: string, orderId: string) {
