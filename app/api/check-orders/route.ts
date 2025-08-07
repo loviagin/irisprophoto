@@ -64,55 +64,64 @@ export async function GET(req: NextRequest) {
     }
 }
 
-// export async function GET(req: NextRequest) {
-//     if (!verifyToken(req)) {
-//         return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
-//     }
+export async function POST(req: NextRequest) {
+    if (!verifyToken(req)) {
+        return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
+    }
 
-//     try {
-//         // Подключение к MongoDB
-//         await connectToDatabase()
+    try {
+        // await connectToDatabase()
 
-//         // Получение последнего известного ID из БД
-//         const meta = await Meta.findById('last_order_id')
-//         const savedLastId = meta?.value || null
+        // Получаем сегодняшнюю дату в формате YYYY-MM-DD
+        const today = new Date()
+        const todayString = today.toISOString().split('T')[0]
 
-//         // Получение самого нового заказа из Notion
-//         const response = await notion.databases.query({
-//             database_id: databaseId,
-//             sorts: [{ property: 'Date', direction: 'descending' }],
-//             page_size: 1,
-//         })
+        // Получаем заказы на сегодня
+        const notionResponse = await notion.databases.query({
+            database_id: databaseId,
+            filter: {
+                property: 'Date',
+                date: {
+                    equals: todayString
+                }
+            }
+        })
 
-//         const first = response.results[0]
-//         if (!first) {
-//             return NextResponse.json({ success: true, message: 'No entries found' })
-//         }
+        const todaysOrders = notionResponse.results
+        const orderCount = todaysOrders.length
 
-//         // Проверка: новый ли это заказ
-//         if (first.id !== savedLastId) {
-//             if (savedLastId !== null) {
-//                 console.log('📢 Найден новый заказ в Notion:', first.id)
+        if (orderCount > 0) {
+            console.log(`📅 Найдено заказов на сегодня (${todayString}):`, orderCount)
 
-//                 const tokens: string[] = await Device.find().distinct('token')
-//                 console.log(`📬 Отправляем уведомления на ${tokens.length} устройств`)
+            // Получаем все токены устройств
+            // const devices = await Device.find()
+            
+            // if (devices.length > 0) {
+            //     // Отправляем уведомление на все устройства
+            //     for (const device of devices) {
+            //         await sendApnPush(
+            //             device.token, 
+            //             `📅 Заказы на сегодня`, 
+            //             `У вас ${orderCount} заказ(ов) на сегодня`, 
+            //             "today-orders"
+            //         )
+            //     }
+                
+            //     console.log(`✅ Уведомления отправлены на ${devices.length} устройств`)
+            // } else {
+            //     console.log('⚠️ Нет зарегистрированных устройств для отправки уведомлений')
+            // }
+        } else {
+            console.log(`📅 На сегодня (${todayString}) заказов нет`)
+        }
 
-//                 for (const token of tokens) {
-//                     await sendApnPush(token, 'Новый заказ!', 'Открой в приложении')
-//                 }
-//             }
-
-//             // Сохраняем ID нового заказа
-//             await Meta.findByIdAndUpdate(
-//                 'last_order_id',
-//                 { value: first.id },
-//                 { upsert: true }
-//             )
-//         }
-
-//         return NextResponse.json({ success: true, lastId: first.id })
-//     } catch (error: any) {
-//         console.error('❌ Ошибка:', error)
-//         return NextResponse.json({ success: false, error: error.message }, { status: 500 })
-//     }
-// }
+        return NextResponse.json({ 
+            success: true, 
+            todaysOrders: orderCount,
+            date: todayString
+        })
+    } catch (error: any) {
+        console.error('❌ Ошибка при получении заказов на сегодня:', error)
+        return NextResponse.json({ success: false, error: error.message }, { status: 500 })
+    }
+}
