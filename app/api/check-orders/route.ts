@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
     }
 
     try {
-        // await connectToDatabase()
+        await connectToDatabase()
 
         // Получаем сегодняшнюю дату в формате YYYY-MM-DD
         const today = new Date()
@@ -94,23 +94,23 @@ export async function POST(req: NextRequest) {
             console.log(`📅 Найдено заказов на сегодня (${todayString}):`, orderCount)
 
             // Получаем все токены устройств
-            // const devices = await Device.find()
+            const devices = await Device.find()
             
-            // if (devices.length > 0) {
-            //     // Отправляем уведомление на все устройства
-            //     for (const device of devices) {
-            //         await sendApnPush(
-            //             device.token, 
-            //             `📅 Заказы на сегодня`, 
-            //             `У вас ${orderCount} заказ(ов) на сегодня`, 
-            //             "today-orders"
-            //         )
-            //     }
+            if (devices.length > 0) {
+                // Отправляем уведомление на все устройства
+                for (const device of devices) {
+                    await sendApnPush(
+                        device.token, 
+                        `📅 Заказы на сегодня`, 
+                        `У вас ${orderCount} заказ(ов) на сегодня`, 
+                        "today-orders"
+                    )
+                }
                 
-            //     console.log(`✅ Уведомления отправлены на ${devices.length} устройств`)
-            // } else {
-            //     console.log('⚠️ Нет зарегистрированных устройств для отправки уведомлений')
-            // }
+                console.log(`✅ Уведомления отправлены на ${devices.length} устройств`)
+            } else {
+                console.log('⚠️ Нет зарегистрированных устройств для отправки уведомлений')
+            }
         } else {
             console.log(`📅 На сегодня (${todayString}) заказов нет`)
         }
