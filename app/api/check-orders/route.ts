@@ -131,6 +131,8 @@ export async function POST(req: NextRequest) {
                     notificationBody = `У вас ${orderCount} заказ(ов) на сегодня. Доставок на сегодня нет`
                 } else if (deliveryCount > 0) {
                     notificationBody = `У вас ${deliveryCount} доставок на сегодня. Заказов на сегодня нет`
+                } else {
+                    notificationBody = `У вас нет заказов и доставок на сегодня`
                 }
 
                 // Отправляем уведомление на все устройства
