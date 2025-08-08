@@ -1,8 +1,8 @@
 import apn from 'apn'
 import fs from 'fs'
 import path from 'path'
-import { connectToDatabase } from './db'
-import Device from '@/models/Device'
+// import { connectToDatabase } from './db'
+// import Device from '@/models/Device'
 
 // Путь к .p8 ключу
 const keyPath = path.resolve('./AuthKey_5SA8A55MT8.p8')
@@ -14,7 +14,7 @@ const apnProvider = new apn.Provider({
     keyId: process.env.APN_KEY_ID!,
     teamId: process.env.APN_TEAM_ID!,
   },
-  production: true, 
+  production: false, 
 })
 
 export async function sendApnPush(deviceToken: string, title: string, body: string, orderId: string) {
