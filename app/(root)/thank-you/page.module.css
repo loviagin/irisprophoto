@@ -22,34 +22,6 @@
   z-index: 1;
 }
 
-.decorativeElements {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-.circle1, .circle2 {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.1;
-}
-
-.circle1 {
-  top: -100px;
-  right: -100px;
-  width: 300px;
-  height: 300px;
-  background: #4a90e2;
-}
-
-.circle2 {
-  bottom: -50px;
-  left: -50px;
-  width: 200px;
-  height: 200px;
-  background: #e2844a;
-}
-
 .heroContent {
   position: relative;
   z-index: 2;

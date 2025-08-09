@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-// Initialize Stripe client only if the secret key is available
+// Initialize Stripe client using either STRIPE_SECRET_KEY or STRIPE_API_KEY
 // Do not force apiVersion to avoid invalid/future version errors in test/sandbox
-const stripe = process.env.STRIPE_SECRET_KEY
-  ? new Stripe(process.env.STRIPE_SECRET_KEY)
-  : null;
+const STRIPE_SERVER_KEY = process.env.STRIPE_SECRET_KEY ?? process.env.STRIPE_API_KEY;
+const stripe = STRIPE_SERVER_KEY ? new Stripe(STRIPE_SERVER_KEY) : null;
 
 export async function POST(request: Request) {
   try {

@@ -121,10 +121,6 @@ export default function ThankYouPage() {
 
             <section className={styles.content}>
                 <div className={styles.card}>
-                    <div className={styles.decorativeElements}>
-                        <div className={styles.circle1} />
-                        <div className={styles.circle2} />
-                    </div>
                     <div className={styles.iconWrapper}>
                         <Image
                             src="/icons/checkmark.svg"
