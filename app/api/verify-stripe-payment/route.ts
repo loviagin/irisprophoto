@@ -2,10 +2,9 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
 // Initialize Stripe client only if the secret key is available
-const stripe = process.env.STRIPE_SECRET_KEY 
-  ? new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: '2025-06-30.basil',
-    })
+// Do not force apiVersion to avoid invalid/future version errors in test/sandbox
+const stripe = process.env.STRIPE_SECRET_KEY
+  ? new Stripe(process.env.STRIPE_SECRET_KEY)
   : null;
 
 export async function POST(request: Request) {
@@ -40,11 +39,13 @@ export async function POST(request: Request) {
     }
 
     // Проверяем статус платежа
-    if (session.payment_status === 'paid' && session.status === 'complete') {
+    // Достаточно проверить, что payment_status === 'paid'.
+    // Некоторые сессии могут иметь отличные статусы выполнения в зависимости от версии API/типа Checkout.
+    if (session.payment_status === 'paid') {
       return NextResponse.json({ valid: true, email, orderNumber, session });
-    } else {
-      return NextResponse.json({ valid: false, session });
     }
+
+    return NextResponse.json({ valid: false, session });
 
   } catch (error) {
     console.error('Error verifying Stripe payment:', error);
