@@ -17,7 +17,6 @@ export default function ThankYouPage() {
         const sessionId = urlParams.get("session_id");
 
         if (sessionId) {
-            // Проверяем статус сессии через Stripe
             fetch("/api/verify-stripe-payment", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -60,7 +59,6 @@ export default function ThankYouPage() {
                         const responseData = await res.json();
                         console.log("5. Email sent successfully:", responseData);
                         setEmailSent(true);
-                        alert("✅ Payment successful! Check your email for the certificate.");
                     } else {
                         const errorText = await res.text();
                         console.error("5. Email sending failed:", {
@@ -76,6 +74,8 @@ export default function ThankYouPage() {
                     setEmailSent(true);
                     alert("❌ Payment successful, but email not sent. Please contact support.");
                 }
+            } else {
+                console.log("Email not sent", valid, email, orderId, emailSent);
             }
         };
 

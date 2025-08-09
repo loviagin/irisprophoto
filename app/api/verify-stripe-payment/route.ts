@@ -22,8 +22,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ valid: false, error: 'Session ID is required' }, { status: 400 });
     }
 
-    // Получаем информацию о сессии из Stripe
-    const session = await stripe.checkout.sessions.retrieve(session_id);
+    // Получаем информацию о сессии из Stripe (расширяем, чтобы получить payment_intent с metadata)
+    const session = await stripe.checkout.sessions.retrieve(session_id, {
+      expand: ['payment_intent']
+    });
 
     // Получаем email покупателя
     let email = session.customer_email;
@@ -31,11 +33,22 @@ export async function POST(request: Request) {
       email = session.customer_details.email;
     }
 
-    // Получаем номер заказа из metadata
-    let orderNumber = undefined;
-    if (session.metadata && session.metadata.order_id) {
-      orderNumber = session.metadata.order_id;
-    }
+    // Пытаемся извлечь номер заказа из разных источников Stripe:
+    // 1) session.metadata.order_id | orderId
+    // 2) session.client_reference_id
+    // 3) payment_intent.metadata.order_id | orderId
+    // 4) fallback: session.id
+    let orderNumber: string | undefined = undefined;
+    const paymentIntent = session.payment_intent && typeof session.payment_intent === 'object'
+      ? session.payment_intent
+      : undefined;
+
+    orderNumber =
+      (session.metadata && (session.metadata as any).order_id) ||
+      (session.metadata && (session.metadata as any).orderId) ||
+      (session.client_reference_id ?? undefined) ||
+      (paymentIntent && (paymentIntent as any).metadata && ((paymentIntent as any).metadata.order_id || (paymentIntent as any).metadata.orderId)) ||
+      session.id;
 
     // Проверяем статус платежа
     // Достаточно проверить, что payment_status === 'paid'.
