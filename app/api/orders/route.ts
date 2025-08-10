@@ -54,6 +54,7 @@ export async function GET(req: NextRequest) {
                 track2: (page as any).properties['Track # 1'].rich_text?.[0]?.plain_text || '',
                 typeOfDelivery: (page as any).properties['Type of delivery'].select?.name || '',
                 effect: (page as any).properties['effect'].select?.name || '',
+                deliveryDate: (page as any).properties['Delivery Date'].date?.start || '',
                 createdAt: (page as any).properties['createdAt'].date?.start || '',
                 icon: (page as any).icon?.type === 'emoji'
                     ? (page as any).icon.emoji
@@ -106,6 +107,7 @@ export async function GET(req: NextRequest) {
             track2: item.properties['Track # 1'].rich_text?.[0]?.plain_text || '',
             typeOfDelivery: item.properties['Type of delivery'].select?.name || '',
             effect: item.properties['effect'].select?.name || '',
+            deliveryDate: item.properties['Delivery Date'].date?.start || '',
             createdAt: item.properties['createdAt'].date?.start || '',
             icon: item.icon?.type === 'emoji'
                 ? item.icon.emoji
@@ -137,7 +139,7 @@ export async function POST(req: NextRequest) {
             },
             icon: {
                 type: 'external',
-                external: { //CHECK THE ICONS
+                external: {
                     url: data.order === "New order from site" ? "https://www.notion.so/icons/globe_purple.svg" : "https://www.notion.so/icons/compose_purple.svg"
                 }
             },
@@ -259,6 +261,13 @@ export async function POST(req: NextRequest) {
                         name: data.effect || 'None',
                     },
                 },
+                'Delivery Date': data.deliveryDate
+                    ? {
+                        date: {
+                            start: data.deliveryDate,
+                        },
+                    }
+                    : { date: null },
                 'createdAt': {
                     date: {
                         start: data.createdAt || new Date().toISOString(),

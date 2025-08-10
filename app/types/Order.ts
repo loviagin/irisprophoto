@@ -27,6 +27,7 @@ export interface Order {
     track2?: string
     typeOfDelivery?: Delivery
     effect?: Effect
+    deliveryDate?: string
     createdAt?: string
     icon?: string
 }

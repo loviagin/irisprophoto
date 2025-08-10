@@ -68,6 +68,7 @@ export async function GET(req: NextRequest) {
             track2: item.properties['Track # 1'].rich_text?.[0]?.plain_text || '',
             typeOfDelivery: item.properties['Type of delivery'].select?.name || '',
             effect: item.properties['effect'].select?.name || '',
+            deliveryDate: item.properties['Delivery Date'].date?.start || '',
             createdAt: item.properties['createdAt'].date?.start || '',
             icon: item.icon?.type === 'emoji'
                 ? item.icon.emoji
