@@ -86,7 +86,7 @@ const infoCards = [
     content: (
       <ul>
         <li>By bank card (Visa, Mastercard, Maestro)</li>
-        <li>Apple Pay и Google Pay</li>
+        <li>Apple Pay & Google Pay</li>
         <li>PayPal</li>
         <li>Pay later (by PayPal)</li>
         <li>In cash at the photo studio</li>
