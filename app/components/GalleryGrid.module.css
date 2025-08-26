@@ -1,0 +1,247 @@
+/* Gallery Grid Styles */
+.galleryHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 5rem 2rem;
+}
+
+.galleryHeader h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.galleryHeader p {
+  font-size: 1.2rem;
+  color: #fff;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.accordion {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.accordionItem {
+  margin-bottom: 2rem;
+}
+
+.accordionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.accordionHeader h2 {
+  font-size: 2rem;
+  color: #fff;
+  margin: 0;
+}
+
+.arrow {
+  font-size: 1.5rem;
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.accordionContent {
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.item {
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.imageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.item:hover .imageWrapper img {
+  transform: scale(1.05);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+}
+
+.overlay h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.overlay span {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* Variants section */
+.variantsContainer {
+  padding: 16px 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.variantsGrid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.variantThumbnail {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.variantThumbnail.active {
+  border: 3px solid #00ff88;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+}
+
+.variantThumbnail:hover {
+  scale: 1.05;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.variantThumbnail.active:hover {
+  border-color: #00ff88;
+}
+
+.variantImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* Navigation arrows */
+.navArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #000000;
+  border: 3px solid #ffffff;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  z-index: 1000;
+  line-height: 1;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.navArrow:hover {
+  scale: 1.1;
+}
+
+.navArrow:active {
+  scale: 0.9;
+}
+
+.navArrowLeft {
+  left: 10px;
+}
+
+.navArrowRight {
+  right: 10px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .accordion {
+    padding: 0 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .galleryHeader {
+    padding: 4rem 0.75rem;
+  }
+
+  .galleryHeader h1 {
+    font-size: 2.5rem;
+  }
+
+  .accordionHeader h2 {
+    font-size: 1.5rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .variantsContainer {
+    padding: 12px 30px;
+    min-height: 80px;
+  }
+
+  .variantThumbnail {
+    width: 50px;
+    height: 50px;
+  }
+
+  .navArrow {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+} 

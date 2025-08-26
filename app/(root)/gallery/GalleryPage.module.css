@@ -141,58 +141,6 @@
   opacity: 0.8;
 }
 
-/* Variants styles */
-.variantsContainer {
-  margin-top: 1rem;
-  padding: 0.5rem;
-  border: 3px solid red !important; /* Debug border */
-  background: rgba(255, 0, 0, 0.3) !important; /* Debug background */
-  min-height: 80px !important; /* Force height */
-  position: relative !important;
-  z-index: 1000 !important;
-}
-
-.variantsGrid {
-  display: flex !important;
-  gap: 0.5rem !important;
-  flex-wrap: wrap !important;
-  justify-content: center !important;
-  border: 2px solid yellow !important; /* Debug grid border */
-  min-height: 60px !important; /* Force grid height */
-}
-
-.variantThumbnail {
-  width: 80px !important; /* Bigger for debug */
-  height: 80px !important; /* Bigger for debug */
-  border-radius: 6px !important;
-  overflow: hidden !important;
-  cursor: pointer !important;
-  border: 3px solid blue !important; /* Debug border */
-  transition: all 0.3s ease !important;
-  position: relative !important;
-  background: green !important; /* Debug background */
-}
-
-.variantThumbnail:hover {
-  border-color: rgba(255, 255, 255, 0.5);
-}
-
-.variantThumbnail.activeVariant {
-  border-color: #fff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-}
-
-.variantImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.variantThumbnail:hover .variantImage {
-  transform: scale(1.1);
-}
-
 @media (max-width: 1200px) {
   .accordion {
     padding: 0 0.5rem;
@@ -224,20 +172,5 @@
 
   .accordionHeader h2 {
     font-size: 1.5rem;
-  }
-
-  /* Mobile variants styles */
-  .variantsContainer {
-    margin-top: 0.75rem;
-    padding: 0.25rem;
-  }
-
-  .variantThumbnail {
-    width: 50px;
-    height: 50px;
-  }
-
-  .variantsGrid {
-    gap: 0.4rem;
   }
 } 

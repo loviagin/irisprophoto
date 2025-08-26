@@ -1,7 +1,8 @@
 'use client'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
-import styles from '../(root)/gallery/GalleryPage.module.css'
+import styles from './GalleryGrid.module.css'
+import React from 'react'
 
 const gallerySections = [
   {
@@ -132,11 +133,6 @@ const gallerySections = [
   {
     title: 'Couple eyes',
     items: [
-      // {
-      //   image: '/works/Collision.webp',
-      //   title: 'Collision',
-      //   category: ''
-      // },
       {
         image: '/works/work10.webp',
         title: 'Yin & Yan Meteor',
@@ -180,31 +176,6 @@ const gallerySections = [
           '/works/water2.webp'
         ]
       },
-      // {
-      //   image: '/works/light beams.webp',
-      //   title: 'Light beams',
-      //   category: ''
-      // },
-      // {
-      //   image: '/works/Radiance.webp',
-      //   title: 'Radiance',
-      //   category: ''
-      // },
-      // {
-      //   image: '/works/Sparks.webp',
-      //   title: 'Sparks',
-      //   category: ''
-      // },
-      // {
-      //   image: '/works/send.webp',
-      //   title: 'Send',
-      //   category: ''
-      // },
-      // {
-      //   image: '/works/yin yang.webp',
-      //   title: 'Yin Yang',
-      //   category: ''
-      // }
     ]
   }
 ]
@@ -212,15 +183,73 @@ const gallerySections = [
 export default function GalleryGrid() {
   const [openSection, setOpenSection] = useState(0)
   const [selectedImages, setSelectedImages] = useState<{[key: string]: string}>({})
+  const [variantIndices, setVariantIndices] = useState<{[key: string]: number}>({})
 
-  // Debug: log gallery data
-  console.log('Gallery sections:', gallerySections)
+  // Инициализируем selectedImages с первым вариантом каждого элемента
+  React.useEffect(() => {
+    const initialSelectedImages: {[key: string]: string} = {}
+    gallerySections.forEach((section, sectionIndex) => {
+      section.items.forEach((item, itemIndex) => {
+        const itemKey = getItemKey(sectionIndex, itemIndex)
+        if (item.variants && item.variants.length > 0) {
+          initialSelectedImages[itemKey] = item.variants[0]
+        }
+      })
+    })
+    setSelectedImages(initialSelectedImages)
+  }, [])
 
   const handleVariantClick = (itemKey: string, variantImage: string) => {
     setSelectedImages(prev => ({
       ...prev,
       [itemKey]: variantImage
     }))
+    
+    // Update variant index when clicking on a specific variant
+    const item = gallerySections.flatMap(section => section.items).find(item => {
+      const [sectionIndex, itemIndex] = itemKey.split('-').map(Number)
+      return gallerySections[sectionIndex]?.items[itemIndex] === item
+    })
+    
+    if (item && item.variants) {
+      const variantIndex = item.variants.indexOf(variantImage)
+      if (variantIndex !== -1) {
+        setVariantIndices(prev => ({
+          ...prev,
+          [itemKey]: variantIndex
+        }))
+      }
+    }
+  }
+
+  const handleVariantNavigation = (itemKey: string, direction: 'prev' | 'next') => {
+    setVariantIndices(prev => {
+      const currentIndex = prev[itemKey] || 0
+      
+      // Find the item by parsing the itemKey
+      const [sectionIndex, itemIndex] = itemKey.split('-').map(Number)
+      const item = gallerySections[sectionIndex]?.items[itemIndex]
+      
+      if (!item || !item.variants) return prev
+      
+      let newIndex
+      if (direction === 'prev') {
+        newIndex = currentIndex > 0 ? currentIndex - 1 : item.variants.length - 1
+      } else {
+        newIndex = currentIndex < item.variants.length - 1 ? currentIndex + 1 : 0
+      }
+      
+      // Update selected image when navigating
+      setSelectedImages(prev => ({
+        ...prev,
+        [itemKey]: item.variants[newIndex]
+      }))
+      
+      return {
+        ...prev,
+        [itemKey]: newIndex
+      }
+    })
   }
 
   const getItemKey = (sectionIndex: number, itemIndex: number) => {
@@ -230,7 +259,7 @@ export default function GalleryGrid() {
   return (
     <>
       <motion.div
-        className={styles.header}
+        className={styles.galleryHeader}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -272,15 +301,6 @@ export default function GalleryGrid() {
                       const itemKey = getItemKey(sectionIndex, index)
                       const currentImage = selectedImages[itemKey] || item.image
                       
-                      // Debug: log each item
-                      console.log(`Item ${index}:`, {
-                        title: item.title,
-                        variants: item.variants,
-                        variantsLength: item.variants?.length,
-                        uniqueVariants: item.variants ? new Set(item.variants).size : 0,
-                        shouldShowVariants: item.variants && item.variants.length > 1 && new Set(item.variants).size > 1
-                      })
-                      
                       return (
                         <motion.div
                           key={index}
@@ -288,40 +308,7 @@ export default function GalleryGrid() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.6, delay: index * 0.1 }}
-                          style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '10px'
-                          }}
                         >
-                          {/* Debug info at top */}
-                          <div style={{
-                            position: 'absolute', 
-                            top: '5px', 
-                            left: '5px', 
-                            background: 'red', 
-                            color: 'white', 
-                            padding: '2px 5px', 
-                            fontSize: '10px',
-                            zIndex: 10
-                          }}>
-                            {item.variants ? `${item.variants.length} variants` : 'No variants'}
-                          </div>
-                          
-                          {/* Simple debug text */}
-                          <div style={{
-                            position: 'absolute',
-                            top: '30px',
-                            left: '5px',
-                            background: 'blue',
-                            color: 'white',
-                            padding: '2px 5px',
-                            fontSize: '10px',
-                            zIndex: 10
-                          }}>
-                            DEBUG: {item.title}
-                          </div>
-                          
                           <div className={styles.imageWrapper}>
                             <img src={currentImage} alt={item.title} />
                             <motion.div
@@ -335,33 +322,50 @@ export default function GalleryGrid() {
                             </motion.div>
                           </div>
                           
-                          {/* Simple variants display */}
-                          <div style={{
-                            padding: '10px',
-                            border: '3px solid red',
-                            background: 'rgba(255, 0, 0, 0.3)',
-                            fontSize: '12px',
-                            color: 'white',
-                            textAlign: 'center',
-                            borderRadius: '6px'
-                          }}>
-                            <strong>VARIANTS: {item.variants ? item.variants.length : 0}</strong>
-                            <div style={{marginTop: '8px'}}>
-                              {item.variants && item.variants.map((variant, variantIndex) => (
-                                <span key={variantIndex} style={{
-                                  display: 'inline-block',
-                                  margin: '3px',
-                                  padding: '4px 8px',
-                                  border: '2px solid white',
-                                  background: 'blue',
-                                  borderRadius: '4px',
-                                  fontSize: '10px'
-                                }}>
-                                  {variantIndex + 1}
-                                </span>
-                              ))}
+                          {/* Variants section */}
+                          {item.variants && (
+                            <div className={styles.variantsContainer}>
+                              {/* Navigation arrows */}
+                              <button
+                                className={`${styles.navArrow} ${styles.navArrowLeft}`}
+                                onClick={() => handleVariantNavigation(itemKey, 'prev')}
+                              >
+                                ←
+                              </button>
+                              
+                              <button
+                                className={`${styles.navArrow} ${styles.navArrowRight}`}
+                                onClick={() => handleVariantNavigation(itemKey, 'next')}
+                              >
+                                →
+                              </button>
+                              
+                              <div className={styles.variantsGrid}>
+                                {item.variants.map((variant, variantIndex) => {
+                                  const isActive = selectedImages[itemKey] === variant
+                                  return (
+                                    <motion.div
+                                      key={variantIndex}
+                                      className={`${styles.variantThumbnail} ${isActive ? styles.active : ''}`}
+                                      onClick={() => handleVariantClick(itemKey, variant)}
+                                      whileHover={{ scale: 1.05 }}
+                                      whileTap={{ scale: 0.95 }}
+                                    >
+                                      <img 
+                                        src={variant} 
+                                        alt={`${item.title} variant ${variantIndex + 1}`}
+                                        className={styles.variantImage}
+                                        onError={(e) => {
+                                          console.error(`Failed to load image: ${variant}`);
+                                          e.currentTarget.style.display = 'none';
+                                        }}
+                                      />
+                                    </motion.div>
+                                  )
+                                })}
+                              </div>
                             </div>
-                          </div>
+                          )}
                         </motion.div>
                       )
                     })}
