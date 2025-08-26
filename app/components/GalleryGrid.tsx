@@ -14,8 +14,6 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/work1.webp',
-          '/works/work2.webp',
-          '/works/work3.webp'
         ]
       },
       {
@@ -24,8 +22,6 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/work2.webp',
-          '/works/work1.webp',
-          '/works/work5.webp'
         ]
       },
       {
@@ -34,8 +30,6 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/work3.webp',
-          '/works/work5.webp',
-          '/works/work6.webp'
         ]
       },
       {
@@ -52,7 +46,6 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/work5.webp',
-          '/works/Meteor.webp'
         ]
       },
       {
@@ -61,7 +54,6 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/work6.webp',
-          '/works/work3.webp'
         ]
       },
       {
@@ -70,7 +62,6 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/Galaxy.webp',
-          '/works/work1.webp'
         ]
       }, 
       {
@@ -79,7 +70,6 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/Halo light.webp',
-          '/works/work3.webp'
         ]
       },
       {
@@ -88,7 +78,6 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/Hurricane.webp',
-          '/works/work2.webp'
         ]
       },
       {
@@ -97,7 +86,6 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/light beams.webp',
-          '/works/work6.webp'
         ]
       },
       {
@@ -106,7 +94,6 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/send.webp',
-          '/works/work5.webp'
         ]
       },
       {
@@ -115,7 +102,6 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/Sparks.webp',
-          '/works/work1.webp'
         ]
       },
       {
@@ -124,8 +110,6 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/water.webp',
-          '/works/water2.webp',
-          '/works/water3.webp'
         ]
       }
     ]
@@ -139,7 +123,8 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/work10.webp',
-          '/works/yin yang.webp'
+          '/works/work10-2.webp',
+          '/works/work10-3.webp',
         ]
       },
       {
@@ -148,7 +133,6 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/Meteor.webp',
-          '/works/work5.webp'
         ]
       },
       {
@@ -157,8 +141,30 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/water2.webp',
-          '/works/water.webp',
-          '/works/water3.webp'
+        ]
+      },
+      {
+        image: '/works/work11.webp',
+        title: 'Supernova Collision',
+        category: '',
+        variants: [
+          '/works/work11.webp',
+        ]
+      },
+      {
+        image: '/works/work13.webp',
+        title: 'Water Collison',
+        category: '',
+        variants: [
+          '/works/work13.webp',
+        ]
+      },
+      {
+        image: '/works/work14.webp',
+        title: 'Collison',
+        category: '',
+        variants: [
+          '/works/work14.webp',
         ]
       }
     ]
@@ -172,8 +178,28 @@ const gallerySections = [
         category: '',
         variants: [
           '/works/water3.webp',
-          '/works/water.webp',
-          '/works/water2.webp'
+          '/works/water3-2.webp',
+        ]
+      },
+      {
+        image: '/works/work12.webp',
+        title: 'Three-way Collison',
+        category: '',
+        variants: [
+          '/works/work12.webp',
+        ]
+      },
+    ]
+  },
+  {
+    title: 'Four eyes',
+    items: [
+      {
+        image: '/works/four-eyes/work1.webp',
+        title: 'Water',
+        category: '',
+        variants: [
+          '/works/four-eyes/work1.webp',
         ]
       },
     ]

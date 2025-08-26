@@ -157,7 +157,7 @@
 }
 
 .variantThumbnail.active:hover {
-  border-color: #00ff88;
+  border-color: #00ff88ad;
 }
 
 .variantImage {
@@ -176,8 +176,8 @@
   height: 35px;
   border-radius: 50%;
   background: #000000;
-  border: 3px solid #ffffff;
-  color: #ffffff;
+  border: 3px solid #ffffffb0;
+  color: #ffffffb0;
   cursor: pointer;
   display: flex;
   align-items: center;
