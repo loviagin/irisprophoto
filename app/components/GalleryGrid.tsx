@@ -352,7 +352,7 @@ export default function GalleryGrid() {
                           {item.variants && (
                             <div className={styles.variantsContainer}>
                               {/* Navigation arrows */}
-                              <button
+                              {/* <button
                                 className={`${styles.navArrow} ${styles.navArrowLeft}`}
                                 onClick={() => handleVariantNavigation(itemKey, 'prev')}
                               >
@@ -364,7 +364,7 @@ export default function GalleryGrid() {
                                 onClick={() => handleVariantNavigation(itemKey, 'next')}
                               >
                                 →
-                              </button>
+                              </button> */}
                               
                               <div className={styles.variantsGrid}>
                                 {item.variants.map((variant, variantIndex) => {
