@@ -54,6 +54,7 @@ export default function BookingModal({
   const [bookedSlots, setBookedSlots] = useState<Array<{ bookingDateTime: string }>>([]);
   const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isAvailable, setIsAvailable] = useState(true);
 
   useEffect(() => {
     const fetchBookedSlots = async () => {
@@ -71,7 +72,16 @@ export default function BookingModal({
       }
     };
 
+    const fetchAvailability = async () => {
+      const response = await fetch('/api/bookings/available');
+      const data = await response.json();
+      if (data.success) {
+        setIsAvailable(data.isAvailable);
+      }
+    };
+    
     if (isOpen) {
+      fetchAvailability();
       fetchBookedSlots();
       // Prevent body scroll when modal is open
       document.body.classList.add('modal-open');
@@ -337,7 +347,7 @@ export default function BookingModal({
               <div className={styles.modalContent}>
                 <h2>Book a photo session</h2>
                 <p>Leave your data, and we will contact you to discuss the details.</p>
-
+                {isAvailable ? (
                 <form onSubmit={handleSubmit} className={styles.bookingForm}>
                   <div className={styles.formGroup}>
                     <FaCamera className={styles.formIcon} />
@@ -462,6 +472,21 @@ export default function BookingModal({
                     {isLoading ? 'Loading...' : 'Order a photo session'}
                   </button>
                 </form>
+                ) : (
+                  <div className={styles.unavailableBanner}>
+                    <div className={styles.unavailableIcon}>
+                      <FaCalendarAlt />
+                    </div>
+                    <div className={styles.unavailableContent}>
+                      <h3>Photo session booking is temporarily unavailable</h3>
+                      <p>We are currently not accepting bookings. Please check back later or contact us for more information.</p>
+                      <div className={styles.unavailableActions}>
+                        <a href="mailto:voroninsfamilyllc@gmail.com" className={styles.unavailableButton}>Contact us</a>
+                        <button onClick={onClose} className={styles.unavailableSecondary}>Close</button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </motion.div>
           </motion.div>

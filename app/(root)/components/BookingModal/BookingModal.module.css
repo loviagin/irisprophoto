@@ -197,6 +197,70 @@
   transform: translateY(-2px);
 }
 
+.unavailableBanner {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 82, 82, 0.12), rgba(255, 82, 82, 0.06));
+  border: 1px solid rgba(255, 82, 82, 0.35);
+  text-align: left;
+}
+
+.unavailableIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 82, 82, 0.15);
+  color: #ff5252;
+  font-size: 18px;
+}
+
+.unavailableContent h3 {
+  margin: 0 0 6px 0;
+  color: var(--text-color);
+  font-size: 1.05rem;
+}
+
+.unavailableContent p {
+  margin: 0 0 14px 0;
+  color: var(--text-light);
+}
+
+.unavailableActions {
+  display: flex;
+  gap: 10px;
+}
+
+.unavailableButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  background: #ff5252;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.unavailableSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  background: transparent;
+  color: var(--text-light);
+  border: 1px solid var(--background-alt);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .formRow {
     flex-direction: column;
