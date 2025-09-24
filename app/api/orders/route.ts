@@ -55,6 +55,12 @@ export async function GET(req: NextRequest) {
                 typeOfDelivery: (page as any).properties['Type of delivery'].select?.name || '',
                 effect: (page as any).properties['effect'].select?.name || '',
                 deliveryDate: (page as any).properties['Delivery Date'].date?.start || '',
+                photoUrl:
+                    (page as any).properties['Photo']?.files?.[0]?.type === 'external'
+                        ? (page as any).properties['Photo'].files[0].external.url
+                        : (page as any).properties['Photo']?.files?.[0]?.type === 'file'
+                            ? (page as any).properties['Photo'].files[0].file.url
+                            : '',
                 createdAt: (page as any).properties['createdAt'].date?.start || '',
                 icon: (page as any).icon?.type === 'emoji'
                     ? (page as any).icon.emoji
@@ -108,6 +114,12 @@ export async function GET(req: NextRequest) {
             typeOfDelivery: item.properties['Type of delivery'].select?.name || '',
             effect: item.properties['effect'].select?.name || '',
             deliveryDate: item.properties['Delivery Date'].date?.start || '',
+            photoUrl:
+                item.properties['Photo']?.files?.[0]?.type === 'external'
+                    ? item.properties['Photo'].files[0].external.url
+                    : item.properties['Photo']?.files?.[0]?.type === 'file'
+                        ? item.properties['Photo'].files[0].file.url
+                        : '',
             createdAt: item.properties['createdAt'].date?.start || '',
             icon: item.icon?.type === 'emoji'
                 ? item.icon.emoji
@@ -279,6 +291,21 @@ export async function POST(req: NextRequest) {
                             select: {
                                 name: data.companies,
                             },
+                        },
+                    }
+                    : {}),
+                ...(data.photoUrl
+                    ? {
+                        'Photo': {
+                            files: [
+                                {
+                                    name: 'photo',
+                                    type: 'external',
+                                    external: {
+                                        url: data.photoUrl,
+                                    },
+                                },
+                            ],
                         },
                     }
                     : {}),

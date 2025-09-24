@@ -28,6 +28,7 @@ export interface Order {
     typeOfDelivery?: Delivery
     effect?: Effect
     deliveryDate?: string
+    photoUrl?: string
     createdAt?: string
     icon?: string
 }
