@@ -16,8 +16,8 @@ export async function POST(request: Request) {
     
     // Определяем цену в зависимости от типа съемки
     const priceMap: { [key: string]: number } = {
-      'one-two': 50, // цена в долларах для 1-2 человек
-      'family': 50,  // цена в долларах для 3-4 человек
+      'one-two': 20, // цена в долларах для 1-2 человек
+      'family': 20,  // цена в долларах для 3-4 человек
     };
 
     const amount = priceMap[bookingData.shootingType] || 115;
