@@ -63,7 +63,7 @@ export default function BookingThankYouPage() {
                 const order: Order = {
                     id: notionId,
                     order: 'Paid booking from site',
-                    status: 'Paid',
+                    status: 'New',
                     date: selectedDateTime.toISOString(),
                     comment: `Type: ${bookingData.shootingType}. ${bookingData.promocode ? `Promocode: ${bookingData.promocode}. ` : ''}${bookingData.details}. Stripe Session: ${sessionId}`,
                     email: bookingData.email || undefined,
