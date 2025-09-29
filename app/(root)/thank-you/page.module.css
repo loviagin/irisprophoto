@@ -83,6 +83,26 @@
   margin-bottom: 30px;
 }
 
+.bookingDetails {
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.bookingDate {
+  font-size: 1.2rem;
+  color: white;
+  margin: 0;
+}
+
+.bookingDate strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
 .importantInfo {
   padding: 20px;
   background: #f8f9fa;

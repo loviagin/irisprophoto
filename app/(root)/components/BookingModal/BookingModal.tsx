@@ -162,109 +162,47 @@ export default function BookingModal({
 
     setIsLoading(true);
 
-    const formDataToSend = {
-      name: formData.name,
-      phone: `+1${formData.phone.replace('+', '')}`,
-      email: formData.email || null,
-      shootingType: formData.shootingType,
-      date: formData.dateTime.toISOString(), // Отправляем полную дату и время в ISO формате
-      details: formData.details
-    };
-
-    const notionId = crypto.randomUUID();
-    const contact = formData.email || `+1${formData.phone.replace('+', '')}`;
-
-    // Устанавливаем время 01:00 по умолчанию, если время не выбрано
-    const selectedDateTime = new Date(formData.dateTime);
-    if (selectedDateTime.getHours() === 0 && selectedDateTime.getMinutes() === 0) {
-      selectedDateTime.setHours(0, 0, 0, 0);
-    }
-
-    const order: Order = {
-      id: notionId,
-      order: 'New order from site',
-      status: 'New',
-      date: selectedDateTime.toISOString(),
-      comment: 'Type: ' + formDataToSend.shootingType + '. ' + (formData.promocode.length > 0 ? 'Promocode: ' + formData.promocode : '') + '. ' + formDataToSend.details,
-      email: formDataToSend.email || undefined,
-      name: formDataToSend.name,
-      phone: formDataToSend.phone || undefined,
-      createdAt: new Date().toISOString()
-    }
-
-    const response = await fetch("/api/orders", {
-      method: "POST",
-      headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
-      body: JSON.stringify(order),
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      try {
-        const bookingResponse = await fetch("/api/bookings", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: formData.name,
-            contact,
-            notionId,
-            bookingDateTime: selectedDateTime.toISOString()
-          }),
-        });
-
-        const bookingResult = await bookingResponse.json();
-      } catch (error) {
-        console.error('Error creating booking:', error);
-        alert("An error occurred while creating an order. Please try again later.");
+    try {
+      // Устанавливаем время, если не выбрано
+      const selectedDateTime = new Date(formData.dateTime);
+      if (selectedDateTime.getHours() === 0 && selectedDateTime.getMinutes() === 0) {
+        selectedDateTime.setHours(12, 0, 0, 0); // По умолчанию 12:00
       }
 
-      if (formDataToSend.email) {
-        const emailResponse = await fetch('/api/email-order', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`
-          },
-          body: JSON.stringify({
-            name: formDataToSend.name,
-            email: formDataToSend.email,
-            date: selectedDateTime.toLocaleString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: false
-            }),
-            orderId: result.id // Используем result.id напрямую
-          }),
-        });
+      // Подготавливаем данные для бронирования
+      const bookingData = {
+        name: formData.name,
+        phone: `+1${formData.phone.replace('+', '')}`,
+        email: formData.email || null,
+        shootingType: formData.shootingType,
+        dateTime: selectedDateTime.toISOString(),
+        details: formData.details,
+        promocode: formData.promocode
+      };
 
-        const emailResult = await emailResponse.json();
-      }
-
-      console.log(JSON.stringify(order))
-
-      alert("Thanks for your order! We will contact you soon.");
-
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        shootingType: "wedding",
-        dateTime: new Date(),
-        details: "",
-        promocode: ""
+      // Создаем Stripe Checkout Session
+      const response = await fetch('/api/create-booking-checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingData),
       });
-    } else {
-      alert("❌ Error: " + result.error);
-    }
 
-    onClose()
-    setIsLoading(false);
+      const result = await response.json();
+
+      if (result.url) {
+        // Редиректим на страницу оплаты Stripe
+        window.location.href = result.url;
+      } else {
+        alert("❌ Error: Unable to create payment session. Please try again.");
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.error('Error creating checkout session:', error);
+      alert("❌ An error occurred. Please try again later.");
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
