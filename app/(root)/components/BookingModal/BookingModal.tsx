@@ -407,7 +407,7 @@ export default function BookingModal({
                   </div>
 
                   <button type="submit" className={styles.submitButton} disabled={isLoading}>
-                    {isLoading ? 'Loading...' : 'Order a photo session'}
+                    {isLoading ? 'Loading...' : 'Order a photo session — $20'}
                   </button>
                 </form>
                 ) : (
