@@ -230,6 +230,7 @@ export default function BookingThankYouPage() {
                             <ul>
                                 <li>Please arrive 5-10 minutes before your scheduled time</li>
                                 <li>If you need to reschedule, contact us at least 48 hours in advance</li>
+                                <li><strong>Please note:</strong> If you do not attend your scheduled session, payment is non-refundable</li>
                             </ul>
                         </div>
                     </div>
