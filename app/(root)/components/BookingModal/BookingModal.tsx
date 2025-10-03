@@ -7,6 +7,7 @@ import styles from './BookingModal.module.css'
 import Portal from '../Portal/Portal'
 import { PatternFormat } from 'react-number-format'
 import { Order } from '@/app/types/Order'
+import { BookingSettings } from '@/app/types/BookingSettings'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import "@/app/styles/datepicker.css"
@@ -20,18 +21,28 @@ export default function BookingModal({
   isOpen,
   onClose
 }: BookingModalProps) {
-  const workStartTime = '12:00';
-  const workEndTime = '18:00';
-  const bookingInterval = 60;
+  const [bookingSettings, setBookingSettings] = useState<BookingSettings>({
+    workStartTime: '12:00',
+    workEndTime: '18:00',
+    workingDays: {
+      monday: true,
+      tuesday: true,
+      wednesday: true,
+      thursday: true,
+      friday: true,
+      saturday: true,
+      sunday: false
+    },
+    bookingInterval: 60,
+    isAvailable: true
+  });
 
-  // Функция для проверки, является ли дата воскресеньем
-  // const isSunday = (date: Date) => {
-  //   return date.getDay() === 0;
-  // }
-
-  // Функция для фильтрации дат (исключаем воскресенья)
+  // Функция для фильтрации дат (исключаем нерабочие дни)
   const filterDate = (date: Date) => {
-    return true;
+    const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const dayName = dayNames[dayOfWeek] as keyof typeof bookingSettings.workingDays;
+    return bookingSettings.workingDays[dayName];
   }
 
   // Функция для получения следующей доступной даты
@@ -57,31 +68,33 @@ export default function BookingModal({
   const [isAvailable, setIsAvailable] = useState(true);
 
   useEffect(() => {
+    const fetchBookingSettings = async () => {
+      try {
+        const response = await fetch('/api/booking-settings');
+        const data = await response.json();
+        if (data.success && data.settings) {
+          setBookingSettings(data.settings);
+          setIsAvailable(data.settings.isAvailable);
+        }
+      } catch (error) {
+        console.error('Error fetching booking settings:', error);
+      }
+    };
+
     const fetchBookedSlots = async () => {
       try {
         const response = await fetch('/api/bookings');
         const data = await response.json();
         if (data.success) {
           setBookedSlots(data.orders);
-          // Генерируем доступные слоты при получении занятых
-          const slots = generateTimeSlots();
-          setAvailableTimeSlots(slots);
         }
       } catch (error) {
         console.error('Error fetching booked slots:', error);
       }
     };
-
-    const fetchAvailability = async () => {
-      const response = await fetch('/api/bookings/available');
-      const data = await response.json();
-      if (data.success) {
-        setIsAvailable(data.isAvailable);
-      }
-    };
     
     if (isOpen) {
-      fetchAvailability();
+      fetchBookingSettings();
       fetchBookedSlots();
       // Prevent body scroll when modal is open
       document.body.classList.add('modal-open');
@@ -96,16 +109,16 @@ export default function BookingModal({
     };
   }, [isOpen]);
 
-  // Обновляем доступные слоты при изменении даты
+  // Обновляем доступные слоты при изменении даты или настроек
   useEffect(() => {
     const slots = generateTimeSlots();
     setAvailableTimeSlots(slots);
-  }, [formData.dateTime]);
+  }, [formData.dateTime, bookingSettings, bookedSlots]);
 
   const generateTimeSlots = () => {
     const slots: string[] = []
-    const [startHour, startMinute] = workStartTime.split(':').map(Number)
-    const [endHour, endMinute] = workEndTime.split(':').map(Number)
+    const [startHour, startMinute] = bookingSettings.workStartTime.split(':').map(Number)
+    const [endHour, endMinute] = bookingSettings.workEndTime.split(':').map(Number)
 
     let currentTime = new Date()
     currentTime.setHours(startHour, startMinute, 0, 0)
@@ -133,7 +146,7 @@ export default function BookingModal({
         slots.push(timeString)
       }
 
-      currentTime.setMinutes(currentTime.getMinutes() + bookingInterval)
+      currentTime.setMinutes(currentTime.getMinutes() + bookingSettings.bookingInterval)
     }
 
     return slots
@@ -214,10 +227,10 @@ export default function BookingModal({
       newDateTime.setDate(parseInt(value.split('-')[2]))
       newDateTime.setHours(0, 0, 0, 0)
 
-      // Если выбранная дата - воскресенье, переносим на следующий день
-      // if (isSunday(newDateTime)) {
-      //   newDateTime.setDate(newDateTime.getDate() + 1);
-      // }
+      // Если выбранная дата - нерабочий день, ищем следующий рабочий день
+      while (!filterDate(newDateTime)) {
+        newDateTime.setDate(newDateTime.getDate() + 1);
+      }
 
       setFormData(prev => ({
         ...prev,

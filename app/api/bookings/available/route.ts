@@ -1,15 +1,33 @@
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '@/lib/db'
-import mongoose from 'mongoose'
+import BookingSettings from '@/models/BookingSettings'
 
 export async function GET() {
   try {
     await connectToDatabase()
 
-    const collection = mongoose.connection.collection('app_settings')
-    const doc = await collection.findOne({ key: 'booking_availability' })
+    let settings = await BookingSettings.findOne()
+    
+    if (!settings) {
+      // Создаем настройки по умолчанию
+      settings = await BookingSettings.create({
+        workStartTime: '12:00',
+        workEndTime: '18:00',
+        workingDays: {
+          monday: true,
+          tuesday: true,
+          wednesday: true,
+          thursday: true,
+          friday: true,
+          saturday: true,
+          sunday: false
+        },
+        bookingInterval: 60,
+        isAvailable: true
+      })
+    }
 
-    const isAvailable = doc?.isAvailable ?? true
+    const isAvailable = settings.isAvailable ?? true
     return NextResponse.json({ success: true, isAvailable })
   } catch (error) {
     console.error('Error fetching availability:', error)
@@ -36,18 +54,14 @@ export async function POST(request: Request) {
       )
     }
 
-    const collection = mongoose.connection.collection('app_settings')
-    await collection.updateOne(
-      { key: 'booking_availability' },
-      {
-        $set: {
-          key: 'booking_availability',
-          isAvailable,
-          updatedAt: new Date(),
-        },
-      },
-      { upsert: true }
-    )
+    let settings = await BookingSettings.findOne()
+    
+    if (!settings) {
+      settings = await BookingSettings.create({ isAvailable })
+    } else {
+      settings.isAvailable = isAvailable
+      await settings.save()
+    }
 
     return NextResponse.json({ success: true, isAvailable })
   } catch (error) {
