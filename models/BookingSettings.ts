@@ -1,5 +1,13 @@
 import mongoose from 'mongoose'
 
+export interface IDateOverride {
+  date: string // формат "YYYY-MM-DD"
+  type: 'closed' | 'special' // закрыто или специальный режим
+  workStartTime?: string // только для type: 'special'
+  workEndTime?: string // только для type: 'special'
+  reason?: string // опционально: причина (например, "Праздник", "Сокращенный день")
+}
+
 export interface IBookingSettings {
   workStartTime: string // формат "HH:MM" например "09:00"
   workEndTime: string // формат "HH:MM" например "18:00"
@@ -14,8 +22,33 @@ export interface IBookingSettings {
   }
   bookingInterval: number // интервал в минутах
   isAvailable: boolean // общая доступность бронирования
+  dateOverrides: IDateOverride[] // исключения для конкретных дат
   updatedAt?: Date
 }
+
+const DateOverrideSchema = new mongoose.Schema<IDateOverride>({
+  date: { 
+    type: String, 
+    required: true 
+  },
+  type: { 
+    type: String, 
+    enum: ['closed', 'special'],
+    required: true 
+  },
+  workStartTime: { 
+    type: String, 
+    required: false 
+  },
+  workEndTime: { 
+    type: String, 
+    required: false 
+  },
+  reason: { 
+    type: String, 
+    required: false 
+  }
+}, { _id: false })
 
 const BookingSettingsSchema = new mongoose.Schema<IBookingSettings>({
   workStartTime: { 
@@ -45,6 +78,10 @@ const BookingSettingsSchema = new mongoose.Schema<IBookingSettings>({
   isAvailable: {
     type: Boolean,
     default: true
+  },
+  dateOverrides: {
+    type: [DateOverrideSchema],
+    default: []
   }
 }, { timestamps: true })
 

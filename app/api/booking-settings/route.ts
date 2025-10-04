@@ -25,7 +25,8 @@ export async function GET() {
           sunday: false
         },
         bookingInterval: 60,
-        isAvailable: true
+        isAvailable: true,
+        dateOverrides: []
       })
     }
 
@@ -78,7 +79,21 @@ export async function PUT(request: NextRequest) {
     if (!settings) {
       settings = await BookingSettings.create(body)
     } else {
-      Object.assign(settings, body)
+      // Обрабатываем частичное обновление workingDays
+      if (body.workingDays) {
+        settings.workingDays = {
+          ...settings.workingDays.toObject(),
+          ...body.workingDays
+        }
+      }
+      
+      // Обновляем остальные поля
+      if (body.workStartTime !== undefined) settings.workStartTime = body.workStartTime
+      if (body.workEndTime !== undefined) settings.workEndTime = body.workEndTime
+      if (body.bookingInterval !== undefined) settings.bookingInterval = body.bookingInterval
+      if (body.isAvailable !== undefined) settings.isAvailable = body.isAvailable
+      if (body.dateOverrides !== undefined) settings.dateOverrides = body.dateOverrides
+      
       await settings.save()
     }
 

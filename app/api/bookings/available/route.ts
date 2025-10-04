@@ -23,7 +23,8 @@ export async function GET() {
           sunday: false
         },
         bookingInterval: 60,
-        isAvailable: true
+        isAvailable: true,
+        dateOverrides: []
       })
     }
 

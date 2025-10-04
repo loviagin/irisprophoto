@@ -34,11 +34,31 @@ export default function BookingModal({
       sunday: false
     },
     bookingInterval: 60,
-    isAvailable: true
+    isAvailable: true,
+    dateOverrides: []
   });
 
-  // Функция для фильтрации дат (исключаем нерабочие дни)
+  // Получить исключение для конкретной даты
+  const getDateOverride = (date: Date) => {
+    const dateString = date.toISOString().split('T')[0]; // YYYY-MM-DD
+    return bookingSettings.dateOverrides?.find(override => override.date === dateString);
+  }
+
+  // Функция для фильтрации дат (исключаем нерабочие дни и закрытые даты)
   const filterDate = (date: Date) => {
+    const override = getDateOverride(date);
+    
+    // Если есть исключение типа "closed", день недоступен
+    if (override?.type === 'closed') {
+      return false;
+    }
+    
+    // Если есть исключение типа "special", день доступен (независимо от дня недели)
+    if (override?.type === 'special') {
+      return true;
+    }
+    
+    // Иначе проверяем обычный рабочий график
     const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
     const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     const dayName = dayNames[dayOfWeek] as keyof typeof bookingSettings.workingDays;
@@ -65,10 +85,12 @@ export default function BookingModal({
   const [bookedSlots, setBookedSlots] = useState<Array<{ bookingDateTime: string }>>([]);
   const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingSettings, setIsLoadingSettings] = useState(true);
   const [isAvailable, setIsAvailable] = useState(true);
 
   useEffect(() => {
     const fetchBookingSettings = async () => {
+      setIsLoadingSettings(true);
       try {
         const response = await fetch('/api/booking-settings');
         const data = await response.json();
@@ -78,6 +100,8 @@ export default function BookingModal({
         }
       } catch (error) {
         console.error('Error fetching booking settings:', error);
+      } finally {
+        setIsLoadingSettings(false);
       }
     };
 
@@ -117,8 +141,26 @@ export default function BookingModal({
 
   const generateTimeSlots = () => {
     const slots: string[] = []
-    const [startHour, startMinute] = bookingSettings.workStartTime.split(':').map(Number)
-    const [endHour, endMinute] = bookingSettings.workEndTime.split(':').map(Number)
+    
+    // Проверяем, есть ли исключение для выбранной даты
+    const override = getDateOverride(new Date(formData.dateTime));
+    
+    // Если день закрыт, возвращаем пустой массив
+    if (override?.type === 'closed') {
+      return slots;
+    }
+    
+    // Определяем рабочие часы (из исключения или из обычного графика)
+    let workStart = bookingSettings.workStartTime;
+    let workEnd = bookingSettings.workEndTime;
+    
+    if (override?.type === 'special' && override.workStartTime && override.workEndTime) {
+      workStart = override.workStartTime;
+      workEnd = override.workEndTime;
+    }
+    
+    const [startHour, startMinute] = workStart.split(':').map(Number)
+    const [endHour, endMinute] = workEnd.split(':').map(Number)
 
     let currentTime = new Date()
     currentTime.setHours(startHour, startMinute, 0, 0)
@@ -354,49 +396,58 @@ export default function BookingModal({
                     />
                   </div>
 
-                  <div className={styles.formRow}>
-                    <div className={styles.formGroup}>
-                      <FaCalendarAlt className={styles.formIcon} />
-                      <DatePicker
-                        selected={formData.dateTime}
-                        onChange={(date: Date | null) => {
-                          if (date) {
-                            date.setHours(0, 0, 0, 0);
-                            setFormData(prev => ({
-                              ...prev,
-                              dateTime: date
-                            }))
-                          }
-                        }}
-                        filterDate={filterDate}
-                        minDate={new Date()}
-                        dateFormat="MMMM d, yyyy"
-                        className={styles.dateInput}
-                        placeholderText="Select date"
-                        popperPlacement="bottom"
-                      />
+                  {isLoadingSettings ? (
+                    <div className={styles.formRow}>
+                      <div className={styles.loadingContainer}>
+                        <div className={styles.spinner}></div>
+                        <p>Loading booking schedule...</p>
+                      </div>
                     </div>
-                    <div className={styles.formGroup}>
-                      <FaClock className={styles.formIcon} />
-                      <select
-                        name="time"
-                        value={formData.dateTime.toLocaleTimeString('en-US', {
-                          hour: '2-digit',
-                          minute: '2-digit',
-                          hour12: false
-                        })}
-                        onChange={handleInputChange}
-                        className={styles.timeSelect}
-                      >
-                        <option value="">Select time</option>
-                        {availableTimeSlots.map((time) => (
-                          <option key={time} value={time}>
-                            {time}
-                          </option>
-                        ))}
-                      </select>
+                  ) : (
+                    <div className={styles.formRow}>
+                      <div className={styles.formGroup}>
+                        <FaCalendarAlt className={styles.formIcon} />
+                        <DatePicker
+                          selected={formData.dateTime}
+                          onChange={(date: Date | null) => {
+                            if (date) {
+                              date.setHours(0, 0, 0, 0);
+                              setFormData(prev => ({
+                                ...prev,
+                                dateTime: date
+                              }))
+                            }
+                          }}
+                          filterDate={filterDate}
+                          minDate={new Date()}
+                          dateFormat="MMMM d, yyyy"
+                          className={styles.dateInput}
+                          placeholderText="Select date"
+                          popperPlacement="bottom"
+                        />
+                      </div>
+                      <div className={styles.formGroup}>
+                        <FaClock className={styles.formIcon} />
+                        <select
+                          name="time"
+                          value={formData.dateTime.toLocaleTimeString('en-US', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: false
+                          })}
+                          onChange={handleInputChange}
+                          className={styles.timeSelect}
+                        >
+                          <option value="">Select time</option>
+                          {availableTimeSlots.map((time) => (
+                            <option key={time} value={time}>
+                              {time}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <div className={styles.formGroup}>
                     <textarea
