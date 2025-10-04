@@ -57,7 +57,7 @@ export default function BookingThankYouPage() {
                     day: 'numeric',
                     hour: '2-digit',
                     minute: '2-digit',
-                    hour12: false
+                    hour12: true
                 }));
 
                 const order: Order = {
@@ -121,7 +121,7 @@ export default function BookingThankYouPage() {
                                         day: 'numeric',
                                         hour: '2-digit',
                                         minute: '2-digit',
-                                        hour12: false
+                                        hour12: true
                                     }),
                                     orderId: orderResult.id
                                 }),
