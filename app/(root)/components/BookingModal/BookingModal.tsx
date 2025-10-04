@@ -38,9 +38,17 @@ export default function BookingModal({
     dateOverrides: []
   });
 
+  // Форматировать дату в локальном часовом поясе (YYYY-MM-DD)
+  const formatLocalDate = (date: Date): string => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   // Получить исключение для конкретной даты
   const getDateOverride = (date: Date) => {
-    const dateString = date.toISOString().split('T')[0]; // YYYY-MM-DD
+    const dateString = formatLocalDate(date);
     return bookingSettings.dateOverrides?.find(override => override.date === dateString);
   }
 
