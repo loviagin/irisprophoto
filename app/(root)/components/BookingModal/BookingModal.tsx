@@ -311,7 +311,8 @@ export default function BookingModal({
           dateTime: newDateTime
         }))
       } else {
-        const [hours, minutes] = value.split(':').map(Number)
+        // Парсим 12-часовой формат (например "02:00 PM")
+        const { hours, minutes } = convertTo24Hour(value)
         const newDateTime = new Date(formData.dateTime)
         newDateTime.setHours(hours, minutes, 0, 0)
         setFormData(prev => ({
@@ -457,7 +458,7 @@ export default function BookingModal({
                           value={formData.dateTime.toLocaleTimeString('en-US', {
                             hour: '2-digit',
                             minute: '2-digit',
-                            hour12: false
+                            hour12: true
                           })}
                           onChange={handleInputChange}
                           className={styles.timeSelect}
