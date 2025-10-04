@@ -457,7 +457,7 @@ export default function BookingModal({
                           value={formData.dateTime.toLocaleTimeString('en-US', {
                             hour: '2-digit',
                             minute: '2-digit',
-                            hour12: true
+                            hour12: false
                           })}
                           onChange={handleInputChange}
                           className={styles.timeSelect}
