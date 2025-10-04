@@ -13,8 +13,8 @@ export async function GET() {
     if (!settings) {
       // Создаем настройки по умолчанию
       settings = await BookingSettings.create({
-        workStartTime: '12:00',
-        workEndTime: '18:00',
+        workStartTime: '12:00 PM',
+        workEndTime: '06:00 PM',
         workingDays: {
           monday: true,
           tuesday: true,
@@ -50,17 +50,17 @@ export async function PUT(request: NextRequest) {
 
     const body = await request.json()
 
-    // Валидация времени
-    const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/
+    // Валидация времени (12-часовой формат с AM/PM)
+    const timeRegex = /^(0?[1-9]|1[0-2]):[0-5][0-9]\s?(AM|PM)$/i
     if (body.workStartTime && !timeRegex.test(body.workStartTime)) {
       return NextResponse.json(
-        { success: false, error: 'Invalid workStartTime format. Use HH:MM' },
+        { success: false, error: 'Invalid workStartTime format. Use HH:MM AM/PM' },
         { status: 400 }
       )
     }
     if (body.workEndTime && !timeRegex.test(body.workEndTime)) {
       return NextResponse.json(
-        { success: false, error: 'Invalid workEndTime format. Use HH:MM' },
+        { success: false, error: 'Invalid workEndTime format. Use HH:MM AM/PM' },
         { status: 400 }
       )
     }

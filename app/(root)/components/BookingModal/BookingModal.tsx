@@ -22,8 +22,8 @@ export default function BookingModal({
   onClose
 }: BookingModalProps) {
   const [bookingSettings, setBookingSettings] = useState<BookingSettings>({
-    workStartTime: '12:00',
-    workEndTime: '18:00',
+    workStartTime: '12:00 PM',
+    workEndTime: '06:00 PM',
     workingDays: {
       monday: true,
       tuesday: true,
@@ -139,6 +139,22 @@ export default function BookingModal({
     setAvailableTimeSlots(slots);
   }, [formData.dateTime, bookingSettings, bookedSlots]);
 
+  // Функция для конвертации времени из формата "HH:MM AM/PM" в 24-часовой формат
+  const convertTo24Hour = (time12h: string): { hours: number, minutes: number } => {
+    const [time, period] = time12h.split(' ');
+    const [hoursStr, minutesStr] = time.split(':');
+    let hours = parseInt(hoursStr);
+    const minutes = parseInt(minutesStr);
+    
+    if (period.toUpperCase() === 'PM' && hours !== 12) {
+      hours += 12;
+    } else if (period.toUpperCase() === 'AM' && hours === 12) {
+      hours = 0;
+    }
+    
+    return { hours, minutes };
+  }
+
   const generateTimeSlots = () => {
     const slots: string[] = []
     
@@ -159,8 +175,8 @@ export default function BookingModal({
       workEnd = override.workEndTime;
     }
     
-    const [startHour, startMinute] = workStart.split(':').map(Number)
-    const [endHour, endMinute] = workEnd.split(':').map(Number)
+    const { hours: startHour, minutes: startMinute } = convertTo24Hour(workStart);
+    const { hours: endHour, minutes: endMinute } = convertTo24Hour(workEnd);
 
     let currentTime = new Date()
     currentTime.setHours(startHour, startMinute, 0, 0)
@@ -172,7 +188,7 @@ export default function BookingModal({
       const timeString = currentTime.toLocaleTimeString('en-US', {
         hour: '2-digit',
         minute: '2-digit',
-        hour12: false
+        hour12: true
       })
 
       // Проверяем, не занято ли это время
@@ -433,7 +449,7 @@ export default function BookingModal({
                           value={formData.dateTime.toLocaleTimeString('en-US', {
                             hour: '2-digit',
                             minute: '2-digit',
-                            hour12: false
+                            hour12: true
                           })}
                           onChange={handleInputChange}
                           className={styles.timeSelect}

@@ -11,8 +11,8 @@ export async function GET() {
     if (!settings) {
       // Создаем настройки по умолчанию
       settings = await BookingSettings.create({
-        workStartTime: '12:00',
-        workEndTime: '18:00',
+        workStartTime: '12:00 PM',
+        workEndTime: '06:00 PM',
         workingDays: {
           monday: true,
           tuesday: true,

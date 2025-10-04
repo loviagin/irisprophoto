@@ -27,18 +27,18 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Валидация времени для специального режима
-    const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/
+    // Валидация времени для специального режима (12-часовой формат с AM/PM)
+    const timeRegex = /^(0?[1-9]|1[0-2]):[0-5][0-9]\s?(AM|PM)$/i
     if (type === 'special') {
       if (!workStartTime || !timeRegex.test(workStartTime)) {
         return NextResponse.json(
-          { success: false, error: 'workStartTime is required for special type and must be in HH:MM format' },
+          { success: false, error: 'workStartTime is required for special type and must be in HH:MM AM/PM format' },
           { status: 400 }
         )
       }
       if (!workEndTime || !timeRegex.test(workEndTime)) {
         return NextResponse.json(
-          { success: false, error: 'workEndTime is required for special type and must be in HH:MM format' },
+          { success: false, error: 'workEndTime is required for special type and must be in HH:MM AM/PM format' },
           { status: 400 }
       )
       }
