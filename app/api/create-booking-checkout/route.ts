@@ -55,7 +55,7 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json({ sessionId: session.id, url: session.url });
+    return NextResponse.json({ sessionId: /*session.id*/"free", url: session.url });
   } catch (error) {
     console.error('Error creating checkout session:', error);
     return NextResponse.json({ 

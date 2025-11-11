@@ -55,17 +55,17 @@ export default function BookingModal({
   // Функция для фильтрации дат (исключаем нерабочие дни и закрытые даты)
   const filterDate = (date: Date) => {
     const override = getDateOverride(date);
-    
+
     // Если есть исключение типа "closed", день недоступен
     if (override?.type === 'closed') {
       return false;
     }
-    
+
     // Если есть исключение типа "special", день доступен (независимо от дня недели)
     if (override?.type === 'special') {
       return true;
     }
-    
+
     // Иначе проверяем обычный рабочий график
     const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
     const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
@@ -124,7 +124,7 @@ export default function BookingModal({
         console.error('Error fetching booked slots:', error);
       }
     };
-    
+
     if (isOpen) {
       fetchBookingSettings();
       fetchBookedSlots();
@@ -153,36 +153,36 @@ export default function BookingModal({
     const [hoursStr, minutesStr] = time.split(':');
     let hours = parseInt(hoursStr);
     const minutes = parseInt(minutesStr);
-    
+
     if (period.toUpperCase() === 'PM' && hours !== 12) {
       hours += 12;
     } else if (period.toUpperCase() === 'AM' && hours === 12) {
       hours = 0;
     }
-    
+
     return { hours, minutes };
   }
 
   const generateTimeSlots = () => {
     const slots: string[] = []
-    
+
     // Проверяем, есть ли исключение для выбранной даты
     const override = getDateOverride(new Date(formData.dateTime));
-    
+
     // Если день закрыт, возвращаем пустой массив
     if (override?.type === 'closed') {
       return slots;
     }
-    
+
     // Определяем рабочие часы (из исключения или из обычного графика)
     let workStart = bookingSettings.workStartTime;
     let workEnd = bookingSettings.workEndTime;
-    
+
     if (override?.type === 'special' && override.workStartTime && override.workEndTime) {
       workStart = override.workStartTime;
       workEnd = override.workEndTime;
     }
-    
+
     const { hours: startHour, minutes: startMinute } = convertTo24Hour(workStart);
     const { hours: endHour, minutes: endMinute } = convertTo24Hour(workEnd);
 
@@ -231,6 +231,59 @@ export default function BookingModal({
     }
   }
 
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+
+  //   if (!formData.email && !formData.phone) {
+  //     alert("Please specify email or phone");
+  //     return;
+  //   }
+
+  //   setIsLoading(true);
+
+  //   try {
+  //     // Устанавливаем время, если не выбрано
+  //     const selectedDateTime = new Date(formData.dateTime);
+  //     if (selectedDateTime.getHours() === 0 && selectedDateTime.getMinutes() === 0) {
+  //       selectedDateTime.setHours(12, 0, 0, 0); // По умолчанию 12:00
+  //     }
+
+  //     // Подготавливаем данные для бронирования
+  //     const bookingData = {
+  //       name: formData.name,
+  //       phone: `+1${formData.phone.replace('+', '')}`,
+  //       email: formData.email || null,
+  //       shootingType: formData.shootingType,
+  //       dateTime: selectedDateTime.toISOString(),
+  //       details: formData.details,
+  //       promocode: formData.promocode
+  //     };
+
+  // Создаем Stripe Checkout Session
+  // const response = await fetch('/api/create-booking-checkout', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify(bookingData),
+  // });
+
+  // const result = await response.json();
+
+  // if (result.url) {
+  // Редиректим на страницу оплаты Stripe
+  // window.location.href = result.url;
+  // } else {
+  //   alert("❌ Error: Unable to create payment session. Please try again.");
+  //   setIsLoading(false);
+  // }
+  //   } catch (error) {
+  //     console.error('Error creating checkout session:', error);
+  //     alert("❌ An error occurred. Please try again later.");
+  //     setIsLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -241,48 +294,110 @@ export default function BookingModal({
 
     setIsLoading(true);
 
-    try {
-      // Устанавливаем время, если не выбрано
-      const selectedDateTime = new Date(formData.dateTime);
-      if (selectedDateTime.getHours() === 0 && selectedDateTime.getMinutes() === 0) {
-        selectedDateTime.setHours(12, 0, 0, 0); // По умолчанию 12:00
-      }
+    const formDataToSend = {
+      name: formData.name,
+      phone: `+1${formData.phone.replace('+', '')}`,
+      email: formData.email || null,
+      shootingType: formData.shootingType,
+      date: formData.dateTime.toISOString(), // Отправляем полную дату и время в ISO формате
+      details: formData.details
+    };
 
-      // Подготавливаем данные для бронирования
-      const bookingData = {
-        name: formData.name,
-        phone: `+1${formData.phone.replace('+', '')}`,
-        email: formData.email || null,
-        shootingType: formData.shootingType,
-        dateTime: selectedDateTime.toISOString(),
-        details: formData.details,
-        promocode: formData.promocode
-      };
+    const notionId = crypto.randomUUID();
+    const contact = formData.email || `+1${formData.phone.replace('+', '')}`;
 
-      // Создаем Stripe Checkout Session
-      const response = await fetch('/api/create-booking-checkout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(bookingData),
-      });
-
-      const result = await response.json();
-
-      if (result.url) {
-        // Редиректим на страницу оплаты Stripe
-        window.location.href = result.url;
-      } else {
-        alert("❌ Error: Unable to create payment session. Please try again.");
-        setIsLoading(false);
-      }
-    } catch (error) {
-      console.error('Error creating checkout session:', error);
-      alert("❌ An error occurred. Please try again later.");
-      setIsLoading(false);
+    // Устанавливаем время 01:00 по умолчанию, если время не выбрано
+    const selectedDateTime = new Date(formData.dateTime);
+    if (selectedDateTime.getHours() === 0 && selectedDateTime.getMinutes() === 0) {
+      selectedDateTime.setHours(0, 0, 0, 0);
     }
-  };
+
+    const order: Order = {
+      id: notionId,
+      order: 'New order from site',
+      status: 'New',
+      date: selectedDateTime.toISOString(),
+      comment: 'Type: ' + formDataToSend.shootingType + '. ' + (formData.promocode.length > 0 ? 'Promocode: ' + formData.promocode : '') + '. ' + formDataToSend.details,
+      email: formDataToSend.email || undefined,
+      name: formDataToSend.name,
+      phone: formDataToSend.phone || undefined,
+      createdAt: new Date().toISOString()
+    }
+
+    const response = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, "Content-Type": "application/json" },
+      body: JSON.stringify(order),
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      try {
+        const bookingResponse = await fetch("/api/bookings", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            contact,
+            notionId,
+            bookingDateTime: selectedDateTime.toISOString()
+          }),
+        });
+
+        const bookingResult = await bookingResponse.json();
+      } catch (error) {
+        console.error('Error creating booking:', error);
+        alert("An error occurred while creating an order. Please try again later.");
+      }
+
+      if (formDataToSend.email) {
+        const emailResponse = await fetch('/api/email-order', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`
+          },
+          body: JSON.stringify({
+            name: formDataToSend.name,
+            email: formDataToSend.email,
+            date: selectedDateTime.toLocaleString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false
+            }),
+            orderId: result.id // Используем result.id напрямую
+          }),
+        });
+
+        const emailResult = await emailResponse.json();
+      }
+
+      console.log(JSON.stringify(order))
+
+      alert("Thanks for your order! We will contact you soon.");
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        shootingType: "wedding",
+        dateTime: new Date(),
+        details: "",
+        promocode: ""
+      });
+    } else {
+      alert("❌ Error: " + result.error);
+    }
+
+    onClose()
+    setIsLoading(false);
+  };  
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -366,139 +481,139 @@ export default function BookingModal({
                 <h2>Book a photo session</h2>
                 <p>Leave your data, and we will contact you to discuss the details.</p>
                 {isAvailable ? (
-                <form onSubmit={handleSubmit} className={styles.bookingForm}>
-                  <div className={styles.formGroup}>
-                    <FaCamera className={styles.formIcon} />
-                    <select
-                      name="shootingType"
-                      value={formData.shootingType}
-                      onChange={handleInputChange}
-                      required
-                      className={styles.customSelect}
-                    >
-                      <option value="one-two">One or two person (-s)</option>
-                      <option value="family">Three or four persons</option>
-                    </select>
-                  </div>
-
-                  <div className={styles.formRow}>
+                  <form onSubmit={handleSubmit} className={styles.bookingForm}>
                     <div className={styles.formGroup}>
-                      <FaUser className={styles.formIcon} />
-                      <input
-                        type="text"
-                        name="name"
-                        placeholder="Your name"
-                        value={formData.name}
+                      <FaCamera className={styles.formIcon} />
+                      <select
+                        name="shootingType"
+                        value={formData.shootingType}
                         onChange={handleInputChange}
                         required
-                      />
+                        className={styles.customSelect}
+                      >
+                        <option value="one-two">One or two person (-s)</option>
+                        <option value="family">Three or four persons</option>
+                      </select>
                     </div>
-                    <div className={styles.formGroup}>
-                      <FaPhone className={styles.formIcon} />
-                      <PatternFormat
-                        format="+1 (###) ###-####"
-                        value={formData.phone}
-                        onValueChange={handlePhoneNumberChange}
-                        name="phone"
-                        type="tel"
-                        placeholder="+1 (555) 555-5555"
-                        customInput={motion.input}
-                        className={styles.phoneInput}
-                        allowEmptyFormatting
-                        mask="_"
-                      />
-                    </div>
-                  </div>
 
-                  <div className={styles.formGroup}>
-                    <FaEnvelope className={styles.formIcon} />
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-
-                  {isLoadingSettings ? (
-                    <div className={styles.formRow}>
-                      <div className={styles.loadingContainer}>
-                        <div className={styles.spinner}></div>
-                        <p>Loading booking schedule...</p>
-                      </div>
-                    </div>
-                  ) : (
                     <div className={styles.formRow}>
                       <div className={styles.formGroup}>
-                        <FaCalendarAlt className={styles.formIcon} />
-                        <DatePicker
-                          selected={formData.dateTime}
-                          onChange={(date: Date | null) => {
-                            if (date) {
-                              date.setHours(0, 0, 0, 0);
-                              setFormData(prev => ({
-                                ...prev,
-                                dateTime: date
-                              }))
-                            }
-                          }}
-                          filterDate={filterDate}
-                          minDate={new Date()}
-                          dateFormat="MMMM d, yyyy"
-                          className={styles.dateInput}
-                          placeholderText="Select date"
-                          popperPlacement="bottom"
+                        <FaUser className={styles.formIcon} />
+                        <input
+                          type="text"
+                          name="name"
+                          placeholder="Your name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          required
                         />
                       </div>
                       <div className={styles.formGroup}>
-                        <FaClock className={styles.formIcon} />
-                        <select
-                          name="time"
-                          value={formData.dateTime.toLocaleTimeString('en-US', {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                            hour12: true
-                          })}
-                          onChange={handleInputChange}
-                          className={styles.timeSelect}
-                        >
-                          <option value="">Select time</option>
-                          {availableTimeSlots.map((time) => (
-                            <option key={time} value={time}>
-                              {time}
-                            </option>
-                          ))}
-                        </select>
+                        <FaPhone className={styles.formIcon} />
+                        <PatternFormat
+                          format="+1 (###) ###-####"
+                          value={formData.phone}
+                          onValueChange={handlePhoneNumberChange}
+                          name="phone"
+                          type="tel"
+                          placeholder="+1 (555) 555-5555"
+                          customInput={motion.input}
+                          className={styles.phoneInput}
+                          allowEmptyFormatting
+                          mask="_"
+                        />
                       </div>
                     </div>
-                  )}
 
-                  <div className={styles.formGroup}>
-                    <textarea
-                      name="details"
-                      placeholder="Your suggestions or questions"
-                      value={formData.details}
-                      onChange={handleInputChange}
-                      rows={4}
-                    />
-                  </div>
+                    <div className={styles.formGroup}>
+                      <FaEnvelope className={styles.formIcon} />
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                      />
+                    </div>
 
-                  <div className={styles.formGroup}>
-                    <FaGift className={styles.formIcon} />
-                    <input
-                      type="text"
-                      name="promocode"
-                      placeholder="Promocode (if you have one)"
-                      value={formData.promocode}
-                      onChange={handleInputChange}
-                    />
-                  </div>
+                    {isLoadingSettings ? (
+                      <div className={styles.formRow}>
+                        <div className={styles.loadingContainer}>
+                          <div className={styles.spinner}></div>
+                          <p>Loading booking schedule...</p>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className={styles.formRow}>
+                        <div className={styles.formGroup}>
+                          <FaCalendarAlt className={styles.formIcon} />
+                          <DatePicker
+                            selected={formData.dateTime}
+                            onChange={(date: Date | null) => {
+                              if (date) {
+                                date.setHours(0, 0, 0, 0);
+                                setFormData(prev => ({
+                                  ...prev,
+                                  dateTime: date
+                                }))
+                              }
+                            }}
+                            filterDate={filterDate}
+                            minDate={new Date()}
+                            dateFormat="MMMM d, yyyy"
+                            className={styles.dateInput}
+                            placeholderText="Select date"
+                            popperPlacement="bottom"
+                          />
+                        </div>
+                        <div className={styles.formGroup}>
+                          <FaClock className={styles.formIcon} />
+                          <select
+                            name="time"
+                            value={formData.dateTime.toLocaleTimeString('en-US', {
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}
+                            onChange={handleInputChange}
+                            className={styles.timeSelect}
+                          >
+                            <option value="">Select time</option>
+                            {availableTimeSlots.map((time) => (
+                              <option key={time} value={time}>
+                                {time}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+                    )}
 
-                  <button type="submit" className={styles.submitButton} disabled={isLoading}>
-                    {isLoading ? 'Loading...' : 'Order a photo session — $20'}
-                  </button>
-                </form>
+                    <div className={styles.formGroup}>
+                      <textarea
+                        name="details"
+                        placeholder="Your suggestions or questions"
+                        value={formData.details}
+                        onChange={handleInputChange}
+                        rows={4}
+                      />
+                    </div>
+
+                    <div className={styles.formGroup}>
+                      <FaGift className={styles.formIcon} />
+                      <input
+                        type="text"
+                        name="promocode"
+                        placeholder="Promocode (if you have one)"
+                        value={formData.promocode}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+
+                    <button type="submit" className={styles.submitButton} disabled={isLoading}>
+                      {isLoading ? 'Loading...' : 'Order a photo session — $20'}
+                    </button>
+                  </form>
                 ) : (
                   <div className={styles.unavailableBanner}>
                     <div className={styles.unavailableIcon}>
